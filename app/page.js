@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 
 const Icon = ({ children, className = "" }) => (
@@ -19,53 +18,53 @@ const Close = ({ className = "" }) => <Icon className={className}>×</Icon>;
 
 const serviceCards = [
   {
-    title: "EMS",
-    text: "Maisons de retraite médicalisées pour un accompagnement 24h/24.",
-    symbol: "▦",
+    title: "Rester chez soi en sécurité",
+    text: "Aide à domicile, soins, présence, repas, ménage ou soutien régulier.",
+    symbol: "⌂",
     color: "bg-emerald-50 text-emerald-700",
   },
   {
-    title: "Aide à domicile",
-    text: "Soutien dans les activités quotidiennes pour rester chez soi.",
-    symbol: "⌂",
+    title: "Trouver un établissement adapté",
+    text: "EMS, court séjour ou accompagnement spécialisé lorsque le maintien à domicile devient difficile.",
+    symbol: "▦",
     color: "bg-blue-50 text-blue-700",
   },
   {
-    title: "Spitex privé",
-    text: "Soins et accompagnement à domicile par des professionnels qualifiés.",
-    symbol: "♡",
-    color: "bg-emerald-50 text-emerald-700",
-  },
-  {
-    title: "Résidence senior",
-    text: "Logements adaptés avec services pour plus d’autonomie et de confort.",
+    title: "Préserver l’autonomie",
+    text: "Résidences seniors, appartements protégés et solutions intermédiaires.",
     symbol: "◎",
     color: "bg-sky-50 text-sky-700",
   },
   {
-    title: "Court séjour",
-    text: "Séjours temporaires pour récupération, répit ou en attente d’une solution.",
-    symbol: "◷",
+    title: "Soulager les proches",
+    text: "Répit, présence temporaire, accompagnement après une chute ou une hospitalisation.",
+    symbol: "♡",
     color: "bg-amber-50 text-amber-700",
+  },
+  {
+    title: "Comprendre le financement",
+    text: "Assurance maladie, prestations complémentaires, aides cantonales et reste à charge.",
+    symbol: "₣",
+    color: "bg-emerald-50 text-emerald-700",
   },
 ];
 
 const benefits = [
   {
-    title: "Gain de temps",
-    text: "Nous recherchons et comparons les meilleures options pour vous.",
+    title: "Un choix plus clair",
+    text: "Nous vous aidons à comprendre ce qui convient vraiment à la situation de votre proche.",
     symbol: "✓",
     color: "bg-emerald-100 text-emerald-700",
   },
   {
-    title: "Conseils personnalisés",
-    text: "Nos conseillers vous écoutent et vous orientent selon vos besoins.",
+    title: "Un accompagnement humain",
+    text: "Vous n’êtes pas seul face aux démarches, aux appels et aux décisions difficiles.",
     symbol: "♡",
     color: "bg-blue-100 text-blue-700",
   },
   {
-    title: "Décisions éclairées",
-    text: "Des informations claires et objectives pour choisir sereinement.",
+    title: "Des pistes adaptées",
+    text: "Nous cherchons des options cohérentes avec les besoins, l’urgence et le cadre de vie souhaité.",
     symbol: "◇",
     color: "bg-amber-100 text-amber-700",
   },
@@ -74,20 +73,20 @@ const benefits = [
 const steps = [
   {
     n: "1",
-    title: "Décrivez votre situation",
-    text: "Répondez à quelques questions sur votre proche, ses besoins et l’urgence.",
+    title: "Parlez-nous de votre proche",
+    text: "Décrivez sa situation, son lieu de vie actuel, ses besoins et ce qui vous inquiète.",
     symbol: "☷",
   },
   {
     n: "2",
-    title: "Recevez des options",
-    text: "Nous identifions les solutions possibles dans le canton de Vaud.",
+    title: "Nous clarifions les options",
+    text: "Nous vous aidons à comprendre les pistes possibles : domicile, résidence, court séjour, EMS ou soutien spécialisé.",
     symbol: "▤",
   },
   {
     n: "3",
-    title: "Avancez en confiance",
-    text: "Vous choisissez librement, avec des informations claires et un accompagnement humain.",
+    title: "Vous avancez vers le bon choix",
+    text: "Vous recevez une orientation humaine pour décider plus sereinement des prochaines étapes.",
     symbol: "◌",
   },
 ];
@@ -119,6 +118,59 @@ const guideCards = [
     symbol: "◷",
   },
 ];
+
+const providerExamples = [
+  {
+    category: "EMS",
+    location: "Lausanne",
+    name: "Fondation La Rozavère",
+    area: "Lausanne centre · 1006",
+    badge: "Places selon disponibilité",
+    icon: "🏥",
+    price: "CHF 4’200+",
+    priceNote: "/mois indicatif",
+    tags: ["Gériatrie", "Soins palliatifs", "Court séjour"],
+    tone: "bg-blue-50",
+  },
+  {
+    category: "Spitex privé",
+    location: "Tout Vaud",
+    name: "Senevita Casa",
+    area: "Canton de Vaud entier",
+    badge: "Disponible 24h/24",
+    icon: "🏠",
+    price: "CHF 35–80",
+    priceNote: "/heure selon prestations",
+    tags: ["Soins infirmiers", "Alzheimer", "LAMal"],
+    tone: "bg-emerald-50",
+  },
+  {
+    category: "Résidence senior",
+    location: "Riviera",
+    name: "Résidence Les Jardins du Léman",
+    area: "Vevey / Montreux",
+    badge: "Logements adaptés",
+    icon: "🌿",
+    price: "Sur demande",
+    priceNote: "selon logement et services",
+    tags: ["Autonomie", "Sécurité", "Services"],
+    tone: "bg-amber-50",
+  },
+  {
+    category: "Aide à domicile",
+    location: "La Côte",
+    name: "Aide & Présence Vaud",
+    area: "Nyon · Morges · La Côte",
+    badge: "Intervention rapide",
+    icon: "🤝",
+    price: "CHF 30–65",
+    priceNote: "/heure selon besoin",
+    tags: ["Repas", "Présence", "Ménage"],
+    tone: "bg-sky-50",
+  },
+];
+
+const providerFilters = ["Tous", "EMS", "Aide à domicile", "Spitex privé", "Lausanne", "Nyon / La Côte", "Vevey / Riviera", "Alzheimer"];
 
 const faqs = [
   {
@@ -281,7 +333,7 @@ function HeroForm() {
       <div className="mb-6">
         <div className="flex items-center justify-between gap-4">
           <h3 className="max-w-xs text-xl font-semibold leading-7 text-slate-950 sm:text-2xl">
-            Votre première orientation gratuite
+            Décrivez la situation de votre proche
           </h3>
           <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
             {step + 1}/{totalSteps}
@@ -294,7 +346,7 @@ function HeroForm() {
 
       {step === 0 && (
         <div>
-          <label className="block text-base font-semibold text-slate-950">Que recherchez-vous pour votre proche ?</label>
+          <label className="block text-base font-semibold text-slate-950">Quelle solution semble la plus proche de votre situation ?</label>
           <div className="mt-4 space-y-3">
             {[
               "Un EMS / établissement médico-social",
@@ -453,7 +505,7 @@ function HeroForm() {
           </button>
         ) : (
           <button type="submit" className="ml-auto flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700">
-            Recevoir mon orientation gratuite <ArrowRight className="text-base" />
+            Recevoir une orientation personnalisée <ArrowRight className="text-base" />
           </button>
         )}
       </div>
@@ -486,7 +538,7 @@ export default function ProcheSuisseVaudLandingPage() {
             href="#form"
             className="hidden rounded-2xl bg-[#123b87] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0d2d68] md:inline-flex"
           >
-            Obtenir de l’aide
+            Recevoir une orientation
           </a>
 
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-2xl md:hidden">
@@ -502,7 +554,7 @@ export default function ProcheSuisseVaudLandingPage() {
               <a href="#guide">Guide</a>
               <a href="#contact">Contact</a>
               <a href="#form" className="rounded-xl bg-[#123b87] px-5 py-3 text-center text-white">
-                Obtenir de l’aide
+                Recevoir une orientation
               </a>
             </div>
           </div>
@@ -515,15 +567,15 @@ export default function ProcheSuisseVaudLandingPage() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-5 py-3 text-sm font-semibold text-emerald-800">
                 <Shield className="text-emerald-700" />
-                Service gratuit et indépendant
+                Orientation humaine et gratuite
               </div>
 
               <h1 className="mt-8 max-w-2xl text-[44px] font-semibold leading-[1.05] tracking-tight text-[#133169] sm:text-[58px] lg:text-[64px]">
-                Votre guide gratuit pour trouver une solution adaptée à un proche âgé
+                Trouvez un lieu de vie adapté pour votre proche âgé, sans avancer seul
               </h1>
 
               <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600 sm:text-xl sm:leading-9">
-                EMS, aide à domicile, Spitex privé, résidence senior ou court séjour — nous vous aidons à comprendre les options, le financement et les bons interlocuteurs dans le canton de Vaud.
+                ProcheSuisse Vaud accompagne les familles dans le canton de Vaud pour comprendre les options possibles, comparer les solutions sérieuses et avancer vers le bon choix : maintien à domicile, résidence senior, court séjour, EMS ou accompagnement spécialisé.
               </p>
 
               <div className="mt-8 grid max-w-2xl gap-5 sm:grid-cols-3">
@@ -537,7 +589,7 @@ export default function ProcheSuisseVaudLandingPage() {
                 </div>
                 <div className="flex items-start gap-3 text-sm text-slate-700">
                   <Lock className="mt-1" />
-                  <span>Vos données sont confidentielles</span>
+                  <span>Solutions adaptées à votre proche</span>
                 </div>
               </div>
             </div>
@@ -553,7 +605,7 @@ export default function ProcheSuisseVaudLandingPage() {
 
         <section id="services" className="mx-auto max-w-7xl px-5 py-10 lg:px-8">
           <h2 className="text-center text-3xl font-semibold leading-tight text-[#163168] sm:text-4xl">
-            Des solutions adaptées à chaque situation
+            Trouver le bon cadre pour votre proche
           </h2>
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
@@ -584,6 +636,77 @@ export default function ProcheSuisseVaudLandingPage() {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">Découvrir les options</p>
+              <h2 className="mt-3 text-3xl font-semibold leading-tight text-[#163168] sm:text-4xl">
+                Exemples de solutions dans le canton de Vaud
+              </h2>
+              <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
+                Chaque situation est différente. Voici quelques types de solutions que les familles explorent souvent avec ProcheSuisse Vaud.
+              </p>
+            </div>
+            <a href="#form" className="text-sm font-semibold text-emerald-700 hover:text-emerald-800">
+              Recevoir une orientation →
+            </a>
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            {providerFilters.map((filter) => (
+              <button key={filter} type="button" className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-800">
+                {filter}
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {providerExamples.map((provider) => (
+              <div key={provider.name} className="overflow-hidden rounded-[2rem] bg-white shadow-sm ring-1 ring-slate-100 transition hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-200/60">
+                <div className={`relative flex h-40 items-center justify-center ${provider.tone}`}>
+                  <div className="absolute left-5 top-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm">
+                    <span className="mr-1 text-emerald-500">●</span>
+                    {provider.badge}
+                  </div>
+                  <div className="text-5xl">{provider.icon}</div>
+                </div>
+
+                <div className="p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
+                    {provider.category} · {provider.location}
+                  </p>
+                  <h3 className="mt-3 text-lg font-semibold leading-6 text-[#153168]">{provider.name}</h3>
+                  <p className="mt-2 text-sm text-slate-500">⌖ {provider.area}</p>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {provider.tags.map((tag) => (
+                      <span key={tag} className="rounded-full bg-slate-50 px-3 py-1 text-xs text-slate-600 ring-1 ring-slate-100">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 border-t border-slate-100 pt-4">
+                    <div className="flex items-end justify-between gap-4">
+                      <div>
+                        <p className="text-lg font-semibold text-[#153168]">{provider.price}</p>
+                        <p className="text-xs text-slate-500">{provider.priceNote}</p>
+                      </div>
+                      <a href="#form" className="rounded-xl bg-[#123b87] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#0d2d68]">
+                        Être guidé
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-5 text-xs leading-5 text-slate-500">
+            Ces exemples sont présentés à titre indicatif pour illustrer les types de solutions possibles. Les disponibilités, prix et conditions doivent toujours être vérifiés auprès des prestataires ou services compétents.
+          </p>
         </section>
 
         <section id="how" className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
@@ -673,7 +796,7 @@ export default function ProcheSuisseVaudLandingPage() {
             <div>
               <Logo />
               <p className="mt-4 max-w-xs text-sm leading-6 text-slate-600">
-                Votre partenaire de confiance pour trouver la bonne solution de soins et d’accompagnement dans le canton de Vaud.
+                Votre partenaire de confiance pour trouver un cadre de vie ou un accompagnement adapté à un proche âgé dans le canton de Vaud.
               </p>
             </div>
 
