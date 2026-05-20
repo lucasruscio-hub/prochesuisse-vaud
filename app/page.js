@@ -219,49 +219,82 @@ function Logo() {
 
 function HeroImage() {
   return (
-    <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#fbf1e4] via-[#fffaf2] to-[#eaf4f0] shadow-sm ring-1 ring-slate-100">
-      <div className="absolute left-1/2 top-10 h-44 w-72 -translate-x-1/2 rounded-[2rem] bg-white/40" />
-      <div className="absolute left-8 top-10 h-40 w-40 rounded-full bg-emerald-50/80" />
-      <div className="absolute right-12 top-12 h-36 w-36 rounded-full bg-sky-50/90" />
-      <div className="absolute right-12 top-28 h-40 w-5 rounded-full bg-emerald-100/80" />
-      <div className="absolute right-24 top-20 h-24 w-4 rounded-full bg-emerald-100/70" />
+    <div className="relative flex items-center justify-center px-4 lg:px-0">
+      <div className="relative w-full max-w-[520px] overflow-hidden rounded-[2.5rem] border border-white/70 bg-gradient-to-br from-[#eef7f2] via-white to-[#edf4ff] p-6 shadow-2xl shadow-slate-200/70 backdrop-blur">
+        <div className="absolute -left-20 top-10 h-56 w-56 rounded-full bg-emerald-100/40 blur-3xl" />
+        <div className="absolute -right-20 bottom-0 h-64 w-64 rounded-full bg-blue-100/50 blur-3xl" />
 
-      <svg
-        className="absolute left-1/2 top-16 h-24 w-80 -translate-x-1/2 opacity-70"
-        viewBox="0 0 280 90"
-        fill="none"
-      >
-        <path d="M4 65C32 43 52 42 78 55C96 64 112 61 132 38C153 14 169 10 188 33C205 54 226 58 276 18" stroke="#9bb9cd" strokeWidth="3" strokeLinecap="round" />
-        <path d="M64 55L88 22L108 54" stroke="#9bb9cd" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M128 45L150 14L174 50" stroke="#9bb9cd" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+        <div className="relative rounded-[2rem] border border-white/80 bg-white/90 p-6 shadow-xl shadow-slate-200/60 backdrop-blur">
+          <div className="flex items-start justify-between gap-5 border-b border-slate-100 pb-5">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-700">
+                Orientation personnalisée
+              </p>
+              <h3 className="mt-3 text-2xl font-semibold leading-9 text-[#163168]">
+                Trouver une solution adaptée pour votre proche
+              </h3>
+            </div>
 
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-center px-4 pb-0">
-        <div className="relative flex w-full max-w-[720px] items-end justify-center gap-1 sm:gap-6">
-          <div className="relative flex h-[315px] w-[230px] items-end justify-center">
-            <div className="absolute bottom-0 h-[210px] w-[178px] rounded-t-[88px] bg-[#efe1ce] shadow-sm" />
-            <div className="absolute top-[58px] h-[86px] w-[86px] rounded-full bg-[#eddcc8]" />
-            <div className="absolute top-[36px] h-[60px] w-[86px] rounded-full bg-[#eeeeee]" />
-            <div className="absolute top-[78px] h-[54px] w-[100px] rounded-t-full border-t-[18px] border-[#f6f6f6]" />
-            <div className="absolute left-[94px] top-[96px] h-2 w-2 rounded-full bg-slate-700" />
-            <div className="absolute right-[94px] top-[96px] h-2 w-2 rounded-full bg-slate-700" />
-            <div className="absolute top-[116px] h-4 w-9 rounded-b-full border-b-2 border-slate-500" />
-            <div className="absolute bottom-[110px] h-10 w-10 rounded-full bg-slate-200" />
+            <div className="rounded-2xl bg-emerald-50 px-4 py-3 text-center text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">
+              Réponse<br />sous 24h
+            </div>
           </div>
 
-          <div className="relative flex h-[350px] w-[270px] items-end justify-center">
-            <div className="absolute bottom-0 h-[236px] w-[202px] rounded-t-[100px] bg-[#f1e5d8] shadow-sm" />
-            <div className="absolute top-[62px] h-[90px] w-[90px] rounded-full bg-[#f0d2bf]" />
-            <div className="absolute top-[30px] h-[72px] w-[112px] rounded-full bg-[#8f624f]" />
-            <div className="absolute top-[95px] left-[111px] h-2 w-2 rounded-full bg-slate-700" />
-            <div className="absolute top-[95px] right-[111px] h-2 w-2 rounded-full bg-slate-700" />
-            <div className="absolute top-[116px] h-4 w-9 rounded-b-full border-b-2 border-slate-700" />
-            <div className="absolute bottom-[120px] -left-1 h-4 w-36 rotate-[-12deg] rounded-full bg-[#f1e5d8]" />
+          <div className="mt-6 space-y-5">
+            <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
+                    Maintien à domicile
+                  </p>
+                  <h4 className="mt-2 text-xl font-semibold text-[#163168]">
+                    Accompagnement quotidien
+                  </h4>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Présence, soins, repas et soutien adaptés au rythme de vie de votre proche.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700">
+                  Disponible
+                </div>
+              </div>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                <span className="rounded-full bg-slate-50 px-3 py-1.5 text-xs text-slate-600 ring-1 ring-slate-100">
+                  Lausanne
+                </span>
+                <span className="rounded-full bg-slate-50 px-3 py-1.5 text-xs text-slate-600 ring-1 ring-slate-100">
+                  Alzheimer
+                </span>
+                <span className="rounded-full bg-slate-50 px-3 py-1.5 text-xs text-slate-600 ring-1 ring-slate-100">
+                  Spitex privé
+                </span>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-[#163168] p-6 text-white shadow-lg shadow-blue-900/20">
+              <div className="flex items-center justify-between gap-5">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100">
+                    Accompagnement humain
+                  </p>
+                  <p className="mt-3 text-lg font-semibold leading-8">
+                    Nous vous aidons à avancer vers une solution claire et rassurante.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl bg-white/10 px-5 py-4 text-center backdrop-blur">
+                  <p className="text-3xl font-bold">24h</p>
+                  <p className="mt-1 text-xs leading-4 text-blue-100">
+                    première orientation
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white/70 to-transparent" />
     </div>
   );
 }
