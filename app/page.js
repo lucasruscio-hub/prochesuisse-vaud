@@ -409,7 +409,11 @@ const handleSubmit = async (event) => {
         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-2xl text-emerald-700">✓</div>
         <h3 className="text-2xl font-semibold text-slate-950">Demande reçue</h3>
         <p className="mt-3 text-sm leading-6 text-slate-600">
-          Merci. Votre demande a bien été enregistrée dans cette démonstration. Pour recevoir les vrais formulaires, il faudra connecter ce formulaire à Formspree, Netlify Forms, Supabase ou un backend.
+          Merci, votre demande a bien été reçue.
+
+Nous allons examiner les informations transmises afin de mieux comprendre la situation de votre proche et préparer une première orientation.
+
+ProcheSuisse Vaud n’est pas un service d’urgence. 
         </p>
         <p className="mt-4 rounded-2xl bg-amber-50 p-4 text-xs leading-5 text-amber-800">
           En cas d’urgence médicale ou de danger immédiat, contactez le 144 ou un professionnel de santé.
