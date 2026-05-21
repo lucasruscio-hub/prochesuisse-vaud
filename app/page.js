@@ -335,8 +335,36 @@ function HeroForm() {
     });
   };
 
-  const next = () => setStep((current) => Math.min(current + 1, totalSteps - 1));
-  const back = () => setStep((current) => Math.max(current - 1, 0));
+  const getStepError = () => {
+  if (step === 0 && !formData.need) return "Veuillez sélectionner une option.";
+  if (step === 1 && !formData.location.trim()) return "Veuillez indiquer la commune ou la région.";
+  if (step === 2 && !formData.urgency) return "Veuillez sélectionner l’urgence.";
+  if (step === 3 && !formData.situation) return "Veuillez sélectionner la phrase la plus proche.";
+  if (step === 5 && !formData.age) return "Veuillez indiquer l’âge approximatif.";
+  if (step === 6 && !formData.funding) return "Veuillez répondre à la question sur le financement.";
+  if (step === 8 && !formData.firstName.trim()) return "Veuillez indiquer votre prénom.";
+  if (step === 8 && !formData.lastName.trim()) return "Veuillez indiquer votre nom.";
+  if (step === 8 && !formData.email.trim()) return "Veuillez indiquer votre adresse e-mail.";
+  if (step === 8 && !formData.phone.trim()) return "Veuillez indiquer votre téléphone.";
+  if (step === 9 && !formData.consentContact) return "Veuillez accepter d’être contacté au sujet de cette demande.";
+  return "";
+};
+
+const next = () => {
+  const error = getStepError();
+
+  if (error) {
+    setSubmitError(error);
+    return;
+  }
+
+  setSubmitError("");
+  setStep((current) => Math.min(current + 1, totalSteps - 1));
+};
+  const back = () => {
+  setSubmitError("");
+  setStep((current) => Math.max(current - 1, 0));
+};
 
 const [isSubmitting, setIsSubmitting] = useState(false);
 const [submitError, setSubmitError] = useState("");
@@ -556,7 +584,11 @@ const handleSubmit = async (event) => {
           </div>
         </div>
       )}
-
+{submitError && (
+  <p className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-700">
+    {submitError}
+  </p>
+)}
       <div className="mt-6 flex items-center justify-between gap-4">
         <button type="button" onClick={back} disabled={step === 0} className="rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-slate-300 disabled:cursor-not-allowed disabled:opacity-40">
           Retour
