@@ -338,11 +338,40 @@ function HeroForm() {
   const next = () => setStep((current) => Math.min(current + 1, totalSteps - 1));
   const back = () => setStep((current) => Math.max(current - 1, 0));
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+const [isSubmitting, setIsSubmitting] = useState(false);
+const [submitError, setSubmitError] = useState("");
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  setIsSubmitting(true);
+  setSubmitError("");
+
+  try {
+    const response = await fetch("/api/leads", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...formData,
+        source: "landing",
+        page: "homepage",
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Impossible d’envoyer la demande.");
+    }
+
     setSubmitted(true);
-    console.log("ProcheSuisse Vaud lead", formData);
-  };
+  } catch (error) {
+    setSubmitError(
+      "Une erreur est survenue. Veuillez réessayer ou nous contacter directement."
+    );
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   const progress = ((step + 1) / totalSteps) * 100;
 
@@ -538,7 +567,7 @@ function HeroForm() {
           </button>
         ) : (
           <button type="submit" className="ml-auto flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700">
-            Recevoir une orientation personnalisée <ArrowRight className="text-base" />
+            {isSubmitting ? "Envoi en cours..." : "Recevoir une orientation personnalisée"} <ArrowRight className="text-base" />
           </button>
         )}
       </div>
