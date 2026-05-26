@@ -159,7 +159,7 @@ const providerExamples = [
   {
     category: "Aide à domicile",
     location: "La Côte",
-    name: "Aide & Présence Vaud",
+    name: "Service d’aide à domicile partenaire",
     area: "Nyon · Morges · La Côte",
     badge: "Intervention rapide",
     icon: "🤝",
@@ -862,7 +862,7 @@ export default function ProcheSuisseVaudLandingPage() {
             </div>
             <div className="space-y-4 text-sm leading-7 text-slate-700">
               <p>
-                Le service est actuellement en phase de lancement dans le canton de Vaud. Notre priorité est de comprendre les situations réelles, structurer les options disponibles et construire un service réellement utile pour les familles.
+                Un accompagnement humain pour avancer plus clairement
               </p>
               <p className="rounded-2xl bg-white/75 p-4 ring-1 ring-white">
                 <strong className="text-slate-950">Important :</strong> ProcheSuisse Vaud n’est pas un prestataire médical, ne garantit pas de place en EMS et ne remplace pas l’avis d’un médecin, d’un CMS, d’un service social ou d’un professionnel de santé.
@@ -931,7 +931,7 @@ export default function ProcheSuisseVaudLandingPage() {
             <div>
               <h3 className="text-sm font-semibold text-slate-900">Besoin d’aide ?</h3>
               <div className="mt-4 space-y-3 text-sm text-slate-600">
-                <p className="flex items-center gap-2"><Phone /> 021 123 45 67</p>
+                <p className="flex items-center gap-2"><Phone /> 079 535 07 81</p>
                 <p className="flex items-center gap-2"><Mail /> info@prochesuisse-vaud.ch</p>
                 <p className="flex items-center gap-2"><Pin /> Lausanne, Vaud</p>
               </div>
