@@ -174,12 +174,12 @@ const providerFilters = ["Tous", "EMS", "Aide à domicile", "Spitex privé", "La
 
 const faqs = [
   {
-    q: "ProcheSuisse Vaud est-il gratuit pour les familles ?",
+    q: "Lia est-il gratuit pour les familles ?",
     a: "Oui, la première orientation est gratuite. L’objectif est de vous aider à clarifier les options possibles avant de contacter les prestataires adaptés.",
   },
   {
     q: "Êtes-vous un prestataire médical ?",
-    a: "Non. ProcheSuisse Vaud n’est pas un prestataire médical et ne remplace pas l’avis d’un médecin, d’un CMS, d’un service social ou d’un professionnel de santé.",
+    a: "Non. Lia n’est pas un prestataire médical et ne remplace pas l’avis d’un médecin, d’un CMS, d’un service social ou d’un professionnel de santé.",
   },
   {
     q: "Pouvez-vous garantir une place en EMS ?",
@@ -195,23 +195,23 @@ const faqs = [
   },
   {
     q: "Que faire en cas d’urgence médicale ?",
-    a: "En cas d’urgence médicale ou de danger immédiat, contactez le 144 ou un professionnel de santé. ProcheSuisse Vaud n’est pas un service d’urgence.",
+    a: "En cas d’urgence médicale ou de danger immédiat, contactez le 144 ou un professionnel de santé. Lia n’est pas un service d’urgence.",
   },
 ];
 
 function Logo() {
   return (
-    <div className="flex items-center gap-3">
-      <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl border border-emerald-100 bg-white shadow-sm">
-        <div className="absolute left-[8px] top-[8px] h-2.5 w-2.5 rounded-full bg-emerald-600" />
-        <div className="absolute right-[8px] top-[8px] h-2.5 w-2.5 rounded-full bg-sky-900" />
-        <div className="text-[24px] leading-none text-emerald-700">♡</div>
+    <div className="leading-tight">
+      <div className="relative inline-block">
+        <span className="font-serif text-[48px] font-semibold leading-none tracking-tight text-[#17233A]">
+          Lia
+        </span>
+        <span className="absolute -right-10 top-1 text-[30px] leading-none text-rose-400">
+          ❧
+        </span>
       </div>
-      <div className="leading-tight">
-        <div className="text-[22px] font-semibold tracking-tight text-slate-950 sm:text-[28px]">
-          ProcheSuisse
-        </div>
-        <div className="text-[17px] font-medium text-emerald-600 sm:text-[21px]">Vaud</div>
+      <div className="mt-1 max-w-[150px] text-[15px] leading-5 text-[#17233A]">
+        Accompagnement pour vos proches, en Suisse.
       </div>
     </div>
   );
@@ -413,7 +413,7 @@ const handleSubmit = async (event) => {
 
 Nous allons examiner les informations transmises afin de mieux comprendre la situation de votre proche et préparer une première orientation.
 
-ProcheSuisse Vaud n’est pas un service d’urgence. 
+Lia n’est pas un service d’urgence. 
         </p>
         <p className="mt-4 rounded-2xl bg-amber-50 p-4 text-xs leading-5 text-amber-800">
           En cas d’urgence médicale ou de danger immédiat, contactez le 144 ou un professionnel de santé.
@@ -579,11 +579,11 @@ ProcheSuisse Vaud n’est pas un service d’urgence.
           <div className="mt-4 space-y-3">
             <label className="flex items-start gap-3 rounded-xl bg-slate-50 p-4 text-xs leading-5 text-slate-600">
               <input type="checkbox" checked={formData.consentContact} onChange={(e) => updateField("consentContact", e.target.checked)} className="mt-1" required />
-              <span>J’accepte d’être contacté par ProcheSuisse Vaud au sujet de cette demande. Je comprends que ProcheSuisse Vaud n’est pas un prestataire médical et ne remplace pas l’avis d’un professionnel de santé.</span>
+              <span>J’accepte d’être contacté par Lia au sujet de cette demande. Je comprends que Lia n’est pas un prestataire médical et ne remplace pas l’avis d’un professionnel de santé.</span>
             </label>
             <label className="flex items-start gap-3 rounded-xl bg-slate-50 p-4 text-xs leading-5 text-slate-600">
               <input type="checkbox" checked={formData.consentMarketing} onChange={(e) => updateField("consentMarketing", e.target.checked)} className="mt-1" />
-              <span>J’accepte de recevoir des conseils et ressources de ProcheSuisse Vaud par e-mail. Je peux me désinscrire à tout moment.</span>
+              <span>J’accepte de recevoir des conseils et ressources de Lia par e-mail. Je peux me désinscrire à tout moment.</span>
             </label>
           </div>
         </div>
@@ -673,7 +673,7 @@ export default function ProcheSuisseVaudLandingPage() {
               </h1>
 
               <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600 sm:text-xl sm:leading-9">
-                ProcheSuisse Vaud accompagne les familles dans le canton de Vaud pour comprendre les options possibles, comparer les solutions sérieuses et avancer vers le bon choix : maintien à domicile, résidence senior, court séjour, EMS ou accompagnement spécialisé.
+                Lia accompagne les familles dans le canton de Vaud pour comprendre les options possibles, comparer les solutions sérieuses et avancer vers le bon choix : maintien à domicile, résidence senior, court séjour, EMS ou accompagnement spécialisé.
               </p>
 
               <div className="mt-8 grid max-w-2xl gap-5 sm:grid-cols-3">
@@ -744,7 +744,7 @@ export default function ProcheSuisseVaudLandingPage() {
                 Exemples de solutions dans le canton de Vaud
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
-                Chaque situation est différente. Voici quelques types de solutions que les familles explorent souvent avec ProcheSuisse Vaud.
+                Chaque situation est différente. Voici quelques types de solutions que les familles explorent souvent avec Lia.
               </p>
             </div>
             <a href="#form" className="text-sm font-semibold text-emerald-700 hover:text-emerald-800">
@@ -857,7 +857,7 @@ export default function ProcheSuisseVaudLandingPage() {
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#123b87]">Phase de lancement</p>
               <h2 className="mt-3 text-3xl font-semibold leading-tight text-[#163168]">
-                Nous construisons ProcheSuisse Vaud avec les premières familles.
+                Nous construisons Lia avec les premières familles.
               </h2>
             </div>
             <div className="space-y-4 text-sm leading-7 text-slate-700">
@@ -865,7 +865,7 @@ export default function ProcheSuisseVaudLandingPage() {
                 Un accompagnement humain pour avancer plus clairement
               </p>
               <p className="rounded-2xl bg-white/75 p-4 ring-1 ring-white">
-                <strong className="text-slate-950">Important :</strong> ProcheSuisse Vaud n’est pas un prestataire médical, ne garantit pas de place en EMS et ne remplace pas l’avis d’un médecin, d’un CMS, d’un service social ou d’un professionnel de santé.
+                <strong className="text-slate-950">Important :</strong> Lia n’est pas un prestataire médical, ne garantit pas de place en EMS et ne remplace pas l’avis d’un médecin, d’un CMS, d’un service social ou d’un professionnel de santé.
               </p>
             </div>
           </div>
@@ -939,7 +939,7 @@ export default function ProcheSuisseVaudLandingPage() {
           </div>
 
           <div className="border-t border-slate-100 bg-[#eef4e7] px-5 py-4 text-center text-xs text-slate-600">
-            Vos données sont sécurisées et confidentielles. Nous ne partageons jamais vos informations sans votre accord. · © 2026 ProcheSuisse Vaud – Tous droits réservés.
+            Vos données sont sécurisées et confidentielles. Nous ne partageons jamais vos informations sans votre accord. · © 2026 Lia – Tous droits réservés.
           </div>
         </footer>
       </main>

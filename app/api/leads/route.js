@@ -64,9 +64,9 @@ export async function POST(request) {
       );
     }
 const emailResult = await resend.emails.send({
-  from: "ProcheSuisse <onboarding@resend.dev>",
+  from: "Lia <onboarding@resend.dev>",
   to: process.env.LEAD_NOTIFY_EMAIL,
-  subject: `Nouveau lead ProcheSuisse - ${body.need}`,
+  subject: `Nouveau lead Lia - ${body.need}`,
   html: `
     <h2>Nouveau lead ProcheSuisse</h2>
 
