@@ -210,7 +210,7 @@ function Logo() {
           ❧
         </span>
       </div>
-      <div className="mt-1 max-w-[150px] text-[15px] leading-5 text-[#17233A]">
+      <div className="mt-1 max-w-[160px] text-[15px] leading-5 text-[#17233A]">
         Accompagnement pour vos proches, en Suisse.
       </div>
     </div>
