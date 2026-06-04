@@ -21,7 +21,7 @@ const serviceCards = [
     title: "Rester chez soi en sécurité",
     text: "Aide à domicile, soins, présence, repas, ménage ou soutien régulier.",
     symbol: "⌂",
-    color: "bg-emerald-50 text-emerald-700",
+    color: "bg-[#FFF0EF] text-[#E64B60]",
   },
   {
     title: "Trouver un établissement adapté",
@@ -45,7 +45,7 @@ const serviceCards = [
     title: "Comprendre le financement",
     text: "Assurance maladie, prestations complémentaires, aides cantonales et reste à charge.",
     symbol: "₣",
-    color: "bg-emerald-50 text-emerald-700",
+    color: "bg-[#FFF0EF] text-[#E64B60]",
   },
 ];
 
@@ -54,7 +54,7 @@ const benefits = [
     title: "Un choix plus clair",
     text: "Nous vous aidons à comprendre ce qui convient vraiment à la situation de votre proche.",
     symbol: "✓",
-    color: "bg-emerald-100 text-emerald-700",
+    color: "bg-[#FFD8D4] text-[#E64B60]",
   },
   {
     title: "Un accompagnement humain",
@@ -142,7 +142,7 @@ const providerExamples = [
     price: "CHF 35–80",
     priceNote: "/heure selon prestations",
     tags: ["Soins infirmiers", "Alzheimer", "LAMal"],
-    tone: "bg-emerald-50",
+    tone: "bg-[#FFF0EF]",
   },
   {
     category: "Résidence senior",
@@ -219,80 +219,25 @@ function Logo() {
 
 function HeroImage() {
   return (
-    <div className="relative flex items-center justify-center px-4 lg:px-0">
-      <div className="relative w-full max-w-[520px] overflow-hidden rounded-[2.5rem] border border-white/70 bg-gradient-to-br from-[#eef7f2] via-white to-[#edf4ff] p-6 shadow-2xl shadow-slate-200/70 backdrop-blur">
-        <div className="absolute -left-20 top-10 h-56 w-56 rounded-full bg-emerald-100/40 blur-3xl" />
-        <div className="absolute -right-20 bottom-0 h-64 w-64 rounded-full bg-blue-100/50 blur-3xl" />
+    <div className="relative min-h-[620px] overflow-hidden">
+      <img
+  src="/hero-lia.png"
+  alt="Une femme accompagnant un proche âgé dans un cadre chaleureux"
+  className="h-full min-h-[620px] w-full object-cover object-center"
+/>
 
-        <div className="relative rounded-[2rem] border border-white/80 bg-white/90 p-6 shadow-xl shadow-slate-200/60 backdrop-blur">
-          <div className="flex items-start justify-between gap-5 border-b border-slate-100 pb-5">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-700">
-                Orientation personnalisée
-              </p>
-              <h3 className="mt-3 text-2xl font-semibold leading-9 text-[#163168]">
-                Trouver une solution adaptée pour votre proche
-              </h3>
-            </div>
+      <div className="absolute inset-0 bg-gradient-to-r from-[#FFF8F3] via-[#FFF8F3]/35 to-transparent" />
+<div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#FFF8F3] to-transparent" />
 
-            <div className="rounded-2xl bg-emerald-50 px-4 py-3 text-center text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">
-              Réponse<br />sous 24h
-            </div>
+      <div className="absolute bottom-10 left-10 max-w-sm rounded-[2rem] bg-white/90 p-6 shadow-2xl shadow-slate-300/30 backdrop-blur">
+        <div className="flex items-start gap-4">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#FFE1DE] text-2xl text-[#FF5F72]">
+            ♡
           </div>
 
-          <div className="mt-6 space-y-5">
-            <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
-                    Maintien à domicile
-                  </p>
-                  <h4 className="mt-2 text-xl font-semibold text-[#163168]">
-                    Accompagnement quotidien
-                  </h4>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
-                    Présence, soins, repas et soutien adaptés au rythme de vie de votre proche.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700">
-                  Disponible
-                </div>
-              </div>
-
-              <div className="mt-5 flex flex-wrap gap-2">
-                <span className="rounded-full bg-slate-50 px-3 py-1.5 text-xs text-slate-600 ring-1 ring-slate-100">
-                  Lausanne
-                </span>
-                <span className="rounded-full bg-slate-50 px-3 py-1.5 text-xs text-slate-600 ring-1 ring-slate-100">
-                  Alzheimer
-                </span>
-                <span className="rounded-full bg-slate-50 px-3 py-1.5 text-xs text-slate-600 ring-1 ring-slate-100">
-                  Spitex privé
-                </span>
-              </div>
-            </div>
-
-            <div className="rounded-2xl bg-[#163168] p-6 text-white shadow-lg shadow-blue-900/20">
-              <div className="flex items-center justify-between gap-5">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100">
-                    Accompagnement humain
-                  </p>
-                  <p className="mt-3 text-lg font-semibold leading-8">
-                    Nous vous aidons à avancer vers une solution claire et rassurante.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl bg-white/10 px-5 py-4 text-center backdrop-blur">
-                  <p className="text-3xl font-bold">24h</p>
-                  <p className="mt-1 text-xs leading-4 text-blue-100">
-                    première orientation
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <p className="text-sm leading-7 text-[#10213D]">
+            Chaque situation est unique. Nous sommes là pour vous écouter et vous guider, sans engagement.
+          </p>
         </div>
       </div>
     </div>
@@ -406,7 +351,7 @@ const handleSubmit = async (event) => {
   if (submitted) {
     return (
       <div className="rounded-[2rem] bg-white p-7 shadow-xl shadow-slate-200/60 ring-1 ring-slate-100">
-        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-2xl text-emerald-700">✓</div>
+        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FFF0EF] text-2xl text-[#E64B60]">✓</div>
         <h3 className="text-2xl font-semibold text-slate-950">Demande reçue</h3>
         <p className="mt-3 text-sm leading-6 text-slate-600">
           Merci, votre demande a bien été reçue.
@@ -429,12 +374,12 @@ Lia n’est pas un service d’urgence.
           <h3 className="max-w-xs text-xl font-semibold leading-7 text-slate-950 sm:text-2xl">
             Décrivez la situation de votre proche
           </h3>
-          <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+          <span className="rounded-full bg-[#FFF0EF] px-3 py-1 text-xs font-semibold text-[#E64B60]">
             {step + 1}/{totalSteps}
           </span>
         </div>
         <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-100">
-          <div className="h-full rounded-full bg-emerald-600 transition-all duration-300" style={{ width: `${progress}%` }} />
+          <div className="h-full rounded-full bg-[#FF5F72] transition-all duration-300" style={{ width: `${progress}%` }} />
         </div>
       </div>
 
@@ -449,7 +394,7 @@ Lia n’est pas un service d’urgence.
               "Un court séjour / répit",
               "Je ne sais pas encore",
             ].map((option) => (
-              <button key={option} type="button" onClick={() => updateField("need", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.need === option ? "border-emerald-600 bg-emerald-50 text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
+              <button key={option} type="button" onClick={() => updateField("need", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.need === option ? "border-[#FF5F72] bg-[#FFF0EF] text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
                 {option}
               </button>
             ))}
@@ -460,7 +405,7 @@ Lia n’est pas un service d’urgence.
       {step === 1 && (
         <div>
           <label className="block text-base font-semibold text-slate-950">Où se situe votre proche ?</label>
-          <input value={formData.location} onChange={(e) => updateField("location", e.target.value)} placeholder="Ex. Lausanne, Nyon, Morges, Vevey, Yverdon..." className="mt-4 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100" />
+          <input value={formData.location} onChange={(e) => updateField("location", e.target.value)} placeholder="Ex. Lausanne, Nyon, Morges, Vevey, Yverdon..." className="mt-4 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-[#FFD8D4]" />
         </div>
       )}
 
@@ -469,7 +414,7 @@ Lia n’est pas un service d’urgence.
           <label className="block text-base font-semibold text-slate-950">Quelle est l’urgence ?</label>
           <div className="mt-4 space-y-3">
             {["Très urgent — cette semaine", "Dans le mois", "Dans les 3 mois", "Je planifie à l’avance", "Simple renseignement"].map((option) => (
-              <button key={option} type="button" onClick={() => updateField("urgency", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.urgency === option ? "border-emerald-600 bg-emerald-50 text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
+              <button key={option} type="button" onClick={() => updateField("urgency", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.urgency === option ? "border-[#FF5F72] bg-[#FFF0EF] text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
                 {option}
               </button>
             ))}
@@ -490,7 +435,7 @@ Lia n’est pas un service d’urgence.
               "Nous voulons anticiper",
               "Autre situation",
             ].map((option) => (
-              <button key={option} type="button" onClick={() => updateField("situation", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.situation === option ? "border-emerald-600 bg-emerald-50 text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
+              <button key={option} type="button" onClick={() => updateField("situation", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.situation === option ? "border-[#FF5F72] bg-[#FFF0EF] text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
                 {option}
               </button>
             ))}
@@ -518,7 +463,7 @@ Lia n’est pas un service d’urgence.
               "Troubles cognitifs / Alzheimer / démence",
               "Je ne sais pas encore",
             ].map((option) => (
-              <label key={option} className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 text-xs leading-5 transition ${formData.needs.includes(option) ? "border-emerald-600 bg-emerald-50 text-emerald-900" : "border-slate-200 bg-white text-slate-700"}`}>
+              <label key={option} className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 text-xs leading-5 transition ${formData.needs.includes(option) ? "border-[#FF5F72] bg-[#FFF0EF] text-emerald-900" : "border-slate-200 bg-white text-slate-700"}`}>
                 <input type="checkbox" checked={formData.needs.includes(option)} onChange={() => toggleNeed(option)} className="mt-1" />
                 <span>{option}</span>
               </label>
@@ -532,7 +477,7 @@ Lia n’est pas un service d’urgence.
           <label className="block text-base font-semibold text-slate-950">Quel est l’âge approximatif de la personne concernée ?</label>
           <div className="mt-4 space-y-3">
             {["Moins de 65 ans", "65–74 ans", "75–84 ans", "85 ans et plus", "Je ne sais pas"].map((option) => (
-              <button key={option} type="button" onClick={() => updateField("age", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.age === option ? "border-emerald-600 bg-emerald-50 text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
+              <button key={option} type="button" onClick={() => updateField("age", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.age === option ? "border-[#FF5F72] bg-[#FFF0EF] text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
                 {option}
               </button>
             ))}
@@ -545,7 +490,7 @@ Lia n’est pas un service d’urgence.
           <label className="block text-base font-semibold text-slate-950">Avez-vous besoin d’aide pour comprendre le financement ?</label>
           <div className="mt-4 space-y-3">
             {["Oui, c’est une inquiétude importante", "Oui, mais ce n’est pas urgent", "Non, nous avons déjà une idée claire", "Je ne sais pas encore"].map((option) => (
-              <button key={option} type="button" onClick={() => updateField("funding", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.funding === option ? "border-emerald-600 bg-emerald-50 text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
+              <button key={option} type="button" onClick={() => updateField("funding", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.funding === option ? "border-[#FF5F72] bg-[#FFF0EF] text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
                 {option}
               </button>
             ))}
@@ -556,7 +501,7 @@ Lia n’est pas un service d’urgence.
       {step === 7 && (
         <div>
           <label className="block text-base font-semibold text-slate-950">Expliquez brièvement la situation</label>
-          <textarea value={formData.details} onChange={(e) => updateField("details", e.target.value)} rows={5} placeholder="Exemple : Ma mère vit seule à Lausanne, elle a chuté récemment et nous ne savons pas s’il faut organiser une aide à domicile ou chercher un EMS." className="mt-4 w-full resize-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100" />
+          <textarea value={formData.details} onChange={(e) => updateField("details", e.target.value)} rows={5} placeholder="Exemple : Ma mère vit seule à Lausanne, elle a chuté récemment et nous ne savons pas s’il faut organiser une aide à domicile ou chercher un EMS." className="mt-4 w-full resize-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-[#FFD8D4]" />
         </div>
       )}
 
@@ -565,10 +510,10 @@ Lia n’est pas un service d’urgence.
           <h4 className="text-base font-semibold text-slate-950">Bonne nouvelle, votre première orientation peut être préparée.</h4>
           <p className="mt-2 text-sm leading-6 text-slate-600">Où devons-nous vous contacter ?</p>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            <input value={formData.firstName} onChange={(e) => updateField("firstName", e.target.value)} placeholder="Prénom" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100" />
-            <input value={formData.lastName} onChange={(e) => updateField("lastName", e.target.value)} placeholder="Nom" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100" />
-            <input type="email" value={formData.email} onChange={(e) => updateField("email", e.target.value)} placeholder="Adresse e-mail" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100" />
-            <input value={formData.phone} onChange={(e) => updateField("phone", e.target.value)} placeholder="Téléphone — ex. 079 000 00 00" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100" />
+            <input value={formData.firstName} onChange={(e) => updateField("firstName", e.target.value)} placeholder="Prénom" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-[#FFD8D4]" />
+            <input value={formData.lastName} onChange={(e) => updateField("lastName", e.target.value)} placeholder="Nom" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-[#FFD8D4]" />
+            <input type="email" value={formData.email} onChange={(e) => updateField("email", e.target.value)} placeholder="Adresse e-mail" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-[#FFD8D4]" />
+            <input value={formData.phone} onChange={(e) => updateField("phone", e.target.value)} placeholder="Téléphone — ex. 079 000 00 00" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-[#FFD8D4]" />
           </div>
         </div>
       )}
@@ -598,18 +543,18 @@ Lia n’est pas un service d’urgence.
           Retour
         </button>
         {step < totalSteps - 1 ? (
-          <button type="button" onClick={next} className="ml-auto flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700">
+          <button type="button" onClick={next} className="ml-auto flex items-center justify-center gap-2 rounded-2xl bg-[#FF5F72] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-rose-200 transition hover:bg-[#E64B60]">
             Continuer <ArrowRight className="text-base" />
           </button>
         ) : (
-          <button type="submit" className="ml-auto flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700">
+          <button type="submit" className="ml-auto flex items-center justify-center gap-2 rounded-xl bg-[#FF5F72] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#E64B60]">
             {isSubmitting ? "Envoi en cours..." : "Recevoir une orientation personnalisée"} <ArrowRight className="text-base" />
           </button>
         )}
       </div>
 
       <p className="mt-4 flex items-center gap-2 text-xs text-slate-500">
-        <Shield className="text-emerald-600" />
+        <Shield className="text-[#FF5F72]" />
         Sans engagement. Données confidentielles.
       </p>
     </form>
@@ -633,11 +578,11 @@ export default function ProcheSuisseVaudLandingPage() {
           </nav>
 
           <a
-            href="#form"
-            className="hidden rounded-2xl bg-[#123b87] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0d2d68] md:inline-flex"
-          >
-            Recevoir une orientation
-          </a>
+  href="#form"
+  className="inline-flex items-center gap-3 rounded-full bg-[#FF5F72] px-9 py-5 text-base font-bold text-white shadow-xl shadow-rose-200 transition hover:bg-[#E64B60]"
+>
+  Faire une demande <ArrowRight />
+</a>
 
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-2xl md:hidden">
             {mobileMenuOpen ? <Close /> : <Menu />}
@@ -660,21 +605,25 @@ export default function ProcheSuisseVaudLandingPage() {
       </header>
 
       <main>
-        <section className="mx-auto max-w-7xl px-5 py-10 lg:px-8 lg:py-14">
-          <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-5 py-3 text-sm font-semibold text-emerald-800">
-                <Shield className="text-emerald-700" />
+        <section className="relative mx-auto min-h-[720px] max-w-[1450px] overflow-hidden px-6 py-14 lg:px-10 lg:py-20">
+          <div className="grid items-center gap-16 lg:grid-cols-[0.85fr_1.15fr]">
+            <div className="relative z-10 max-w-[650px]">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF0EF] px-5 py-3 text-sm font-semibold text-[#E64B60]">
+                <Shield className="text-[#E64B60]" />
                 Orientation humaine et gratuite
               </div>
 
-              <h1 className="mt-8 max-w-2xl text-[44px] font-semibold leading-[1.05] tracking-tight text-[#133169] sm:text-[58px] lg:text-[64px]">
-                Trouvez un lieu de vie adapté pour votre proche âgé, sans avancer seul
-              </h1>
+             <h1 className="font-serif text-5xl font-semibold leading-[1.05] tracking-[-0.04em] text-[#10213D] sm:text-6xl lg:text-7xl">
+  Vous accompagnez
+  <br />
+  un proche âgé ?
+</h1>
 
-              <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600 sm:text-xl sm:leading-9">
-                Lia accompagne les familles dans le canton de Vaud pour comprendre les options possibles, comparer les solutions sérieuses et avancer vers le bon choix : maintien à domicile, résidence senior, court séjour, EMS ou accompagnement spécialisé.
-              </p>
+<div className="mt-2 h-2 w-40 rounded-full bg-[#FF7A87]" />
+
+              <p className="mt-9 max-w-xl text-lg leading-8 text-[#10213D]">
+  Lia vous aide à trouver le cadre de vie ou l’accompagnement le plus adapté, dans tout le canton de Vaud.
+</p>
 
               <div className="mt-8 grid max-w-2xl gap-5 sm:grid-cols-3">
                 <div className="flex items-start gap-3 text-sm text-slate-700">
@@ -692,12 +641,9 @@ export default function ProcheSuisseVaudLandingPage() {
               </div>
             </div>
 
-            <div className="grid gap-6 lg:grid-cols-[1fr_360px] lg:items-center">
-              <HeroImage />
-              <div id="form" className="lg:-ml-10">
-                <HeroForm />
-              </div>
-            </div>
+           <div className="mt-12 lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:w-[58%]">
+  <HeroImage />
+</div>
           </div>
         </section>
 
@@ -739,7 +685,7 @@ export default function ProcheSuisseVaudLandingPage() {
         <section className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">Découvrir les options</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E64B60]">Découvrir les options</p>
               <h2 className="mt-3 text-3xl font-semibold leading-tight text-[#163168] sm:text-4xl">
                 Exemples de solutions dans le canton de Vaud
               </h2>
@@ -747,14 +693,17 @@ export default function ProcheSuisseVaudLandingPage() {
                 Chaque situation est différente. Voici quelques types de solutions que les familles explorent souvent avec Lia.
               </p>
             </div>
-            <a href="#form" className="text-sm font-semibold text-emerald-700 hover:text-emerald-800">
-              Recevoir une orientation →
-            </a>
+            <a
+  href="#form"
+  className="inline-flex items-center gap-3 rounded-full bg-[#FF5F72] px-9 py-5 text-base font-bold text-white shadow-xl shadow-rose-200 transition hover:bg-[#E64B60]"
+>
+  Faire une demande <ArrowRight />
+</a>
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
             {providerFilters.map((filter) => (
-              <button key={filter} type="button" className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-800">
+              <button key={filter} type="button" className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-emerald-300 hover:bg-[#FFF0EF] hover:text-emerald-800">
                 {filter}
               </button>
             ))}
@@ -772,7 +721,7 @@ export default function ProcheSuisseVaudLandingPage() {
                 </div>
 
                 <div className="p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E64B60]">
                     {provider.category} · {provider.location}
                   </p>
                   <h3 className="mt-3 text-lg font-semibold leading-6 text-[#153168]">{provider.name}</h3>
@@ -806,18 +755,51 @@ export default function ProcheSuisseVaudLandingPage() {
             Ces exemples sont présentés à titre indicatif pour illustrer les types de solutions possibles. Les disponibilités, prix et conditions doivent toujours être vérifiés auprès des prestataires ou services compétents.
           </p>
         </section>
+<section id="form" className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
+  <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+    <div>
+      <h2 className="font-serif text-4xl font-semibold leading-tight text-[#10213D] sm:text-5xl">
+        Chaque situation est unique.
+      </h2>
+      <div className="mt-2 h-2 w-56 rounded-full bg-[#FF7A87]" />
 
+      <p className="mt-8 max-w-xl text-lg leading-8 text-[#10213D]">
+        Que vous cherchiez un EMS, un appartement adapté, une aide à domicile ou simplement des conseils, Lia est là pour vous aider à y voir plus clair.
+      </p>
+
+      <div className="mt-8 flex flex-wrap gap-3">
+        {["Sans engagement", "Réponse rapide", "Service gratuit"].map((item) => (
+          <span key={item} className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#10213D] shadow-sm ring-1 ring-[#F1DDD7]">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#FF5F72] text-xs text-white">✓</span>
+            {item}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-10 max-w-lg rounded-[2rem] bg-[#FFE1DE] p-8 text-[#10213D]">
+        <div className="text-5xl leading-none text-[#FF5F72]">“</div>
+        <p className="mt-2 text-base leading-8">
+          Lia nous a vraiment aidés à y voir plus clair à un moment où on avait tellement besoin.
+        </p>
+        <p className="mt-5 text-sm font-semibold">— Famille, Lausanne</p>
+        <div className="mt-4 text-right text-2xl text-[#FF5F72]">♡</div>
+      </div>
+    </div>
+
+    <HeroForm />
+  </div>
+</section>
         <section id="how" className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
           <h2 className="text-center text-3xl font-semibold leading-tight text-[#163168] sm:text-4xl">Comment ça marche</h2>
-          <div className="mx-auto mt-3 h-1 w-14 rounded-full bg-emerald-400" />
+          <div className="mx-auto mt-3 h-1 w-14 rounded-full bg-[#FF7A87]" />
 
           <div className="mt-10 grid gap-8 md:grid-cols-3">
             {steps.map((step) => (
               <div key={step.n} className="text-center">
-                <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-emerald-50 text-[34px]">
+                <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-[#FFF0EF] text-[34px]">
                   {step.symbol}
                 </div>
-                <div className="mx-auto -mt-3 flex h-9 w-9 items-center justify-center rounded-full bg-emerald-600 text-sm font-bold text-white">
+                <div className="mx-auto -mt-3 flex h-9 w-9 items-center justify-center rounded-full bg-[#FF5F72] text-sm font-bold text-white">
                   {step.n}
                 </div>
                 <h3 className="mt-5 text-xl font-semibold text-[#153168]">{step.title}</h3>
@@ -829,7 +811,7 @@ export default function ProcheSuisseVaudLandingPage() {
 
         <section id="guide" className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
           <div className="text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">Comprendre les options</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E64B60]">Comprendre les options</p>
             <h2 className="mt-3 text-3xl font-semibold leading-tight text-[#163168] sm:text-4xl">
               Soins, accompagnement et financement
             </h2>
@@ -841,12 +823,12 @@ export default function ProcheSuisseVaudLandingPage() {
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
             {guideCards.map((card) => (
               <div key={card.title} className="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f1f7f3] text-2xl font-semibold text-emerald-700">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f1f7f3] text-2xl font-semibold text-[#E64B60]">
                   {card.symbol}
                 </div>
                 <h3 className="mt-5 text-lg font-semibold text-[#153168]">{card.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-slate-600">{card.text}</p>
-                <div className="mt-5 text-sm font-semibold text-emerald-700">Lire le guide →</div>
+                <div className="mt-5 text-sm font-semibold text-[#E64B60]">Lire le guide →</div>
               </div>
             ))}
           </div>

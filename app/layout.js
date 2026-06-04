@@ -12,9 +12,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "ProcheSuisse Vaud | Orientation pour proches âgés",
+  title: "Lia | Orientation pour proches âgés",
   description:
-    "ProcheSuisse Vaud aide les familles à trouver un cadre de vie ou un accompagnement adapté pour un proche âgé dans le canton de Vaud.",
+    "Lia aide les familles à trouver un cadre de vie ou un accompagnement adapté pour un proche âgé dans le canton de Vaud.",
 };
 
 export default function RootLayout({ children }) {
