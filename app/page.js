@@ -647,20 +647,22 @@ export default function ProcheSuisseVaudLandingPage() {
           </div>
         </section>
 
-        <section id="services" className="mx-auto max-w-7xl px-5 py-10 lg:px-8">
-          <h2 className="text-center text-3xl font-semibold leading-tight text-[#163168] sm:text-4xl">
-            Trouver le bon cadre pour votre proche
+        <section id="services" className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
+          <h2 className="text-center font-serif text-4xl font-semibold leading-tight text-[#10213D] sm:text-5xl">
+            Des solutions adaptées à chaque situation
           </h2>
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
             {serviceCards.map((card) => (
-              <div key={card.title} className="group rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-100 transition hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-200/60">
-                <div className={`flex h-16 w-16 items-center justify-center rounded-2xl text-[28px] ${card.color}`}>
+              <div key={card.title} className="group rounded-[2.5rem] bg-white/80 p-7 shadow-sm ring-1 ring-[#F3E3DE] backdrop-blur transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-100/40">
+                <div className={`flex h-18 w-18 items-center justify-center rounded-[1.8rem] text-[30px] shadow-sm ${card.color}`}>
                   {card.symbol}
                 </div>
                 <h3 className="mt-5 text-xl font-semibold text-[#153168]">{card.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-slate-600">{card.text}</p>
-                <div className="mt-6 text-xl text-slate-500 transition group-hover:translate-x-1">→</div>
+                <div className="mt-8 text-2xl text-[#FF7A87] transition duration-300 group-hover:translate-x-2">
+  →
+</div>
               </div>
             ))}
           </div>
