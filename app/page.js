@@ -18,57 +18,56 @@ const Close = ({ className = "" }) => <Icon className={className}>×</Icon>;
 
 const serviceCards = [
   {
-    title: "Rester chez soi en sécurité",
-    text: "Aide à domicile, soins, présence, repas, ménage ou soutien régulier.",
-    symbol: "⌂",
-    color: "bg-[#FFF0EF] text-[#E64B60]",
-  },
-  {
-    title: "Trouver un établissement adapté",
-    text: "EMS, court séjour ou accompagnement spécialisé lorsque le maintien à domicile devient difficile.",
+    title: "Trouver un EMS",
+    eyebrow: "Établissement médico-social",
+    text: "Comprendre les critères d’admission, les coûts et les possibilités disponibles dans le canton de Vaud.",
     symbol: "▦",
-    color: "bg-blue-50 text-blue-700",
+    href: "#form", // future page: /ems
+    color: "bg-[#FFE1DE] text-[#E64B60]",
   },
   {
-    title: "Préserver l’autonomie",
-    text: "Résidences seniors, appartements protégés et solutions intermédiaires.",
+    title: "Organiser une aide à domicile",
+    eyebrow: "Maintien à domicile",
+    text: "Explorer les solutions de présence, repas, ménage, accompagnement et soutien quotidien.",
+    symbol: "⌂",
+    href: "#form", // future page: /aide-domicile
+    color: "bg-[#EEF4FF] text-[#153168]",
+  },
+  {
+    title: "Choisir une résidence senior",
+    eyebrow: "Logement adapté",
+    text: "Découvrir les appartements protégés et résidences permettant de préserver l’autonomie.",
     symbol: "◎",
-    color: "bg-sky-50 text-sky-700",
+    href: "#form", // future page: /residence-senior
+    color: "bg-[#FFF4D8] text-[#9A6500]",
   },
   {
-    title: "Soulager les proches",
-    text: "Répit, présence temporaire, accompagnement après une chute ou une hospitalisation.",
+    title: "Comprendre le Spitex privé",
+    eyebrow: "Soins à domicile",
+    text: "Distinguer les prestations privées, les soins pris en charge, la disponibilité et les tarifs.",
+    symbol: "⇄",
+    href: "#form", // future page: /spitex
+    color: "bg-[#EEF7F3] text-[#27634E]",
+  },
+  {
+    title: "Trouver un court séjour ou du répit",
+    eyebrow: "Solution temporaire",
+    text: "Après une hospitalisation, une chute ou lorsque les proches ont temporairement besoin de soutien.",
     symbol: "♡",
-    color: "bg-amber-50 text-amber-700",
+    href: "#form", // future page: /court-sejour
+    color: "bg-[#FFF0EF] text-[#E64B60]",
   },
   {
-    title: "Comprendre le financement",
-    text: "Assurance maladie, prestations complémentaires, aides cantonales et reste à charge.",
-    symbol: "₣",
-    color: "bg-[#FFF0EF] text-[#E64B60]",
+    title: "Alzheimer et démence",
+    eyebrow: "Accompagnement spécialisé",
+    text: "Identifier les solutions adaptées lorsque la mémoire, la sécurité ou l’autonomie deviennent difficiles.",
+    symbol: "◌",
+    href: "#form", // future page: /alzheimer
+    color: "bg-[#F2EEFF] text-[#5C4B8A]",
   },
 ];
 
-const benefits = [
-  {
-    title: "Un choix plus clair",
-    text: "Nous vous aidons à comprendre ce qui convient vraiment à la situation de votre proche.",
-    symbol: "✓",
-    color: "bg-[#FFD8D4] text-[#E64B60]",
-  },
-  {
-    title: "Un accompagnement humain",
-    text: "Vous n’êtes pas seul face aux démarches, aux appels et aux décisions difficiles.",
-    symbol: "♡",
-    color: "bg-blue-100 text-blue-700",
-  },
-  {
-    title: "Des pistes adaptées",
-    text: "Nous cherchons des options cohérentes avec les besoins, l’urgence et le cadre de vie souhaité.",
-    symbol: "◇",
-    color: "bg-amber-100 text-amber-700",
-  },
-];
+
 
 const steps = [
   {
@@ -622,67 +621,140 @@ export default function ProcheSuisseVaudLandingPage() {
 <div className="mt-2 h-2 w-40 rounded-full bg-[#FF7A87]" />
 
               <p className="mt-9 max-w-xl text-lg leading-8 text-[#10213D]">
-  Lia vous aide à trouver le cadre de vie ou l’accompagnement le plus adapté, dans tout le canton de Vaud.
+  Lia vous aide à trouver le cadre de vie ou l’accompagnement le plus adapté,
+  dans tout le canton de Vaud.
 </p>
 
-              <div className="mt-8 grid max-w-2xl gap-5 sm:grid-cols-3">
-                <div className="flex items-start gap-3 text-sm text-slate-700">
-                  <Shield className="mt-1 text-amber-700" />
-                  <span>Indépendant et impartial</span>
-                </div>
-                <div className="flex items-start gap-3 text-sm text-slate-700">
-                  <Pin className="mt-1 text-slate-700" />
-                  <span>Spécialiste du canton de Vaud</span>
-                </div>
-                <div className="flex items-start gap-3 text-sm text-slate-700">
-                  <Lock className="mt-1" />
-                  <span>Solutions adaptées à votre proche</span>
-                </div>
-              </div>
-            </div>
+<div className="mt-9 flex flex-wrap items-center gap-6">
+  <a
+    href="#form"
+    className="inline-flex items-center gap-3 rounded-full bg-[#FF5F72] px-8 py-4 text-base font-bold text-white shadow-xl shadow-rose-200 transition hover:-translate-y-0.5 hover:bg-[#E64B60]"
+  >
+    Faire une demande <ArrowRight />
+  </a>
 
-           <div className="mt-12 lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:w-[58%]">
+  <a
+    href="#how"
+    className="text-sm font-semibold text-[#10213D] underline decoration-[#FF7A87] decoration-2 underline-offset-8"
+  >
+    En savoir plus ↓
+  </a>
+</div>
+</div>
+
+<div className="mt-12 lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:w-[58%]">
   <HeroImage />
 </div>
-          </div>
-        </section>
-
-        <section id="services" className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
-          <h2 className="text-center font-serif text-4xl font-semibold leading-tight text-[#10213D] sm:text-5xl">
-            Des solutions adaptées à chaque situation
-          </h2>
-
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            {serviceCards.map((card) => (
-              <div key={card.title} className="group rounded-[2.5rem] bg-white/80 p-7 shadow-sm ring-1 ring-[#F3E3DE] backdrop-blur transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-100/40">
-                <div className={`flex h-18 w-18 items-center justify-center rounded-[1.8rem] text-[30px] shadow-sm ${card.color}`}>
-                  {card.symbol}
-                </div>
-                <h3 className="mt-5 text-xl font-semibold text-[#153168]">{card.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{card.text}</p>
-                <div className="mt-8 text-2xl text-[#FF7A87] transition duration-300 group-hover:translate-x-2">
-  →
 </div>
-              </div>
-            ))}
+</section>
+<section className="relative z-20 mx-auto -mt-12 max-w-6xl px-5 lg:px-8">
+  <div className="grid overflow-hidden rounded-[2rem] bg-white shadow-2xl shadow-rose-100/60 ring-1 ring-[#F1DDD7] sm:grid-cols-2 lg:grid-cols-4">
+    {[
+      {
+        symbol: "♡",
+        title: "Confidentiel",
+        text: "Vos informations restent privées.",
+      },
+      {
+        symbol: "✓",
+        title: "Indépendant",
+        text: "Aucun établissement privilégié.",
+      },
+      {
+        symbol: "♧",
+        title: "Humain",
+        text: "Un accompagnement à taille humaine.",
+      },
+      {
+        symbol: "⌖",
+        title: "Dans le canton de Vaud",
+        text: "Des solutions locales adaptées.",
+      },
+    ].map((item, index) => (
+      <div
+        key={item.title}
+        className={`flex items-start gap-4 p-6 ${
+          index < 3 ? "lg:border-r lg:border-[#F1DDD7]" : ""
+        }`}
+      >
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FFE1DE] text-2xl text-[#FF5F72]">
+          {item.symbol}
+        </div>
+
+        <div>
+          <h3 className="font-semibold text-[#10213D]">{item.title}</h3>
+          <p className="mt-1 text-sm leading-6 text-slate-600">{item.text}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+        <section
+  id="services"
+  className="border-y border-[#F3E3DE] bg-[#FFF9F6]"
+>
+  <div className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-24">
+    <div className="mx-auto max-w-3xl text-center">
+      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#E64B60]">
+        Comprendre les solutions
+      </p>
+
+      <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight text-[#10213D] sm:text-5xl">
+        Une solution adaptée à chaque situation
+      </h2>
+
+      <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600">
+        Lia vous aide à comprendre les différentes possibilités et à
+        identifier celles qui correspondent réellement aux besoins de votre
+        proche.
+      </p>
+    </div>
+
+    <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {serviceCards.map((card) => (
+        <a
+          key={card.title}
+          href={card.href}
+          className="group flex min-h-[330px] flex-col rounded-[2rem] border border-[#F0DED8] bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#FFB9C1] hover:shadow-xl hover:shadow-rose-100/60"
+        >
+          <div className="flex items-start justify-between gap-5">
+            <div
+              className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.4rem] text-[27px] ${card.color}`}
+            >
+              {card.symbol}
+            </div>
+
+            <span className="rounded-full bg-[#FFF8F3] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#E64B60]">
+              Guide Lia
+            </span>
           </div>
 
-          <div className="mt-8 grid gap-5 lg:grid-cols-3">
-            {benefits.map((item) => (
-              <div key={item.title} className="rounded-[2rem] border border-slate-200 bg-white p-6">
-                <div className="flex items-start gap-5">
-                  <div className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-[26px] ${item.color}`}>
-                    {item.symbol}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-[#153168]">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">{item.text}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <p className="mt-7 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+            {card.eyebrow}
+          </p>
+
+          <h3 className="mt-3 font-serif text-2xl font-semibold leading-tight text-[#10213D]">
+            {card.title}
+          </h3>
+
+          <p className="mt-4 text-sm leading-7 text-slate-600">
+            {card.text}
+          </p>
+
+          <div className="mt-auto flex items-center justify-between pt-8">
+            <span className="text-sm font-semibold text-[#E64B60]">
+              Être guidé
+            </span>
+
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF0EF] text-lg text-[#E64B60] transition duration-300 group-hover:translate-x-1 group-hover:bg-[#FF5F72] group-hover:text-white">
+              →
+            </span>
           </div>
-        </section>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
 
         <section className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
