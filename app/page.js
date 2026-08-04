@@ -9,6 +9,7 @@ import {
   MailIcon,
   MapPin,
   ShieldCheck,
+  ChevronDown,
 } from "lucide-react";
 const Icon = ({ children, className = "" }) => (
   <span className={`inline-flex items-center justify-center ${className}`} aria-hidden="true">
@@ -574,7 +575,52 @@ Lia n’est pas un service d’urgence.
     </form>
   );
 }
+function FAQItem({ item, defaultOpen = false }) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
 
+  return (
+    <div className="overflow-hidden rounded-[1.5rem] border border-[#F0DED8] bg-white transition hover:border-[#FFB9C1]">
+      <button
+        type="button"
+        onClick={() => setIsOpen((current) => !current)}
+        aria-expanded={isOpen}
+        className="flex w-full items-center justify-between gap-6 px-6 py-6 text-left sm:px-7"
+      >
+        <span className="text-base font-semibold leading-6 text-[#10213D] sm:text-lg">
+          {item.q}
+        </span>
+
+        <span
+          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition duration-300 ${
+            isOpen
+              ? "bg-[#FF5F72] text-white"
+              : "bg-[#FFF0EF] text-[#E64B60]"
+          }`}
+        >
+          <ChevronDown
+            size={20}
+            strokeWidth={1.8}
+            className={`transition-transform duration-300 ${
+              isOpen ? "rotate-180" : ""
+            }`}
+          />
+        </span>
+      </button>
+
+      <div
+        className={`grid transition-all duration-300 ${
+          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <p className="border-t border-[#F3E3DE] px-6 py-6 text-sm leading-7 text-slate-600 sm:px-7">
+            {item.a}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 export default function ProcheSuisseVaudLandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -1018,23 +1064,34 @@ export default function ProcheSuisseVaudLandingPage() {
   </div>
 </section>
 
-        <section className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-semibold leading-tight text-[#163168] sm:text-4xl">Questions fréquentes</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-slate-600">
-              Les premières questions que les familles se posent lorsqu’un proche âgé commence à avoir besoin d’aide.
-            </p>
-          </div>
+        <section className="mx-auto max-w-7xl px-5 pb-8 pt-16 lg:px-8 lg:pt-20">
+  <div className="mx-auto max-w-3xl text-center">
+    <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#E64B60]">
+      Vos questions
+    </p>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            {faqs.map((item) => (
-              <div key={item.q} className="rounded-[1.5rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
-                <h3 className="text-base font-semibold text-[#153168]">{item.q}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{item.a}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+    <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight text-[#10213D] sm:text-5xl">
+      Questions fréquentes
+    </h2>
+
+    <div className="mx-auto mt-3 h-1.5 w-16 rounded-full bg-[#FF7A87]" />
+
+    <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-600">
+      Les réponses aux premières questions que les familles se posent
+      lorsqu’un proche commence à avoir besoin d’aide.
+    </p>
+  </div>
+
+  <div className="mx-auto mt-12 max-w-4xl space-y-4">
+    {faqs.map((item, index) => (
+      <FAQItem
+        key={item.q}
+        item={item}
+        defaultOpen={index === 0}
+      />
+    ))}
+  </div>
+</section>
 
         <footer
   id="contact"
