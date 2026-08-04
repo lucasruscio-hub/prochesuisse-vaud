@@ -1,6 +1,11 @@
 "use client";
 import React, { useState } from "react";
-
+import {
+  ClipboardList,
+  MessageCircle,
+  Search,
+  HeartHandshake,
+} from "lucide-react";
 const Icon = ({ children, className = "" }) => (
   <span className={`inline-flex items-center justify-center ${className}`} aria-hidden="true">
     {children}
@@ -72,21 +77,27 @@ const serviceCards = [
 const steps = [
   {
     n: "1",
-    title: "Parlez-nous de votre proche",
-    text: "Décrivez sa situation, son lieu de vie actuel, ses besoins et ce qui vous inquiète.",
-    symbol: "☷",
+    title: "Vous remplissez le formulaire",
+    text: "Quelques questions simples nous permettent de comprendre la situation de votre proche.",
+    Icon: ClipboardList,
   },
   {
     n: "2",
-    title: "Nous clarifions les options",
-    text: "Nous vous aidons à comprendre les pistes possibles : domicile, résidence, court séjour, EMS ou soutien spécialisé.",
-    symbol: "▤",
+    title: "Nous comprenons vos besoins",
+    text: "Nous analysons votre demande avec attention, sans jugement et sans engagement.",
+    Icon: MessageCircle,
   },
   {
     n: "3",
-    title: "Vous avancez vers le bon choix",
-    text: "Vous recevez une orientation humaine pour décider plus sereinement des prochaines étapes.",
-    symbol: "◌",
+    title: "Nous identifions les options adaptées",
+    text: "Nous recherchons les solutions les plus pertinentes dans le canton de Vaud.",
+    Icon: Search,
+  },
+  {
+    n: "4",
+    title: "Vous avancez sereinement",
+    text: "Vous recevez une orientation claire et restez libre de choisir la prochaine étape.",
+    Icon: HeartHandshake,
   },
 ];
 
@@ -689,6 +700,62 @@ export default function ProcheSuisseVaudLandingPage() {
     ))}
   </div>
 </section>
+<section
+  id="how"
+  className="relative overflow-hidden border-b border-[#F3E3DE] bg-[#FFF4EF]"
+>
+  <div className="absolute -right-24 top-10 h-80 w-80 rounded-full bg-[#FFD8D4]/50 blur-3xl" />
+  <div className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-white/70 blur-3xl" />
+
+  <div className="relative mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-24">
+    <div className="mx-auto max-w-3xl text-center">
+      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#E64B60]">
+        Simple et humain
+      </p>
+
+      <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight text-[#10213D] sm:text-5xl">
+        Comment ça marche
+      </h2>
+
+      <div className="mx-auto mt-3 h-1.5 w-16 rounded-full bg-[#FF7A87]" />
+
+      <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-600">
+        Lia vous accompagne étape par étape afin de rendre une situation
+        souvent complexe plus claire et plus rassurante.
+      </p>
+    </div>
+
+    <div className="relative mt-14">
+      <div className="absolute left-[12%] right-[12%] top-12 hidden border-t-2 border-dashed border-[#FF9AA6] lg:block" />
+
+      <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((step) => {
+          const StepIcon = step.Icon;
+
+          return (
+            <div key={step.n} className="relative text-center">
+              <div className="relative z-10 mx-auto flex h-24 w-24 items-center justify-center rounded-full border-4 border-white bg-[#FFF9F6] text-[#10213D] shadow-lg shadow-rose-100/70 ring-1 ring-[#F1DDD7]">
+                <StepIcon size={35} strokeWidth={1.7} />
+              </div>
+
+              <div className="relative z-20 mx-auto -mt-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#FF5F72] text-sm font-bold text-white shadow-md shadow-rose-200">
+                {step.n}
+              </div>
+
+              <h3 className="mx-auto mt-6 max-w-[230px] text-lg font-semibold leading-6 text-[#10213D]">
+                {step.title}
+              </h3>
+
+              <p className="mx-auto mt-3 max-w-[250px] text-sm leading-6 text-slate-600">
+                {step.text}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>
         <section
   id="services"
   className="border-y border-[#F3E3DE] bg-[#FFF9F6]"
@@ -863,25 +930,7 @@ export default function ProcheSuisseVaudLandingPage() {
     <HeroForm />
   </div>
 </section>
-        <section id="how" className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
-          <h2 className="text-center text-3xl font-semibold leading-tight text-[#163168] sm:text-4xl">Comment ça marche</h2>
-          <div className="mx-auto mt-3 h-1 w-14 rounded-full bg-[#FF7A87]" />
-
-          <div className="mt-10 grid gap-8 md:grid-cols-3">
-            {steps.map((step) => (
-              <div key={step.n} className="text-center">
-                <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-[#FFF0EF] text-[34px]">
-                  {step.symbol}
-                </div>
-                <div className="mx-auto -mt-3 flex h-9 w-9 items-center justify-center rounded-full bg-[#FF5F72] text-sm font-bold text-white">
-                  {step.n}
-                </div>
-                <h3 className="mt-5 text-xl font-semibold text-[#153168]">{step.title}</h3>
-                <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-slate-600">{step.text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        
 
         <section id="guide" className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
           <div className="text-center">
