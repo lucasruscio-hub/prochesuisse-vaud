@@ -806,6 +806,40 @@ export default function ProcheSuisseVaudLandingPage() {
     </div>
   </div>
 </section>
+<section id="form" className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
+  <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+    <div>
+      <h2 className="font-serif text-4xl font-semibold leading-tight text-[#10213D] sm:text-5xl">
+        Chaque situation est unique.
+      </h2>
+      <div className="mt-2 h-2 w-56 rounded-full bg-[#FF7A87]" />
+
+      <p className="mt-8 max-w-xl text-lg leading-8 text-[#10213D]">
+        Que vous cherchiez un EMS, un appartement adapté, une aide à domicile ou simplement des conseils, Lia est là pour vous aider à y voir plus clair.
+      </p>
+
+      <div className="mt-8 flex flex-wrap gap-3">
+        {["Sans engagement", "Réponse rapide", "Service gratuit"].map((item) => (
+          <span key={item} className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#10213D] shadow-sm ring-1 ring-[#F1DDD7]">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#FF5F72] text-xs text-white">✓</span>
+            {item}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-10 max-w-lg rounded-[2rem] bg-[#FFE1DE] p-8 text-[#10213D]">
+        <div className="text-5xl leading-none text-[#FF5F72]">“</div>
+        <p className="mt-2 text-base leading-8">
+          Lia nous a vraiment aidés à y voir plus clair à un moment où on avait tellement besoin.
+        </p>
+        <p className="mt-5 text-sm font-semibold">— Famille, Lausanne</p>
+        <div className="mt-4 text-right text-2xl text-[#FF5F72]">♡</div>
+      </div>
+    </div>
+
+    <HeroForm />
+  </div>
+</section>
         <section
   id="services"
   className="border-y border-[#F3E3DE] bg-[#FFF9F6]"
@@ -946,40 +980,7 @@ export default function ProcheSuisseVaudLandingPage() {
             Ces exemples sont présentés à titre indicatif pour illustrer les types de solutions possibles. Les disponibilités, prix et conditions doivent toujours être vérifiés auprès des prestataires ou services compétents.
           </p>
         </section>
-<section id="form" className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
-  <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-    <div>
-      <h2 className="font-serif text-4xl font-semibold leading-tight text-[#10213D] sm:text-5xl">
-        Chaque situation est unique.
-      </h2>
-      <div className="mt-2 h-2 w-56 rounded-full bg-[#FF7A87]" />
 
-      <p className="mt-8 max-w-xl text-lg leading-8 text-[#10213D]">
-        Que vous cherchiez un EMS, un appartement adapté, une aide à domicile ou simplement des conseils, Lia est là pour vous aider à y voir plus clair.
-      </p>
-
-      <div className="mt-8 flex flex-wrap gap-3">
-        {["Sans engagement", "Réponse rapide", "Service gratuit"].map((item) => (
-          <span key={item} className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#10213D] shadow-sm ring-1 ring-[#F1DDD7]">
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#FF5F72] text-xs text-white">✓</span>
-            {item}
-          </span>
-        ))}
-      </div>
-
-      <div className="mt-10 max-w-lg rounded-[2rem] bg-[#FFE1DE] p-8 text-[#10213D]">
-        <div className="text-5xl leading-none text-[#FF5F72]">“</div>
-        <p className="mt-2 text-base leading-8">
-          Lia nous a vraiment aidés à y voir plus clair à un moment où on avait tellement besoin.
-        </p>
-        <p className="mt-5 text-sm font-semibold">— Famille, Lausanne</p>
-        <div className="mt-4 text-right text-2xl text-[#FF5F72]">♡</div>
-      </div>
-    </div>
-
-    <HeroForm />
-  </div>
-</section>
         
 
         <section id="guide" className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
