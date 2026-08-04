@@ -957,24 +957,62 @@ export default function ProcheSuisseVaudLandingPage() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-5 py-8 lg:px-8">
-          <div className="grid gap-8 rounded-[2rem] bg-[#eef4ff] p-7 lg:grid-cols-[0.85fr_1.15fr] lg:p-10">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#123b87]">Phase de lancement</p>
-              <h2 className="mt-3 text-3xl font-semibold leading-tight text-[#163168]">
-                Nous construisons Lia avec les premières familles.
-              </h2>
-            </div>
-            <div className="space-y-4 text-sm leading-7 text-slate-700">
-              <p>
-                Un accompagnement humain pour avancer plus clairement
-              </p>
-              <p className="rounded-2xl bg-white/75 p-4 ring-1 ring-white">
-                <strong className="text-slate-950">Important :</strong> Lia n’est pas un prestataire médical, ne garantit pas de place en EMS et ne remplace pas l’avis d’un médecin, d’un CMS, d’un service social ou d’un professionnel de santé.
-              </p>
-            </div>
-          </div>
-        </section>
+        <section className="mx-auto max-w-7xl px-5 pb-8 pt-14 lg:px-8">
+  <div className="relative overflow-hidden rounded-[2.5rem] border border-[#F2DAD4] bg-[#FFF0EF] px-7 py-10 sm:px-10 lg:px-14 lg:py-14">
+    <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#FFD8D4]/60 blur-3xl" />
+    <div className="absolute -bottom-28 left-1/3 h-64 w-64 rounded-full bg-white/70 blur-3xl" />
+
+    <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <div>
+        <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#E64B60] ring-1 ring-[#F1DDD7]">
+          <HeartHandshake size={17} strokeWidth={1.8} />
+          Lia se construit avec vous
+        </div>
+
+        <h2 className="mt-6 max-w-2xl font-serif text-4xl font-semibold leading-tight text-[#10213D] sm:text-5xl">
+          Chaque famille mérite d’être accompagnée.
+        </h2>
+
+        <p className="mt-5 max-w-2xl text-base leading-8 text-slate-700">
+          Lia accompagne ses premières familles dans le canton de Vaud afin
+          de construire un service réellement utile, humain et adapté aux
+          situations vécues.
+        </p>
+
+        <a
+          href="#form"
+          className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#FF5F72] px-8 py-4 text-base font-bold text-white shadow-xl shadow-rose-200 transition hover:-translate-y-0.5 hover:bg-[#E64B60]"
+        >
+          Faire une demande
+          <ArrowRight />
+        </a>
+      </div>
+
+      <div className="rounded-[2rem] bg-white/85 p-7 shadow-lg shadow-rose-100/50 ring-1 ring-white backdrop-blur">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#FFE1DE] text-[#E64B60]">
+          <HeartHandshake size={27} strokeWidth={1.7} />
+        </div>
+
+        <h3 className="mt-5 text-xl font-semibold text-[#10213D]">
+          Un accompagnement humain
+        </h3>
+
+        <p className="mt-3 text-sm leading-7 text-slate-600">
+          Nous prenons le temps de comprendre votre situation avant de vous
+          aider à clarifier les prochaines étapes.
+        </p>
+
+        <div className="mt-6 border-t border-[#F1DDD7] pt-5">
+          <p className="text-xs leading-6 text-slate-500">
+            <strong className="text-[#10213D]">Important :</strong> Lia n’est
+            pas un prestataire médical, ne garantit pas de place en EMS et ne
+            remplace pas l’avis d’un professionnel de santé.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
         <section className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
           <div className="text-center">
