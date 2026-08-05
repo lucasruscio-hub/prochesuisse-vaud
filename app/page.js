@@ -368,13 +368,22 @@ const handleSubmit = async (event) => {
       <div className="rounded-[2rem] bg-white p-7 shadow-xl shadow-slate-200/60 ring-1 ring-slate-100">
         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FFF0EF] text-2xl text-[#E64B60]">✓</div>
         <h3 className="text-2xl font-semibold text-slate-950">Demande reçue</h3>
-        <p className="mt-3 text-sm leading-6 text-slate-600">
-          Merci, votre demande a bien été reçue.
+        <div className="mt-3 space-y-3 text-sm leading-6 text-slate-600">
+  <p>
+    Merci, votre demande a bien été reçue.
+  </p>
 
-Nous allons examiner les informations transmises afin de mieux comprendre la situation de votre proche et préparer une première orientation.
+  <p>
+    Nous allons analyser les informations transmises afin de comprendre la
+    situation de votre proche et préparer une première sélection de solutions
+    pertinentes.
+  </p>
 
-Lia n’est pas un service d’urgence. 
-        </p>
+  <p>
+    Les disponibilités, tarifs et conditions devront ensuite être confirmés
+    auprès des prestataires concernés.
+  </p>
+</div>
         <p className="mt-4 rounded-2xl bg-amber-50 p-4 text-xs leading-5 text-amber-800">
           En cas d’urgence médicale ou de danger immédiat, contactez le 144 ou un professionnel de santé.
         </p>
@@ -387,7 +396,7 @@ Lia n’est pas un service d’urgence.
       <div className="mb-6">
         <div className="flex items-center justify-between gap-4">
           <h3 className="max-w-xs text-xl font-semibold leading-7 text-slate-950 sm:text-2xl">
-            Décrivez la situation de votre proche
+            Préparons votre sélection personnalisée
           </h3>
           <span className="rounded-full bg-[#FFF0EF] px-3 py-1 text-xs font-semibold text-[#E64B60]">
             {step + 1}/{totalSteps}
@@ -563,7 +572,7 @@ Lia n’est pas un service d’urgence.
           </button>
         ) : (
           <button type="submit" className="ml-auto flex items-center justify-center gap-2 rounded-xl bg-[#FF5F72] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#E64B60]">
-            {isSubmitting ? "Envoi en cours..." : "Recevoir une orientation personnalisée"} <ArrowRight className="text-base" />
+            {isSubmitting ? "Envoi en cours..." : "Préparer ma sélection personnalisée"} <ArrowRight className="text-base" />
           </button>
         )}
       </div>
@@ -641,7 +650,7 @@ export default function ProcheSuisseVaudLandingPage() {
   href="#form"
   className="inline-flex items-center gap-3 rounded-full bg-[#FF5F72] px-9 py-5 text-base font-bold text-white shadow-xl shadow-rose-200 transition hover:bg-[#E64B60]"
 >
-  Faire une demande <ArrowRight />
+  Recevoir ma sélection <ArrowRight />
 </a>
 
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-2xl md:hidden">
@@ -691,7 +700,7 @@ export default function ProcheSuisseVaudLandingPage() {
     href="#form"
     className="inline-flex items-center gap-3 rounded-full bg-[#FF5F72] px-8 py-4 text-base font-bold text-white shadow-xl shadow-rose-200 transition hover:-translate-y-0.5 hover:bg-[#E64B60]"
   >
-    Faire une demande <ArrowRight />
+    Recevoir ma sélection <ArrowRight />
   </a>
 
   <a
@@ -810,13 +819,13 @@ export default function ProcheSuisseVaudLandingPage() {
   <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
     <div>
       <h2 className="font-serif text-4xl font-semibold leading-tight text-[#10213D] sm:text-5xl">
-        Chaque situation est unique.
-      </h2>
+  Recevez une sélection adaptée à votre proche.
+</h2>
       <div className="mt-2 h-2 w-56 rounded-full bg-[#FF7A87]" />
 
       <p className="mt-8 max-w-xl text-lg leading-8 text-[#10213D]">
-        Que vous cherchiez un EMS, un appartement adapté, une aide à domicile ou simplement des conseils, Lia est là pour vous aider à y voir plus clair.
-      </p>
+  Décrivez-nous la situation de votre proche. Lia analyse ses besoins et vous prépare gratuitement une première sélection de solutions pertinentes dans le canton de Vaud.
+</p>
 
       <div className="mt-8 flex flex-wrap gap-3">
         {["Sans engagement", "Réponse rapide", "Service gratuit"].map((item) => (
@@ -922,7 +931,7 @@ export default function ProcheSuisseVaudLandingPage() {
   href="#form"
   className="inline-flex items-center gap-3 rounded-full bg-[#FF5F72] px-9 py-5 text-base font-bold text-white shadow-xl shadow-rose-200 transition hover:bg-[#E64B60]"
 >
-  Faire une demande <ArrowRight />
+  Recevoir ma sélection <ArrowRight />
 </a>
           </div>
 
@@ -1034,7 +1043,7 @@ export default function ProcheSuisseVaudLandingPage() {
           href="#form"
           className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#FF5F72] px-8 py-4 text-base font-bold text-white shadow-xl shadow-rose-200 transition hover:-translate-y-0.5 hover:bg-[#E64B60]"
         >
-          Faire une demande
+          Recevoir ma sélection
           <ArrowRight />
         </a>
       </div>
@@ -1119,7 +1128,7 @@ export default function ProcheSuisseVaudLandingPage() {
           href="#form"
           className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#FF5F72] px-8 py-4 text-base font-bold text-white shadow-xl shadow-rose-200 transition hover:-translate-y-0.5 hover:bg-[#E64B60]"
         >
-          Faire une demande
+          Recevoir ma sélection
           <ArrowRight />
         </a>
       </div>
@@ -1225,7 +1234,7 @@ export default function ProcheSuisseVaudLandingPage() {
           </a>
 
           <a href="#form" className="transition hover:text-[#E64B60]">
-            Faire une demande
+            Recevoir ma sélection
           </a>
         </div>
       </div>
