@@ -10,6 +10,8 @@ import {
   MapPin,
   ShieldCheck,
   ChevronDown,
+  Clock3,
+  TriangleAlert,
 } from "lucide-react";
 const Icon = ({ children, className = "" }) => (
   <span className={`inline-flex items-center justify-center ${className}`} aria-hidden="true">
@@ -704,11 +706,11 @@ export default function ProcheSuisseVaudLandingPage() {
   </a>
 
   <a
-    href="#how"
-    className="text-sm font-semibold text-[#10213D] underline decoration-[#FF7A87] decoration-2 underline-offset-8"
-  >
-    En savoir plus ↓
-  </a>
+  href="#urgent"
+  className="text-sm font-semibold text-[#10213D] underline decoration-[#FF7A87] decoration-2 underline-offset-8"
+>
+  Besoin d’une solution rapidement ?
+</a>
 </div>
 </div>
 
@@ -847,6 +849,60 @@ export default function ProcheSuisseVaudLandingPage() {
     </div>
 
     <HeroForm />
+  </div>
+</section>
+<section
+  id="urgent"
+  className="mx-auto max-w-7xl px-5 pb-10 pt-2 lg:px-8 lg:pb-14"
+>
+  <div className="relative overflow-hidden rounded-[2.5rem] border border-[#F2D7C8] bg-[#FFF4E5] px-7 py-10 sm:px-10 lg:px-14 lg:py-12">
+    <div className="absolute -right-16 -top-20 h-64 w-64 rounded-full bg-[#FFD8D4]/45 blur-3xl" />
+
+    <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+      <div className="flex items-start gap-5">
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white text-[#E64B60] shadow-sm ring-1 ring-[#F1DDD7]">
+          <Clock3 size={29} strokeWidth={1.7} />
+        </div>
+
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E64B60]">
+            Situation pressante
+          </p>
+
+          <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight text-[#10213D] sm:text-4xl">
+            Besoin d’une solution rapidement ?
+          </h2>
+
+          <p className="mt-4 max-w-3xl text-base leading-8 text-slate-700">
+            Sortie d’hôpital, chute récente, proche aidant épuisé ou maintien
+            à domicile devenu difficile : décrivez-nous la situation afin que
+            Lia puisse identifier rapidement les premières pistes adaptées.
+          </p>
+        </div>
+      </div>
+
+      <a
+        href="#form"
+        className="inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-[#10213D] px-7 py-4 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#19345C]"
+      >
+        Demander une orientation rapide
+        <ArrowRight />
+      </a>
+    </div>
+
+    <div className="relative mt-8 flex items-start gap-3 rounded-2xl bg-white/70 px-5 py-4 ring-1 ring-white">
+      <TriangleAlert
+        size={19}
+        strokeWidth={1.8}
+        className="mt-0.5 shrink-0 text-[#E64B60]"
+      />
+
+      <p className="text-xs leading-6 text-slate-600">
+        <strong className="text-[#10213D]">Urgence médicale :</strong> en cas
+        de danger immédiat ou de problème médical urgent, contactez le 144.
+        Lia n’est pas un service d’urgence.
+      </p>
+    </div>
   </div>
 </section>
         <section
