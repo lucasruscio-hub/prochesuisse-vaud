@@ -30,35 +30,11 @@ const Close = ({ className = "" }) => <Icon className={className}>×</Icon>;
 
 const serviceCards = [
   {
-    title: "Trouver un EMS",
-    eyebrow: "Établissement médico-social",
-    text: "Comprendre les critères d’admission, les coûts et les possibilités disponibles dans le canton de Vaud.",
-    symbol: "▦",
-    href: "#form", // future page: /ems
-    color: "bg-[#FFE1DE] text-[#E64B60]",
-  },
-  {
-    title: "Organiser une aide à domicile",
-    eyebrow: "Maintien à domicile",
-    text: "Explorer les solutions de présence, repas, ménage, accompagnement et soutien quotidien.",
-    symbol: "⌂",
-    href: "#form", // future page: /aide-domicile
-    color: "bg-[#EEF4FF] text-[#153168]",
-  },
-  {
-    title: "Choisir une résidence senior",
-    eyebrow: "Logement adapté",
-    text: "Découvrir les appartements protégés et résidences permettant de préserver l’autonomie.",
-    symbol: "◎",
-    href: "#form", // future page: /residence-senior
-    color: "bg-[#FFF4D8] text-[#9A6500]",
-  },
-  {
     title: "Comprendre le Spitex privé",
     eyebrow: "Soins à domicile",
     text: "Distinguer les prestations privées, les soins pris en charge, la disponibilité et les tarifs.",
     symbol: "⇄",
-    href: "#form", // future page: /spitex
+    href: "#form",
     color: "bg-[#EEF7F3] text-[#27634E]",
   },
   {
@@ -66,7 +42,7 @@ const serviceCards = [
     eyebrow: "Solution temporaire",
     text: "Après une hospitalisation, une chute ou lorsque les proches ont temporairement besoin de soutien.",
     symbol: "♡",
-    href: "#form", // future page: /court-sejour
+    href: "#form",
     color: "bg-[#FFF0EF] text-[#E64B60]",
   },
   {
@@ -74,7 +50,7 @@ const serviceCards = [
     eyebrow: "Accompagnement spécialisé",
     text: "Identifier les solutions adaptées lorsque la mémoire, la sécurité ou l’autonomie deviennent difficiles.",
     symbol: "◌",
-    href: "#form", // future page: /alzheimer
+    href: "#form",
     color: "bg-[#F2EEFF] text-[#5C4B8A]",
   },
 ];
@@ -646,8 +622,8 @@ export default function ProcheSuisseVaudLandingPage() {
   </a>
 
   <a href="#services" className="hover:text-slate-950">
-    Services
-  </a>
+  Solutions
+</a>
 
   <a href="#guide" className="hover:text-slate-950">
     Guide
@@ -674,7 +650,7 @@ export default function ProcheSuisseVaudLandingPage() {
           <div className="border-t border-slate-100 px-5 py-4 md:hidden">
             <div className="flex flex-col gap-4 text-sm font-medium text-slate-700">
               <a href="#how">Comment ça marche</a>
-              <a href="#services">Services</a>
+              <a href="#services">Solutions</a>
               <a href="#guide">Guide</a>
               <a href="#contact">Contact</a>
               <a href="#form" className="rounded-xl bg-[#123b87] px-5 py-3 text-center text-white">
@@ -897,7 +873,7 @@ export default function ProcheSuisseVaudLandingPage() {
   <div className="mx-auto grid max-w-7xl gap-6 px-5 pb-16 pt-3 lg:grid-cols-2 lg:px-8">
     {/* URGENT */}
     <a
-      href="#urgent"
+      href="#form"
       className="group relative overflow-hidden rounded-[2rem] bg-[#FFF0D8] p-8 transition hover:-translate-y-1 hover:shadow-xl lg:p-10"
     >
       <div className="relative z-10 max-w-lg">
@@ -1048,60 +1024,7 @@ export default function ProcheSuisseVaudLandingPage() {
     <HeroForm />
   </div>
 </section>
-<section
-  id="urgent"
-  className="mx-auto max-w-7xl px-5 pb-10 pt-2 lg:px-8 lg:pb-14"
->
-  <div className="relative overflow-hidden rounded-[2.5rem] border border-[#F2D7C8] bg-[#FFF4E5] px-7 py-10 sm:px-10 lg:px-14 lg:py-12">
-    <div className="absolute -right-16 -top-20 h-64 w-64 rounded-full bg-[#FFD8D4]/45 blur-3xl" />
 
-    <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-      <div className="flex items-start gap-5">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white text-[#E64B60] shadow-sm ring-1 ring-[#F1DDD7]">
-          <Clock3 size={29} strokeWidth={1.7} />
-        </div>
-
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E64B60]">
-            Situation pressante
-          </p>
-
-          <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight text-[#10213D] sm:text-4xl">
-            Besoin d’une solution rapidement ?
-          </h2>
-
-          <p className="mt-4 max-w-3xl text-base leading-8 text-slate-700">
-            Sortie d’hôpital, chute récente, proche aidant épuisé ou maintien
-            à domicile devenu difficile : décrivez-nous la situation afin que
-            Lia puisse identifier rapidement les premières pistes adaptées.
-          </p>
-        </div>
-      </div>
-
-      <a
-        href="#form"
-        className="inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-[#10213D] px-7 py-4 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#19345C]"
-      >
-        Demander une orientation rapide
-        <ArrowRight />
-      </a>
-    </div>
-
-    <div className="relative mt-8 flex items-start gap-3 rounded-2xl bg-white/70 px-5 py-4 ring-1 ring-white">
-      <TriangleAlert
-        size={19}
-        strokeWidth={1.8}
-        className="mt-0.5 shrink-0 text-[#E64B60]"
-      />
-
-      <p className="text-xs leading-6 text-slate-600">
-        <strong className="text-[#10213D]">Urgence médicale :</strong> en cas
-        de danger immédiat ou de problème médical urgent, contactez le 144.
-        Lia n’est pas un service d’urgence.
-      </p>
-    </div>
-  </div>
-</section>
         <section
   id="services"
   className="border-y border-[#F3E3DE] bg-[#FFF9F6]"
@@ -1109,18 +1032,17 @@ export default function ProcheSuisseVaudLandingPage() {
   <div className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-24">
     <div className="mx-auto max-w-3xl text-center">
       <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#E64B60]">
-        Comprendre les solutions
+        Situations spécifiques
       </p>
 
       <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight text-[#10213D] sm:text-5xl">
-        Une solution adaptée à chaque situation
+        Des besoins qui demandent une attention particulière
       </h2>
 
       <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600">
-        Lia vous aide à comprendre les différentes possibilités et à
-        identifier celles qui correspondent réellement aux besoins de votre
-        proche.
-      </p>
+  Certaines situations nécessitent une recherche plus précise. Lia vous aide
+  à comprendre les options possibles et à identifier les bons interlocuteurs.
+</p>
     </div>
 
     <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
