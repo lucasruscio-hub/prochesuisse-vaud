@@ -55,7 +55,25 @@ export default function AnnuairePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeRegion, setActiveRegion] = useState("Tous");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
 
+  const requestedType = params.get("type");
+  const requestedQuery = params.get("query");
+  const requestedCommune = params.get("commune");
+
+  if (["ems", "domicile", "residence"].includes(requestedType)) {
+    setActiveTab(requestedType);
+  }
+
+  if (requestedQuery) {
+    setSearchQuery(requestedQuery);
+  }
+
+  if (requestedCommune) {
+    setActiveRegion(requestedCommune);
+  }
+}, []);
   const counts = useMemo(() => {
     return {
       ems: providers.filter((provider) => provider.type === "ems").length,

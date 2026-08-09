@@ -138,56 +138,33 @@ const guideCards = [
 
 const providerExamples = [
   {
+    type: "ems",
     category: "EMS",
     location: "Lausanne",
-    name: "Fondation La Rozavère",
-    area: "Lausanne centre · 1006",
-    badge: "Places selon disponibilité",
+    name: "EMS Rozavère",
+    area: "Lausanne · 1010",
     icon: "🏥",
-    price: "CHF 4’200+",
-    priceNote: "/mois indicatif",
-    tags: ["Gériatrie", "Soins palliatifs", "Court séjour"],
-    tone: "bg-blue-50",
+    tone: "bg-[#EEF4FF]",
   },
   {
-    category: "Spitex privé",
-    location: "Tout Vaud",
-    name: "Senevita Casa",
-    area: "Canton de Vaud entier",
-    badge: "Disponible 24h/24",
+    type: "domicile",
+    category: "Aide à domicile",
+    location: "Renens",
+    name: "Senevita Casa Vaud",
+    area: "Renens · 1020",
     icon: "🏠",
-    price: "CHF 35–80",
-    priceNote: "/heure selon prestations",
-    tags: ["Soins infirmiers", "Alzheimer", "LAMal"],
     tone: "bg-[#FFF0EF]",
   },
   {
+    type: "residence",
     category: "Résidence senior",
-    location: "Riviera",
-    name: "Résidence Les Jardins du Léman",
-    area: "Vevey / Montreux",
-    badge: "Logements adaptés",
+    location: "Montreux",
+    name: "Nova Via Residenzen Montreux",
+    area: "Montreux · 1820",
     icon: "🌿",
-    price: "Sur demande",
-    priceNote: "selon logement et services",
-    tags: ["Autonomie", "Sécurité", "Services"],
-    tone: "bg-amber-50",
-  },
-  {
-    category: "Aide à domicile",
-    location: "La Côte",
-    name: "Service d’aide à domicile partenaire",
-    area: "Nyon · Morges · La Côte",
-    badge: "Intervention rapide",
-    icon: "🤝",
-    price: "CHF 30–65",
-    priceNote: "/heure selon besoin",
-    tags: ["Repas", "Présence", "Ménage"],
-    tone: "bg-sky-50",
+    tone: "bg-[#FFF4D8]",
   },
 ];
-
-const providerFilters = ["Tous", "EMS", "Aide à domicile", "Spitex privé", "Lausanne", "Nyon / La Côte", "Vevey / Riviera", "Alzheimer"];
 
 const faqs = [
   {
@@ -635,18 +612,51 @@ function FAQItem({ item, defaultOpen = false }) {
 export default function ProcheSuisseVaudLandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const [marketplaceType, setMarketplaceType] = useState("ems");
+  const [marketplaceQuery, setMarketplaceQuery] = useState("");
+
+  const handleMarketplaceSearch = (event) => {
+    event.preventDefault();
+
+    const params = new URLSearchParams();
+    params.set("type", marketplaceType);
+
+    const query = marketplaceQuery.trim();
+
+    if (query) {
+      params.set("query", query);
+    }
+
+    window.location.href = `/annuaire?${params.toString()}`;
+  };
+
   return (
     <div className="min-h-screen bg-[#fcfbf8] text-slate-900">
       <header className="border-b border-slate-100 bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-8">
           <Logo />
 
-          <nav className="hidden items-center gap-10 text-sm font-medium text-slate-700 md:flex lg:text-base">
-            <a href="#how" className="hover:text-slate-950">Comment ça marche</a>
-            <a href="#services" className="hover:text-slate-950">Services</a>
-            <a href="#guide" className="hover:text-slate-950">Guide</a>
-            <a href="#contact" className="hover:text-slate-950">Contact</a>
-          </nav>
+          <nav className="hidden items-center gap-8 text-sm font-medium text-slate-700 md:flex lg:text-base">
+  <a href="/annuaire" className="font-semibold text-[#E64B60] hover:text-[#FF5F72]">
+    Explorer les solutions
+  </a>
+
+  <a href="#how" className="hover:text-slate-950">
+    Comment ça marche
+  </a>
+
+  <a href="#services" className="hover:text-slate-950">
+    Services
+  </a>
+
+  <a href="#guide" className="hover:text-slate-950">
+    Guide
+  </a>
+
+  <a href="#contact" className="hover:text-slate-950">
+    Contact
+  </a>
+</nav>
 
           <a
   href="#form"
@@ -692,25 +702,87 @@ export default function ProcheSuisseVaudLandingPage() {
 
 <div className="mt-2 h-2 w-40 rounded-full bg-[#FF7A87]" />
 
-              <p className="mt-9 max-w-xl text-lg leading-8 text-[#10213D]">
-  Lia vous aide à trouver le cadre de vie ou l’accompagnement le plus adapté,
-  dans tout le canton de Vaud.
+              <p className="mt-7 max-w-xl text-lg leading-8 text-[#10213D]">
+  Trouvez un EMS, une aide à domicile ou une résidence senior dans le
+  canton de Vaud — ou laissez Lia vous aider à identifier les solutions
+  adaptées à votre proche.
 </p>
 
-<div className="mt-9 flex flex-wrap items-center gap-6">
+<form
+  onSubmit={handleMarketplaceSearch}
+  className="mt-8 max-w-xl rounded-[2rem] border border-[#F1DDD7] bg-white p-4 shadow-xl shadow-rose-100/60"
+>
+  <div className="grid grid-cols-3 gap-2">
+    {[
+      { id: "ems", label: "EMS", symbol: "▦" },
+      { id: "domicile", label: "Aide à domicile", symbol: "⌂" },
+      { id: "residence", label: "Résidences", symbol: "◎" },
+    ].map((item) => {
+      const active = marketplaceType === item.id;
+
+      return (
+        <button
+          key={item.id}
+          type="button"
+          onClick={() => setMarketplaceType(item.id)}
+          className={`flex flex-col items-center justify-center rounded-xl border px-2 py-3 text-center transition sm:flex-row sm:gap-2 ${
+            active
+              ? "border-[#FF7A87] bg-[#FFF0EF] text-[#10213D]"
+              : "border-[#F0E7E3] bg-[#FFFDFC] text-slate-600 hover:border-[#FFB9C1]"
+          }`}
+        >
+          <span className="text-lg text-[#E64B60]">{item.symbol}</span>
+
+          <span className="text-[11px] font-semibold sm:text-xs">
+            {item.label}
+          </span>
+        </button>
+      );
+    })}
+  </div>
+
+  <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+    <div className="relative flex-1">
+      <Search
+        size={19}
+        strokeWidth={1.8}
+        className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+      />
+
+      <input
+        type="text"
+        value={marketplaceQuery}
+        onChange={(event) => setMarketplaceQuery(event.target.value)}
+        placeholder="Commune, NPA ou nom..."
+        className="w-full rounded-xl border border-[#E8DFDA] bg-[#FFFDFC] py-3.5 pl-11 pr-4 text-sm text-[#10213D] outline-none placeholder:text-slate-400 focus:border-[#FF7A87] focus:ring-4 focus:ring-[#FFF0EF]"
+      />
+    </div>
+
+    <button
+      type="submit"
+      className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#10213D] px-6 py-3.5 text-sm font-bold text-white transition hover:bg-[#19345C]"
+    >
+      Rechercher
+      <Search size={17} />
+    </button>
+  </div>
+</form>
+
+<div className="mt-6 flex flex-wrap items-center gap-6">
   <a
     href="#form"
-    className="inline-flex items-center gap-3 rounded-full bg-[#FF5F72] px-8 py-4 text-base font-bold text-white shadow-xl shadow-rose-200 transition hover:-translate-y-0.5 hover:bg-[#E64B60]"
+    className="inline-flex items-center gap-3 rounded-full bg-[#FF5F72] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-rose-200 transition hover:-translate-y-0.5 hover:bg-[#E64B60]"
   >
-    Recevoir ma sélection <ArrowRight />
+    Recevoir ma sélection
+    <ArrowRight />
   </a>
 
   <a
-  href="#urgent"
-  className="text-sm font-semibold text-[#10213D] underline decoration-[#FF7A87] decoration-2 underline-offset-8"
->
-  Besoin d’une solution rapidement ?
-</a>
+    href="#urgent"
+    className="text-sm font-semibold text-[#10213D] underline decoration-[#FF7A87] decoration-2 underline-offset-8"
+  >
+    Besoin d’une solution rapidement ?
+  </a>
 </div>
 </div>
 
@@ -972,79 +1044,93 @@ export default function ProcheSuisseVaudLandingPage() {
   </div>
 </section>
 
-        <section className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E64B60]">Découvrir les options</p>
-              <h2 className="mt-3 text-3xl font-semibold leading-tight text-[#163168] sm:text-4xl">
-                Exemples de solutions dans le canton de Vaud
-              </h2>
-              <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
-                Chaque situation est différente. Voici quelques types de solutions que les familles explorent souvent avec Lia.
-              </p>
-            </div>
-            <a
-  href="#form"
-  className="inline-flex items-center gap-3 rounded-full bg-[#FF5F72] px-9 py-5 text-base font-bold text-white shadow-xl shadow-rose-200 transition hover:bg-[#E64B60]"
->
-  Recevoir ma sélection <ArrowRight />
-</a>
+        <section className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
+  <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+    <div>
+      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E64B60]">
+        Explorer Lia
+      </p>
+
+      <h2 className="mt-3 font-serif text-4xl font-semibold leading-tight text-[#10213D] sm:text-5xl">
+        Découvrez quelques solutions dans le canton de Vaud
+      </h2>
+
+      <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
+        Parcourez les établissements et services référencés par Lia, puis
+        affinez votre recherche selon la région et le type d’accompagnement.
+      </p>
+    </div>
+
+    <a
+      href="/annuaire"
+      className="inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-[#10213D] px-7 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#19345C]"
+    >
+      Voir tous les prestataires
+      <ArrowRight />
+    </a>
+  </div>
+
+  <div className="mt-10 grid gap-6 md:grid-cols-3">
+    {providerExamples.map((provider) => (
+      <article
+        key={provider.name}
+        className="group overflow-hidden rounded-[2rem] border border-[#F0DED8] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#FFB9C1] hover:shadow-xl hover:shadow-rose-100/50"
+      >
+        <div
+          className={`flex h-36 items-center justify-center ${provider.tone}`}
+        >
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/80 text-4xl shadow-sm">
+            {provider.icon}
           </div>
+        </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            {providerFilters.map((filter) => (
-              <button key={filter} type="button" className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-emerald-300 hover:bg-[#FFF0EF] hover:text-emerald-800">
-                {filter}
-              </button>
-            ))}
-          </div>
-
-          <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {providerExamples.map((provider) => (
-              <div key={provider.name} className="overflow-hidden rounded-[2rem] bg-white shadow-sm ring-1 ring-slate-100 transition hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-200/60">
-                <div className={`relative flex h-40 items-center justify-center ${provider.tone}`}>
-                  <div className="absolute left-5 top-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm">
-                    <span className="mr-1 text-emerald-500">●</span>
-                    {provider.badge}
-                  </div>
-                  <div className="text-5xl">{provider.icon}</div>
-                </div>
-
-                <div className="p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E64B60]">
-                    {provider.category} · {provider.location}
-                  </p>
-                  <h3 className="mt-3 text-lg font-semibold leading-6 text-[#153168]">{provider.name}</h3>
-                  <p className="mt-2 text-sm text-slate-500">⌖ {provider.area}</p>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {provider.tags.map((tag) => (
-                      <span key={tag} className="rounded-full bg-slate-50 px-3 py-1 text-xs text-slate-600 ring-1 ring-slate-100">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-5 border-t border-slate-100 pt-4">
-                    <div className="flex items-end justify-between gap-4">
-                      <div>
-                        <p className="text-lg font-semibold text-[#153168]">{provider.price}</p>
-                        <p className="text-xs text-slate-500">{provider.priceNote}</p>
-                      </div>
-                      <a href="#form" className="rounded-xl bg-[#123b87] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#0d2d68]">
-                        Être guidé
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p className="mt-5 text-xs leading-5 text-slate-500">
-            Ces exemples sont présentés à titre indicatif pour illustrer les types de solutions possibles. Les disponibilités, prix et conditions doivent toujours être vérifiés auprès des prestataires ou services compétents.
+        <div className="p-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#E64B60]">
+            {provider.category} · {provider.location}
           </p>
-        </section>
+
+          <h3 className="mt-3 text-xl font-semibold leading-7 text-[#10213D]">
+            {provider.name}
+          </h3>
+
+          <p className="mt-2 flex items-center gap-2 text-sm text-slate-500">
+            <MapPin size={15} strokeWidth={1.8} className="text-[#FF7A87]" />
+            {provider.area}
+          </p>
+
+          <div className="mt-6 border-t border-[#F0E7E3] pt-5">
+            <a
+              href={`/annuaire?type=${provider.type}&query=${encodeURIComponent(
+                provider.name
+              )}`}
+              className="flex items-center justify-between text-sm font-semibold text-[#10213D] transition group-hover:text-[#E64B60]"
+            >
+              Voir dans l’annuaire
+
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#FFF0EF] text-[#E64B60] transition group-hover:bg-[#FF5F72] group-hover:text-white">
+                →
+              </span>
+            </a>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div className="mt-6 flex items-start gap-3 rounded-2xl bg-[#FFF8F3] p-5 text-xs leading-6 text-slate-500">
+    <ShieldCheck
+      size={18}
+      strokeWidth={1.8}
+      className="mt-0.5 shrink-0 text-[#E64B60]"
+    />
+
+    <p>
+      Les informations présentées sont indicatives et issues de sources
+      publiques. Les prestations, conditions et disponibilités doivent être
+      confirmées auprès des organismes concernés.
+    </p>
+  </div>
+</section>
 
         
 
