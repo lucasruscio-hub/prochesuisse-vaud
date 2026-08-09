@@ -686,151 +686,276 @@ export default function ProcheSuisseVaudLandingPage() {
       </header>
 
       <main>
-        <section className="relative mx-auto min-h-[720px] max-w-[1450px] overflow-hidden px-6 py-14 lg:px-10 lg:py-20">
-          <div className="grid items-center gap-16 lg:grid-cols-[0.85fr_1.15fr]">
-            <div className="relative z-10 max-w-[650px]">
-              <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF0EF] px-5 py-3 text-sm font-semibold text-[#E64B60]">
-                <Shield className="text-[#E64B60]" />
-                Orientation humaine et gratuite
-              </div>
-
-             <h1 className="font-serif text-5xl font-semibold leading-[1.05] tracking-[-0.04em] text-[#10213D] sm:text-6xl lg:text-7xl">
-  Vous accompagnez
-  <br />
-  un proche âgé ?
-</h1>
-
-<div className="mt-2 h-2 w-40 rounded-full bg-[#FF7A87]" />
-
-              <p className="mt-7 max-w-xl text-lg leading-8 text-[#10213D]">
-  Trouvez un EMS, une aide à domicile ou une résidence senior dans le
-  canton de Vaud — ou laissez Lia vous aider à identifier les solutions
-  adaptées à votre proche.
-</p>
-
-<form
-  onSubmit={handleMarketplaceSearch}
-  className="mt-8 max-w-xl rounded-[2rem] border border-[#F1DDD7] bg-white p-4 shadow-xl shadow-rose-100/60"
->
-  <div className="grid grid-cols-3 gap-2">
-    {[
-      { id: "ems", label: "EMS", symbol: "▦" },
-      { id: "domicile", label: "Aide à domicile", symbol: "⌂" },
-      { id: "residence", label: "Résidences", symbol: "◎" },
-    ].map((item) => {
-      const active = marketplaceType === item.id;
-
-      return (
-        <button
-          key={item.id}
-          type="button"
-          onClick={() => setMarketplaceType(item.id)}
-          className={`flex flex-col items-center justify-center rounded-xl border px-2 py-3 text-center transition sm:flex-row sm:gap-2 ${
-            active
-              ? "border-[#FF7A87] bg-[#FFF0EF] text-[#10213D]"
-              : "border-[#F0E7E3] bg-[#FFFDFC] text-slate-600 hover:border-[#FFB9C1]"
-          }`}
-        >
-          <span className="text-lg text-[#E64B60]">{item.symbol}</span>
-
-          <span className="text-[11px] font-semibold sm:text-xs">
-            {item.label}
-          </span>
-        </button>
-      );
-    })}
-  </div>
-
-  <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-    <div className="relative flex-1">
-      <Search
-        size={19}
-        strokeWidth={1.8}
-        className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
-      />
-
-      <input
-        type="text"
-        value={marketplaceQuery}
-        onChange={(event) => setMarketplaceQuery(event.target.value)}
-        placeholder="Commune, NPA ou nom..."
-        className="w-full rounded-xl border border-[#E8DFDA] bg-[#FFFDFC] py-3.5 pl-11 pr-4 text-sm text-[#10213D] outline-none placeholder:text-slate-400 focus:border-[#FF7A87] focus:ring-4 focus:ring-[#FFF0EF]"
-      />
+        {/* MARKETPLACE HERO */}
+<section className="border-b border-[#F2DDE1] bg-[#FFF0F4]">
+  <div className="mx-auto max-w-7xl px-5 pb-12 pt-14 text-center lg:px-8 lg:pb-16 lg:pt-16">
+    <div className="inline-flex items-center gap-2 rounded-full bg-white/75 px-5 py-2.5 text-sm font-semibold text-[#E64B60] ring-1 ring-[#F3D8DE]">
+      <ShieldCheck size={17} strokeWidth={1.8} />
+      Gratuit pour les familles · Canton de Vaud
     </div>
 
-    <button
-      type="submit"
-      className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#10213D] px-6 py-3.5 text-sm font-bold text-white transition hover:bg-[#19345C]"
+    <h1 className="mx-auto mt-7 max-w-4xl font-serif text-5xl font-semibold leading-[1.05] tracking-[-0.035em] text-[#10213D] sm:text-6xl lg:text-[68px]">
+      Trouvez la bonne solution
+      <br />
+      pour un proche âgé
+    </h1>
+
+    <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-[#40506A] sm:text-lg">
+      Explorez les EMS, services d’aide à domicile et résidences seniors
+      dans le canton de Vaud — ou laissez Lia vous accompagner dans votre
+      recherche.
+    </p>
+
+    {/* CATEGORY SELECTOR */}
+    <div className="mx-auto mt-9 grid max-w-2xl grid-cols-3 gap-2">
+      {[
+        {
+          id: "ems",
+          label: "EMS",
+          symbol: "▦",
+        },
+        {
+          id: "domicile",
+          label: "Aide à domicile",
+          symbol: "⌂",
+        },
+        {
+          id: "residence",
+          label: "Résidences seniors",
+          symbol: "◎",
+        },
+      ].map((item) => {
+        const active = marketplaceType === item.id;
+
+        return (
+          <button
+            key={item.id}
+            type="button"
+            onClick={() => setMarketplaceType(item.id)}
+            className={`flex min-h-[78px] flex-col items-center justify-center gap-1 rounded-xl border px-3 py-3 transition sm:flex-row sm:gap-3 ${
+              active
+                ? "border-[#FF7A87] bg-white text-[#10213D] shadow-sm"
+                : "border-[#F1DDE1] bg-white/55 text-slate-600 hover:bg-white"
+            }`}
+          >
+            <span
+              className={`flex h-9 w-9 items-center justify-center rounded-lg text-lg ${
+                active
+                  ? "bg-[#FFF0EF] text-[#FF5F72]"
+                  : "bg-white text-[#7A8495]"
+              }`}
+            >
+              {item.symbol}
+            </span>
+
+            <span className="text-xs font-bold sm:text-sm">
+              {item.label}
+            </span>
+          </button>
+        );
+      })}
+    </div>
+
+    {/* SEARCH */}
+    <form
+      onSubmit={handleMarketplaceSearch}
+      className="mx-auto mt-3 max-w-5xl rounded-2xl bg-white p-2 shadow-xl shadow-rose-200/25 ring-1 ring-[#EFDDE0]"
     >
-      Rechercher
-      <Search size={17} />
-    </button>
-  </div>
-</form>
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <div className="relative flex-1">
+          <Search
+            size={20}
+            strokeWidth={1.8}
+            className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"
+          />
 
-<div className="mt-6 flex flex-wrap items-center gap-6">
-  <a
-    href="#form"
-    className="inline-flex items-center gap-3 rounded-full bg-[#FF5F72] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-rose-200 transition hover:-translate-y-0.5 hover:bg-[#E64B60]"
-  >
-    Recevoir ma sélection
-    <ArrowRight />
-  </a>
-
-  <a
-    href="#urgent"
-    className="text-sm font-semibold text-[#10213D] underline decoration-[#FF7A87] decoration-2 underline-offset-8"
-  >
-    Besoin d’une solution rapidement ?
-  </a>
-</div>
-</div>
-
-<div className="mt-12 lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:w-[58%]">
-  <HeroImage />
-</div>
-</div>
-</section>
-<section className="relative z-20 mx-auto -mt-12 max-w-6xl px-5 lg:px-8">
-  <div className="grid overflow-hidden rounded-[2rem] bg-white shadow-2xl shadow-rose-100/60 ring-1 ring-[#F1DDD7] sm:grid-cols-2 lg:grid-cols-4">
-    {[
-      {
-        symbol: "♡",
-        title: "Confidentiel",
-        text: "Vos informations restent privées.",
-      },
-      {
-        symbol: "✓",
-        title: "Indépendant",
-        text: "Aucun établissement privilégié.",
-      },
-      {
-        symbol: "♧",
-        title: "Humain",
-        text: "Un accompagnement à taille humaine.",
-      },
-      {
-        symbol: "⌖",
-        title: "Dans le canton de Vaud",
-        text: "Des solutions locales adaptées.",
-      },
-    ].map((item, index) => (
-      <div
-        key={item.title}
-        className={`flex items-start gap-4 p-6 ${
-          index < 3 ? "lg:border-r lg:border-[#F1DDD7]" : ""
-        }`}
-      >
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FFE1DE] text-2xl text-[#FF5F72]">
-          {item.symbol}
+          <input
+            type="text"
+            value={marketplaceQuery}
+            onChange={(event) => setMarketplaceQuery(event.target.value)}
+            placeholder="Rechercher par commune, NPA ou nom du prestataire"
+            className="h-16 w-full rounded-xl border-0 bg-white pl-14 pr-5 text-base text-[#10213D] outline-none placeholder:text-slate-400"
+          />
         </div>
 
-        <div>
-          <h3 className="font-semibold text-[#10213D]">{item.title}</h3>
-          <p className="mt-1 text-sm leading-6 text-slate-600">{item.text}</p>
+        <button
+          type="submit"
+          className="inline-flex h-16 shrink-0 items-center justify-center gap-3 rounded-xl bg-[#10213D] px-9 text-sm font-bold text-white transition hover:bg-[#19345C]"
+        >
+          <Search size={18} strokeWidth={2} />
+          Rechercher
+        </button>
+      </div>
+    </form>
+
+    <div className="mt-6">
+      <span className="text-sm text-slate-600">
+        Vous ne savez pas quelle solution choisir ?{" "}
+      </span>
+
+      <a
+        href="#form"
+        className="text-sm font-bold text-[#E64B60] underline decoration-[#FF9AA6] decoration-2 underline-offset-4"
+      >
+        Recevoir ma sélection personnalisée →
+      </a>
+    </div>
+  </div>
+
+  {/* TRUST STRIP */}
+  <div className="border-t border-[#F0DADD] bg-[#FFE4EC]">
+    <div className="mx-auto grid max-w-7xl gap-0 px-5 sm:grid-cols-3 lg:px-8">
+      {[
+        {
+          symbol: "♡",
+          title: "Gratuit pour les familles",
+          text: "Explorez les solutions sans frais.",
+        },
+        {
+          symbol: "✓",
+          title: "Informations transparentes",
+          text: "Données issues de sources publiques.",
+        },
+        {
+          symbol: "♧",
+          title: "Accompagnement humain",
+          text: "Lia vous aide si la recherche devient complexe.",
+        },
+      ].map((item, index) => (
+        <div
+          key={item.title}
+          className={`flex items-center gap-4 px-3 py-6 text-left sm:px-6 ${
+            index < 2 ? "sm:border-r sm:border-[#F2C9D2]" : ""
+          }`}
+        >
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/75 text-xl text-[#FF5F72]">
+            {item.symbol}
+          </div>
+
+          <div>
+            <h3 className="text-sm font-bold text-[#10213D]">
+              {item.title}
+            </h3>
+
+            <p className="mt-1 text-xs leading-5 text-slate-600">
+              {item.text}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* THREE MAIN CATEGORIES */}
+<section className="bg-white">
+  <div className="mx-auto max-w-7xl px-5 py-8 lg:px-8">
+    <div className="grid gap-4 md:grid-cols-3">
+      {[
+        {
+          type: "ems",
+          label: "EMS",
+          text: "Établissements médico-sociaux",
+        },
+        {
+          type: "domicile",
+          label: "Aide à domicile",
+          text: "Soins et accompagnement chez soi",
+        },
+        {
+          type: "residence",
+          label: "Résidences seniors",
+          text: "Logements adaptés et vie autonome",
+        },
+      ].map((item) => (
+        <a
+          key={item.type}
+          href={`/annuaire?type=${item.type}`}
+          className="group flex items-center justify-between rounded-xl border border-[#E8E2DF] bg-white px-6 py-5 transition hover:border-[#FF9EAA] hover:shadow-md"
+        >
+          <div>
+            <h3 className="font-bold text-[#10213D]">
+              {item.label}
+            </h3>
+
+            <p className="mt-1 text-xs text-slate-500">
+              {item.text}
+            </p>
+          </div>
+
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF0EF] font-bold text-[#E64B60] transition group-hover:bg-[#FF5F72] group-hover:text-white">
+            →
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* SUPPORT PATHS */}
+<section className="bg-white">
+  <div className="mx-auto grid max-w-7xl gap-6 px-5 pb-16 pt-3 lg:grid-cols-2 lg:px-8">
+    {/* URGENT */}
+    <a
+      href="#urgent"
+      className="group relative overflow-hidden rounded-[2rem] bg-[#FFF0D8] p-8 transition hover:-translate-y-1 hover:shadow-xl lg:p-10"
+    >
+      <div className="relative z-10 max-w-lg">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#E64B60] shadow-sm">
+          <Clock3 size={23} strokeWidth={1.8} />
+        </div>
+
+        <h2 className="mt-6 font-serif text-3xl font-semibold text-[#10213D]">
+          Besoin d’une solution rapidement ?
+        </h2>
+
+        <p className="mt-4 text-sm leading-7 text-slate-700">
+          Sortie d’hôpital, chute récente ou situation devenue difficile :
+          Lia traite les situations pressantes en priorité.
+        </p>
+
+        <div className="mt-7 inline-flex items-center gap-2 rounded-xl bg-[#10213D] px-5 py-3 text-sm font-bold text-white">
+          Demander une orientation rapide
+          <ArrowRight />
         </div>
       </div>
-    ))}
+    </a>
+
+    {/* PERSONALISED SHORTLIST */}
+    <a
+      href="#form"
+      className="group relative min-h-[330px] overflow-hidden rounded-[2rem] bg-[#DFF6EF] transition hover:-translate-y-1 hover:shadow-xl"
+    >
+      <div className="absolute right-0 top-0 h-full w-[48%]">
+        <img
+          src="/hero-lia.png"
+          alt=""
+          className="h-full w-full object-cover"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-r from-[#DFF6EF] via-[#DFF6EF]/30 to-transparent" />
+      </div>
+
+      <div className="relative z-10 max-w-[60%] p-8 lg:p-10">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#E64B60] shadow-sm">
+          <HeartHandshake size={24} strokeWidth={1.8} />
+        </div>
+
+        <h2 className="mt-6 font-serif text-3xl font-semibold text-[#10213D]">
+          Recevez une sélection personnalisée
+        </h2>
+
+        <p className="mt-4 text-sm leading-7 text-slate-700">
+          Décrivez la situation de votre proche et Lia vous aide à identifier
+          les options les plus pertinentes.
+        </p>
+
+        <div className="mt-7 inline-flex items-center gap-2 font-bold text-[#10213D]">
+          Recevoir ma sélection
+          <ArrowRight />
+        </div>
+      </div>
+    </a>
   </div>
 </section>
 <section
