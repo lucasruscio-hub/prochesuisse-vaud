@@ -176,9 +176,7 @@ function Logo() {
         <span className="font-serif text-[48px] font-semibold leading-none tracking-tight text-[#17233A]">
           Lia
         </span>
-        <span className="absolute -right-10 top-1 text-[30px] leading-none text-rose-400">
-          ❧
-        </span>
+        
       </div>
       <div className="mt-1 max-w-[160px] text-[15px] leading-5 text-[#17233A]">
         Accompagnement pour vos proches, en Suisse.
@@ -603,7 +601,7 @@ export default function ProcheSuisseVaudLandingPage() {
       params.set("query", query);
     }
 
-    window.location.href = `/annuaire?${params.toString()}`;
+    window.location.href = `/recherche?${params.toString()}`;
   };
 
   return (
@@ -613,7 +611,7 @@ export default function ProcheSuisseVaudLandingPage() {
           <Logo />
 
           <nav className="hidden items-center gap-8 text-sm font-medium text-slate-700 md:flex lg:text-base">
-  <a href="/annuaire" className="font-semibold text-[#E64B60] hover:text-[#FF5F72]">
+  <a href="/recherche" className="font-semibold text-[#E64B60] hover:text-[#FF5F72]">
     Explorer les solutions
   </a>
 
@@ -846,7 +844,7 @@ export default function ProcheSuisseVaudLandingPage() {
       ].map((item) => (
         <a
           key={item.type}
-          href={`/annuaire?type=${item.type}`}
+          href={`/recherche?type=${item.type}`}
           className="group flex items-center justify-between rounded-xl border border-[#E8E2DF] bg-white px-6 py-5 transition hover:border-[#FF9EAA] hover:shadow-md"
         >
           <div>
@@ -1103,16 +1101,15 @@ export default function ProcheSuisseVaudLandingPage() {
       </h2>
 
       <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
-        Parcourez les établissements et services référencés par Lia, puis
-        affinez votre recherche selon la région et le type d’accompagnement.
+        Parcourez les établissements et services présents sur Lia, puis affinez votre recherche selon la région et le type d’accompagnement.
       </p>
     </div>
 
     <a
-      href="/annuaire"
+      href="/recherche"
       className="inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-[#10213D] px-7 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#19345C]"
     >
-      Voir tous les prestataires
+      Explorer toutes les solutions
       <ArrowRight />
     </a>
   </div>
@@ -1147,12 +1144,12 @@ export default function ProcheSuisseVaudLandingPage() {
 
           <div className="mt-6 border-t border-[#F0E7E3] pt-5">
             <a
-              href={`/annuaire?type=${provider.type}&query=${encodeURIComponent(
+              href={`/recherche?type=${provider.type}&query=${encodeURIComponent(
                 provider.name
               )}`}
               className="flex items-center justify-between text-sm font-semibold text-[#10213D] transition group-hover:text-[#E64B60]"
             >
-              Voir dans l’annuaire
+              Voir cette solution
 
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#FFF0EF] text-[#E64B60] transition group-hover:bg-[#FF5F72] group-hover:text-white">
                 →
@@ -1354,7 +1351,7 @@ export default function ProcheSuisseVaudLandingPage() {
           </a>
 
           <a
-            href="mailto:info@prochesuisse-vaud.ch"
+            href="mailto:contact@liavaud.ch"
             className="flex items-center gap-4 rounded-2xl bg-[#FFF8F3] p-4 transition hover:bg-[#FFF0EF]"
           >
             <MailIcon
@@ -1366,7 +1363,7 @@ export default function ProcheSuisseVaudLandingPage() {
             <div>
               <p className="text-xs text-slate-500">E-mail</p>
               <p className="font-semibold text-[#10213D]">
-                info@prochesuisse-vaud.ch
+                contact@liavaud.ch
               </p>
             </div>
           </a>
