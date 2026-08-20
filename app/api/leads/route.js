@@ -68,7 +68,7 @@ const emailResult = await resend.emails.send({
   to: process.env.LEAD_NOTIFY_EMAIL,
   subject: `Nouveau lead Lia - ${body.need}`,
   html: `
-    <h2>Nouveau lead ProcheSuisse</h2>
+    <h2>Nouveau lead Lia</h2>
 
     <p><strong>Besoin :</strong> ${body.need}</p>
     <p><strong>Localisation :</strong> ${body.location}</p>

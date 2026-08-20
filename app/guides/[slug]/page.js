@@ -15,6 +15,8 @@ import {
   getAllGuideSlugs,
   getGuideBySlug,
 } from "../../../lib/guides";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
 
 const SITE_URL = "https://liavaud.ch";
 
@@ -63,22 +65,6 @@ export async function generateMetadata({ params }) {
       description: guide.metaDescription,
     },
   };
-}
-
-function Logo() {
-  return (
-    <div className="leading-tight">
-      <div>
-        <span className="font-serif text-[46px] font-semibold leading-none tracking-tight text-[#17233A]">
-          Lia
-        </span>
-      </div>
-
-      <div className="mt-1 max-w-[160px] text-[14px] leading-5 text-[#17233A]">
-        Accompagnement pour vos proches, en Suisse.
-      </div>
-    </div>
-  );
 }
 
 export default async function GuidePage({ params }) {
@@ -168,52 +154,7 @@ export default async function GuidePage({ params }) {
         }}
       />
 
-      {/* HEADER */}
-      <header className="border-b border-slate-100 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-8">
-          <Link href="/" aria-label="Retour à l’accueil Lia">
-            <Logo />
-          </Link>
-
-          <nav className="hidden items-center gap-9 text-sm font-medium text-slate-700 md:flex lg:text-base">
-            <Link
-              href="/recherche"
-              className="transition hover:text-[#E64B60]"
-            >
-              Explorer les solutions
-            </Link>
-
-            <Link
-              href="/#how"
-              className="transition hover:text-[#E64B60]"
-            >
-              Comment ça marche
-            </Link>
-
-            <Link
-              href="/guides"
-              className="font-semibold text-[#E64B60]"
-            >
-              Guides
-            </Link>
-
-            <Link
-              href="/#contact"
-              className="transition hover:text-[#E64B60]"
-            >
-              Contact
-            </Link>
-          </nav>
-
-          <Link
-            href="/#form"
-            className="hidden items-center gap-2 rounded-full bg-[#FF5F72] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-rose-200 transition hover:bg-[#E64B60] md:inline-flex"
-          >
-            Recevoir ma sélection
-            <ArrowRight size={16} />
-          </Link>
-        </div>
-      </header>
+      <Header active="guides" />
 
       {/* HERO */}
       <section className="border-b border-[#F0D7D9] bg-[#FDE7EA]">
@@ -513,6 +454,8 @@ export default async function GuidePage({ params }) {
           </article>
         </div>
       </section>
+
+      <Footer />
     </main>
   );
 }

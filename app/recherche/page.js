@@ -14,6 +14,8 @@ import {
   X,
 } from "lucide-react";
 
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import {
   providers,
   searchProviders,
@@ -63,22 +65,6 @@ function resultsHeading(type, count) {
   return `${count} résidence${count !== 1 ? "s" : ""} senior${
     count !== 1 ? "s" : ""
   } présente${count !== 1 ? "s" : ""} sur Lia`;
-}
-
-function Logo() {
-  return (
-    <div className="leading-tight">
-      <div className="relative inline-block">
-        <span className="font-serif text-[48px] font-semibold leading-none tracking-tight text-[#17233A]">
-          Lia
-        </span>
-      </div>
-
-      <div className="mt-1 max-w-[160px] text-[15px] leading-5 text-[#17233A]">
-        Accompagnement pour vos proches, en Suisse.
-      </div>
-    </div>
-  );
 }
 
 function ProviderIcon({ type }) {
@@ -175,59 +161,7 @@ export default function RecherchePage() {
 
   return (
     <main className="min-h-screen bg-[#FFF2EF] text-[#10213D]">
-      {/* HEADER */}
-      <header className="border-b border-slate-100 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-8">
-          <Link href="/" aria-label="Retour à l’accueil Lia">
-            <Logo />
-          </Link>
-
-          <nav className="hidden items-center gap-9 text-sm font-medium text-slate-700 md:flex lg:text-base">
-            <Link
-              href="/recherche"
-              className="font-semibold text-[#E64B60]"
-            >
-              Explorer les solutions
-            </Link>
-
-            <Link
-              href="/#how"
-              className="transition hover:text-slate-950"
-            >
-              Comment ça marche
-            </Link>
-
-            <Link
-              href="/#services"
-              className="transition hover:text-slate-950"
-            >
-              Solutions
-            </Link>
-
-            <Link
-              href="/#guide"
-              className="transition hover:text-slate-950"
-            >
-              Guide
-            </Link>
-
-            <Link
-              href="/#contact"
-              className="transition hover:text-slate-950"
-            >
-              Contact
-            </Link>
-          </nav>
-
-          <Link
-            href="/#form"
-            className="hidden items-center gap-3 rounded-full bg-[#FF5F72] px-8 py-4 text-sm font-bold text-white shadow-xl shadow-rose-200 transition hover:bg-[#E64B60] md:inline-flex"
-          >
-            Recevoir ma sélection
-            <ArrowRight size={16} />
-          </Link>
-        </div>
-      </header>
+      <Header active="recherche" />
 
       {/* HERO */}
       <section className="border-b border-[#F2DDD9] bg-[#FDE7EA]">
@@ -623,6 +557,8 @@ export default function RecherchePage() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </main>
   );
 }
