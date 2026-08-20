@@ -105,8 +105,8 @@ export default function Footer({ ctaHref = "/#form" }) {
                 <MapPin size={21} strokeWidth={1.8} className="text-[#E64B60]" />
 
                 <div>
-                  <p className="text-xs text-slate-500">Région</p>
-                  <p className="font-semibold text-[#10213D]">Lausanne, canton de Vaud</p>
+                  <p className="text-xs text-slate-500">Zone couverte actuellement</p>
+                  <p className="font-semibold text-[#10213D]">Canton de Vaud</p>
                 </div>
               </div>
             </div>

@@ -26,8 +26,7 @@ const NAV_ITEMS = [
   },
   {
     href: "/guides",
-    homeHref: "#guide",
-    label: "Guide",
+    label: "Guides",
     key: "guides",
   },
   {
