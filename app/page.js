@@ -211,7 +211,6 @@ function HeroForm() {
     email: "",
     phone: "",
     consentContact: false,
-    consentMarketing: false,
   });
 
   const totalSteps = 10;
@@ -485,10 +484,6 @@ const handleSubmit = async (event) => {
               <input type="checkbox" checked={formData.consentContact} onChange={(e) => updateField("consentContact", e.target.checked)} className="mt-1" required />
               <span>J’accepte d’être contacté par Lia au sujet de cette demande. Je comprends que Lia n’est pas un prestataire médical et ne remplace pas l’avis d’un professionnel de santé.</span>
             </label>
-            <label className="flex items-start gap-3 rounded-xl bg-slate-50 p-4 text-xs leading-5 text-slate-600">
-              <input type="checkbox" checked={formData.consentMarketing} onChange={(e) => updateField("consentMarketing", e.target.checked)} className="mt-1" />
-              <span>J’accepte de recevoir des conseils et ressources de Lia par e-mail. Je peux me désinscrire à tout moment.</span>
-            </label>
           </div>
         </div>
       )}
@@ -511,6 +506,22 @@ const handleSubmit = async (event) => {
           </button>
         )}
       </div>
+
+      {step === totalSteps - 1 && (
+        <p className="mt-4 rounded-xl bg-[#FFF8F3] p-4 text-sm leading-6 text-slate-600 ring-1 ring-[#F1DDD7]">
+          En envoyant votre demande, vous acceptez que Lia traite les
+          informations fournies afin de comprendre votre situation et de vous
+          répondre. Certaines informations peuvent concerner la santé ou les
+          besoins d’accompagnement de votre proche. Consultez notre{" "}
+          <a
+            href="/politique-de-confidentialite"
+            className="font-semibold text-[#10213D] underline decoration-[#10213D] underline-offset-4"
+          >
+            Politique de confidentialité
+          </a>
+          .
+        </p>
+      )}
 
       <p className="mt-4 flex items-center gap-2 text-xs text-slate-500">
         <Shield className="text-[#FF5F72]" />
