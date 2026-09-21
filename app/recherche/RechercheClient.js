@@ -17,6 +17,7 @@ import {
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { SPECIAL_FILTERS } from "../../lib/provider-config";
+import { providerPath } from "../../lib/provider-detail";
 import { searchProviders } from "../../lib/provider-search";
 
 const PAGE_SIZE = 9;
@@ -377,9 +378,11 @@ export default function RechercheClient({ providers }) {
           <>
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {visibleProviders.map((provider) => (
-                <article
+                <Link
+                  href={providerPath(provider.slug)}
+                  aria-label={`Voir la fiche de ${provider.name}`}
                   key={provider.id}
-                  className="group flex min-h-[300px] flex-col rounded-2xl border border-[#ECE7E3] bg-white p-6 shadow-[0_5px_20px_rgba(23,35,58,0.035)] transition duration-200 hover:-translate-y-1 hover:border-[#FFD1D6] hover:shadow-[0_16px_35px_rgba(23,35,58,0.08)]"
+                  className="group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#10213D] flex min-h-[300px] flex-col rounded-2xl border border-[#ECE7E3] bg-white p-6 shadow-[0_5px_20px_rgba(23,35,58,0.035)] transition duration-200 hover:-translate-y-1 hover:border-[#FFD1D6] hover:shadow-[0_16px_35px_rgba(23,35,58,0.08)]"
                 >
                   <div className="flex items-start gap-4">
                     <ProviderIcon type={provider.type} />
@@ -431,16 +434,15 @@ export default function RechercheClient({ providers }) {
                         confirmer auprès de l’organisme concerné.
                       </p>
 
-                      <Link
-                        href="/#form"
+                      <span
                         className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#10213D] px-4 py-3 text-sm font-semibold text-white transition group-hover:bg-[#19345C]"
                       >
-                        Recevoir une sélection adaptée
+                        Voir la fiche
                         <ArrowRight size={16} />
-                      </Link>
+                      </span>
                     </div>
                   </div>
-                </article>
+                </Link>
               ))}
             </div>
 
