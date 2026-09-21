@@ -31,17 +31,18 @@ const specificConcerns = {
 
 export function buildLegacyMappingRows() {
   return providers.map((provider) => {
-    const concerns = ["Identity and physical address unverified; name/locality/NPA alone do not establish a unique site."];
+    const verificationNotes = ["Identity and physical address unverified; name/locality/NPA alone do not establish a unique site."];
+    const specialReviewConcerns = [];
     if (provider.type === "domicile") {
-      concerns.push("Confirm locally identifiable service operation; office locality does not establish service coverage.");
+      specialReviewConcerns.push("Confirm locally identifiable service operation; office locality does not establish service coverage.");
     }
     if (provider.id.startsWith("epsm-")) {
-      concerns.push("EPSM labelled record currently typed ems; review subtype and elderly-care scope before classification/publication.");
+      specialReviewConcerns.push("EPSM labelled record currently typed ems; review subtype and elderly-care scope before classification/publication.");
     }
     if (/Fondation|Groupe|SISP|GHOL/.test(provider.name)) {
-      concerns.push("Organization/group affiliation in name; distinguish provider site from operator and related listings.");
+      specialReviewConcerns.push("Organization/group affiliation in name; distinguish provider site from operator and related listings.");
     }
-    if (specificConcerns[provider.id]) concerns.push(specificConcerns[provider.id]);
+    if (specificConcerns[provider.id]) specialReviewConcerns.push(specificConcerns[provider.id]);
     return {
       legacyId: provider.id,
       name: provider.name,
@@ -51,7 +52,9 @@ export function buildLegacyMappingRows() {
       originalTags: [...provider.tags],
       originalLocationText: provider.address,
       ...proposeLegacyServices(provider.tags),
-      concerns,
+      verificationNotes,
+      specialReviewConcerns,
+      concerns: [...verificationNotes, ...specialReviewConcerns],
     };
   });
 }
