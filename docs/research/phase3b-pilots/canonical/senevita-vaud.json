@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "senevita-vaud",
+    "slug": "senevita-vaud",
+    "expectedName": "Senevita Casa Vaud",
+    "expectedType": "domicile"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "locationKind": "office",
+  "claims": [
+    {
+      "field": "identity.name",
+      "value": "Senevita Casa Vaud",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "name"
+    },
+    {
+      "field": "identity.type",
+      "value": "domicile",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "primary_type"
+    },
+    {
+      "field": "identity.operator",
+      "value": "Senevita",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "office.address",
+      "value": "Avenue des Baumettes 3",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "office.postalCode",
+      "value": "1020",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "postal_code"
+    },
+    {
+      "field": "office.locality",
+      "value": "Renens",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "locality"
+    },
+    {
+      "field": "contact.phone",
+      "value": "021 311 19 20",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "phone"
+    },
+    {
+      "field": "contact.website",
+      "value": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "website"
+    },
+    {
+      "field": "service.home_nursing",
+      "value": "home_nursing",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.basic_care",
+      "value": "basic_care",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.daily_life_assistance",
+      "value": "daily_life_assistance",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.household_help",
+      "value": "household_help",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.complex_care",
+      "value": "complex_care",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.night_watch",
+      "value": "night_watch",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.24_hour_assistance",
+      "value": "24_hour_assistance",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.family_caregiver_support",
+      "value": "family_caregiver_support",
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service_area.regions",
+      "value": [
+        "Riviera",
+        "La Côte",
+        "Lausanne and western region"
+      ],
+      "evidence": {
+        "kind": "provider",
+        "name": "Senevita — Vaud team",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/equipe/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    }
+  ],
+  "offerings": [],
+  "unresolved": [
+    "canton has no field-level source; remains unknown"
+  ],
+  "holdReasons": [],
+  "legacyTags": [
+    "Spitex",
+    "LAMal",
+    "24h/24",
+    "Tout Vaud"
+  ],
+  "legacyTagsVerified": false
+}

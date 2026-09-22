@@ -1,0 +1,223 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-boveresses",
+    "slug": "ems-boveresses",
+    "expectedName": "EMS Les Boveresses",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "locationKind": "site",
+  "claims": [
+    {
+      "field": "identity.name",
+      "value": "Tertianum Les Boveresses",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "name"
+    },
+    {
+      "field": "identity.type",
+      "value": "ems",
+      "evidence": {
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "primary_type"
+    },
+    {
+      "field": "identity.operator",
+      "value": "Tertianum Vaud SA",
+      "evidence": {
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "site.address",
+      "value": "Avenue des Boveresses 31",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "site.postalCode",
+      "value": "1010",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "postal_code"
+    },
+    {
+      "field": "site.locality",
+      "value": "Lausanne",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "locality"
+    },
+    {
+      "field": "site.canton",
+      "value": "VD",
+      "evidence": {
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "canton_code"
+    },
+    {
+      "field": "contact.phone",
+      "value": "021 654 06 06",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "phone"
+    },
+    {
+      "field": "contact.email",
+      "value": "lesboveresses@tertianum.ch",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "email"
+    },
+    {
+      "field": "contact.website",
+      "value": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "website"
+    },
+    {
+      "field": "capacity.beds",
+      "value": 42,
+      "evidence": {
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.long_term_care",
+      "value": "long_term_care",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.short_respite_stay",
+      "value": "short_respite_stay",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.palliative_care",
+      "value": "palliative_care",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.physiotherapy",
+      "value": "physiotherapy",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.occupational_therapy",
+      "value": "occupational_therapy",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.podology",
+      "value": "podology",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "service.hairdresser",
+      "value": "hairdresser",
+      "evidence": {
+        "kind": "provider",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    }
+  ],
+  "offerings": [],
+  "unresolved": [],
+  "holdReasons": [],
+  "legacyTags": [
+    "Gériatrie",
+    "Psychiatrie"
+  ],
+  "legacyTagsVerified": false
+}

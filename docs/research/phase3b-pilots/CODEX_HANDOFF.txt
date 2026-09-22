@@ -1,0 +1,58 @@
+LIA — PHASE 3B CODEX HANDOFF
+
+Goal:
+Build a safe reviewed-enrichment pipeline for Lia using the three pilot research packets in this folder.
+
+Do not publish anything.
+Do not write to production.
+Do not weaken RLS.
+Do not scrape websites.
+Do not call Google APIs.
+Do not create a migration unless the existing schema genuinely cannot represent the required reviewed facts; if there is a schema gap, document it first.
+
+Pilots:
+1. ems-boveresses.review.json
+2. nova-via.review.json
+3. senevita-vaud.review.json
+
+Before coding:
+- inspect the existing Phase 1 provider schema
+- inspect provider_sources
+- inspect existing ingestion/local-writer architecture
+- inspect the current provider repository/detail code
+- identify what can be reused
+
+Build:
+- a canonical reviewed-enrichment packet format
+- validation
+- local-only apply/test flow
+- provenance retention per factual field/source where the current schema supports it
+- explicit handling of unknowns
+- explicit handling of identity conflicts
+- explicit separation of legacy tags from verified facts
+- explicit separation of office location from home-care service coverage
+- ability to model a site with multiple care offerings, or document the schema gap if the current DB cannot do this safely
+- accidental publication/verification guards
+- tests for all of the above
+
+Validation must reject:
+- unsupported provider type
+- malformed URL/email/phone where appropriate
+- missing provenance for enriched factual data
+- identity conflict
+- unrelated-provider mutation
+- publication=true
+- silent verification
+- conversion of legacy tags into verified services without sourced review
+
+Use the pilot packets only as research inputs. Normalize them into the canonical format you design; do not blindly make their current JSON shape the database contract.
+
+Run relevant unit/integration tests and changed-file lint.
+Do not commit or push.
+At the end report:
+- exact files changed
+- final canonical review-packet structure
+- whether the existing schema is sufficient
+- any schema gaps
+- pilot validation results
+- exact next safe step for local application

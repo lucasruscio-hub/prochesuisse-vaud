@@ -1,0 +1,221 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "nova-via",
+    "slug": "nova-via",
+    "expectedName": "Nova Via Residenzen Montreux",
+    "expectedType": "residence"
+  },
+  "approval": {
+    "localApply": false,
+    "publish": false,
+    "verify": false
+  },
+  "locationKind": "site",
+  "claims": [
+    {
+      "field": "identity.name",
+      "value": "Nova Vita Montreux",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-montreux/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "name"
+    },
+    {
+      "field": "identity.type",
+      "value": "residence",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-montreux/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "primary_type"
+    },
+    {
+      "field": "identity.operator",
+      "value": "Nova Vita Residenz Montreux SA",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-contact/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "site.address",
+      "value": "Place de la Paix",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-contact/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "site.postalCode",
+      "value": "1820",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-contact/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "postal_code"
+    },
+    {
+      "field": "site.locality",
+      "value": "Montreux",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-contact/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "locality"
+    },
+    {
+      "field": "contact.phone",
+      "value": "+41 21 965 90 90",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-contact/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "phone"
+    },
+    {
+      "field": "contact.email",
+      "value": "montreux@novavita.com",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-contact/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "email"
+    },
+    {
+      "field": "contact.website",
+      "value": "https://www.novavita.com/fr/nova-vita-montreux/",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-montreux/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "website"
+    },
+    {
+      "field": "attribute.senior_apartments_1_to_3_rooms",
+      "value": "senior_apartments_1_to_3_rooms",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-montreux/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "attribute.approx_apartment_size_30_to_85_m2",
+      "value": "approx_apartment_size_30_to_85_m2",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-montreux/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "attribute.emergency_call_system",
+      "value": "emergency_call_system",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-montreux/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "attribute.base_and_optional_services",
+      "value": "base_and_optional_services",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-montreux/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "attribute.bilingual_environment",
+      "value": "bilingual_environment",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-montreux/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "offering.medicalized_care_unit.capacity",
+      "value": 12,
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-montreux/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "offering.medicalized_care_unit.24_7_support",
+      "value": "24_7_support",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-montreux/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "offering.medicalized_care_unit.short_stays_possible",
+      "value": "short_stays_possible",
+      "evidence": {
+        "kind": "provider",
+        "name": "Nova Vita",
+        "url": "https://www.novavita.com/fr/nova-vita-montreux/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    }
+  ],
+  "offerings": [
+    "senior_residence",
+    "medicalized_care_unit"
+  ],
+  "unresolved": [
+    "canton has no field-level source; remains unknown"
+  ],
+  "holdReasons": [
+    "multiple care offerings require a reviewed schema/identity decision"
+  ],
+  "legacyTags": [
+    "Haut de gamme",
+    "Bilingue",
+    "Vue lac",
+    "Activités"
+  ],
+  "legacyTagsVerified": false
+}

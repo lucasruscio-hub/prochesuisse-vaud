@@ -1,0 +1,195 @@
+{
+  "research_packet_version": 1,
+  "legacy_id": "ems-boveresses",
+  "review_state": "human_researched_pending_local_apply",
+  "publication_allowed": false,
+  "verification_granted": false,
+  "identity": {
+    "canonical_name": {
+      "value": "Tertianum Les Boveresses",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    "provider_type": {
+      "value": "ems",
+      "source": {
+        "type": "official_web",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    "operator": {
+      "value": "Tertianum Vaud SA",
+      "source": {
+        "type": "official_web",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessed_on": "2026-09-21"
+      }
+    }
+  },
+  "location": {
+    "address": {
+      "value": "Avenue des Boveresses 31",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    "postal_code": {
+      "value": "1010",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    "commune": {
+      "value": "Lausanne",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    "canton": {
+      "value": "VD",
+      "source": {
+        "type": "official_web",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    "country_code": "CH",
+    "latitude": null,
+    "longitude": null
+  },
+  "contact": {
+    "phone": {
+      "value": "021 654 06 06",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    "email": {
+      "value": "lesboveresses@tertianum.ch",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    "website": {
+      "value": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    }
+  },
+  "capacity": {
+    "beds": {
+      "value": 42,
+      "source": {
+        "type": "official_web",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessed_on": "2026-09-21"
+      }
+    }
+  },
+  "verified_services": [
+    {
+      "value": "long_term_care",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    {
+      "value": "short_respite_stay",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    {
+      "value": "palliative_care",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    {
+      "value": "physiotherapy",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    {
+      "value": "occupational_therapy",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    {
+      "value": "podology",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    },
+    {
+      "value": "hairdresser",
+      "source": {
+        "type": "official_web",
+        "name": "Tertianum",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+        "accessed_on": "2026-09-21"
+      }
+    }
+  ],
+  "dynamic_data": {
+    "availability": null,
+    "note": "The official provider page may display live availability. Do not import it as a durable fact without a timestamped availability model."
+  },
+  "legacy_tags": [
+    "Gériatrie",
+    "Psychiatrie"
+  ],
+  "legacy_tags_are_verified": false,
+  "review_notes": [
+    "Good first EMS pilot because identity, location, capacity and rich service data are supported by current official sources.",
+    "Do not publish during Phase 3B."
+  ]
+}
