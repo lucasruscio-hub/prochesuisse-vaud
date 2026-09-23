@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-le-home", "slug": "ems-le-home", "repositoryName": "EMS Le Home", "researchedName": "EMS Le Home", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A14:J14", "Deep Enrichment!A7:I7"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The workbook confirms Le Home as one of two distinct sites operated by EMS Le Home - Les Pins SA and retains its legacy slug.",
+    "facts": [
+      {"field": "site.address", "value": "Avenue des Peupliers 22A, 1009 Pully", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C7"}},
+      {"field": "site.phone", "value": "021 721 02 70", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D7"}},
+      {"field": "site.email", "value": "info@lehome-lespins.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E7"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I14"},
+    {"id": "provider-site", "kind": "provider", "name": "EMS Le Home - Les Pins", "url": "https://www.lehome-lespins.ch/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H7"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "ems-le-home-les-pins-sa", "name": "EMS Le Home - Les Pins SA", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F14"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E14"},
+      "capacity": {"value": 31, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G14"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "service", "code": "hairdressing", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F7"}},
+        {"kind": "service", "code": "social_activities", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F7"}}
+      ],
+      "admissions": null, "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.address", "value": "Avenue des Peupliers 22A, 1009 Pully", "reason": "Site address is preserved for a separate reviewed provider-field workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C7"}},
+    {"field": "site.phone", "value": "021 721 02 70", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D7"}},
+    {"field": "site.email", "value": "info@lehome-lespins.ch", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E7"}},
+    {"field": "facility.shared_living_rest_areas", "value": true, "reason": "No sufficiently specific V1 facility code exists.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F7"}},
+    {"field": "practical.visiting_access", "value": "24/7 visiting access", "reason": "Visiting access is not an admission pathway or current V1 offering field.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F7"}},
+    {"field": "accommodation.room_configuration", "value": "14 double rooms and 3 individual rooms, all with private bathrooms", "reason": "The V1 schema has no sourced room-configuration model; it must not be flattened into bed capacity.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G7"}},
+    {"field": "admissions_financing", "value": "Provider pages explain Vaud financing and admission information", "reason": "The workbook summary does not preserve the actual pathway or financing terms needed for import.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G7"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Vue lac"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

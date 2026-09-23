@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-clair-soleil", "slug": "ems-clair-soleil", "repositoryName": "EMS Clair Soleil", "researchedName": "EMS Clair-Soleil", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A3:J3", "Deep Enrichment!A3:I3"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The workbook explicitly retains the legacy provider and gives the current hyphenated establishment name at the same Ecublens site.",
+    "facts": [
+      {"field": "site.name", "value": "EMS Clair-Soleil", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E3"}},
+      {"field": "site.address", "value": "Route de la Pierre 7, 1024 Ecublens", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C3"}},
+      {"field": "site.phone", "value": "+41 21 694 22 22", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D3"}},
+      {"field": "site.email", "value": "ems.clairsoleil@fa2.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E3"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I3"},
+    {"id": "provider-site", "kind": "provider", "name": "EMS Clair-Soleil", "url": "https://clair-soleil.ch/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H3"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "asile-des-aveugles", "name": "Asile des Aveugles", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F3"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E3"},
+      "capacity": {"value": 94, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G3"}},
+      "stayModes": {"longStay": {"value": true, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F3"}}, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "service", "code": "social_activities", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F3"}},
+        {"kind": "facility", "code": "garden_or_park", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G3"}}
+      ], "admissions": null, "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "EMS Clair-Soleil", "reason": "Reviewed spelling belongs to the provider identity workflow.", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E3"}},
+    {"field": "site.address", "value": "Route de la Pierre 7, 1024 Ecublens", "reason": "Site address is preserved for a separate reviewed provider-field workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C3"}},
+    {"field": "site.phone", "value": "+41 21 694 22 22", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D3"}},
+    {"field": "site.email", "value": "ems.clairsoleil@fa2.ch", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E3"}},
+    {"field": "care_approach.humanitude", "value": true, "reason": "The V1 model has no controlled care-approach field or code.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F3"}},
+    {"field": "service.hotel_and_care", "value": "Social, hotel and care services", "reason": "The bundled wording is too broad for controlled feature import.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F3"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Long séjour"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

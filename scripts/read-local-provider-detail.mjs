@@ -13,7 +13,7 @@ SET LOCAL statement_timeout = '10s';
 SELECT jsonb_build_object(
   'provider', (SELECT to_jsonb(p) FROM public.providers p WHERE p.legacy_id = (${identity} #>> '{}') AND p.slug = (${identity} #>> '{}')),
   'sources', (SELECT coalesce(jsonb_agg(jsonb_build_object('source_type',s.source_type,
-    'source_url',s.source_url,'external_record_id',s.external_record_id,
+    'source_name',s.source_name,'source_url',s.source_url,'external_record_id',s.external_record_id,
     'fields_supported',s.fields_supported) ORDER BY s.id),'[]')
     FROM public.provider_sources s JOIN public.providers p ON p.id = s.provider_id
     WHERE p.legacy_id = (${identity} #>> '{}')),

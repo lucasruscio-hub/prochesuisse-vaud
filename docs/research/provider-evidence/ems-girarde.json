@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-girarde", "slug": "ems-girarde", "repositoryName": "EMS Résidence la Girarde", "researchedName": "Résidence La Girarde", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A31:J31", "Deep Enrichment!A21:J21"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The workbook confirms the legacy Girarde record, the current Fondation du Relais operator, and the same Épalinges establishment.",
+    "facts": [
+      {"field": "site.name", "value": "Résidence La Girarde", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B21"}},
+      {"field": "site.address", "value": "Chemin de la Girarde 2, 1066 Épalinges", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C21"}},
+      {"field": "site.phone", "value": "021 711 72 00", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D21"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I31"},
+    {"id": "provider-site", "kind": "provider", "name": "Fondation du Relais — La Girarde", "url": "https://www.fondationdurelais.ch/la-girarde-prestations/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H21"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-du-relais", "name": "Fondation du Relais", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F31"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E31"},
+      "capacity": {"value": 62, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G31"}},
+      "stayModes": {"longStay": {"value": true, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F21"}}, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "care_profile", "code": "psychiatric_care", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F21"}},
+        {"kind": "service", "code": "podology", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F21"}},
+        {"kind": "service", "code": "hairdressing", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F21"}},
+        {"kind": "service", "code": "social_activities", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F21"}}
+      ],
+      "admissions": {"value": "Admissions gérées par le BRIO.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G21"}},
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "Résidence La Girarde", "reason": "Reviewed display-name changes belong to the provider identity workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B21"}},
+    {"field": "site.address", "value": "Chemin de la Girarde 2, 1066 Épalinges", "reason": "Site address is preserved for a separate reviewed provider-field workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C21"}},
+    {"field": "site.phone", "value": "021 711 72 00", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D21"}},
+    {"field": "service.nursing_medical_psychiatrist", "value": "Nursing and medical support; psychiatrist", "reason": "The summary is too broad for a precise V1 controlled service mapping.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F21"}},
+    {"field": "service.massage", "value": true, "reason": "No V1 controlled taxonomy code exists.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F21"}},
+    {"field": "service.mobility_support", "value": true, "reason": "No precise V1 controlled taxonomy code exists.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F21"}},
+    {"field": "separate_offering.cat", "value": true, "reason": "CAT is explicitly separate and cannot be flattened into the EMS offering without its own reviewed structure.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G21"}},
+    {"field": "public_interest_status", "value": "Non-profit institution recognized as being of public interest (RIP)", "reason": "The workbook wording does not explicitly scope the status to this EMS offering, so the offering-scoped field remains unknown.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!J21"}},
+    {"field": "legacy_tags", "value": ["Gériatrie"], "reason": "The legacy tag remains unverified and is not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

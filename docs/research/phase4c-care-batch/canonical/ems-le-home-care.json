@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-le-home",
+    "slug": "ems-le-home",
+    "expectedName": "EMS Le Home",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "ems-le-home-les-pins-sa",
+      "name": "EMS Le Home - Les Pins SA",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F14",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E14",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 31,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G14",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [],
+      "features": [
+        {
+          "kind": "service",
+          "code": "hairdressing",
+          "displayName": "Coiffure",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F7",
+            "kind": "provider",
+            "name": "EMS Le Home - Les Pins",
+            "url": "https://www.lehome-lespins.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "social_activities",
+          "displayName": "Activités sociales et socioculturelles",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F7",
+            "kind": "provider",
+            "name": "EMS Le Home - Les Pins",
+            "url": "https://www.lehome-lespins.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.address",
+      "value": "Avenue des Peupliers 22A, 1009 Pully",
+      "reason": "Site address is preserved for a separate reviewed provider-field workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C7",
+        "kind": "provider",
+        "name": "EMS Le Home - Les Pins",
+        "url": "https://www.lehome-lespins.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 721 02 70",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D7",
+        "kind": "provider",
+        "name": "EMS Le Home - Les Pins",
+        "url": "https://www.lehome-lespins.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "info@lehome-lespins.ch",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E7",
+        "kind": "provider",
+        "name": "EMS Le Home - Les Pins",
+        "url": "https://www.lehome-lespins.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.shared_living_rest_areas",
+      "value": true,
+      "reason": "No sufficiently specific V1 facility code exists.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F7",
+        "kind": "provider",
+        "name": "EMS Le Home - Les Pins",
+        "url": "https://www.lehome-lespins.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "practical.visiting_access",
+      "value": "24/7 visiting access",
+      "reason": "Visiting access is not an admission pathway or current V1 offering field.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F7",
+        "kind": "provider",
+        "name": "EMS Le Home - Les Pins",
+        "url": "https://www.lehome-lespins.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "accommodation.room_configuration",
+      "value": "14 double rooms and 3 individual rooms, all with private bathrooms",
+      "reason": "The V1 schema has no sourced room-configuration model; it must not be flattened into bed capacity.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G7",
+        "kind": "provider",
+        "name": "EMS Le Home - Les Pins",
+        "url": "https://www.lehome-lespins.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "admissions_financing",
+      "value": "Provider pages explain Vaud financing and admission information",
+      "reason": "The workbook summary does not preserve the actual pathway or financing terms needed for import.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G7",
+        "kind": "provider",
+        "name": "EMS Le Home - Les Pins",
+        "url": "https://www.lehome-lespins.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Vue lac"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": []
+}

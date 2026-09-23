@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-signal", "slug": "ems-signal", "repositoryName": "EMS Le Signal", "researchedName": "Résidence Le Signal", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A16:J16", "Deep Enrichment!A9:I9"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The workbook confirms the legacy Signal record and current Résidence Le Signal at Route du Signal 6 in Les Cullayes under the same operator.",
+    "facts": [
+      {"field": "site.name", "value": "Résidence Le Signal", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B9"}},
+      {"field": "site.address", "value": "Route du Signal 6, 1080 Les Cullayes", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C9"}},
+      {"field": "site.phone", "value": "021 903 11 66", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D9"}},
+      {"field": "site.email", "value": "secretariat@ems-lesignal.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E9"}},
+      {"field": "offering.capacity", "value": {"officialBeds": 24, "providerResidentsApprox": 30}, "scope": "offering", "status": "conflicting", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G16"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I16"},
+    {"id": "provider-site", "kind": "provider", "name": "Résidence Le Signal", "url": "https://www.ems-lesignal.ch/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H9"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-ems-du-jorat", "name": "Fondation EMS du Jorat", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F16"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E16"},
+      "capacity": null,
+      "stayModes": {
+        "longStay": {"value": true, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F9"}},
+        "shortStay": {"value": true, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F9"}},
+        "respiteStay": null
+      },
+      "features": [
+        {"kind": "care_profile", "code": "geriatric_care", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F9"}},
+        {"kind": "care_profile", "code": "psychiatric_care", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F9"}},
+        {"kind": "service", "code": "palliative_care", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F9"}},
+        {"kind": "service", "code": "hairdressing", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F9"}}
+      ],
+      "admissions": null, "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "Résidence Le Signal", "reason": "Reviewed display-name changes belong to the provider identity workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B9"}},
+    {"field": "site.address", "value": "Route du Signal 6, 1080 Les Cullayes", "reason": "Site address is preserved for a separate reviewed provider-field workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C9"}},
+    {"field": "site.phone", "value": "021 903 11 66", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D9"}},
+    {"field": "site.email", "value": "secretariat@ems-lesignal.ch", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E9"}},
+    {"field": "offering.capacity", "value": {"officialBeds": 24, "providerResidentsApprox": 30}, "reason": "The workbook contains conflicting official-list capacity and approximate provider resident counts; capacity stays unknown pending reconciliation."},
+    {"field": "service.animation", "value": true, "reason": "The taxonomy now supports service.social_activities, but Signal remains held and no care fact is promoted before its unresolved capacity review.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F9"}},
+    {"field": "facility.gardens", "value": true, "reason": "The taxonomy now supports facility.garden_or_park, but Signal remains held and no care fact is promoted before its unresolved capacity review.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F9"}},
+    {"field": "service.beauty_catering", "value": "Beauty services and catering", "reason": "The bundled concepts lack clean V1 taxonomy mappings.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F9"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Campagne"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [{"code": "capacity_conflict", "description": "Resolve 24 official beds versus approximately 30 residents before importing capacity.", "workbookCells": ["Master Audit!G16", "Deep Enrichment!G9"]}],
+  "taxonomyProposals": [],
+  "review": {"status": "held", "localApply": false, "publish": false, "verify": false}
+}

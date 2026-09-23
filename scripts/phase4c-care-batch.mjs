@@ -9,8 +9,7 @@ import { LOCAL_CONFIRMATION, runLocalSql } from "../lib/local-provider-writer.mj
 
 const root = new URL("../", import.meta.url);
 const manifestUrl = new URL("../docs/research/phase4c-care-batch/batch.json", import.meta.url);
-const expectedCandidates = ["ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-marronnier",
-  "ems-signal", "ems-petit-flon", "ems-girarde", "ems-pre-fleuri"];
+const expectedCandidates = ["ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-signal", "ems-girarde"];
 const providerIds = new Set(providers.map((provider) => provider.id));
 const baselines = new Map(inspectLegacyProviders().rows.map((row) => [row.legacyId, row.provider]));
 
@@ -26,7 +25,7 @@ export function validateCareBatch(manifest, readPacket = (path) => JSON.parse(re
   const candidates = new Map();
   for (const candidate of manifest.candidates) {
     if (!providerIds.has(candidate.slug) || candidates.has(candidate.slug)
-      || !["evidence_missing_from_repo", "packet_ready_for_review", "packet_held"].includes(candidate.status)
+      || !["evidence_missing_from_repo", "packet_ready_for_review", "packet_approved_for_local_apply", "packet_held"].includes(candidate.status)
       || !Array.isArray(candidate.repositoryMaterial) || !Array.isArray(candidate.supportedCareFacts)
       || !Array.isArray(candidate.proposedFacts) || !Array.isArray(candidate.deferred)
       || !Array.isArray(candidate.taxonomyMappings) || !Array.isArray(candidate.sourceNames)
@@ -43,6 +42,9 @@ export function validateCareBatch(manifest, readPacket = (path) => JSON.parse(re
     }
     if (candidate.status === "packet_held" && (candidate.localApply || !candidate.unresolved.length)) {
       throw new Error(`Held candidate cannot be locally approved: ${candidate.slug}`);
+    }
+    if (candidate.localApply !== (candidate.status === "packet_approved_for_local_apply")) {
+      throw new Error(`Candidate local-apply gate does not match review status: ${candidate.slug}`);
     }
     candidates.set(candidate.slug, candidate);
   }
@@ -69,6 +71,7 @@ export function validateCareBatch(manifest, readPacket = (path) => JSON.parse(re
   }
   return { valid: true, candidates, packets,
     evidenceMissing: [...candidates.values()].filter((item) => item.status === "evidence_missing_from_repo"),
+    heldPackets: [...packets.values()].filter((item) => item.validation.unresolvedCount > 0),
     readyForHumanReview: [...packets.values()].filter((item) => !item.packet.approval.localApply
       && item.validation.unresolvedCount === 0),
     approvedForLocalApply: [...packets.values()].filter((item) => item.validation.localApplyReady) };
@@ -88,6 +91,57 @@ export function selectApprovedPackets(manifest, slugs, readPacket) {
   });
 }
 
+export function describeCareApplyPlan({ slug, packet }) {
+  const sourceUses = new Map();
+  const recordSourceUse = (evidence, use) => {
+    const key = `${evidence.kind}\u0000${evidence.name}\u0000${evidence.url}\u0000${evidence.accessedOn}`;
+    if (!sourceUses.has(key)) sourceUses.set(key, { action: "create_or_reuse_exact_provider_source",
+      kind: evidence.kind, name: evidence.name, url: evidence.url, accessedOn: evidence.accessedOn, uses: [] });
+    sourceUses.get(key).uses.push({ ...use, researchField: evidence.researchField });
+  };
+  for (const organization of packet.organizations) {
+    recordSourceUse(organization.evidence, { scope: "organization", field: "operator", slug: organization.slug });
+  }
+  for (const offering of packet.offerings) {
+    recordSourceUse(offering.typeEvidence, { scope: "offering", offering: offering.slug, field: "offering_type" });
+    if (offering.capacity) recordSourceUse(offering.capacity.evidence,
+      { scope: "offering", offering: offering.slug, field: "capacity" });
+    for (const [field, fact] of Object.entries(offering.stayModes)) {
+      if (fact) recordSourceUse(fact.evidence, { scope: "offering", offering: offering.slug, field });
+    }
+    for (const feature of offering.features) recordSourceUse(feature.evidence,
+      { scope: "offering_feature", offering: offering.slug, field: `${feature.kind}.${feature.code}` });
+    for (const field of ["admissions", "financing", "publicInterestStatus", "pricing"]) {
+      if (offering[field]) recordSourceUse(offering[field].evidence,
+        { scope: "offering", offering: offering.slug, field });
+    }
+  }
+  return {
+    slug,
+    approval: packet.approval,
+    organizations: packet.organizations.map(({ evidence: _evidence, ...organization }) => ({
+      action: "create_or_reuse_exact", ...organization,
+    })),
+    providerOrganizationRelationships: packet.organizations.map((organization) => ({
+      action: "create", organizationSlug: organization.slug,
+      relationshipType: organization.relationshipType, isPrimary: organization.isPrimary,
+    })),
+    offerings: packet.offerings.map((offering) => ({
+      action: "create", slug: offering.slug, name: offering.name, offeringType: offering.offeringType,
+      capacity: offering.capacity ? { value: offering.capacity.value, unit: offering.capacity.unit } : null,
+      stayModes: Object.fromEntries(Object.entries(offering.stayModes)
+        .map(([field, fact]) => [field, fact?.value ?? null])),
+      features: offering.features.map(({ evidence: _evidence, ...feature }) => feature),
+      admissions: offering.admissions?.value ?? null,
+      financing: offering.financing?.value ?? null,
+      publicInterestStatus: offering.publicInterestStatus?.value ?? null,
+      pricing: offering.pricing?.value ?? null,
+    })),
+    provenance: [...sourceUses.values()],
+    deferred: packet.deferred,
+  };
+}
+
 export function main(args) {
   const manifest = loadCareBatch();
   if (args.length === 1 && ["--check-batch", "--dry-run"].includes(args[0])) {
@@ -95,6 +149,7 @@ export function main(args) {
     console.log(JSON.stringify({ mode: args[0].slice(2), databaseWrites: 0, batchId: manifest.batchId,
       candidates: checked.candidates.size, packetCount: checked.packets.size,
       readyForHumanReview: checked.readyForHumanReview.map((item) => item.packet.identity.slug),
+      heldPackets: checked.heldPackets.map((item) => item.packet.identity.slug),
       approvedForLocalApply: checked.approvedForLocalApply.map((item) => item.packet.identity.slug),
       evidenceMissingFromRepo: checked.evidenceMissing.map((item) => item.slug),
       protectedExisting: manifest.protectedExisting }, null, 2));
@@ -103,7 +158,7 @@ export function main(args) {
   if (args[0] === "--plan-apply") {
     const selected = selectApprovedPackets(manifest, args.slice(1));
     console.log(JSON.stringify({ mode: "plan-apply", databaseWrites: 0,
-      providers: selected.map((item) => item.slug) }, null, 2));
+      providers: selected.map(describeCareApplyPlan) }, null, 2));
     return;
   }
   if (args[0] === "--write-local") {

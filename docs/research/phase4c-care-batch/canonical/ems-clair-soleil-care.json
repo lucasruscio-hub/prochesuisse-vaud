@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-clair-soleil",
+    "slug": "ems-clair-soleil",
+    "expectedName": "EMS Clair Soleil",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "asile-des-aveugles",
+      "name": "Asile des Aveugles",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F3",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E3",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 94,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G3",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": {
+          "value": true,
+          "evidence": {
+            "researchField": "Deep Enrichment!F3",
+            "kind": "provider",
+            "name": "EMS Clair-Soleil",
+            "url": "https://clair-soleil.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [],
+      "features": [
+        {
+          "kind": "service",
+          "code": "social_activities",
+          "displayName": "Activités sociales et socioculturelles",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F3",
+            "kind": "provider",
+            "name": "EMS Clair-Soleil",
+            "url": "https://clair-soleil.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "facility",
+          "code": "garden_or_park",
+          "displayName": "Jardin ou parc",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!G3",
+            "kind": "provider",
+            "name": "EMS Clair-Soleil",
+            "url": "https://clair-soleil.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "EMS Clair-Soleil",
+      "reason": "Reviewed spelling belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Master Audit!E3",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Route de la Pierre 7, 1024 Ecublens",
+      "reason": "Site address is preserved for a separate reviewed provider-field workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C3",
+        "kind": "provider",
+        "name": "EMS Clair-Soleil",
+        "url": "https://clair-soleil.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "+41 21 694 22 22",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D3",
+        "kind": "provider",
+        "name": "EMS Clair-Soleil",
+        "url": "https://clair-soleil.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "ems.clairsoleil@fa2.ch",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E3",
+        "kind": "provider",
+        "name": "EMS Clair-Soleil",
+        "url": "https://clair-soleil.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "care_approach.humanitude",
+      "value": true,
+      "reason": "The V1 model has no controlled care-approach field or code.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F3",
+        "kind": "provider",
+        "name": "EMS Clair-Soleil",
+        "url": "https://clair-soleil.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.hotel_and_care",
+      "value": "Social, hotel and care services",
+      "reason": "The bundled wording is too broad for controlled feature import.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F3",
+        "kind": "provider",
+        "name": "EMS Clair-Soleil",
+        "url": "https://clair-soleil.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Long séjour"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": []
+}

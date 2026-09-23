@@ -2,7 +2,12 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { controlledCareFeature } from "../lib/care-feature-taxonomy.js";
 import { validateCarePacket } from "../lib/care-review-packet.mjs";
-import { loadCareBatch, selectApprovedPackets, validateCareBatch } from "../scripts/phase4c-care-batch.mjs";
+import {
+  describeCareApplyPlan,
+  loadCareBatch,
+  selectApprovedPackets,
+  validateCareBatch,
+} from "../scripts/phase4c-care-batch.mjs";
 
 const source = { researchField: "identity.type", kind: "public", name: "Fixture public register",
   url: "https://example.test/register", accessedOn: "2026-09-23" };
@@ -20,8 +25,12 @@ function packet(slug = "ems-chateau-rive") {
     deferred: [], unresolved: [] };
 }
 
-function manifestFor(value, status = "packet_ready_for_review") {
+function manifestFor(value, status = value.approval.localApply
+  ? "packet_approved_for_local_apply" : "packet_ready_for_review") {
   const manifest = structuredClone(loadCareBatch());
+  for (const item of manifest.candidates) Object.assign(item, { status: "evidence_missing_from_repo",
+    repositoryMaterial: [], supportedCareFacts: [], proposedFacts: [], deferred: [],
+    taxonomyMappings: [], sourceNames: [], unresolved: ["Fixture omitted"], localApply: false });
   const candidate = manifest.candidates.find((item) => item.slug === value.identity.slug);
   Object.assign(candidate, { status, repositoryMaterial: [], supportedCareFacts: ["fixture"],
     proposedFacts: ["fixture"], deferred: [], taxonomyMappings: [],
@@ -31,18 +40,17 @@ function manifestFor(value, status = "packet_ready_for_review") {
   return manifest;
 }
 
-test("the Phase 4C evidence inventory holds every candidate without importable facts", () => {
+test("the Phase 4C.1 batch exposes exactly four locally approved packets and holds Signal", () => {
   const checked = validateCareBatch(loadCareBatch());
-  assert.equal(checked.candidates.size, 8);
-  assert.equal(checked.packets.size, 0);
-  assert.equal(checked.readyForHumanReview.length, 0);
-  assert.equal(checked.approvedForLocalApply.length, 0);
-  assert.equal(checked.evidenceMissing.length, 8);
-  for (const candidate of checked.evidenceMissing) {
-    assert.equal(candidate.localApply, false);
-    assert.deepEqual(candidate.supportedCareFacts, []);
-    assert.deepEqual(candidate.proposedFacts, []);
-    assert.ok(candidate.unresolved.length > 0);
+  assert.equal(checked.candidates.size, 5);
+  assert.equal(checked.packets.size, 5);
+  assert.deepEqual(checked.readyForHumanReview, []);
+  assert.deepEqual(checked.heldPackets.map((item) => item.packet.identity.slug), ["ems-signal"]);
+  assert.deepEqual(checked.approvedForLocalApply.map((item) => item.packet.identity.slug),
+    ["ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-girarde"]);
+  assert.equal(checked.evidenceMissing.length, 0);
+  for (const candidate of checked.candidates.values()) {
+    assert.equal(candidate.localApply, candidate.slug !== "ems-signal");
   }
 });
 
@@ -68,6 +76,22 @@ test("explicitly approved packets can be selected while protected and unresolved
   const heldManifest = manifestFor(unresolved, "packet_held");
   assert.throws(() => selectApprovedPackets(heldManifest, [unresolved.identity.slug], () => unresolved),
     /lacks human local-apply approval/);
+});
+
+test("apply planning exposes exact operations and provenance without changing approval state", () => {
+  const value = packet();
+  value.approval.localApply = true;
+  value.offerings[0].capacity = { value: 10, unit: "beds", evidence: source };
+  value.offerings[0].features = [{ ...controlledCareFeature("service", "social_activities"), evidence: source }];
+  const [selected] = selectApprovedPackets(manifestFor(value), [value.identity.slug], () => value);
+  const plan = describeCareApplyPlan(selected);
+  assert.equal(plan.organizations.length, 0);
+  assert.equal(plan.offerings[0].action, "create");
+  assert.deepEqual(plan.offerings[0].capacity, { value: 10, unit: "beds" });
+  assert.equal(plan.offerings[0].features[0].code, "social_activities");
+  assert.deepEqual(plan.approval, { localApply: true, publish: false, verify: false });
+  assert.deepEqual(plan.provenance[0].uses.map((use) => use.field),
+    ["offering_type", "capacity", "service.social_activities"]);
 });
 
 test("the generic contract accepts multiple distinct sourced offerings", () => {

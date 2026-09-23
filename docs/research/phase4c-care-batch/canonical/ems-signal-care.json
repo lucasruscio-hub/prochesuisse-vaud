@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-signal",
+    "slug": "ems-signal",
+    "expectedName": "EMS Le Signal",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": false,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "fondation-ems-du-jorat",
+      "name": "Fondation EMS du Jorat",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F16",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E16",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": null,
+      "stayModes": {
+        "longStay": {
+          "value": true,
+          "evidence": {
+            "researchField": "Deep Enrichment!F9",
+            "kind": "provider",
+            "name": "Résidence Le Signal",
+            "url": "https://www.ems-lesignal.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        "shortStay": {
+          "value": true,
+          "evidence": {
+            "researchField": "Deep Enrichment!F9",
+            "kind": "provider",
+            "name": "Résidence Le Signal",
+            "url": "https://www.ems-lesignal.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "geriatric_care",
+        "psychiatric_care"
+      ],
+      "features": [
+        {
+          "kind": "care_profile",
+          "code": "geriatric_care",
+          "displayName": "Accompagnement gériatrique",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F9",
+            "kind": "provider",
+            "name": "Résidence Le Signal",
+            "url": "https://www.ems-lesignal.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "care_profile",
+          "code": "psychiatric_care",
+          "displayName": "Accompagnement psychiatrique",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F9",
+            "kind": "provider",
+            "name": "Résidence Le Signal",
+            "url": "https://www.ems-lesignal.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "palliative_care",
+          "displayName": "Soins palliatifs",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F9",
+            "kind": "provider",
+            "name": "Résidence Le Signal",
+            "url": "https://www.ems-lesignal.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "hairdressing",
+          "displayName": "Coiffure",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F9",
+            "kind": "provider",
+            "name": "Résidence Le Signal",
+            "url": "https://www.ems-lesignal.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "Résidence Le Signal",
+      "reason": "Reviewed display-name changes belong to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B9",
+        "kind": "provider",
+        "name": "Résidence Le Signal",
+        "url": "https://www.ems-lesignal.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Route du Signal 6, 1080 Les Cullayes",
+      "reason": "Site address is preserved for a separate reviewed provider-field workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C9",
+        "kind": "provider",
+        "name": "Résidence Le Signal",
+        "url": "https://www.ems-lesignal.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 903 11 66",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D9",
+        "kind": "provider",
+        "name": "Résidence Le Signal",
+        "url": "https://www.ems-lesignal.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "secretariat@ems-lesignal.ch",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E9",
+        "kind": "provider",
+        "name": "Résidence Le Signal",
+        "url": "https://www.ems-lesignal.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "offering.capacity",
+      "value": {
+        "officialBeds": 24,
+        "providerResidentsApprox": 30
+      },
+      "reason": "The workbook contains conflicting official-list capacity and approximate provider resident counts; capacity stays unknown pending reconciliation."
+    },
+    {
+      "field": "service.animation",
+      "value": true,
+      "reason": "The taxonomy now supports service.social_activities, but Signal remains held and no care fact is promoted before its unresolved capacity review.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F9",
+        "kind": "provider",
+        "name": "Résidence Le Signal",
+        "url": "https://www.ems-lesignal.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.gardens",
+      "value": true,
+      "reason": "The taxonomy now supports facility.garden_or_park, but Signal remains held and no care fact is promoted before its unresolved capacity review.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F9",
+        "kind": "provider",
+        "name": "Résidence Le Signal",
+        "url": "https://www.ems-lesignal.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.beauty_catering",
+      "value": "Beauty services and catering",
+      "reason": "The bundled concepts lack clean V1 taxonomy mappings.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F9",
+        "kind": "provider",
+        "name": "Résidence Le Signal",
+        "url": "https://www.ems-lesignal.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Campagne"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": [
+    {
+      "code": "capacity_conflict",
+      "description": "Resolve 24 official beds versus approximately 30 residents before importing capacity."
+    }
+  ]
+}

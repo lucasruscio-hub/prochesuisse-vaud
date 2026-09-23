@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "provider": {
+    "legacyId": "ems-chateau-rive",
+    "slug": "ems-chateau-rive",
+    "repositoryName": "EMS Château de la Rive",
+    "researchedName": "Château de la Rive",
+    "primaryType": "ems"
+  },
+  "workbook": {
+    "path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx",
+    "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450",
+    "auditDate": "2026-09-21",
+    "rows": ["Master Audit!A2:J2", "Deep Enrichment!A2:I2"]
+  },
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The legacy slug and current listing are tied to the same Lutry establishment in both workbook rows.",
+    "facts": [
+      {"field": "site.name", "value": "Château de la Rive", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E2"}},
+      {"field": "site.address", "value": "Chemin de Curtinaux 14, 1095 Lutry", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C2"}},
+      {"field": "site.phone", "value": "021 796 10 41", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D2"}},
+      {"field": "site.email", "value": "direction@chateaudelarive.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E2"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I2"},
+    {"id": "provider-site", "kind": "provider", "name": "Château de la Rive", "url": "https://chateaudelarive.ch/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H2"}
+  ],
+  "carePacketProposal": {
+    "organizations": [
+      {"slug": "chateau-de-la-rive-sa", "name": "Château de la Rive SA", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F2"}}
+    ],
+    "offerings": [
+      {
+        "slug": "ems",
+        "name": "Établissement médico-social",
+        "offeringType": "ems",
+        "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E2"},
+        "capacity": {"value": 103, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G2"}},
+        "stayModes": {
+          "longStay": {"value": true, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F2"}},
+          "shortStay": {"value": true, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F2"}},
+          "respiteStay": null
+        },
+        "features": [
+          {"kind": "care_profile", "code": "geriatric_care", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F2"}},
+          {"kind": "service", "code": "physiotherapy", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F2"}},
+          {"kind": "service", "code": "podology", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F2"}},
+          {"kind": "service", "code": "hairdressing", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F2"}}
+        ],
+        "admissions": null,
+        "financing": null,
+        "publicInterestStatus": null,
+        "pricing": null
+      }
+    ]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "Château de la Rive", "reason": "Reviewed display-name changes belong to the provider identity workflow, not the care apply.", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E2"}},
+    {"field": "site.address", "value": "Chemin de Curtinaux 14, 1095 Lutry", "reason": "Site address is preserved for a separate reviewed provider-field workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C2"}},
+    {"field": "site.phone", "value": "021 796 10 41", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D2"}},
+    {"field": "site.email", "value": "direction@chateaudelarive.ch", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E2"}},
+    {"field": "care_profile.specialized_environment", "value": "Advanced-age psychiatric/cognitive-support environment in La Résidence", "reason": "The workbook scopes this to a named environment; it cannot safely characterize the whole EMS offering.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G2"}},
+    {"field": "service.aesthetics", "value": true, "reason": "No V1 controlled taxonomy code exists.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F2"}},
+    {"field": "service.hotel_laundry", "value": "On-site hotel/laundry services", "reason": "This bundled practical-services summary does not map cleanly to the V1 taxonomy.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F2"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Court séjour", "Lavaux"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}
