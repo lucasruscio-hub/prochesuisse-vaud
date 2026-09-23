@@ -33,7 +33,13 @@ CREATE TEMP TABLE phase4_baseline AS SELECT
   (SELECT count(*) FROM public.providers) provider_count,
   (SELECT count(*) FROM public.provider_sources) source_count,
   (SELECT count(*) FROM public.provider_service_areas) area_count,
-  (SELECT count(*) FROM public.municipalities) municipality_count;
+  (SELECT count(*) FROM public.municipalities) municipality_count,
+  (SELECT count(*) FROM public.organizations) organization_count,
+  (SELECT count(*) FROM public.provider_organizations) relationship_count,
+  (SELECT count(*) FROM public.care_offerings) offering_count,
+  (SELECT count(*) FROM public.care_offering_features) feature_count,
+  (SELECT count(*) FROM public.care_offering_sources) offering_source_count,
+  (SELECT count(*) FROM public.care_offering_availability) availability_count;
 
 CREATE FUNCTION pg_temp.assert_true(ok boolean, label text) RETURNS void
 LANGUAGE plpgsql SECURITY INVOKER AS $$
@@ -58,6 +64,7 @@ DO $$ BEGIN
 END $$;
 GRANT EXECUTE ON FUNCTION pg_temp.assert_true(boolean, text),
   pg_temp.expect_error(text, text, text) TO anon, authenticated, service_role;
+GRANT SELECT ON phase4_baseline TO service_role;
 
 SET LOCAL ROLE service_role;
 
@@ -65,7 +72,7 @@ SET LOCAL ROLE service_role;
 INSERT INTO public.provider_sources (id, provider_id, source_type, source_name, fields_supported)
 SELECT source_id, p.id, 'lia', source_name, fields
 FROM (VALUES
-  ('41000000-0000-4000-8000-000000000001'::uuid, 'ems-boveresses', 'Phase 4A Boveresses fixture', ARRAY['offering.type','offering.capacity','offering.service']),
+  ('41000000-0000-4000-8000-000000000001'::uuid, 'ems-boissonnet', 'Phase 4A EMS fixture', ARRAY['offering.type','offering.capacity','offering.service']),
   ('41000000-0000-4000-8000-000000000002'::uuid, 'senevita-vaud', 'Phase 4A Senevita fixture', ARRAY['offering.type']),
   ('41000000-0000-4000-8000-000000000003'::uuid, 'nova-via', 'Phase 4A Nova fixture', ARRAY['offering.type','offering.capacity'])
 ) source(source_id, slug, source_name, fields)
@@ -81,7 +88,7 @@ VALUES
 INSERT INTO public.provider_organizations (provider_id, organization_id, relationship_type, is_primary, source_id)
 SELECT p.id, relation.organization_id, 'operator', true, relation.source_id
 FROM (VALUES
-  ('ems-boveresses', '42000000-0000-4000-8000-000000000001'::uuid, '41000000-0000-4000-8000-000000000001'::uuid),
+  ('ems-boissonnet', '42000000-0000-4000-8000-000000000001'::uuid, '41000000-0000-4000-8000-000000000001'::uuid),
   ('senevita-vaud', '42000000-0000-4000-8000-000000000002'::uuid, '41000000-0000-4000-8000-000000000002'::uuid),
   ('nova-via', '42000000-0000-4000-8000-000000000003'::uuid, '41000000-0000-4000-8000-000000000003'::uuid)
 ) relation(slug, organization_id, source_id)
@@ -92,7 +99,7 @@ INSERT INTO public.care_offerings (id, provider_id, slug, name, offering_type,
 SELECT offering.id, p.id, offering.slug, offering.name, offering.offering_type,
   offering.capacity_value, offering.capacity_unit, offering.long_stay, offering.short_stay, offering.respite_stay
 FROM (VALUES
-  ('43000000-0000-4000-8000-000000000001'::uuid, 'ems-boveresses', 'ems', 'EMS', 'ems', 42, 'beds', true, true, true),
+  ('43000000-0000-4000-8000-000000000001'::uuid, 'ems-boissonnet', 'ems', 'EMS', 'ems', 42, 'beds', true, true, true),
   ('43000000-0000-4000-8000-000000000002'::uuid, 'senevita-vaud', 'home-care', 'Soins à domicile', 'home_care', NULL, NULL, NULL, NULL, NULL),
   ('43000000-0000-4000-8000-000000000003'::uuid, 'nova-via', 'senior-residence', 'Résidence seniors', 'senior_residence', NULL, NULL, NULL, NULL, NULL),
   ('43000000-0000-4000-8000-000000000004'::uuid, 'nova-via', 'medicalized-care', 'Unité médicalisée', 'medicalized_care_unit', NULL, NULL, NULL, NULL, NULL),
@@ -124,7 +131,7 @@ SELECT o.provider_id, o.id, 'waitlist', '2026-09-23 12:00:00+00',
 FROM public.care_offerings o WHERE o.id = '43000000-0000-4000-8000-000000000001';
 
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.care_offerings o
-  JOIN public.providers p ON p.id=o.provider_id WHERE p.slug='ems-boveresses'),
+  JOIN public.providers p ON p.id=o.provider_id WHERE p.slug='ems-boissonnet'),
   'one site can have one EMS offering');
 SELECT pg_temp.assert_true((SELECT count(*) = 2 FROM public.care_offerings o
   JOIN public.providers p ON p.id=o.provider_id WHERE p.slug='nova-via'),
@@ -140,9 +147,10 @@ SELECT pg_temp.assert_true((SELECT capacity_value IS NULL AND capacity_unit IS N
 SELECT pg_temp.assert_true((SELECT count(*) = 0 FROM public.provider_service_areas a
   JOIN public.providers p ON p.id=a.provider_id WHERE p.slug='senevita-vaud'),
   'office address and home-care offerings create no service coverage');
-SELECT pg_temp.assert_true((SELECT count(*) = 5 FROM public.care_offering_sources)
-  AND (SELECT count(*) = 1 FROM public.care_offering_features)
-  AND (SELECT count(*) = 1 FROM public.care_offering_availability),
+SELECT pg_temp.assert_true((SELECT offering_source_count + 5 = (SELECT count(*) FROM public.care_offering_sources)
+  AND feature_count + 1 = (SELECT count(*) FROM public.care_offering_features)
+  AND availability_count + 1 = (SELECT count(*) FROM public.care_offering_availability)
+  FROM phase4_baseline),
   'offering facts retain private source linkage and timestamped availability');
 
 -- Coverage is added only through explicit, sourced service-area rows. NULL keeps site scope;
@@ -186,9 +194,9 @@ SELECT pg_temp.assert_true((SELECT count(*) = 2 FROM public.provider_organizatio
   'one operator can relate to multiple independent sites');
 
 SELECT pg_temp.expect_error($q$INSERT INTO public.care_offerings(provider_id,slug,name,offering_type)
-  SELECT id,'bad','Bad','unknown' FROM public.providers WHERE slug='ems-boveresses'$q$, '23514', 'invalid offering type');
+  SELECT id,'bad','Bad','unknown' FROM public.providers WHERE slug='ems-boissonnet'$q$, '23514', 'invalid offering type');
 SELECT pg_temp.expect_error($q$INSERT INTO public.care_offerings(provider_id,slug,name,offering_type,capacity_value)
-  SELECT id,'bad-capacity','Bad capacity','ems',10 FROM public.providers WHERE slug='ems-boveresses'$q$, '23514', 'capacity requires unit');
+  SELECT id,'bad-capacity','Bad capacity','ems',10 FROM public.providers WHERE slug='ems-boissonnet'$q$, '23514', 'capacity requires unit');
 SELECT pg_temp.expect_error($q$INSERT INTO public.care_offering_features
   (provider_id,offering_id,feature_kind,feature_code,display_name,source_id)
   SELECT o.provider_id,o.id,'service','wrong_source','Wrong source','41000000-0000-4000-8000-000000000002'
@@ -197,7 +205,7 @@ SELECT pg_temp.expect_error($q$INSERT INTO public.provider_service_areas
   (provider_id,care_offering_id,coverage_type,country_code,canton_code,source_id)
   SELECT p.id,'43000000-0000-4000-8000-000000000002','canton','CH','VS',
     '41000000-0000-4000-8000-000000000001'
-  FROM public.providers p WHERE p.slug='ems-boveresses'$q$, '23503',
+  FROM public.providers p WHERE p.slug='ems-boissonnet'$q$, '23503',
   'cross-provider offering coverage rejected');
 RESET ROLE;
 
@@ -223,7 +231,14 @@ RESET ROLE;
 SELECT pg_temp.assert_true((SELECT provider_count + 2 = (SELECT count(*) FROM public.providers)
   AND source_count + 5 = (SELECT count(*) FROM public.provider_sources)
   AND area_count + 3 = (SELECT count(*) FROM public.provider_service_areas)
-  AND municipality_count = (SELECT count(*) FROM public.municipalities) FROM phase4_baseline),
+  AND municipality_count = (SELECT count(*) FROM public.municipalities)
+  AND organization_count + 4 = (SELECT count(*) FROM public.organizations)
+  AND relationship_count + 5 = (SELECT count(*) FROM public.provider_organizations)
+  AND offering_count + 5 = (SELECT count(*) FROM public.care_offerings)
+  AND feature_count + 1 = (SELECT count(*) FROM public.care_offering_features)
+  AND offering_source_count + 5 = (SELECT count(*) FROM public.care_offering_sources)
+  AND availability_count + 1 = (SELECT count(*) FROM public.care_offering_availability)
+  FROM phase4_baseline),
   'only explicit synthetic fixtures changed; municipalities untouched');
 
 ROLLBACK;

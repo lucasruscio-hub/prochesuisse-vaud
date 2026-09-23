@@ -1,0 +1,100 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { controlledCareFeature } from "../lib/care-feature-taxonomy.js";
+import { validateCarePacket } from "../lib/care-review-packet.mjs";
+import { loadCareBatch, selectApprovedPackets, validateCareBatch } from "../scripts/phase4c-care-batch.mjs";
+
+const source = { researchField: "identity.type", kind: "public", name: "Fixture public register",
+  url: "https://example.test/register", accessedOn: "2026-09-23" };
+
+function packet(slug = "ems-chateau-rive") {
+  return { version: 1,
+    identity: { legacyId: slug, slug, expectedName: "Fixture establishment", expectedType: "ems" },
+    approval: { localApply: false, publish: false, verify: false },
+    organizations: [],
+    offerings: [{ slug: "ems", name: "Établissement médico-social", offeringType: "ems",
+      typeEvidence: source, capacity: null,
+      stayModes: { longStay: null, shortStay: null, respiteStay: null },
+      careProfiles: [], features: [], admissions: null, financing: null,
+      publicInterestStatus: null, pricing: null }],
+    deferred: [], unresolved: [] };
+}
+
+function manifestFor(value, status = "packet_ready_for_review") {
+  const manifest = structuredClone(loadCareBatch());
+  const candidate = manifest.candidates.find((item) => item.slug === value.identity.slug);
+  Object.assign(candidate, { status, repositoryMaterial: [], supportedCareFacts: ["fixture"],
+    proposedFacts: ["fixture"], deferred: [], taxonomyMappings: [],
+    sourceNames: [source.name], unresolved: value.unresolved.map((item) => item.description),
+    localApply: value.approval.localApply });
+  manifest.packetPaths = [{ slug: value.identity.slug, path: "fixture.json" }];
+  return manifest;
+}
+
+test("the Phase 4C evidence inventory holds every candidate without importable facts", () => {
+  const checked = validateCareBatch(loadCareBatch());
+  assert.equal(checked.candidates.size, 8);
+  assert.equal(checked.packets.size, 0);
+  assert.equal(checked.readyForHumanReview.length, 0);
+  assert.equal(checked.approvedForLocalApply.length, 0);
+  assert.equal(checked.evidenceMissing.length, 8);
+  for (const candidate of checked.evidenceMissing) {
+    assert.equal(candidate.localApply, false);
+    assert.deepEqual(candidate.supportedCareFacts, []);
+    assert.deepEqual(candidate.proposedFacts, []);
+    assert.ok(candidate.unresolved.length > 0);
+  }
+});
+
+test("a valid packet is reviewable but cannot be selected before explicit approval", () => {
+  const value = packet();
+  const manifest = manifestFor(value);
+  const checked = validateCareBatch(manifest, () => value);
+  assert.equal(checked.readyForHumanReview.length, 1);
+  assert.equal(checked.approvedForLocalApply.length, 0);
+  assert.throws(() => selectApprovedPackets(manifest, [value.identity.slug], () => value),
+    /lacks human local-apply approval/);
+});
+
+test("explicitly approved packets can be selected while protected and unresolved packets are refused", () => {
+  const value = packet();
+  value.approval.localApply = true;
+  const manifest = manifestFor(value);
+  assert.equal(selectApprovedPackets(manifest, [value.identity.slug], () => value).length, 1);
+  assert.throws(() => selectApprovedPackets(manifest, ["ems-boveresses"], () => value), /protected/);
+
+  const unresolved = packet();
+  unresolved.unresolved.push({ code: "identity_review", description: "Identity still needs review." });
+  const heldManifest = manifestFor(unresolved, "packet_held");
+  assert.throws(() => selectApprovedPackets(heldManifest, [unresolved.identity.slug], () => unresolved),
+    /lacks human local-apply approval/);
+});
+
+test("the generic contract accepts multiple distinct sourced offerings", () => {
+  const value = packet();
+  const second = structuredClone(value.offerings[0]);
+  second.slug = "medicalized-care";
+  second.name = "Unité de soins médicalisés";
+  second.offeringType = "medicalized_care_unit";
+  second.features = [{ ...controlledCareFeature("facility", "emergency_call_system"), evidence: source }];
+  value.offerings.push(second);
+  const result = validateCarePacket(value);
+  assert.equal(result.offeringCount, 2);
+  assert.equal(result.importedFeatureCount, 1);
+});
+
+test("unknown, duplicate, and Google-derived controlled facts are rejected", () => {
+  const unknown = packet();
+  unknown.offerings[0].features = [{ kind: "service", code: "invented", displayName: "Inventé",
+    details: null, evidence: source }];
+  assert.throws(() => validateCarePacket(unknown), /Unsupported controlled care feature/);
+
+  const duplicate = packet();
+  const feature = { ...controlledCareFeature("service", "palliative_care"), evidence: source };
+  duplicate.offerings[0].features = [feature, structuredClone(feature)];
+  assert.throws(() => validateCarePacket(duplicate), /Duplicate controlled care feature/);
+
+  const google = packet();
+  google.offerings[0].typeEvidence = { ...source, url: "https://maps.google.com/place/test" };
+  assert.throws(() => validateCarePacket(google), /cannot use Google/);
+});

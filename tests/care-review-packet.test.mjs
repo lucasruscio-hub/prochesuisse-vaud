@@ -18,23 +18,25 @@ test("canonical care packet is a deterministic projection of reviewed Phase 3B e
   compared.approval.localApply = false;
   assert.deepEqual(compared, expected);
   assert.deepEqual(validateBoveressesCarePacket(canonical), {
-    valid: true, localApplyReady: true, importedFeatureCount: 5, deferredCount: 3,
+    valid: true, localApplyReady: true, offeringCount: 1,
+    importedFeatureCount: 5, deferredCount: 3, unresolvedCount: 0,
   });
 });
 
 test("only supported offering facts are approved and unknowns remain null or absent", () => {
-  assert.deepEqual(canonical.offering.capacity, {
-    value: 42, unit: "beds", evidence: canonical.offering.capacity.evidence,
+  const offering = canonical.offerings[0];
+  assert.deepEqual(offering.capacity, {
+    value: 42, unit: "beds", evidence: offering.capacity.evidence,
   });
-  assert.equal(canonical.offering.stayModes.longStay.value, true);
-  assert.equal(canonical.offering.stayModes.shortStay, null);
-  assert.equal(canonical.offering.stayModes.respiteStay, null);
-  assert.deepEqual(canonical.offering.careProfiles, []);
-  assert.deepEqual(canonical.offering.features.map((feature) => feature.code), [
+  assert.equal(offering.stayModes.longStay.value, true);
+  assert.equal(offering.stayModes.shortStay, null);
+  assert.equal(offering.stayModes.respiteStay, null);
+  assert.deepEqual(offering.careProfiles, []);
+  assert.deepEqual(offering.features.map((feature) => feature.code), [
     "palliative_care", "physiotherapy", "occupational_therapy", "podology", "hairdressing",
   ]);
   for (const key of ["admissions", "financing", "publicInterestStatus", "pricing"]) {
-    assert.equal(canonical.offering[key], null);
+    assert.equal(offering[key], null);
   }
   assert.ok(canonical.deferred.some((claim) => claim.field === "service.short_respite_stay"));
   assert.ok(canonical.deferred.some((claim) => claim.field === "care_profile"));
@@ -43,11 +45,11 @@ test("only supported offering facts are approved and unknowns remain null or abs
 
 test("unknown feature codes and altered evidence fail controlled review", () => {
   const unknown = structuredClone(canonical);
-  unknown.offering.features[0].code = "invented_service";
+  unknown.offerings[0].features[0].code = "invented_service";
   assert.throws(() => validateBoveressesCarePacket(unknown), /Unsupported controlled care feature/);
   const altered = structuredClone(phase3);
   altered.claims.find((claim) => claim.field === "capacity.beds").value = 99;
-  assert.throws(() => buildBoveressesCarePacket(altered), /Missing unique reviewed Phase 3B claim/);
+  assert.throws(() => buildBoveressesCarePacket(altered), /Missing unique reviewed research claim/);
 });
 
 test("guarded SQL is additive, offering scoped, sourced, and rejects repeat state", () => {
@@ -57,8 +59,9 @@ test("guarded SQL is additive, offering scoped, sourced, and rejects repeat stat
   assert.match(sql, /INSERT INTO public\.care_offering_features/);
   assert.match(sql, /INSERT INTO public\.care_offering_sources/);
   assert.match(sql, /INSERT INTO public\.provider_organizations/);
-  assert.match(sql, /Existing Boveresses care state requires reconciliation/);
-  assert.match(sql, /Unrelated provider or care data changed/);
+  assert.match(sql, /Existing reviewed care state requires reconciliation/);
+  assert.match(sql, /Unrelated or existing data changed/);
   assert.match(sql, /ROLLBACK;\s*$/);
-  assert.doesNotMatch(sql, /INSERT INTO public\.provider_sources|UPDATE public\.|DELETE FROM public\.|\bUPSERT\b|ON CONFLICT/i);
+  assert.match(sql, /INSERT INTO public\.provider_sources/);
+  assert.doesNotMatch(sql, /UPDATE public\.|DELETE FROM public\.|\bUPSERT\b|ON CONFLICT\s*\(/i);
 });

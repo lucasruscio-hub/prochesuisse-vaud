@@ -11,135 +11,139 @@
     "publish": false,
     "verify": false
   },
-  "organization": {
-    "slug": "tertianum-vaud-sa",
-    "name": "Tertianum Vaud SA",
-    "relationshipType": "operator",
-    "isPrimary": true,
-    "evidence": {
-      "phase3Field": "identity.operator",
-      "kind": "public",
-      "name": "Canton de Vaud — Liste officielle 2026 des établissements",
-      "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
-      "accessedOn": "2026-09-21"
-    }
-  },
-  "offering": {
-    "slug": "ems",
-    "name": "Établissement médico-social",
-    "offeringType": "ems",
-    "typeEvidence": {
-      "phase3Field": "identity.type",
-      "kind": "public",
-      "name": "Canton de Vaud — Liste officielle 2026 des établissements",
-      "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
-      "accessedOn": "2026-09-21"
-    },
-    "capacity": {
-      "value": 42,
-      "unit": "beds",
+  "organizations": [
+    {
+      "slug": "tertianum-vaud-sa",
+      "name": "Tertianum Vaud SA",
+      "relationshipType": "operator",
+      "isPrimary": true,
       "evidence": {
-        "phase3Field": "capacity.beds",
+        "researchField": "identity.operator",
         "kind": "public",
         "name": "Canton de Vaud — Liste officielle 2026 des établissements",
         "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
         "accessedOn": "2026-09-21"
       }
-    },
-    "stayModes": {
-      "longStay": {
-        "value": true,
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "identity.type",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 42,
+        "unit": "beds",
         "evidence": {
-          "phase3Field": "service.long_term_care",
-          "kind": "provider",
-          "name": "Tertianum",
-          "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+          "researchField": "capacity.beds",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
           "accessedOn": "2026-09-21"
         }
       },
-      "shortStay": null,
-      "respiteStay": null
-    },
-    "careProfiles": [],
-    "features": [
-      {
-        "kind": "service",
-        "code": "palliative_care",
-        "displayName": "Soins palliatifs",
-        "details": null,
-        "evidence": {
-          "phase3Field": "service.palliative_care",
-          "kind": "provider",
-          "name": "Tertianum",
-          "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
-          "accessedOn": "2026-09-21"
-        }
+      "stayModes": {
+        "longStay": {
+          "value": true,
+          "evidence": {
+            "researchField": "service.long_term_care",
+            "kind": "provider",
+            "name": "Tertianum",
+            "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        "shortStay": null,
+        "respiteStay": null
       },
-      {
-        "kind": "service",
-        "code": "physiotherapy",
-        "displayName": "Physiothérapie",
-        "details": null,
-        "evidence": {
-          "phase3Field": "service.physiotherapy",
-          "kind": "provider",
-          "name": "Tertianum",
-          "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
-          "accessedOn": "2026-09-21"
+      "careProfiles": [],
+      "features": [
+        {
+          "kind": "service",
+          "code": "palliative_care",
+          "displayName": "Soins palliatifs",
+          "details": null,
+          "evidence": {
+            "researchField": "service.palliative_care",
+            "kind": "provider",
+            "name": "Tertianum",
+            "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "physiotherapy",
+          "displayName": "Physiothérapie",
+          "details": null,
+          "evidence": {
+            "researchField": "service.physiotherapy",
+            "kind": "provider",
+            "name": "Tertianum",
+            "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "occupational_therapy",
+          "displayName": "Ergothérapie",
+          "details": null,
+          "evidence": {
+            "researchField": "service.occupational_therapy",
+            "kind": "provider",
+            "name": "Tertianum",
+            "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "podology",
+          "displayName": "Podologie",
+          "details": null,
+          "evidence": {
+            "researchField": "service.podology",
+            "kind": "provider",
+            "name": "Tertianum",
+            "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "hairdressing",
+          "displayName": "Coiffure",
+          "details": null,
+          "evidence": {
+            "researchField": "service.hairdresser",
+            "kind": "provider",
+            "name": "Tertianum",
+            "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
+            "accessedOn": "2026-09-21"
+          }
         }
-      },
-      {
-        "kind": "service",
-        "code": "occupational_therapy",
-        "displayName": "Ergothérapie",
-        "details": null,
-        "evidence": {
-          "phase3Field": "service.occupational_therapy",
-          "kind": "provider",
-          "name": "Tertianum",
-          "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
-          "accessedOn": "2026-09-21"
-        }
-      },
-      {
-        "kind": "service",
-        "code": "podology",
-        "displayName": "Podologie",
-        "details": null,
-        "evidence": {
-          "phase3Field": "service.podology",
-          "kind": "provider",
-          "name": "Tertianum",
-          "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
-          "accessedOn": "2026-09-21"
-        }
-      },
-      {
-        "kind": "service",
-        "code": "hairdressing",
-        "displayName": "Coiffure",
-        "details": null,
-        "evidence": {
-          "phase3Field": "service.hairdresser",
-          "kind": "provider",
-          "name": "Tertianum",
-          "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
-          "accessedOn": "2026-09-21"
-        }
-      }
-    ],
-    "admissions": null,
-    "financing": null,
-    "publicInterestStatus": null,
-    "pricing": null
-  },
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
   "deferred": [
     {
       "field": "service.short_respite_stay",
       "value": "short_respite_stay",
       "reason": "The reviewed claim combines short stay and respite; it cannot safely populate either independent field.",
       "evidence": {
-        "phase3Field": "service.short_respite_stay",
+        "researchField": "service.short_respite_stay",
         "kind": "provider",
         "name": "Tertianum",
         "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses",
@@ -159,5 +163,6 @@
       "value": null,
       "reason": "No timestamped availability observation exists in the reviewed packet."
     }
-  ]
+  ],
+  "unresolved": []
 }

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "batchId": "phase4c-care-pilot-01",
+  "description": "Care-evidence inventory for the first requested Phase 4C candidates. No new provider has repository evidence sufficient for a care packet.",
+  "protectedExisting": [
+    "ems-boveresses"
+  ],
+  "packetPaths": [],
+  "candidates": [
+    {
+      "slug": "ems-chateau-rive",
+      "status": "evidence_missing_from_repo",
+      "repositoryMaterial": ["docs/research/phase3d-google-place-batch.md", "docs/legacy-provider-mapping.md"],
+      "supportedCareFacts": [],
+      "proposedFacts": [],
+      "deferred": ["Legacy Gériatrie, Court séjour and Lavaux tags are explicitly unverified."],
+      "taxonomyMappings": [],
+      "sourceNames": [],
+      "unresolved": ["Current source-level care evidence is not stored in the repository."],
+      "localApply": false
+    },
+    {
+      "slug": "ems-clair-soleil",
+      "status": "evidence_missing_from_repo",
+      "repositoryMaterial": ["docs/research/phase3d-google-place-batch.md", "docs/legacy-provider-mapping.md"],
+      "supportedCareFacts": [],
+      "proposedFacts": [],
+      "deferred": ["Legacy Gériatrie and Long séjour tags are explicitly unverified."],
+      "taxonomyMappings": [],
+      "sourceNames": [],
+      "unresolved": ["Current source-level care evidence is not stored in the repository."],
+      "localApply": false
+    },
+    {
+      "slug": "ems-le-home",
+      "status": "evidence_missing_from_repo",
+      "repositoryMaterial": ["docs/research/phase3d-google-place-batch.md", "docs/legacy-provider-mapping.md"],
+      "supportedCareFacts": [],
+      "proposedFacts": [],
+      "deferred": ["Legacy Gériatrie and Vue lac tags are explicitly unverified."],
+      "taxonomyMappings": [],
+      "sourceNames": [],
+      "unresolved": ["Current source-level care evidence is not stored in the repository."],
+      "localApply": false
+    },
+    {
+      "slug": "ems-marronnier",
+      "status": "evidence_missing_from_repo",
+      "repositoryMaterial": ["docs/research/phase3d-google-place-batch.md", "docs/legacy-provider-mapping.md"],
+      "supportedCareFacts": [],
+      "proposedFacts": [],
+      "deferred": ["Legacy Gériatrie and Lavaux tags are explicitly unverified."],
+      "taxonomyMappings": [],
+      "sourceNames": [],
+      "unresolved": ["Current source-level care evidence and operator evidence are not stored in the repository."],
+      "localApply": false
+    },
+    {
+      "slug": "ems-signal",
+      "status": "evidence_missing_from_repo",
+      "repositoryMaterial": ["docs/research/phase3d-google-place-batch.md", "docs/legacy-provider-mapping.md"],
+      "supportedCareFacts": [],
+      "proposedFacts": [],
+      "deferred": ["Legacy Gériatrie and Campagne tags are explicitly unverified."],
+      "taxonomyMappings": [],
+      "sourceNames": [],
+      "unresolved": ["Current source-level care evidence is not stored in the repository.", "The legacy Les Cullayes locality requires independent identity review."],
+      "localApply": false
+    },
+    {
+      "slug": "ems-petit-flon",
+      "status": "evidence_missing_from_repo",
+      "repositoryMaterial": ["docs/research/phase3d-google-place-batch.md", "docs/legacy-provider-mapping.md"],
+      "supportedCareFacts": [],
+      "proposedFacts": [],
+      "deferred": ["Legacy Psychiatrie and Gériatrie tags are explicitly unverified."],
+      "taxonomyMappings": [],
+      "sourceNames": [],
+      "unresolved": ["Current source-level care evidence is not stored in the repository.", "The site/operator relationship in the legacy name requires evidence."],
+      "localApply": false
+    },
+    {
+      "slug": "ems-girarde",
+      "status": "evidence_missing_from_repo",
+      "repositoryMaterial": ["docs/research/phase3d-google-place-batch.md", "docs/legacy-provider-mapping.md"],
+      "supportedCareFacts": [],
+      "proposedFacts": [],
+      "deferred": ["The legacy Gériatrie tag is explicitly unverified."],
+      "taxonomyMappings": [],
+      "sourceNames": [],
+      "unresolved": ["Current source-level care evidence is not stored in the repository.", "The legacy Epalinges spelling requires independent identity review."],
+      "localApply": false
+    },
+    {
+      "slug": "ems-pre-fleuri",
+      "status": "evidence_missing_from_repo",
+      "repositoryMaterial": ["docs/research/phase3d-google-place-batch.md", "docs/legacy-provider-mapping.md"],
+      "supportedCareFacts": [],
+      "proposedFacts": [],
+      "deferred": ["Legacy Gériatrie and Alzheimer tags, including the prior dementia_support mapping, are explicitly unverified."],
+      "taxonomyMappings": [],
+      "sourceNames": [],
+      "unresolved": ["Current source-level care evidence is not stored in the repository."],
+      "localApply": false
+    }
+  ]
+}

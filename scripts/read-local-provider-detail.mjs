@@ -1,10 +1,12 @@
 import { runLocalSql, jsonSql } from "../lib/local-provider-writer.mjs";
-import { LOCAL_DETAIL_PILOTS } from "../lib/provider-local-projection.js";
+import { providers } from "../lib/providers.js";
 import { fileURLToPath } from "node:url";
 import { resolve } from "node:path";
 
 export function buildLocalProviderDetailSql(slug) {
-  if (!LOCAL_DETAIL_PILOTS.includes(slug)) throw new Error("Local development pilot only");
+  if (!providers.some((provider) => provider.id === slug) || slug === "nova-via") {
+    throw new Error("Unknown or held local development provider");
+  }
   const identity = jsonSql(slug);
   return `BEGIN READ ONLY;
 SET LOCAL statement_timeout = '10s';
@@ -50,7 +52,9 @@ ROLLBACK;`;
 export function main(args) {
   const [slug] = args;
   if (process.env.NODE_ENV !== "development" || args.length !== 1
-    || !LOCAL_DETAIL_PILOTS.includes(slug)) throw new Error("Local development pilot only");
+    || !providers.some((provider) => provider.id === slug) || slug === "nova-via") {
+    throw new Error("Unknown or held local development provider");
+  }
   console.log(runLocalSql(buildLocalProviderDetailSql(slug)).trim());
 }
 

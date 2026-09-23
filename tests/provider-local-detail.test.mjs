@@ -23,7 +23,7 @@ function snapshot(base, patch, reviewedSources) {
   serviceAreaCount: 0 };
 }
 
-test("detail repository keeps static fallback by default and for non-pilots", async () => {
+test("detail repository keeps static fallback by default and keeps Nova Vita held", async () => {
   assert.equal(localDetailPreviewEnabled(), false);
   const base = await getProviderBySlug("ems-boveresses");
   assert.deepEqual(await getProviderDetailBySlug(base.slug), base);

@@ -31,22 +31,22 @@ if (existing === 0) {
   const result = JSON.parse(runLocalSql(sql).trim());
   assert.equal(result.provider, "ems-boveresses");
   assert.equal(result.providerSourcesAdded, 0);
-  assert.equal(result.features.length, 5);
+  assert.equal(result.features, 5);
   assert.equal(result.offeringSources, 2);
   assert.equal(result.published, false);
   assert.equal(result.verified, false);
   assert.deepEqual(snapshot(), before, "rollback apply changed the local database");
 
   const conflict = sql.replace("DO $apply$", "INSERT INTO public.organizations(slug,name) VALUES ('tertianum-vaud-sa','Conflict');\nDO $apply$");
-  assert.throws(() => runLocalSql(conflict), /Existing Boveresses care state requires reconciliation/);
+  assert.throws(() => runLocalSql(conflict), /Existing reviewed care state requires reconciliation/);
   assert.deepEqual(snapshot(), before, "conflict test changed the local database");
 
   const unrelated = sql.replace("END $apply$;", "END $apply$;\nUPDATE public.providers SET name='Unsafe unrelated mutation' WHERE slug='ems-chateau-rive';");
-  assert.throws(() => runLocalSql(unrelated), /Unrelated provider or care data changed/);
+  assert.throws(() => runLocalSql(unrelated), /Unrelated or existing data changed/);
   assert.deepEqual(snapshot(), before, "unrelated mutation test changed the local database");
 } else {
   assert.equal(existing, 1, "unexpected Boveresses offering count");
-  assert.throws(() => runLocalSql(sql), /Existing Boveresses care state requires reconciliation/);
+  assert.throws(() => runLocalSql(sql), /Existing reviewed care state requires reconciliation/);
   const detailSnapshot = JSON.parse(runLocalSql(buildLocalProviderDetailSql("ems-boveresses")).trim());
   assert.ok(projectBoveressesCareDetail(detailSnapshot), "existing care projection is invalid");
   assert.deepEqual(snapshot(), before, "repeat rejection changed the local database");

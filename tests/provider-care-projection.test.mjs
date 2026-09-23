@@ -12,7 +12,7 @@ const source = (type, url) => ({ source_type: type, source_name: type === "publi
 function snapshot() {
   const provider = { id: "provider-1", slug: "ems-boveresses", legacy_id: "ems-boveresses",
     name: "Tertianum Les Boveresses", primary_type: "ems", is_published: false,
-    verification_status: "unverified" };
+    verification_status: "unverified", status: "active" };
   const organization = { id: "org-1", slug: "tertianum-vaud-sa", name: "Tertianum Vaud SA",
     legal_name: null, website: null, status: "active", verification_status: "unverified",
     is_published: false, last_reviewed_at: null };
@@ -47,7 +47,8 @@ test("Boveresses care projection exposes only applied offering facts", () => {
   assert.deepEqual(detail.offerings[0], {
     name: "Établissement médico-social", summary: null, careProfiles: [], capacity: "42 lits",
     stayModes: ["Long séjour"], services: ["Coiffure", "Ergothérapie", "Soins palliatifs", "Physiothérapie", "Podologie"],
-    accommodation: [], facilities: [],
+    accommodation: [], facilities: [], admissions: null, financing: null, pricing: null,
+    publicInterestStatus: null,
   });
   assert.deepEqual(detail.operator, { name: "Tertianum Vaud SA" });
   assert.ok(!JSON.stringify(detail).includes("source_url"));
@@ -57,13 +58,20 @@ test("partial, published, cross-provider, or unsourced care state is hidden", ()
   for (const change of [
     (value) => { value.offerings[0].offering.capacity_value = null; },
     (value) => { value.offerings[0].offering.is_published = true; },
-    (value) => { value.offerings[0].features.pop(); },
     (value) => { value.offerings[0].features[0].feature.provider_id = "other"; },
     (value) => { value.offerings[0].features[0].source.source_url = "https://example.test"; },
   ]) {
     const value = snapshot(); change(value);
     assert.equal(projectBoveressesCareDetail(value), null);
   }
+});
+
+test("an absent optional feature remains unknown and does not invalidate the offering", () => {
+  const value = snapshot();
+  value.offerings[0].features.pop();
+  const detail = projectBoveressesCareDetail(value);
+  assert.equal(detail.offerings[0].services.length, 4);
+  assert.ok(!detail.offerings[0].services.includes("Podologie"));
 });
 
 test("Google enrichment stays separate and cannot create or overwrite Lia care facts", () => {
@@ -87,4 +95,43 @@ test("detail normalization hides empty care sections and presents scoped facts",
   assert.deepEqual(rich.offerings[0].careProfiles, []);
   assert.ok(providerDetailSections(rich).some(([id]) => id === "accompagnement"));
   assert.deepEqual(rich.legacyTags, ["Gériatrie"]);
+});
+
+test("the same projection renders a second and third synthetic provider", () => {
+  const second = snapshot();
+  second.provider.id = "provider-2";
+  second.provider.slug = second.provider.legacy_id = "ems-synthetic-two";
+  second.provider.name = "Synthetic Two";
+  second.organizationLinks[0].relationship.provider_id = "provider-2";
+  second.offerings[0].offering.provider_id = "provider-2";
+  second.offerings[0].sources.forEach((item) => { item.link.provider_id = "provider-2"; });
+  second.offerings[0].features.forEach((item) => { item.feature.provider_id = "provider-2"; });
+  const secondDetail = projectBoveressesCareDetail(second);
+  assert.equal(secondDetail.offerings[0].capacity, "42 lits");
+  assert.ok(providerDetailSections(providerDetailView({ slug: second.provider.slug,
+    name: second.provider.name, type: "ems", tags: [], detail: secondDetail }))
+    .some(([id]) => id === "accompagnement"));
+
+  const third = structuredClone(second);
+  third.provider.id = "provider-3";
+  third.provider.slug = third.provider.legacy_id = "ems-synthetic-three";
+  third.provider.name = "Synthetic Three";
+  third.organizationLinks[0].relationship.provider_id = "provider-3";
+  for (const entry of third.offerings) {
+    entry.offering.provider_id = "provider-3";
+    entry.sources.forEach((item) => { item.link.provider_id = "provider-3"; });
+    entry.features.forEach((item) => { item.feature.provider_id = "provider-3"; });
+  }
+  const extra = structuredClone(third.offerings[0]);
+  extra.offering.id = "offering-2";
+  extra.offering.slug = "medicalized-care";
+  extra.offering.name = "Unité médicalisée";
+  extra.offering.offering_type = "medicalized_care_unit";
+  for (const item of extra.sources) item.link.offering_id = "offering-2";
+  for (const item of extra.features) item.feature.offering_id = "offering-2";
+  third.offerings.push(extra);
+  const thirdDetail = projectBoveressesCareDetail(third);
+  assert.equal(thirdDetail.offerings.length, 2);
+  assert.deepEqual(thirdDetail.offerings.map((item) => item.name),
+    ["Établissement médico-social", "Unité médicalisée"]);
 });

@@ -39,8 +39,8 @@ export function main(args) {
     const packet = reviewedPacket();
     console.log(JSON.stringify({ mode: args[0].slice(2), databaseWrites: 0, provider: packet.identity.slug,
       ...validateBoveressesCarePacket(packet), importedFacts: {
-        organization: 1, offering: 1, capacity: 1, stayModes: 1,
-        careProfiles: 0, services: packet.offering.features.length, facilities: 0,
+        organization: packet.organizations.length, offering: packet.offerings.length, capacity: 1, stayModes: 1,
+        careProfiles: 0, services: packet.offerings[0].features.length, facilities: 0,
       }, deferred: packet.deferred }, null, 2));
     return;
   }
