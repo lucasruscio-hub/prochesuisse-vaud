@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { registerHooks } from "node:module";
-import { providerPath, providerMetadata, providerBreadcrumbs, providerDetailView, providerDetailSections } from "../lib/provider-detail.js";
+import { providerPath, providerMetadata, providerBreadcrumbs, providerDetailView, providerDetailSections, providerHeroMedia } from "../lib/provider-detail.js";
 
 registerHooks({ resolve(specifier, context, nextResolve) {
   if (specifier === "server-only") return { url: "data:text/javascript,export{}", shortCircuit: true };
@@ -53,7 +53,7 @@ test("sparse legacy providers show identity and transparency without invented se
     assert.equal(view.pricing, null);
     assert.equal(view.availability, null);
     assert.equal(view.mapUrl, null);
-    assert.deepEqual(view.reviews, { google: [], lia: [] });
+    assert.deepEqual(view.reviews, { lia: [] });
     assert.equal(view.operator, null);
     assert.equal(view.sourceFreshness, null);
     assert.deepEqual(providerDetailSections(view).map(([id]) => id), ["reperes", "sources"]);
@@ -80,7 +80,7 @@ test("curated detail sections support multiple offerings and keep review sources
     } });
   assert.equal(view.offerings.length, 2);
   assert.deepEqual(view.offerings.map((offering) => offering.name), ["Résidence", "Unité de soins"]);
-  assert.equal(view.reviews.google.length, 1);
+  assert.equal(view.google, null);
   assert.equal(view.reviews.lia.length, 1);
   assert.equal(view.locationLabel, "Place de la Paix");
   assert.deepEqual(view.availability, { text: "Disponible", checkedAt: "2026-09-22" });
@@ -104,10 +104,21 @@ test("incomplete or unverified rich fields stay hidden", () => {
   assert.deepEqual(view.photos, []);
   assert.equal(view.overview, null);
   assert.deepEqual(view.offerings, []);
-  assert.deepEqual(view.reviews, { google: [], lia: [] });
+  assert.deepEqual(view.reviews, { lia: [] });
   assert.equal(view.mapUrl, null);
   assert.equal(view.sourceFreshness, null);
   assert.equal(view.availability, null);
   assert.deepEqual(providerDetailSections(view).map(([id]) => id), ["reperes", "sources"]);
   assert.equal(view.locationLabel, "1020 Renens");
+});
+
+test("hero media uses legitimate photos and retains the decorative empty state", () => {
+  const empty = { photos: [], google: null };
+  assert.deepEqual(providerHeroMedia(empty), { source: "none", photos: [] });
+  const providerPhoto = { src: "/provider.jpg", alt: "Provider" };
+  assert.deepEqual(providerHeroMedia({ photos: [providerPhoto], google: null }),
+    { source: "provider", photos: [providerPhoto] });
+  const googlePhoto = { src: "https://lh3.googleusercontent.com/place", alt: "Google" };
+  assert.deepEqual(providerHeroMedia({ photos: [providerPhoto], google: { photos: [googlePhoto] } }),
+    { source: "google", photos: [googlePhoto] });
 });

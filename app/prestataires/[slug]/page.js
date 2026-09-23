@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { connection } from "next/server";
 import { ArrowLeft, ArrowRight, Building2, HeartHandshake, House, MapPin, ShieldCheck, Trees } from "lucide-react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import GoogleReviewCard from "../../components/GoogleReviewCard";
 import { getProviderDetailBySlug } from "../../../lib/provider-repository";
-import { providerMetadata, providerBreadcrumbs, providerDetailView, providerDetailSections } from "../../../lib/provider-detail";
+import { providerMetadata, providerBreadcrumbs, providerDetailView, providerDetailSections, providerHeroMedia } from "../../../lib/provider-detail";
 
 const focus = "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#10213D]";
 
@@ -35,19 +37,46 @@ function List({ values }) {
   return <ul className="grid gap-2 sm:grid-cols-2">{values.map((value) => <li key={value} className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#E86C7C]" aria-hidden="true" />{value}</li>)}</ul>;
 }
 
+function GalleryPhoto({ photo, primary, google }) {
+  return <figure className={`relative min-h-0 overflow-hidden bg-[#EDE5E0] ${primary ? "col-span-2 aspect-[4/3] sm:col-span-2 sm:row-span-3 sm:aspect-auto" : "aspect-square sm:aspect-auto"}`}>
+    <Image src={photo.src} alt={photo.alt} fill sizes={primary ? "(max-width: 640px) 100vw, 66vw" : "(max-width: 640px) 50vw, 33vw"} loading={primary ? "eager" : "lazy"} className="object-cover" unoptimized />
+    {google && <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/50 to-transparent px-3 pb-3 pt-9 text-[11px] leading-4 text-white/90" translate="no">
+      <span className="sr-only">Photo Google Maps. </span>
+      {photo.authors.map((author, index) => <span key={`${author.name}-${index}`} className="inline-flex items-center gap-1">{index > 0 && ", "}{author.photoUri && <Image src={author.photoUri} alt="" width={16} height={16} className="rounded-full" unoptimized />}{author.uri ? <a href={author.uri} target="_blank" rel="noopener noreferrer" className={`font-medium underline underline-offset-2 ${focus}`}>{author.name}</a> : author.name}</span>)}
+      {photo.authors.length > 0 && " · "}<a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className={`underline underline-offset-2 ${focus}`}>Google Maps</a>
+    </figcaption>}
+  </figure>;
+}
+
+function PhotoHero({ photos, google }) {
+  const selected = photos.slice(0, 4);
+  const layout = selected.length === 1 ? "grid-cols-1 aspect-[16/10] sm:aspect-[16/8]"
+    : selected.length === 2 ? "grid-cols-2 aspect-[16/10] sm:h-[500px] sm:aspect-auto"
+      : "grid-cols-2 sm:h-[540px] sm:grid-cols-3 sm:grid-rows-3";
+  return <section aria-label={google ? "Photos Google Maps" : "Photos du prestataire"} className="mt-5">
+    {google && <div className="mb-2 flex items-center gap-2 text-xs text-[#657084]"><span>Photos fournies par</span><Image src="https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_color_92x30dp.png" alt="Google" width={55} height={18} unoptimized /></div>}
+    <div className={`grid overflow-hidden rounded-[2rem] bg-[#293953] shadow-[0_24px_70px_rgba(16,33,61,0.13)] ${layout}`}>
+      {selected.map((photo, index) => <GalleryPhoto key={photo.src} photo={photo} primary={index === 0 && selected.length > 2} google={google} />)}
+    </div>
+  </section>;
+}
+
 export async function generateMetadata({ params }) {
-  const provider = await getProviderDetailBySlug((await params).slug);
+  const provider = await getProviderDetailBySlug((await params).slug, { includeGoogle: false });
   if (!provider) notFound();
   return providerMetadata(provider);
 }
 
 export default async function ProviderPage({ params }) {
+  await connection();
   const provider = await getProviderDetailBySlug((await params).slug);
   if (!provider) notFound();
   const view = providerDetailView(provider);
   const Icon = view.type === "ems" ? Building2 : view.type === "domicile" ? House : Trees;
   const searchHref = `/recherche?type=${encodeURIComponent(view.type)}`;
-  const hasReviews = view.reviews.google.length > 0 || view.reviews.lia.length > 0;
+  const hasReviews = (view.google?.reviews.length ?? 0) > 0 || view.google?.rating != null || view.reviews.lia.length > 0;
+  const heroMedia = providerHeroMedia(view);
+  const heroPhotos = heroMedia.photos;
   const navigation = providerDetailSections(view);
 
   return <div lang="fr" className="min-h-screen bg-[#FFFAF7] text-[#10213D]">
@@ -65,18 +94,23 @@ export default async function ProviderPage({ params }) {
       </div>
       <div className="mx-auto max-w-7xl px-5 pt-7 md:px-8 md:pt-9">
         <Link href={searchHref} className={`inline-flex items-center gap-2 text-sm font-medium text-[#5D6979] hover:text-[#B34556] ${focus}`}><ArrowLeft size={16} aria-hidden="true" /> Retour aux résultats</Link>
-        <header className="relative mt-6 overflow-hidden rounded-[2rem] bg-[#10213D] text-white shadow-[0_24px_70px_rgba(16,33,61,0.13)]">
+        {heroPhotos.length > 0 ? <>
+          <header className="mt-8 max-w-4xl">
+            <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#B34556]"><Icon size={18} strokeWidth={1.7} aria-hidden="true" /> {view.typeLabel}</p>
+            <h1 className="mt-4 break-words font-serif text-4xl leading-[1.08] tracking-tight text-[#10213D] sm:text-5xl lg:text-6xl">{view.name}</h1>
+            {view.locationLabel && <p className="mt-4 flex items-start gap-2.5 text-base text-[#536176]"><MapPin size={19} className="mt-0.5 shrink-0 text-[#D45768]" aria-hidden="true" />{view.locationLabel}</p>}
+          </header>
+          <PhotoHero photos={heroPhotos} google={heroMedia.source === "google"} />
+        </> : <header className="relative mt-6 overflow-hidden rounded-[2rem] bg-[#10213D] text-white shadow-[0_24px_70px_rgba(16,33,61,0.13)]">
           <div className="relative grid min-h-[330px] lg:grid-cols-[1.25fr_0.75fr]">
             <div className="relative z-10 flex flex-col justify-center px-7 py-10 sm:px-12 sm:py-14 lg:py-20">
               <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC2C8]"><Icon size={18} strokeWidth={1.7} aria-hidden="true" /> {view.typeLabel}</p>
               <h1 className="mt-5 max-w-3xl break-words font-serif text-4xl leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">{view.name}</h1>
               {view.locationLabel && <p className="mt-6 flex items-start gap-2.5 text-base text-white/85"><MapPin size={19} className="mt-0.5 shrink-0 text-[#FF9EAA]" aria-hidden="true" />{view.locationLabel}</p>}
             </div>
-            {view.photos.length ? <div className="relative min-h-64 overflow-hidden bg-[#F2E1DC] lg:min-h-full"><Image src={view.photos[0].src} alt={view.photos[0].alt} fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" unoptimized /></div>
-              : <div className="relative hidden min-h-full overflow-hidden bg-[#293953] lg:block" aria-hidden="true"><div className="absolute -right-20 -top-24 h-[420px] w-[420px] rounded-full border-[70px] border-[#FF9EAA]/80" /><div className="absolute bottom-[-170px] left-[-60px] h-[420px] w-[420px] rounded-full border-[65px] border-[#F5D9CE]/20" /><div className="absolute bottom-12 right-14 h-20 w-20 rounded-full bg-[#FF9EAA]/30" /></div>}
+            <div className="relative hidden min-h-full overflow-hidden bg-[#293953] lg:block" aria-hidden="true"><div className="absolute -right-20 -top-24 h-[420px] w-[420px] rounded-full border-[70px] border-[#FF9EAA]/80" /><div className="absolute bottom-[-170px] left-[-60px] h-[420px] w-[420px] rounded-full border-[65px] border-[#F5D9CE]/20" /><div className="absolute bottom-12 right-14 h-20 w-20 rounded-full bg-[#FF9EAA]/30" /></div>
           </div>
-        </header>
-        {view.photos.length > 1 && <div aria-label="Photos du prestataire" className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">{view.photos.slice(1).map((photo) => <div key={photo.src} className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#F2E1DC]"><Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 640px) 50vw, 33vw" className="object-cover" unoptimized /></div>)}</div>}
+        </header>}
       </div>
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <nav aria-label="Sur cette fiche" className="mt-7 flex flex-wrap gap-2 border-b border-[#E8E1DC] pb-6 text-sm">{navigation.map(([id, label]) => <a key={id} href={`#${id}`} className={`rounded-full border border-[#E8E1DC] bg-white px-4 py-2 font-medium text-[#48566A] transition hover:border-[#FF9EAA] hover:text-[#9D3043] ${focus}`}>{label}</a>)}</nav>
@@ -102,8 +136,22 @@ export default async function ProviderPage({ params }) {
               {[["Soins et services", offering.services], ["Hébergement", offering.accommodation], ["Équipements et espaces", offering.facilities]].filter(([, values]) => values.length).map(([label, values]) => <div key={label} className="mt-5"><h4 className="mb-2 font-semibold text-[#10213D]">{label}</h4><List values={values} /></div>)}
             </article>)}</div></Section>}
             {(view.admissions || view.pricing || view.availability) && <Section id="pratique" eyebrow="Pour avancer" title="Informations pratiques"><div className="grid gap-4 sm:grid-cols-2">{[["Admissions et accès", view.admissions], ["Tarifs et financement", view.pricing], ["Disponibilités", view.availability?.text]].filter(([, value]) => value).map(([title, value]) => <div key={title} className="rounded-2xl border border-[#EEE4DF] bg-white p-6"><h3 className="font-semibold text-[#10213D]">{title}</h3><p className="mt-2">{value}</p>{title === "Disponibilités" && <p className="mt-2 text-xs text-[#69758A]">Mise à jour&nbsp;: {view.availability.checkedAt}</p>}</div>)}</div></Section>}
-            {view.mapUrl && <Section id="localisation" eyebrow="Sur place" title="Localisation">{view.locationLabel && <p>{view.locationLabel}</p>}<a href={view.mapUrl} target="_blank" rel="noopener noreferrer" className={`mt-4 inline-flex items-center gap-2 font-semibold text-[#9D3043] underline underline-offset-4 ${focus}`}>Voir la carte <ArrowRight size={16} aria-hidden="true" /></a>{view.type === "domicile" && <p className="mt-3 text-sm">L’adresse d’un bureau ne définit pas la zone d’intervention.</p>}</Section>}
-            {hasReviews && <Section id="avis" eyebrow="Retours d’expérience" title="Les avis"><div className="space-y-7">{[["google", "Avis Google"], ["lia", "Avis Lia"]].filter(([source]) => view.reviews[source].length).map(([source, label]) => <div key={source}><h3 className="font-semibold text-[#10213D]">{label}</h3><div className="mt-3 grid gap-3 sm:grid-cols-2">{view.reviews[source].map((review, index) => <blockquote key={`${review.author}-${index}`} className="rounded-2xl border border-[#EEE4DF] bg-white p-5"><p>“{review.quote}”</p><footer className="mt-3 text-sm font-medium text-[#10213D]">{review.author}{review.date && ` · ${review.date}`}</footer></blockquote>)}</div></div>)}</div></Section>}
+            {(view.mapUrl || view.google?.embedUrl) && <Section id="localisation" eyebrow="Sur place" title="Localisation">
+              {view.locationLabel && <div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8D5360]">Localisation indiquée par Lia</p><p className="mt-1 text-[#25364E]">{view.locationLabel}</p></div>}
+              {view.google?.embedUrl && <div className="mt-5"><p className="text-xs text-[#69758A]">Carte fournie par Google Maps</p><iframe title={`Google Maps — ${view.name}`} src={view.google.embedUrl} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 aspect-[4/3] w-full rounded-2xl border border-[#EEE4DF] sm:aspect-[16/9]" allowFullScreen /></div>}
+              <a href={view.google?.placeUrl ?? view.mapUrl} target="_blank" rel="noopener noreferrer" className={`mt-4 inline-flex items-center gap-2 font-semibold text-[#9D3043] underline underline-offset-4 ${focus}`}>Voir sur {view.google?.placeUrl ? "Google Maps" : "la carte"} <ArrowRight size={16} aria-hidden="true" /></a>
+              {view.type === "domicile" && <p className="mt-3 text-sm">L’adresse d’un bureau ne définit pas la zone d’intervention.</p>}
+            </Section>}
+            {hasReviews && <Section id="avis" eyebrow="Retours d’expérience" title="Les avis">
+              {view.google && (view.google.rating != null || view.google.reviews.length > 0) && <div className="rounded-2xl border border-[#EEE4DF] bg-white p-6">
+                <h3 className="flex items-center gap-2 font-semibold text-[#10213D]">Avis <Image src="https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_color_92x30dp.png" alt="Google" width={62} height={20} unoptimized /></h3>
+                {view.google.rating != null && <p className="mt-2 text-xl font-semibold text-[#10213D]">{view.google.rating.toLocaleString("fr-CH", { maximumFractionDigits: 1 })} / 5{view.google.reviewCount != null && <span className="ml-2 text-sm font-normal text-[#5D6979]">({view.google.reviewCount} avis sur Google)</span>}</p>}
+                {view.google.reviews.length > 0 && <><p className="mt-2 text-xs">Google sélectionne les avis affichés selon leur pertinence. Ils ne sont pas des avis Lia et ne valident pas les prestations de soins.</p><div className="mt-4 grid items-start gap-3 sm:grid-cols-2">{view.google.reviews.map((review, index) => <GoogleReviewCard key={`${review.sourceUrl}-${index}`} review={review} />)}</div></>}
+                {view.google.reviewsUrl && <a href={view.google.reviewsUrl} target="_blank" rel="noopener noreferrer" className={`mt-4 inline-block text-sm font-semibold text-[#9D3043] underline underline-offset-4 ${focus}`}>Voir les avis sur Google Maps</a>}
+                {view.google.attributions.length > 0 && <p className="mt-3 text-xs" translate="no">Sources associées : {view.google.attributions.map((item, index) => <span key={`${item.name}-${index}`}>{index > 0 && ", "}{item.uri ? <a href={item.uri} target="_blank" rel="noopener noreferrer" className="underline">{item.name}</a> : item.name}</span>)}</p>}
+              </div>}
+              {view.reviews.lia.length > 0 && <div className="mt-7"><h3 className="font-semibold text-[#10213D]">Avis Lia</h3><div className="mt-3 grid gap-3 sm:grid-cols-2">{view.reviews.lia.map((review, index) => <blockquote key={`${review.author}-${index}`} className="rounded-2xl border border-[#EEE4DF] bg-white p-5"><p>“{review.quote}”</p><footer className="mt-3 text-sm font-medium text-[#10213D]">{review.author}{review.date && ` · ${review.date}`}</footer></blockquote>)}</div></div>}
+            </Section>}
             {view.operator && <Section id="organisation" eyebrow="À propos" title="L’organisation"><p className="font-semibold text-[#10213D]">{view.operator.name}</p>{view.operator.description && <p className="mt-2">{view.operator.description}</p>}</Section>}
             <section id="sources" aria-labelledby="sources-heading" className="scroll-mt-24 border-t border-[#E8E1DC] py-8 text-sm leading-6 text-[#5D6979]">
               <h2 id="sources-heading" className="font-semibold text-[#354359]">À propos des informations</h2>

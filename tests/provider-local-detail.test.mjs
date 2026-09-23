@@ -58,6 +58,39 @@ test("local reviewed Boveresses projects only approved structured identity and c
   assert.equal(view.sourceFreshness, null);
 });
 
+test("Google enrichment requires key and approval, and stays separate from reviewed Lia fields", async () => {
+  const base = await getProviderBySlug("ems-boveresses");
+  const local = snapshot(base, { name: "Tertianum Les Boveresses", canton_code: "VD",
+    phone: "021 654 06 06" }, [source("provider", "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-les-boveresses", ["name", "postal_code", "locality", "phone", "email", "website"]),
+    source("public", "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", ["primary_type", "canton_code"])]);
+  const priorKey = process.env.GOOGLE_PLACES_API_KEY;
+  let googleCalls = 0;
+  const options = { preview: true, readLocal: async () => local,
+    approvedPlaceId: () => "ChIJ1234567890abc", readGoogle: async () => {
+      googleCalls++;
+      return { place: { id: "ChIJ1234567890abc", googleMapsUri: "https://www.google.com/maps/place/example",
+        rating: 4.2, userRatingCount: 12 } };
+    } };
+  try {
+    delete process.env.GOOGLE_PLACES_API_KEY;
+    assert.equal((await getProviderDetailBySlug(base.slug, options)).detail.google, undefined);
+    assert.equal(googleCalls, 0);
+    process.env.GOOGLE_PLACES_API_KEY = "test-key";
+    assert.equal((await getProviderDetailBySlug(base.slug, { ...options, approvedPlaceId: () => null })).detail.google, undefined);
+    assert.equal(googleCalls, 0);
+    const enriched = await getProviderDetailBySlug(base.slug, options);
+    assert.equal(googleCalls, 1);
+    assert.equal(enriched.name, "Tertianum Les Boveresses");
+    assert.equal(enriched.detail.contact.phone, "021 654 06 06");
+    assert.equal(enriched.detail.google.rating, 4.2);
+    assert.equal(enriched.detail.google.reviewCount, 12);
+    assert.deepEqual(enriched.tags, base.tags);
+  } finally {
+    if (priorKey === undefined) delete process.env.GOOGLE_PLACES_API_KEY;
+    else process.env.GOOGLE_PLACES_API_KEY = priorKey;
+  }
+});
+
 test("local Senevita shows office locality and sourced contact without coverage", async () => {
   const base = await getProviderBySlug("senevita-vaud");
   const local = snapshot(base, { phone: "021 311 19 20",
