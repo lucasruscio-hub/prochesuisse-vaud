@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "batchId": "phase3d-pilot-01",
+  "description": "First human-review batch of current establishment or office identities; no automatic matching or approval.",
+  "slugs": [
+    "ems-boveresses",
+    "ems-chateau-rive",
+    "ems-clair-soleil",
+    "ems-boissonnet",
+    "ems-joli-automne",
+    "ems-le-home",
+    "ems-marronnier",
+    "ems-signal",
+    "ems-petit-flon",
+    "ems-pre-pariset",
+    "ems-pre-tour",
+    "ems-girarde",
+    "ems-meillerie",
+    "ems-pre-fleuri",
+    "senevita-vaud"
+  ]
+}
