@@ -69,6 +69,23 @@ test("the Phase 4C.2 batch exposes eight locally approved packets and protects p
     ["ems-boveresses", "ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-girarde", "ems-signal"]);
 });
 
+test("the Phase 4C.3 batch exposes six locally approved packets and protects all prior state", () => {
+  const checked = validateCareBatch(loadCareBatch("phase4c-care-batch-03"));
+  assert.equal(checked.candidates.size, 6);
+  assert.equal(checked.packets.size, 6);
+  assert.deepEqual(checked.readyForHumanReview, []);
+  assert.deepEqual(checked.approvedForLocalApply.map((item) => item.packet.identity.slug), [
+    "ems-arcades", "ems-meillerie", "ems-valency", "ems-meridienne", "ems-paix-soir", "ems-vernie",
+  ]);
+  assert.deepEqual(checked.heldPackets, []);
+  assert.deepEqual(checked.evidenceMissing, []);
+  assert.deepEqual(loadCareBatch("phase4c-care-batch-03").protectedExisting, [
+    "ems-boveresses", "ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-girarde", "ems-signal",
+    "ems-marronnier", "ems-petit-flon", "ems-pre-fleuri", "ems-praz-joret", "ems-sauvabelin",
+    "ems-mauri", "ems-pins", "ems-jardins-leman",
+  ]);
+});
+
 test("a valid packet is reviewable but cannot be selected before explicit approval", () => {
   const value = packet();
   const manifest = manifestFor(value);

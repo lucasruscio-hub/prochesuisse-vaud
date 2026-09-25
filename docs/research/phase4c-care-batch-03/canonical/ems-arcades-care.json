@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-arcades",
+    "slug": "ems-arcades",
+    "expectedName": "EMS Les Arcades – Groupe Odysse",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "residences-odysse-sa",
+      "name": "Résidences Odysse SA",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F17",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E17",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 29,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G17",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "psychiatric_care"
+      ],
+      "features": [
+        {
+          "kind": "care_profile",
+          "code": "psychiatric_care",
+          "displayName": "Accompagnement psychiatrique",
+          "details": "Mission de psychiatrie de l’âge avancé.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F10",
+            "kind": "public",
+            "name": "Réseau Santé Région Lausanne — membres EMS",
+            "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "EMS Les Arcades",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B10",
+        "kind": "public",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Avenue William 15, 1095 Lutry",
+      "reason": "Site address belongs to the separate reviewed provider-field workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C10",
+        "kind": "public",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 796 13 00",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D10",
+        "kind": "public",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "care_details",
+      "value": "Provider site has limited current service content",
+      "reason": "The workbook preserves no additional precise site-level care facts for controlled import.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G10",
+        "kind": "public",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Court séjour"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": []
+}

@@ -1,0 +1,246 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-vernie",
+    "slug": "ems-vernie",
+    "expectedName": "EMS La Vernie",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "fondation-la-primerose",
+      "name": "Fondation La Primerose",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F12",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E12",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 30,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G12",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": {
+          "value": true,
+          "evidence": {
+            "researchField": "Deep Enrichment!F29",
+            "kind": "provider",
+            "name": "Fondation La Primerose — EMS La Vernie",
+            "url": "https://www.fondationlaprimerose.ch/etablissement/la-vernie/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "psychiatric_care"
+      ],
+      "features": [
+        {
+          "kind": "care_profile",
+          "code": "psychiatric_care",
+          "displayName": "Accompagnement psychiatrique",
+          "details": "Psychiatrie de l’âge avancé.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F29",
+            "kind": "provider",
+            "name": "Fondation La Primerose — EMS La Vernie",
+            "url": "https://www.fondationlaprimerose.ch/etablissement/la-vernie/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "podology",
+          "displayName": "Podologie",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F29",
+            "kind": "provider",
+            "name": "Fondation La Primerose — EMS La Vernie",
+            "url": "https://www.fondationlaprimerose.ch/etablissement/la-vernie/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "hairdressing",
+          "displayName": "Coiffure",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F29",
+            "kind": "provider",
+            "name": "Fondation La Primerose — EMS La Vernie",
+            "url": "https://www.fondationlaprimerose.ch/etablissement/la-vernie/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "EMS La Vernie",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B29",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Vernie",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-vernie/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Route de Marcolet 39, 1023 Crissier",
+      "reason": "Site address belongs to the separate reviewed provider-field workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C29",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Vernie",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-vernie/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 637 73 73",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D29",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Vernie",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-vernie/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "veinfo@fondationlaprimerose.ch",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E29",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Vernie",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-vernie/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.community_units",
+      "value": "Two community-style living units",
+      "reason": "The V1 model has no controlled field for this unit structure.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F29",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Vernie",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-vernie/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.rooms",
+      "value": "Individual rooms and some couple rooms",
+      "reason": "Room configuration has no V1 offering field and is not capacity.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F29",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Vernie",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-vernie/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.interdisciplinary_care",
+      "value": true,
+      "reason": "The bundled wording does not identify a precise controlled service.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F29",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Vernie",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-vernie/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.patio_and_secure_terrace",
+      "value": true,
+      "reason": "A patio and terrace do not establish a garden or park and have no accepted V1 code.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F29",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Vernie",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-vernie/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.dentistry",
+      "value": true,
+      "reason": "Dentistry remains deferred because the evidence does not establish on-site treatment, a visiting dentist or organized external access.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F29",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Vernie",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-vernie/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "offering.epsm",
+      "value": "Separate 45-bed EPSM at La Vernie",
+      "reason": "EPSM is a separate offering and must not be flattened into the 30-bed EMS offering.",
+      "evidence": {
+        "researchField": "Master Audit!G12",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": []
+}

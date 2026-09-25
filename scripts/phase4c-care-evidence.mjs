@@ -3,15 +3,17 @@ import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { providers } from "../lib/providers.js";
 import { buildCarePacketFromEvidence, CARE_EVIDENCE_WORKBOOK,
-  ALL_PHASE4C_EVIDENCE_SLUGS, PHASE4C_BATCH_2_EVIDENCE_SLUGS,
+  ALL_PHASE4C_EVIDENCE_SLUGS, PHASE4C_BATCH_2_EVIDENCE_SLUGS, PHASE4C_BATCH_3_EVIDENCE_SLUGS,
   readProviderCareEvidence,
   validateProviderCareEvidence } from "../lib/provider-care-evidence.mjs";
 
 const workbookUrl = new URL(`../${CARE_EVIDENCE_WORKBOOK}`, import.meta.url);
 const evidenceUrl = (slug) => new URL(`../docs/research/provider-evidence/${slug}.json`, import.meta.url);
-const canonicalUrl = (slug) => new URL(PHASE4C_BATCH_2_EVIDENCE_SLUGS.includes(slug)
-  ? `../docs/research/phase4c-care-batch-02/canonical/${slug}-care.json`
-  : `../docs/research/phase4c-care-batch/canonical/${slug}-care.json`, import.meta.url);
+const canonicalUrl = (slug) => new URL(PHASE4C_BATCH_3_EVIDENCE_SLUGS.includes(slug)
+  ? `../docs/research/phase4c-care-batch-03/canonical/${slug}-care.json`
+  : PHASE4C_BATCH_2_EVIDENCE_SLUGS.includes(slug)
+    ? `../docs/research/phase4c-care-batch-02/canonical/${slug}-care.json`
+    : `../docs/research/phase4c-care-batch/canonical/${slug}-care.json`, import.meta.url);
 const providerBySlug = new Map(providers.map((provider) => [provider.id, provider]));
 
 function importableFactCount(packet) {

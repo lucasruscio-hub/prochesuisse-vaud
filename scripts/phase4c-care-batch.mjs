@@ -10,6 +10,7 @@ import { LOCAL_CONFIRMATION, runLocalSql } from "../lib/local-provider-writer.mj
 const root = new URL("../", import.meta.url);
 const DEFAULT_BATCH_ID = "phase4c-care-pilot-01";
 const BATCH_2_ID = "phase4c-care-batch-02";
+const BATCH_3_ID = "phase4c-care-batch-03";
 const batchDefinitions = Object.freeze({
   [DEFAULT_BATCH_ID]: {
     manifestUrl: new URL("../docs/research/phase4c-care-batch/batch.json", import.meta.url),
@@ -22,6 +23,14 @@ const batchDefinitions = Object.freeze({
       "ems-sauvabelin", "ems-mauri", "ems-pins", "ems-jardins-leman"],
     protectedExisting: ["ems-boveresses", "ems-chateau-rive", "ems-clair-soleil", "ems-le-home",
       "ems-girarde", "ems-signal"],
+  },
+  [BATCH_3_ID]: {
+    manifestUrl: new URL("../docs/research/phase4c-care-batch-03/batch.json", import.meta.url),
+    expectedCandidates: ["ems-arcades", "ems-meillerie", "ems-valency", "ems-meridienne",
+      "ems-paix-soir", "ems-vernie"],
+    protectedExisting: ["ems-boveresses", "ems-chateau-rive", "ems-clair-soleil", "ems-le-home",
+      "ems-girarde", "ems-signal", "ems-marronnier", "ems-petit-flon", "ems-pre-fleuri",
+      "ems-praz-joret", "ems-sauvabelin", "ems-mauri", "ems-pins", "ems-jardins-leman"],
   },
 });
 const providerIds = new Set(providers.map((provider) => provider.id));

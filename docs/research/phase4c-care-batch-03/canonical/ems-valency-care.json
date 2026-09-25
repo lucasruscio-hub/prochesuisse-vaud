@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-valency",
+    "slug": "ems-valency",
+    "expectedName": "EMS Parc de Valency – SISP",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "fondation-de-la-plaine",
+      "name": "Fondation de la Plaine",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F25",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E25",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 20,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G25",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "geriatric_care"
+      ],
+      "features": [
+        {
+          "kind": "care_profile",
+          "code": "geriatric_care",
+          "displayName": "Accompagnement gériatrique",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F16",
+            "kind": "provider",
+            "name": "altage — EMS Parc de Valency",
+            "url": "https://altage.ch/etablissement-medico-sociaux/ems-parc-de-valency/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "physiotherapy",
+          "displayName": "Physiothérapie",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F16",
+            "kind": "provider",
+            "name": "altage — EMS Parc de Valency",
+            "url": "https://altage.ch/etablissement-medico-sociaux/ems-parc-de-valency/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "facility",
+          "code": "garden_or_park",
+          "displayName": "Jardin ou parc",
+          "details": "Jardin.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F16",
+            "kind": "provider",
+            "name": "altage — EMS Parc de Valency",
+            "url": "https://altage.ch/etablissement-medico-sociaux/ems-parc-de-valency/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": {
+        "value": "Toutes les admissions sont organisées par le BRIO.",
+        "evidence": {
+          "researchField": "Deep Enrichment!G16",
+          "kind": "provider",
+          "name": "altage — EMS Parc de Valency",
+          "url": "https://altage.ch/etablissement-medico-sociaux/ems-parc-de-valency/",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "financing": {
+        "value": "Établissement conventionné dans le canton de Vaud.",
+        "evidence": {
+          "researchField": "Deep Enrichment!G16",
+          "kind": "provider",
+          "name": "altage — EMS Parc de Valency",
+          "url": "https://altage.ch/etablissement-medico-sociaux/ems-parc-de-valency/",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "EMS Parc de Valency",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B16",
+        "kind": "provider",
+        "name": "altage — EMS Parc de Valency",
+        "url": "https://altage.ch/etablissement-medico-sociaux/ems-parc-de-valency/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Route de Prilly 18, 1004 Lausanne",
+      "reason": "Site address belongs to the separate reviewed provider-field workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C16",
+        "kind": "provider",
+        "name": "altage — EMS Parc de Valency",
+        "url": "https://altage.ch/etablissement-medico-sociaux/ems-parc-de-valency/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "058 748 84 60",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D16",
+        "kind": "provider",
+        "name": "altage — EMS Parc de Valency",
+        "url": "https://altage.ch/etablissement-medico-sociaux/ems-parc-de-valency/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "olivia.chevalley@altage.ch",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E16",
+        "kind": "provider",
+        "name": "altage — EMS Parc de Valency",
+        "url": "https://altage.ch/etablissement-medico-sociaux/ems-parc-de-valency/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.rooms_and_balconies",
+      "value": "Individual and double rooms; all rooms have a balcony",
+      "reason": "Room configuration and balconies have no V1 offering fields and are not capacity.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F16",
+        "kind": "provider",
+        "name": "altage — EMS Parc de Valency",
+        "url": "https://altage.ch/etablissement-medico-sociaux/ems-parc-de-valency/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.ems_doctor",
+      "value": "Weekly EMS doctor",
+      "reason": "The V1 taxonomy has no precise controlled mapping for this arrangement.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F16",
+        "kind": "provider",
+        "name": "altage — EMS Parc de Valency",
+        "url": "https://altage.ch/etablissement-medico-sociaux/ems-parc-de-valency/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.free_visiting",
+      "value": true,
+      "reason": "Visiting access has no V1 offering field.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F16",
+        "kind": "provider",
+        "name": "altage — EMS Parc de Valency",
+        "url": "https://altage.ch/etablissement-medico-sociaux/ems-parc-de-valency/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Public"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence; the Public tag does not establish RIP status."
+    }
+  ],
+  "unresolved": []
+}

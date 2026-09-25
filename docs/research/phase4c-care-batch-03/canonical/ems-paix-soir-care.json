@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-paix-soir",
+    "slug": "ems-paix-soir",
+    "expectedName": "EMS La Paix du Soir",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "association-la-paix-du-soir",
+      "name": "Association La Paix du Soir",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F11",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E11",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 84,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G11",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [],
+      "features": [
+        {
+          "kind": "service",
+          "code": "social_activities",
+          "displayName": "Activités sociales et socioculturelles",
+          "details": "Accompagnement socioculturel et activités orientées vers les familles.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F28",
+            "kind": "provider",
+            "name": "Association La Paix du Soir — EMS",
+            "url": "https://www.paixdusoir.ch/services/ems",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "facility",
+          "code": "restaurant",
+          "displayName": "Restaurant sur place",
+          "details": "Restaurant sur le site.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F28",
+            "kind": "provider",
+            "name": "Association La Paix du Soir — EMS",
+            "url": "https://www.paixdusoir.ch/services/ems",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "EMS La Paix du Soir",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B28",
+        "kind": "provider",
+        "name": "Association La Paix du Soir — EMS",
+        "url": "https://www.paixdusoir.ch/services/ems",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Chemin de Longeraie 9, 1052 Le Mont-sur-Lausanne",
+      "reason": "Site address belongs to the separate reviewed provider-field workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C28",
+        "kind": "provider",
+        "name": "Association La Paix du Soir — EMS",
+        "url": "https://www.paixdusoir.ch/services/ems",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 651 66 66",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D28",
+        "kind": "provider",
+        "name": "Association La Paix du Soir — EMS",
+        "url": "https://www.paixdusoir.ch/services/ems",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "info@paixdusoir.ch",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E28",
+        "kind": "provider",
+        "name": "Association La Paix du Soir — EMS",
+        "url": "https://www.paixdusoir.ch/services/ems",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "care_profile.loss_of_autonomy",
+      "value": "Physical, psychological or cognitive loss of autonomy",
+      "reason": "This broad admission population does not map precisely to a controlled care profile.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F28",
+        "kind": "provider",
+        "name": "Association La Paix du Soir — EMS",
+        "url": "https://www.paixdusoir.ch/services/ems",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.nursing_care",
+      "value": true,
+      "reason": "Broad nursing wording does not map to the home-care-specific controlled code.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F28",
+        "kind": "provider",
+        "name": "Association La Paix du Soir — EMS",
+        "url": "https://www.paixdusoir.ch/services/ems",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "offering.spah",
+      "value": "30-place SPAH on the same campus",
+      "reason": "SPAH is a separate offering and is not part of the EMS capacity.",
+      "evidence": {
+        "researchField": "Master Audit!G11",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "offering.cat",
+      "value": "CAT on the same campus",
+      "reason": "CAT is a separate offering and must not be flattened into the EMS offering.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G28",
+        "kind": "provider",
+        "name": "Association La Paix du Soir — présentation",
+        "url": "https://www.paixdusoir.ch/a-propos-de-nous/presentation",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "offering.protected_housing",
+      "value": "Protected housing on the same campus",
+      "reason": "Protected housing is a separate offering and must not be flattened into the EMS offering.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G28",
+        "kind": "provider",
+        "name": "Association La Paix du Soir — présentation",
+        "url": "https://www.paixdusoir.ch/a-propos-de-nous/presentation",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Soins palliatifs"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": []
+}

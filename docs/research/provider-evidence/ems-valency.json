@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-valency", "slug": "ems-valency", "repositoryName": "EMS Parc de Valency – SISP", "researchedName": "EMS Parc de Valency", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A25:J25", "Deep Enrichment!A16:K16"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The current Parc de Valency establishment matches the repository site; the official list corrects the stale SISP operator reference to Fondation de la Plaine.",
+    "facts": [
+      {"field": "site.name", "value": "EMS Parc de Valency", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B16"}},
+      {"field": "site.address", "value": "Route de Prilly 18, 1004 Lausanne", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C16"}},
+      {"field": "site.phone", "value": "058 748 84 60", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D16"}},
+      {"field": "site.email", "value": "olivia.chevalley@altage.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E16"}},
+      {"field": "organization.operator", "value": "Fondation de la Plaine", "scope": "organization", "status": "reviewed", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F25"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I25"},
+    {"id": "provider-site", "kind": "provider", "name": "altage — EMS Parc de Valency", "url": "https://altage.ch/etablissement-medico-sociaux/ems-parc-de-valency/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H16"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-de-la-plaine", "name": "Fondation de la Plaine", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F25"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E25"},
+      "capacity": {"value": 20, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G25"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "care_profile", "code": "geriatric_care", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F16"}},
+        {"kind": "service", "code": "physiotherapy", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F16"}},
+        {"kind": "facility", "code": "garden_or_park", "details": "Jardin.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F16"}}
+      ],
+      "admissions": {"value": "Toutes les admissions sont organisées par le BRIO.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G16"}},
+      "financing": {"value": "Établissement conventionné dans le canton de Vaud.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G16"}},
+      "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "EMS Parc de Valency", "reason": "Reviewed establishment naming belongs to the provider identity workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B16"}},
+    {"field": "site.address", "value": "Route de Prilly 18, 1004 Lausanne", "reason": "Site address belongs to the separate reviewed provider-field workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C16"}},
+    {"field": "site.phone", "value": "058 748 84 60", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D16"}},
+    {"field": "site.email", "value": "olivia.chevalley@altage.ch", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E16"}},
+    {"field": "facility.rooms_and_balconies", "value": "Individual and double rooms; all rooms have a balcony", "reason": "Room configuration and balconies have no V1 offering fields and are not capacity.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F16"}},
+    {"field": "service.ems_doctor", "value": "Weekly EMS doctor", "reason": "The V1 taxonomy has no precise controlled mapping for this arrangement.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F16"}},
+    {"field": "facility.free_visiting", "value": true, "reason": "Visiting access has no V1 offering field.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F16"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Public"], "reason": "Legacy tags remain unverified and are not used as evidence; the Public tag does not establish RIP status."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

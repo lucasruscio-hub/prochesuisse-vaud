@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-meridienne",
+    "slug": "ems-meridienne",
+    "expectedName": "EMS La Méridienne – Fondation Primerose",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "fondation-la-primerose",
+      "name": "Fondation La Primerose",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F9",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E9",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 14,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G9",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": {
+          "value": true,
+          "evidence": {
+            "researchField": "Deep Enrichment!F27",
+            "kind": "provider",
+            "name": "Fondation La Primerose — EMS La Méridienne",
+            "url": "https://www.fondationlaprimerose.ch/etablissement/la-meridienne/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "psychiatric_care"
+      ],
+      "features": [
+        {
+          "kind": "care_profile",
+          "code": "psychiatric_care",
+          "displayName": "Accompagnement psychiatrique",
+          "details": "Psychiatrie de l’âge avancé.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F27",
+            "kind": "provider",
+            "name": "Fondation La Primerose — EMS La Méridienne",
+            "url": "https://www.fondationlaprimerose.ch/etablissement/la-meridienne/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "social_activities",
+          "displayName": "Activités sociales et socioculturelles",
+          "details": "Activités individuelles et de groupe.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F27",
+            "kind": "provider",
+            "name": "Fondation La Primerose — EMS La Méridienne",
+            "url": "https://www.fondationlaprimerose.ch/etablissement/la-meridienne/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "podology",
+          "displayName": "Podologie",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F27",
+            "kind": "provider",
+            "name": "Fondation La Primerose — EMS La Méridienne",
+            "url": "https://www.fondationlaprimerose.ch/etablissement/la-meridienne/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "hairdressing",
+          "displayName": "Coiffure",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F27",
+            "kind": "provider",
+            "name": "Fondation La Primerose — EMS La Méridienne",
+            "url": "https://www.fondationlaprimerose.ch/etablissement/la-meridienne/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "facility",
+          "code": "garden_or_park",
+          "displayName": "Jardin ou parc",
+          "details": "Jardin et terrasse.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F27",
+            "kind": "provider",
+            "name": "Fondation La Primerose — EMS La Méridienne",
+            "url": "https://www.fondationlaprimerose.ch/etablissement/la-meridienne/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "EMS La Méridienne",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B27",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Méridienne",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-meridienne/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Sur la Croix 3, 1020 Renens",
+      "reason": "Site address belongs to the separate reviewed provider-field workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C27",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Méridienne",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-meridienne/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 634 52 52",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D27",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Méridienne",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-meridienne/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "meinfo@fondationlaprimerose.ch",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E27",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Méridienne",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-meridienne/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.secured_floors",
+      "value": "Four secured floors",
+      "reason": "The V1 taxonomy has no controlled facility code for this structure.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F27",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Méridienne",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-meridienne/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.interdisciplinary_care",
+      "value": true,
+      "reason": "The bundled wording does not identify a precise controlled service.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F27",
+        "kind": "provider",
+        "name": "Fondation La Primerose — EMS La Méridienne",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/la-meridienne/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "offering.cat",
+      "value": "CAT at the same establishment",
+      "reason": "CAT is a separate offering and must not be flattened into the EMS offering.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G27",
+        "kind": "provider",
+        "name": "Fondation La Primerose — CAT La Méridienne",
+        "url": "https://www.fondationlaprimerose.ch/etablissement/cat-la-meridienne/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Court séjour",
+        "Alzheimer"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence; short stay is not imported."
+    }
+  ],
+  "unresolved": []
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-arcades", "slug": "ems-arcades", "repositoryName": "EMS Les Arcades – Groupe Odysse", "researchedName": "EMS Les Arcades", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A17:J17", "Deep Enrichment!A10:K10"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The official list and current regional health-network directory identify the existing Les Arcades establishment in Lutry under Résidences Odysse SA.",
+    "facts": [
+      {"field": "site.name", "value": "EMS Les Arcades", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "rsrl-directory", "workbookCell": "Deep Enrichment!B10"}},
+      {"field": "site.address", "value": "Avenue William 15, 1095 Lutry", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "rsrl-directory", "workbookCell": "Deep Enrichment!C10"}},
+      {"field": "site.phone", "value": "021 796 13 00", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "rsrl-directory", "workbookCell": "Deep Enrichment!D10"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I17"},
+    {"id": "rsrl-directory", "kind": "public", "name": "Réseau Santé Région Lausanne — membres EMS", "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H10"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "residences-odysse-sa", "name": "Résidences Odysse SA", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F17"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E17"},
+      "capacity": {"value": 29, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G17"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "care_profile", "code": "psychiatric_care", "details": "Mission de psychiatrie de l’âge avancé.", "evidence": {"sourceId": "rsrl-directory", "workbookCell": "Deep Enrichment!F10"}}
+      ],
+      "admissions": null, "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "EMS Les Arcades", "reason": "Reviewed establishment naming belongs to the provider identity workflow.", "evidence": {"sourceId": "rsrl-directory", "workbookCell": "Deep Enrichment!B10"}},
+    {"field": "site.address", "value": "Avenue William 15, 1095 Lutry", "reason": "Site address belongs to the separate reviewed provider-field workflow.", "evidence": {"sourceId": "rsrl-directory", "workbookCell": "Deep Enrichment!C10"}},
+    {"field": "site.phone", "value": "021 796 13 00", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "rsrl-directory", "workbookCell": "Deep Enrichment!D10"}},
+    {"field": "care_details", "value": "Provider site has limited current service content", "reason": "The workbook preserves no additional precise site-level care facts for controlled import.", "evidence": {"sourceId": "rsrl-directory", "workbookCell": "Deep Enrichment!G10"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Court séjour"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

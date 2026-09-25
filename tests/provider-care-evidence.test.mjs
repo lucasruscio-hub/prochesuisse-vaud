@@ -2,14 +2,14 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { CARE_FEATURE_TAXONOMY } from "../lib/care-feature-taxonomy.js";
-import { ALL_PHASE4C_EVIDENCE_SLUGS, PHASE4C_BATCH_2_EVIDENCE_SLUGS,
+import { ALL_PHASE4C_EVIDENCE_SLUGS, PHASE4C_BATCH_2_EVIDENCE_SLUGS, PHASE4C_BATCH_3_EVIDENCE_SLUGS,
   PHASE4C_EVIDENCE_SLUGS } from "../lib/provider-care-evidence.mjs";
 import { buildPhase4cEvidenceSet } from "../scripts/phase4c-care-evidence.mjs";
 
 const entries = buildPhase4cEvidenceSet();
 const bySlug = new Map(entries.map((entry) => [entry.slug, entry]));
 const approvedSlugs = ["ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-girarde",
-  ...PHASE4C_BATCH_2_EVIDENCE_SLUGS];
+  ...PHASE4C_BATCH_2_EVIDENCE_SLUGS, ...PHASE4C_BATCH_3_EVIDENCE_SLUGS];
 
 test("durable evidence files match the immutable workbook and repository identities", () => {
   assert.deepEqual(entries.map((entry) => entry.slug), [...ALL_PHASE4C_EVIDENCE_SLUGS]);
@@ -35,6 +35,19 @@ test("batch two has human local-apply approval and does not alter batch one appr
   }
   assert.equal(bySlug.get("ems-signal").value.review.status, "held");
   assert.equal(bySlug.get("ems-signal").packet.approval.localApply, false);
+});
+
+test("batch three has human local-apply approval and preserves publication gates", () => {
+  assert.deepEqual(PHASE4C_BATCH_3_EVIDENCE_SLUGS, [
+    "ems-arcades", "ems-meillerie", "ems-valency", "ems-meridienne", "ems-paix-soir", "ems-vernie",
+  ]);
+  for (const slug of PHASE4C_BATCH_3_EVIDENCE_SLUGS) {
+    const entry = bySlug.get(slug);
+    assert.equal(entry.value.review.status, "approved_for_local_apply");
+    assert.deepEqual(entry.packet.approval, { localApply: true, publish: false, verify: false });
+    assert.deepEqual(entry.packet.unresolved, []);
+    assert.deepEqual(entry.value.taxonomyProposals, []);
+  }
 });
 
 test("only workbook-supported facts enter canonical packets", () => {
@@ -113,4 +126,42 @@ test("batch two projects only approved supported facts and keeps dentistry defer
   const jardins = bySlug.get("ems-jardins-leman");
   assert.ok(jardins.packet.deferred.some((item) => item.field === "service.dentistry"));
   assert.ok(!jardins.packet.offerings[0].features.some((item) => item.code === "dentistry"));
+});
+
+test("batch three projects only narrow workbook-supported EMS facts", () => {
+  const arcades = bySlug.get("ems-arcades").packet.offerings[0];
+  assert.equal(arcades.capacity.value, 29);
+  assert.deepEqual(arcades.features.map((item) => item.code), ["psychiatric_care"]);
+
+  const meillerie = bySlug.get("ems-meillerie");
+  assert.equal(meillerie.packet.offerings[0].capacity.value, 26);
+  assert.deepEqual(meillerie.packet.offerings[0].features.map((item) => item.code), ["geriatric_care"]);
+  for (const code of ["physiotherapy", "occupational_therapy", "podology"]) {
+    assert.ok(meillerie.packet.deferred.some((item) => item.field === `service.${code}`));
+    assert.ok(!meillerie.packet.offerings[0].features.some((item) => item.code === code));
+  }
+  assert.ok(meillerie.packet.deferred.some((item) => item.field === "service.dentistry"));
+
+  const valency = bySlug.get("ems-valency").packet.offerings[0];
+  assert.equal(valency.capacity.value, 20);
+  assert.equal(valency.financing.value, "Établissement conventionné dans le canton de Vaud.");
+  assert.equal(valency.publicInterestStatus, null);
+
+  const meridienne = bySlug.get("ems-meridienne").packet.offerings[0];
+  assert.equal(meridienne.capacity.value, 14);
+  assert.equal(meridienne.stayModes.longStay.value, true);
+  assert.equal(meridienne.stayModes.shortStay, null);
+
+  const paixSoir = bySlug.get("ems-paix-soir").packet.offerings[0];
+  assert.equal(paixSoir.capacity.value, 84);
+  assert.deepEqual(paixSoir.features.map((item) => `${item.kind}.${item.code}`), [
+    "service.social_activities", "facility.restaurant",
+  ]);
+
+  const vernie = bySlug.get("ems-vernie");
+  assert.equal(vernie.packet.offerings[0].capacity.value, 30);
+  assert.equal(vernie.packet.offerings[0].stayModes.longStay.value, true);
+  assert.ok(vernie.packet.deferred.some((item) => item.field === "offering.epsm"));
+  assert.ok(vernie.packet.deferred.some((item) => item.field === "service.dentistry"));
+  assert.ok(!vernie.packet.offerings[0].features.some((item) => item.code === "dentistry"));
 });

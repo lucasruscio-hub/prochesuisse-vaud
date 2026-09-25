@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-meillerie", "slug": "ems-meillerie", "repositoryName": "EMS Meillerie – Fondation La Rozavère", "researchedName": "EMS Meillerie", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A23:J23", "Deep Enrichment!A14:K14"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The official list and the Fondation La Rozavère establishment page identify the current 26-place EMS Meillerie at the repository establishment.",
+    "facts": [
+      {"field": "site.name", "value": "EMS Meillerie", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B14"}},
+      {"field": "site.address", "value": "Chemin de Meillerie 6, 1006 Lausanne", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C14"}},
+      {"field": "site.phone", "value": "058 211 70 00", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D14"}},
+      {"field": "site.email", "value": "info@rozavere.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E14"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I23"},
+    {"id": "provider-site", "kind": "provider", "name": "Fondation La Rozavère — EMS Meillerie", "url": "https://rozavere.ch/resider/ems-meillerie/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H14"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-la-rozavere", "name": "Fondation La Rozavère", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F23"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E23"},
+      "capacity": {"value": 26, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G23"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "care_profile", "code": "geriatric_care", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F14"}}
+      ],
+      "admissions": null, "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "EMS Meillerie", "reason": "Reviewed establishment naming belongs to the provider identity workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B14"}},
+    {"field": "site.address", "value": "Chemin de Meillerie 6, 1006 Lausanne", "reason": "Site address belongs to the separate reviewed provider-field workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C14"}},
+    {"field": "site.phone", "value": "058 211 70 00", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D14"}},
+    {"field": "site.email", "value": "info@rozavere.ch", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E14"}},
+    {"field": "facility.rooms", "value": "Individual and double rooms", "reason": "Room configuration has no V1 offering field and is not capacity.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F14"}},
+    {"field": "service.sensory_wellbeing", "value": true, "reason": "The workbook wording lacks an accepted controlled service code.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F14"}},
+    {"field": "service.physiotherapy", "value": "Externally supplied", "reason": "Human review excluded externally supplied services from the generic consumer service taxonomy.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F14"}},
+    {"field": "service.occupational_therapy", "value": "Externally supplied", "reason": "Human review excluded externally supplied services from the generic consumer service taxonomy.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F14"}},
+    {"field": "service.podology", "value": "Externally supplied", "reason": "Human review excluded externally supplied services from the generic consumer service taxonomy.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F14"}},
+    {"field": "service.dentistry", "value": true, "reason": "Dentistry remains deferred because the evidence does not establish on-site treatment, a visiting dentist or organized external access.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F14"}},
+    {"field": "service.family_support", "value": true, "reason": "The wording does not establish the narrower controlled family-caregiver-support concept.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F14"}},
+    {"field": "service.zootherapy", "value": true, "reason": "This non-recurring concept has no accepted controlled code.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F14"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Soins palliatifs"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

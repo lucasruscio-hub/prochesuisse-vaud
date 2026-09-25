@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "batchId": "phase4c-care-batch-03",
+  "description": "Six-provider Phase 4C.3 Vaud care-enrichment batch approved for local apply planning from the 2026-09-21 master audit workbook.",
+  "protectedExisting": ["ems-boveresses", "ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-girarde", "ems-signal", "ems-marronnier", "ems-petit-flon", "ems-pre-fleuri", "ems-praz-joret", "ems-sauvabelin", "ems-mauri", "ems-pins", "ems-jardins-leman"],
+  "packetPaths": [
+    {"slug": "ems-arcades", "path": "docs/research/phase4c-care-batch-03/canonical/ems-arcades-care.json"},
+    {"slug": "ems-meillerie", "path": "docs/research/phase4c-care-batch-03/canonical/ems-meillerie-care.json"},
+    {"slug": "ems-valency", "path": "docs/research/phase4c-care-batch-03/canonical/ems-valency-care.json"},
+    {"slug": "ems-meridienne", "path": "docs/research/phase4c-care-batch-03/canonical/ems-meridienne-care.json"},
+    {"slug": "ems-paix-soir", "path": "docs/research/phase4c-care-batch-03/canonical/ems-paix-soir-care.json"},
+    {"slug": "ems-vernie", "path": "docs/research/phase4c-care-batch-03/canonical/ems-vernie-care.json"}
+  ],
+  "candidates": [
+    {
+      "slug": "ems-arcades",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-arcades.json"],
+      "supportedCareFacts": ["Résidences Odysse SA operator", "EMS offering", "29 beds", "advanced-age psychiatric mission"],
+      "proposedFacts": ["operator residences-odysse-sa", "offering ems", "capacity 29 beds", "care_profile.psychiatric_care"],
+      "deferred": ["Reviewed identity/contact fields remain outside the care apply.", "No additional precise service facts are preserved.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["care_profile.psychiatric_care"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Réseau Santé Région Lausanne — membres EMS"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-meillerie",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-meillerie.json"],
+      "supportedCareFacts": ["Fondation La Rozavère operator", "EMS offering", "26 beds", "geriatric care"],
+      "proposedFacts": ["operator fondation-la-rozavere", "offering ems", "capacity 26 beds", "care_profile.geriatric_care"],
+      "deferred": ["Reviewed identity/contact fields remain outside the care apply.", "Room configuration and sensory-wellbeing wording lack V1 fields.", "External physiotherapy, occupational therapy and podology are excluded from the generic consumer taxonomy.", "Dentistry, family support and zootherapy remain deferred.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["care_profile.geriatric_care"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Fondation La Rozavère — EMS Meillerie"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-valency",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-valency.json"],
+      "supportedCareFacts": ["Fondation de la Plaine operator", "EMS offering", "20 beds", "geriatric care", "physiotherapy", "garden", "BRIO admissions", "Vaud conventioned financing context"],
+      "proposedFacts": ["operator fondation-de-la-plaine", "offering ems", "capacity 20 beds", "care_profile.geriatric_care", "service.physiotherapy", "facility.garden_or_park", "admissions summary", "financing summary"],
+      "deferred": ["Reviewed identity/contact fields remain outside the care apply.", "Room/balcony configuration, weekly doctor and visiting access lack V1 mappings.", "Legacy Public tag does not establish RIP status."],
+      "taxonomyMappings": ["care_profile.geriatric_care", "service.physiotherapy", "facility.garden_or_park"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "altage — EMS Parc de Valency"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-meridienne",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-meridienne.json"],
+      "supportedCareFacts": ["Fondation La Primerose operator", "EMS offering", "14 beds", "long stay", "advanced-age psychiatric care", "social activities", "podology", "hairdressing", "garden and terrace"],
+      "proposedFacts": ["operator fondation-la-primerose", "offering ems", "capacity 14 beds", "long_stay true", "care_profile.psychiatric_care", "service.social_activities", "service.podology", "service.hairdressing", "facility.garden_or_park"],
+      "deferred": ["Reviewed identity/contact fields remain outside the care apply.", "Secured-floor and interdisciplinary-care wording lack precise V1 mappings.", "CAT remains a separate offering.", "Legacy short-stay tag remains unverified."],
+      "taxonomyMappings": ["care_profile.psychiatric_care", "service.social_activities", "service.podology", "service.hairdressing", "facility.garden_or_park"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Fondation La Primerose — EMS La Méridienne", "Fondation La Primerose — CAT La Méridienne"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-paix-soir",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-paix-soir.json"],
+      "supportedCareFacts": ["Association La Paix du Soir operator", "EMS offering", "84 beds", "social activities", "on-site restaurant"],
+      "proposedFacts": ["operator association-la-paix-du-soir", "offering ems", "capacity 84 beds", "service.social_activities", "facility.restaurant"],
+      "deferred": ["Reviewed identity/contact fields remain outside the care apply.", "Broad loss-of-autonomy and nursing wording lacks precise mappings.", "SPAH, CAT and protected housing remain separate offerings.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["service.social_activities", "facility.restaurant"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Association La Paix du Soir — EMS", "Association La Paix du Soir — présentation"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-vernie",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-vernie.json"],
+      "supportedCareFacts": ["Fondation La Primerose operator", "EMS offering", "30 EMS beds", "long stay", "advanced-age psychiatric care", "podology", "hairdressing"],
+      "proposedFacts": ["operator fondation-la-primerose", "offering ems", "capacity 30 beds", "long_stay true", "care_profile.psychiatric_care", "service.podology", "service.hairdressing"],
+      "deferred": ["Reviewed identity/contact fields remain outside the care apply.", "Unit/room/patio/terrace and broad interdisciplinary wording lack precise V1 mappings.", "Dentistry remains deferred.", "The 45-bed EPSM remains a separate offering.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["care_profile.psychiatric_care", "service.podology", "service.hairdressing"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Fondation La Primerose — EMS La Vernie", "Fondation La Primerose — établissements"],
+      "unresolved": [],
+      "localApply": true
+    }
+  ]
+}
