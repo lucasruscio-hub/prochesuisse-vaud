@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-rozavere",
+    "slug": "ems-rozavere",
+    "expectedName": "EMS Rozavère",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "locationKind": "site",
+  "claims": [
+    {
+      "field": "identity.name",
+      "value": "EMS Rovéréaz",
+      "evidence": {
+        "kind": "provider",
+        "name": "Fondation La Rozavère — EMS Rovéréaz",
+        "url": "https://rozavere.ch/resider/ems-rovereaz/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "name"
+    },
+    {
+      "field": "identity.type",
+      "value": "ems",
+      "evidence": {
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "primary_type"
+    },
+    {
+      "field": "identity.operator",
+      "value": "Fondation La Rozavère",
+      "evidence": {
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "site.address",
+      "value": "Chemin de Rovéréaz 23",
+      "evidence": {
+        "kind": "provider",
+        "name": "Fondation La Rozavère — EMS Rovéréaz",
+        "url": "https://rozavere.ch/resider/ems-rovereaz/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "site.postalCode",
+      "value": "1012",
+      "evidence": {
+        "kind": "provider",
+        "name": "Fondation La Rozavère — EMS Rovéréaz",
+        "url": "https://rozavere.ch/resider/ems-rovereaz/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "postal_code"
+    },
+    {
+      "field": "site.locality",
+      "value": "Lausanne",
+      "evidence": {
+        "kind": "provider",
+        "name": "Fondation La Rozavère — EMS Rovéréaz",
+        "url": "https://rozavere.ch/resider/ems-rovereaz/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "locality"
+    }
+  ],
+  "offerings": [],
+  "unresolved": [],
+  "holdReasons": [],
+  "legacyTags": [
+    "Gériatrie",
+    "Soins palliatifs"
+  ],
+  "legacyTagsVerified": false
+}

@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-chantemerle",
+    "slug": "ems-chantemerle",
+    "expectedName": "EMS Chantemerle",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "residences-odysse-sa",
+      "name": "Résidences Odysse SA",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F4",
+        "kind": "provider",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E4",
+        "kind": "provider",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": null,
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "geriatric_care"
+      ],
+      "features": [
+        {
+          "kind": "care_profile",
+          "code": "geriatric_care",
+          "displayName": "Accompagnement gériatrique",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F4",
+            "kind": "provider",
+            "name": "Réseau Santé Région Lausanne — membres EMS",
+            "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.identity",
+      "value": "EMS Chantemerle, Chemin de Chantemerle 3, 1010 Lausanne",
+      "reason": "Identity and address changes use the separate reviewed-provider correction workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B4:C4",
+        "kind": "provider",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "offering.capacity",
+      "value": "unknown",
+      "reason": "The workbook does not establish a current EMS capacity.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G4",
+        "kind": "provider",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "services",
+      "value": "no detailed service list",
+      "reason": "No additional precise consumer service fact is established by the workbook.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F4",
+        "kind": "provider",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie"
+      ],
+      "reason": "Legacy tags remain unverified and are not used independently as care evidence."
+    }
+  ],
+  "unresolved": []
+}

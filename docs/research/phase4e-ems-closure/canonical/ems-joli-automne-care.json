@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-joli-automne",
+    "slug": "ems-joli-automne",
+    "expectedName": "EMS Joli Automne",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "tertianum-vaud-sa",
+      "name": "Tertianum Vaud SA",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F7",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E7",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 17,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G7",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [],
+      "features": [],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "Tertianum Joli Automne",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B6",
+        "kind": "provider",
+        "name": "Tertianum Joli Automne",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-joli-automne",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Ecublens, Vaud",
+      "reason": "The workbook preserves only locality-level address evidence, not a complete street address.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C6",
+        "kind": "provider",
+        "name": "Tertianum Joli Automne",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-joli-automne",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.medicalized_rooms",
+      "value": true,
+      "reason": "Generic medicalized-room wording does not map to a controlled V1 facility or care profile.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F6",
+        "kind": "provider",
+        "name": "Tertianum Joli Automne",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-joli-automne",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "offering.long_short_stay",
+      "value": "Long/short care offer depending on current Tertianum service configuration",
+      "reason": "The workbook explicitly makes these stay modes dependent on a changing service configuration, so neither stay field is imported.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F6",
+        "kind": "provider",
+        "name": "Tertianum Joli Automne",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-joli-automne",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.communal_spaces_and_terrace",
+      "value": true,
+      "reason": "Communal spaces and a terrace do not establish a controlled facility mapping.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F6",
+        "kind": "provider",
+        "name": "Tertianum Joli Automne",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-joli-automne",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "availability",
+      "value": "Live availability shown by provider",
+      "reason": "Live availability is time-sensitive and must not be stored as a static care fact.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G6",
+        "kind": "provider",
+        "name": "Tertianum Joli Automne",
+        "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-joli-automne",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Alzheimer"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as care-profile evidence."
+    }
+  ],
+  "unresolved": []
+}

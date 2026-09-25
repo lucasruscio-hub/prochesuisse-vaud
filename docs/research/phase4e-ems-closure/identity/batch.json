@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "batchId": "phase4e-identity-corrections",
+  "providers": ["ems-chantemerle", "ems-rozavere", "ems-laurelles-vevey", "ems-palmiers"],
+  "protectedProviders": {"laurellesResidence": "leave_untouched_pending_senior_residence_workflow"},
+  "corrections": [
+    {"slug": "ems-chantemerle", "slugChange": false, "localApply": true, "publish": false, "verify": false, "expected": {"name": "EMS Chantemerle", "locality": "Lausanne", "postalCode": "1010", "displayAddress": "Lausanne · 1010"}, "aliasAction": "none", "duplicateAction": "none", "workbookEvidence": ["Master Audit!A4:J4", "Deep Enrichment!A4:K4"]},
+    {"slug": "ems-rozavere", "slugChange": false, "localApply": true, "publish": false, "verify": false, "expected": {"name": "EMS Rovéréaz", "locality": "Lausanne", "postalCode": "1012", "displayAddress": "Lausanne · 1012"}, "aliasAction": "deferred_no_alias_model_change", "duplicateAction": "none", "workbookEvidence": ["Master Audit!A34:J34", "Deep Enrichment!A24:K24"]},
+    {"slug": "ems-laurelles-vevey", "slugChange": false, "localApply": true, "publish": false, "verify": false, "expected": {"name": "EMS Les Laurelles", "locality": "Montreux", "postalCode": "1820", "displayAddress": "Montreux · 1820"}, "aliasAction": "none", "duplicateAction": "leave_laurelles-residence_untouched_pending_senior_residence_workflow", "workbookEvidence": ["Master Audit!A45:J45", "Deep Enrichment!A34:K34", "Structural Resolution!A8:J8"]},
+    {"slug": "ems-palmiers", "slugChange": false, "localApply": true, "publish": false, "verify": false, "expected": {"name": "EMS Les Palmiers", "locality": "Montreux", "postalCode": "1820", "displayAddress": "Montreux · 1820"}, "aliasAction": "none", "duplicateAction": "none", "workbookEvidence": ["Master Audit!A47:J47", "Deep Enrichment!A35:K35"]}
+  ]
+}

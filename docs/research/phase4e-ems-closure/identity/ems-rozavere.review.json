@@ -1,0 +1,21 @@
+{
+  "research_packet_version": 1, "legacy_id": "ems-rozavere",
+  "review_state": "human_researched_pending_local_apply", "publication_allowed": false,
+  "verification_granted": false,
+  "identity": {
+    "canonical_name": {"value": "EMS Rovéréaz", "source": {"type": "official_web", "name": "Fondation La Rozavère — EMS Rovéréaz", "url": "https://rozavere.ch/resider/ems-rovereaz/", "accessed_on": "2026-09-21"}},
+    "provider_type": {"value": "ems", "source": {"type": "official_web", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessed_on": "2026-09-21"}},
+    "operator": {"value": "Fondation La Rozavère", "source": {"type": "official_web", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessed_on": "2026-09-21"}}
+  },
+  "location": {
+    "address": {"value": "Chemin de Rovéréaz 23", "source": {"type": "official_web", "name": "Fondation La Rozavère — EMS Rovéréaz", "url": "https://rozavere.ch/resider/ems-rovereaz/", "accessed_on": "2026-09-21"}},
+    "postal_code": {"value": "1012", "source": {"type": "official_web", "name": "Fondation La Rozavère — EMS Rovéréaz", "url": "https://rozavere.ch/resider/ems-rovereaz/", "accessed_on": "2026-09-21"}},
+    "commune": {"value": "Lausanne", "source": {"type": "official_web", "name": "Fondation La Rozavère — EMS Rovéréaz", "url": "https://rozavere.ch/resider/ems-rovereaz/", "accessed_on": "2026-09-21"}},
+    "canton": null, "country_code": "CH", "latitude": null, "longitude": null
+  },
+  "office_location": null, "contact": {"phone": null, "email": null, "website": null},
+  "capacity": null, "verified_services": [], "verified_attributes": [], "care_offerings": [],
+  "service_area": null, "dynamic_data": {"availability": null},
+  "legacy_tags": ["Gériatrie", "Soins palliatifs"], "legacy_tags_are_verified": false,
+  "review_notes": ["Human-approved Phase 4E identity correction. No alias is created; the former name remains only in legacy provenance."]
+}

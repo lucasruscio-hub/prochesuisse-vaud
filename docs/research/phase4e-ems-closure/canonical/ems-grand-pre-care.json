@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-grand-pre",
+    "slug": "ems-grand-pre",
+    "expectedName": "EMS Le Grand Pré – Fondation Primeroche",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "fondation-primeroche",
+      "name": "Fondation Primeroche",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F13",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E13",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 34,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G13",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [],
+      "features": [],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "Etablissement Le Grand Pré",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B30",
+        "kind": "provider",
+        "name": "Fondation Primeroche — Etablissement Le Grand Pré",
+        "url": "https://www.primeroche.ch/etablissement-le-grand-pre-2",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Rue du Grand Pré 2, 1033 Cheseaux-sur-Lausanne",
+      "reason": "Address data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C30",
+        "kind": "provider",
+        "name": "Fondation Primeroche — Etablissement Le Grand Pré",
+        "url": "https://www.primeroche.ch/etablissement-le-grand-pre-2",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 545 55 55",
+      "reason": "Contact data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D30",
+        "kind": "provider",
+        "name": "Fondation Primeroche — Etablissement Le Grand Pré",
+        "url": "https://www.primeroche.ch/etablissement-le-grand-pre-2",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "info@primeroche.ch",
+      "reason": "Contact data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E30",
+        "kind": "provider",
+        "name": "Fondation Primeroche — Etablissement Le Grand Pré",
+        "url": "https://www.primeroche.ch/etablissement-le-grand-pre-2",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.total_residents",
+      "value": 48,
+      "reason": "The provider's 48-resident site total spans EMS and EPSM and must not replace the official 34-bed EMS capacity.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G30",
+        "kind": "provider",
+        "name": "Fondation Primeroche — brochure EMS Grand Pré",
+        "url": "https://www.primeroche.ch/wp-content/uploads/2024/08/EMS-GP22.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "offering.epsm",
+      "value": "Separate 14-place EPSM",
+      "reason": "EPSM is a separate offering and must not be flattened into the 34-bed EMS offering.",
+      "evidence": {
+        "researchField": "Master Audit!G13",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "services.site_wide",
+      "value": [
+        "restaurant",
+        "animation",
+        "hairdresser",
+        "aesthetic care",
+        "pedicure",
+        "aromatherapy",
+        "art therapy",
+        "music therapy"
+      ],
+      "reason": "The workbook describes these across a mixed EMS/EPSM establishment and does not scope them specifically to the EMS offering.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F30",
+        "kind": "provider",
+        "name": "Fondation Primeroche — Etablissement Le Grand Pré",
+        "url": "https://www.primeroche.ch/etablissement-le-grand-pre-2",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.wellbeing_balneotherapy",
+      "value": true,
+      "reason": "The site-wide wording is not scoped to the EMS offering and does not establish a controlled V1 facility.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F30",
+        "kind": "provider",
+        "name": "Fondation Primeroche — Etablissement Le Grand Pré",
+        "url": "https://www.primeroche.ch/etablissement-le-grand-pre-2",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Alzheimer"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as care-profile evidence."
+    }
+  ],
+  "unresolved": []
+}

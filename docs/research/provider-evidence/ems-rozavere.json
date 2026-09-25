@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-rozavere", "slug": "ems-rozavere", "repositoryName": "EMS Rovéréaz", "researchedName": "EMS Rovéréaz", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A34:J34", "Deep Enrichment!A24:K24"]},
+  "identity": {"status": "reconciled", "rationale": "The approved identity correction distinguishes the EMS Rovéréaz establishment from its Fondation La Rozavère operator.", "facts": [
+    {"field": "site.name", "value": "EMS Rovéréaz", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B24"}},
+    {"field": "site.address", "value": "Chemin de Rovéréaz 23, 1012 Lausanne", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C24"}}
+  ]},
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I34"},
+    {"id": "provider-site", "kind": "provider", "name": "Fondation La Rozavère — EMS Rovéréaz", "url": "https://rozavere.ch/resider/ems-rovereaz/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H24"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-la-rozavere", "name": "Fondation La Rozavère", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F34"}}],
+    "offerings": [{"slug": "ems", "name": "Établissement médico-social", "offeringType": "ems", "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E34"},
+      "capacity": {"value": 161, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G34"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null}, "features": [],
+      "admissions": null, "financing": null, "publicInterestStatus": null, "pricing": null}]
+  },
+  "deferredClaims": [
+    {"field": "site.identity", "value": "EMS Rovéréaz, Chemin de Rovéréaz 23, 1012 Lausanne", "reason": "Identity and address changes use the separate reviewed-provider correction workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B24:C24"}},
+    {"field": "unit.r1_ouest_est_capacity", "value": 50, "reason": "This is one unit count and must not replace the 161-bed total EMS capacity.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G24"}},
+    {"field": "offering.spah", "value": "30-bed SPAH", "reason": "SPAH is separate from the EMS offering and is not flattened into its capacity or care facts.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F24:G24"}},
+    {"field": "care_profile.site_wide", "value": "geriatric and advanced-age psychiatric mission wording", "reason": "The provider wording is not scoped narrowly enough to import a controlled EMS profile.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F24"}},
+    {"field": "services.site_wide", "value": "individualized accompaniment and activities", "reason": "Broad site-wide wording does not establish a controlled consumer service.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F24"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Soins palliatifs"], "reason": "Legacy tags remain unverified."}
+  ],
+  "unresolvedIssues": [], "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

@@ -1,0 +1,21 @@
+{
+  "research_packet_version": 1, "legacy_id": "ems-chantemerle",
+  "review_state": "human_researched_pending_local_apply", "publication_allowed": false,
+  "verification_granted": false,
+  "identity": {
+    "canonical_name": {"value": "EMS Chantemerle", "source": {"type": "official_web", "name": "Réseau Santé Région Lausanne — membres EMS", "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/", "accessed_on": "2026-09-21"}},
+    "provider_type": {"value": "ems", "source": {"type": "official_web", "name": "Réseau Santé Région Lausanne — membres EMS", "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/", "accessed_on": "2026-09-21"}},
+    "operator": {"value": "Résidences Odysse SA", "source": {"type": "official_web", "name": "Réseau Santé Région Lausanne — membres EMS", "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/", "accessed_on": "2026-09-21"}}
+  },
+  "location": {
+    "address": {"value": "Chemin de Chantemerle 3", "source": {"type": "official_web", "name": "Réseau Santé Région Lausanne — membres EMS", "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/", "accessed_on": "2026-09-21"}},
+    "postal_code": {"value": "1010", "source": {"type": "official_web", "name": "Réseau Santé Région Lausanne — membres EMS", "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/", "accessed_on": "2026-09-21"}},
+    "commune": {"value": "Lausanne", "source": {"type": "official_web", "name": "Réseau Santé Région Lausanne — membres EMS", "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/", "accessed_on": "2026-09-21"}},
+    "canton": null, "country_code": "CH", "latitude": null, "longitude": null
+  },
+  "office_location": null, "contact": {"phone": null, "email": null, "website": null},
+  "capacity": null, "verified_services": [], "verified_attributes": [], "care_offerings": [],
+  "service_area": null, "dynamic_data": {"availability": null},
+  "legacy_tags": ["Gériatrie"], "legacy_tags_are_verified": false,
+  "review_notes": ["Human-approved Phase 4E identity correction. Street address remains evidence only; display is derived from locality and postal code."]
+}

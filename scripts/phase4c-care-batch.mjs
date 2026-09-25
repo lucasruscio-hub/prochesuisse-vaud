@@ -6,12 +6,15 @@ import { validateCarePacket } from "../lib/care-review-packet.mjs";
 import { buildCareApplySql } from "../lib/care-review-apply.mjs";
 import { inspectLegacyProviders } from "./ingest-legacy-providers.mjs";
 import { LOCAL_CONFIRMATION, runLocalSql } from "../lib/local-provider-writer.mjs";
+import { buildPostIdentityBaseline } from "../lib/phase4e-identity-corrections.mjs";
+import { checkedPhase4eIdentityPacket, validatePhase4eIdentityBatch } from "./phase4e-identity.mjs";
 
 const root = new URL("../", import.meta.url);
 const DEFAULT_BATCH_ID = "phase4c-care-pilot-01";
 const BATCH_2_ID = "phase4c-care-batch-02";
 const BATCH_3_ID = "phase4c-care-batch-03";
 const BATCH_4_ID = "phase4c-care-batch-04";
+const PHASE4E_ID = "phase4e-ems-closure";
 const batchDefinitions = Object.freeze({
   [DEFAULT_BATCH_ID]: {
     manifestUrl: new URL("../docs/research/phase4c-care-batch/batch.json", import.meta.url),
@@ -40,6 +43,16 @@ const batchDefinitions = Object.freeze({
       "ems-girarde", "ems-signal", "ems-marronnier", "ems-petit-flon", "ems-pre-fleuri",
       "ems-praz-joret", "ems-sauvabelin", "ems-mauri", "ems-pins", "ems-jardins-leman",
       "ems-arcades", "ems-meillerie", "ems-valency", "ems-meridienne", "ems-paix-soir", "ems-vernie"],
+  },
+  [PHASE4E_ID]: {
+    manifestUrl: new URL("../docs/research/phase4e-ems-closure/batch.json", import.meta.url),
+    expectedCandidates: ["ems-chantemerle", "ems-joli-automne", "ems-grand-pre", "ems-lys",
+      "ems-rozavere", "ems-laurelles-vevey", "ems-palmiers"],
+    protectedExisting: ["ems-boveresses", "ems-chateau-rive", "ems-clair-soleil", "ems-le-home",
+      "ems-girarde", "ems-signal", "ems-marronnier", "ems-petit-flon", "ems-pre-fleuri",
+      "ems-praz-joret", "ems-sauvabelin", "ems-mauri", "ems-pins", "ems-jardins-leman",
+      "ems-arcades", "ems-meillerie", "ems-valency", "ems-meridienne", "ems-paix-soir", "ems-vernie",
+      "ems-boissonnet", "ems-odysse", "ems-pre-pariset", "ems-pre-tour", "ems-tremieres"],
   },
 });
 const providerIds = new Set(providers.map((provider) => provider.id));
@@ -117,6 +130,7 @@ export function validateCareBatch(manifest, readPacket = (path) => JSON.parse(re
 
 export function selectApprovedPackets(manifest, slugs, readPacket) {
   const checked = validateCareBatch(manifest, readPacket);
+  if (manifest.batchId === PHASE4E_ID) validatePhase4eIdentityBatch();
   if (!slugs.length || new Set(slugs).size !== slugs.length) throw new Error("Select one or more unique provider slugs");
   return slugs.map((slug) => {
     if (manifest.protectedExisting.includes(slug)) throw new Error(`Existing care pilot is protected: ${slug}`);
@@ -125,7 +139,15 @@ export function selectApprovedPackets(manifest, slugs, readPacket) {
     const packet = readPacket ? readPacket(entry.path) : JSON.parse(readFileSync(new URL(entry.path, root), "utf8"));
     const validation = validateCarePacket(packet);
     if (!validation.localApplyReady) throw new Error(`Care packet lacks human local-apply approval: ${slug}`);
-    return { slug, packet, baseline: baselines.get(slug), validation, checked };
+    const baseline = manifest.batchId === PHASE4E_ID
+      && ["ems-chantemerle", "ems-rozavere", "ems-laurelles-vevey", "ems-palmiers"].includes(slug)
+      ? buildPostIdentityBaseline(checkedPhase4eIdentityPacket(slug), baselines.get(slug))
+      : baselines.get(slug);
+    if (manifest.batchId === PHASE4E_ID
+      && (packet.identity.expectedName !== baseline.name || packet.identity.expectedType !== baseline.primary_type)) {
+      throw new Error(`Care packet identity dependency mismatch: ${slug}`);
+    }
+    return { slug, packet, baseline, validation, checked };
   });
 }
 
@@ -200,6 +222,7 @@ export function main(args) {
   }
   if (args[0] === "--plan-apply") {
     const selected = selectApprovedPackets(manifest, args.slice(1));
+    for (const { packet, baseline } of selected) buildCareApplySql(packet, baseline);
     console.log(JSON.stringify({ mode: "plan-apply", databaseWrites: 0,
       providers: selected.map(describeCareApplyPlan) }, null, 2));
     return;

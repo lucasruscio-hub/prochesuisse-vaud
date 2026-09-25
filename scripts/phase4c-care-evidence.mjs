@@ -2,15 +2,19 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { providers } from "../lib/providers.js";
+import { PHASE4E_IDENTITY_CORRECTION_SLUGS } from "../lib/phase4e-identity-corrections.mjs";
+import { checkedPhase4eIdentityPacket } from "./phase4e-identity.mjs";
 import { buildCarePacketFromEvidence, CARE_EVIDENCE_WORKBOOK,
   ALL_PHASE4C_EVIDENCE_SLUGS, PHASE4C_BATCH_2_EVIDENCE_SLUGS, PHASE4C_BATCH_3_EVIDENCE_SLUGS,
-  PHASE4C_BATCH_4_EVIDENCE_SLUGS,
+  PHASE4C_BATCH_4_EVIDENCE_SLUGS, PHASE4E_CLOSURE_EVIDENCE_SLUGS,
   readProviderCareEvidence,
   validateProviderCareEvidence } from "../lib/provider-care-evidence.mjs";
 
 const workbookUrl = new URL(`../${CARE_EVIDENCE_WORKBOOK}`, import.meta.url);
 const evidenceUrl = (slug) => new URL(`../docs/research/provider-evidence/${slug}.json`, import.meta.url);
-const canonicalUrl = (slug) => new URL(PHASE4C_BATCH_4_EVIDENCE_SLUGS.includes(slug)
+const canonicalUrl = (slug) => new URL(PHASE4E_CLOSURE_EVIDENCE_SLUGS.includes(slug)
+  ? `../docs/research/phase4e-ems-closure/canonical/${slug}-care.json`
+  : PHASE4C_BATCH_4_EVIDENCE_SLUGS.includes(slug)
   ? `../docs/research/phase4c-care-batch-04/canonical/${slug}-care.json`
   : PHASE4C_BATCH_3_EVIDENCE_SLUGS.includes(slug)
     ? `../docs/research/phase4c-care-batch-03/canonical/${slug}-care.json`
@@ -34,7 +38,10 @@ export function buildPhase4cEvidenceSet() {
     const value = readProviderCareEvidence(evidenceUrl(slug));
     const checked = validateProviderCareEvidence(value, { workbookBytes });
     const repository = providerBySlug.get(slug);
-    if (!repository || repository.name !== value.provider.repositoryName
+    const expectedRepositoryName = PHASE4E_IDENTITY_CORRECTION_SLUGS.includes(slug)
+      ? checkedPhase4eIdentityPacket(slug).claims.find((claim) => claim.target === "name")?.value
+      : repository?.name;
+    if (!repository || expectedRepositoryName !== value.provider.repositoryName
       || repository.type !== value.provider.primaryType) throw new Error(`Repository identity mismatch: ${slug}`);
     const packet = buildCarePacketFromEvidence(value, { workbookBytes });
     return { slug, value, packet, checked, importableFactCount: importableFactCount(packet),

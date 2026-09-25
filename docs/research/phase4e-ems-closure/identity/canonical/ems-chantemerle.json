@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-chantemerle",
+    "slug": "ems-chantemerle",
+    "expectedName": "EMS de Chantemerle",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "locationKind": "site",
+  "claims": [
+    {
+      "field": "identity.name",
+      "value": "EMS Chantemerle",
+      "evidence": {
+        "kind": "provider",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "name"
+    },
+    {
+      "field": "identity.type",
+      "value": "ems",
+      "evidence": {
+        "kind": "provider",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "primary_type"
+    },
+    {
+      "field": "identity.operator",
+      "value": "Résidences Odysse SA",
+      "evidence": {
+        "kind": "provider",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "site.address",
+      "value": "Chemin de Chantemerle 3",
+      "evidence": {
+        "kind": "provider",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "site.postalCode",
+      "value": "1010",
+      "evidence": {
+        "kind": "provider",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "postal_code"
+    },
+    {
+      "field": "site.locality",
+      "value": "Lausanne",
+      "evidence": {
+        "kind": "provider",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "locality"
+    }
+  ],
+  "offerings": [],
+  "unresolved": [],
+  "holdReasons": [],
+  "legacyTags": [
+    "Gériatrie"
+  ],
+  "legacyTagsVerified": false
+}

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-laurelles-vevey", "slug": "ems-laurelles-vevey", "repositoryName": "EMS Les Laurelles", "researchedName": "EMS Les Laurelles", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A45:J45", "Deep Enrichment!A34:K34", "Structural Resolution!A8:J8"]},
+  "identity": {"status": "reconciled", "rationale": "The approved identity correction places this EMS in Montreux while preserving the Territet-Montreux street wording as evidence only; laurelles-residence remains untouched.", "facts": [
+    {"field": "site.name", "value": "EMS Les Laurelles", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B34"}},
+    {"field": "site.address", "value": "Avenue de Collonge 9, 1820 Territet-Montreux", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C34"}}
+  ]},
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I45"},
+    {"id": "provider-site", "kind": "provider", "name": "Fondation Balcons du Lac — EMS Les Laurelles", "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-laurelles-residence-et-prestations-hotelieres-pour-personnes-agees-activites-et-soins", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H34"},
+    {"id": "structural-review", "kind": "provider", "name": "Fondation Balcons du Lac — structural duplicate review", "url": "https://www.balconsdulac.ch/", "accessedOn": "2026-09-21", "workbookCell": "Structural Resolution!H8"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-balcons-du-lac", "name": "Fondation Balcons du Lac", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F45"}}],
+    "offerings": [{"slug": "ems", "name": "Établissement médico-social", "offeringType": "ems", "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E45"},
+      "capacity": {"value": 33, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G45"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "care_profile", "code": "geriatric_care", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F34"}},
+        {"kind": "facility", "code": "garden_or_park", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F34"}}
+      ],
+      "admissions": {"value": "Admissions gérées par le BRIO régional.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G34"}},
+      "financing": null, "publicInterestStatus": null, "pricing": null}]
+  },
+  "deferredClaims": [
+    {"field": "site.identity", "value": "Avenue de Collonge 9, 1820 Territet-Montreux", "reason": "The canonical locality is Montreux; this more specific address remains evidence only and original_location_text stays unchanged.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C34"}},
+    {"field": "duplicate.laurelles-residence", "value": "pending senior-residence resolution", "reason": "The possible duplicate remains completely untouched with no merge, deletion, or redirect.", "evidence": {"sourceId": "structural-review", "workbookCell": "Structural Resolution!A8:J8"}},
+    {"field": "services.external", "value": ["physiotherapy", "podology", "hairdressing"], "reason": "The workbook scopes these services externally; generic consumer service codes would lose that qualifier.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F34"}},
+    {"field": "services.broad", "value": "interdisciplinary activities and hotel/spiritual wording", "reason": "Broad wording is not mapped to a more specific consumer feature.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F34"}},
+    {"field": "facility.rooms", "value": 33, "reason": "Room configuration is not imported as a facility and does not replace the official bed capacity.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G34"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Vue lac", "Haut de gamme"], "reason": "Legacy tags remain unverified."}
+  ],
+  "unresolvedIssues": [], "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-joli-automne", "slug": "ems-joli-automne", "repositoryName": "EMS Joli Automne", "researchedName": "Tertianum Joli Automne", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A7:J7", "Deep Enrichment!A6:K6"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The official-list row and current Tertianum establishment page identify the repository's active Joli Automne EMS in Ecublens under Tertianum Vaud SA.",
+    "facts": [
+      {"field": "site.name", "value": "Tertianum Joli Automne", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B6"}},
+      {"field": "site.locality", "value": "Ecublens, Vaud", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C6"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I7"},
+    {"id": "provider-site", "kind": "provider", "name": "Tertianum Joli Automne", "url": "https://www.tertianum.ch/fr/etablissement-medico-sociaux/tertianum-joli-automne", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H6"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "tertianum-vaud-sa", "name": "Tertianum Vaud SA", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F7"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E7"},
+      "capacity": {"value": 17, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G7"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [],
+      "admissions": null, "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "Tertianum Joli Automne", "reason": "Reviewed establishment naming belongs to the provider identity workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B6"}},
+    {"field": "site.address", "value": "Ecublens, Vaud", "reason": "The workbook preserves only locality-level address evidence, not a complete street address.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C6"}},
+    {"field": "facility.medicalized_rooms", "value": true, "reason": "Generic medicalized-room wording does not map to a controlled V1 facility or care profile.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F6"}},
+    {"field": "offering.long_short_stay", "value": "Long/short care offer depending on current Tertianum service configuration", "reason": "The workbook explicitly makes these stay modes dependent on a changing service configuration, so neither stay field is imported.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F6"}},
+    {"field": "facility.communal_spaces_and_terrace", "value": true, "reason": "Communal spaces and a terrace do not establish a controlled facility mapping.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F6"}},
+    {"field": "availability", "value": "Live availability shown by provider", "reason": "Live availability is time-sensitive and must not be stored as a static care fact.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G6"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Alzheimer"], "reason": "Legacy tags remain unverified and are not used as care-profile evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

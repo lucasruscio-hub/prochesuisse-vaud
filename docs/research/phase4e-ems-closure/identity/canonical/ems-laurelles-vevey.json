@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-laurelles-vevey",
+    "slug": "ems-laurelles-vevey",
+    "expectedName": "EMS Les Laurelles",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "locationKind": "site",
+  "claims": [
+    {
+      "field": "identity.name",
+      "value": "EMS Les Laurelles",
+      "evidence": {
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — EMS Les Laurelles",
+        "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-laurelles-residence-et-prestations-hotelieres-pour-personnes-agees-activites-et-soins",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "name"
+    },
+    {
+      "field": "identity.type",
+      "value": "ems",
+      "evidence": {
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "primary_type"
+    },
+    {
+      "field": "identity.operator",
+      "value": "Fondation Balcons du Lac",
+      "evidence": {
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "site.address",
+      "value": "Avenue de Collonge 9, 1820 Territet-Montreux",
+      "evidence": {
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — EMS Les Laurelles",
+        "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-laurelles-residence-et-prestations-hotelieres-pour-personnes-agees-activites-et-soins",
+        "accessedOn": "2026-09-21"
+      },
+      "target": null
+    },
+    {
+      "field": "site.postalCode",
+      "value": "1820",
+      "evidence": {
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — EMS Les Laurelles",
+        "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-laurelles-residence-et-prestations-hotelieres-pour-personnes-agees-activites-et-soins",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "postal_code"
+    },
+    {
+      "field": "site.locality",
+      "value": "Montreux",
+      "evidence": {
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — EMS Les Laurelles",
+        "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-laurelles-residence-et-prestations-hotelieres-pour-personnes-agees-activites-et-soins",
+        "accessedOn": "2026-09-21"
+      },
+      "target": "locality"
+    }
+  ],
+  "offerings": [],
+  "unresolved": [],
+  "holdReasons": [],
+  "legacyTags": [
+    "Gériatrie",
+    "Vue lac",
+    "Haut de gamme"
+  ],
+  "legacyTagsVerified": false
+}

@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-lys",
+    "slug": "ems-lys",
+    "expectedName": "EMS Les Lys – Fondation Primeroche",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "fondation-primeroche",
+      "name": "Fondation Primeroche",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F20",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E20",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 36,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G20",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [],
+      "features": [],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "Etablissement Les Lys",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B12",
+        "kind": "provider",
+        "name": "Fondation Primeroche — Etablissement Les Lys",
+        "url": "https://www.primeroche.ch/etablissement-les-lys",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Rue des Métiers 3, 1008 Prilly",
+      "reason": "Address data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C12",
+        "kind": "provider",
+        "name": "Fondation Primeroche — Etablissement Les Lys",
+        "url": "https://www.primeroche.ch/etablissement-les-lys",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 545 55 55",
+      "reason": "Contact data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D12",
+        "kind": "provider",
+        "name": "Fondation Primeroche — Etablissement Les Lys",
+        "url": "https://www.primeroche.ch/etablissement-les-lys",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "info@primeroche.ch",
+      "reason": "Contact data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E12",
+        "kind": "provider",
+        "name": "Fondation Primeroche — Etablissement Les Lys",
+        "url": "https://www.primeroche.ch/etablissement-les-lys",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "offering.epsm",
+      "value": "Separate 30-place EPSM",
+      "reason": "EPSM is a separate offering and must not be flattened into the 36-bed EMS offering.",
+      "evidence": {
+        "researchField": "Master Audit!G20",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "care_profile.psychogeriatric",
+      "value": true,
+      "reason": "The workbook describes mixed EMS/EPSM care units and does not scope the psychogeriatric mission specifically to the EMS offering.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F12",
+        "kind": "provider",
+        "name": "Fondation Primeroche — Etablissement Les Lys",
+        "url": "https://www.primeroche.ch/etablissement-les-lys",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "services.mixed_offering",
+      "value": [
+        "hairdresser",
+        "aesthetic care",
+        "pedicure",
+        "aromatherapy",
+        "art therapy",
+        "music therapy",
+        "animation"
+      ],
+      "reason": "The service list applies to mixed EMS/EPSM units and cannot be imported into the EMS consumer taxonomy without offering-specific scope.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F12",
+        "kind": "provider",
+        "name": "Fondation Primeroche — Etablissement Les Lys",
+        "url": "https://www.primeroche.ch/etablissement-les-lys",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "admissions.priority_policy",
+      "value": "Priority for foundation communes and neighbours",
+      "reason": "The workbook describes a site/foundation policy without proving that it applies exclusively to the EMS offering.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G12",
+        "kind": "provider",
+        "name": "Fondation Primeroche — Etablissement Les Lys",
+        "url": "https://www.primeroche.ch/etablissement-les-lys",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as care-profile evidence."
+    }
+  ],
+  "unresolved": []
+}

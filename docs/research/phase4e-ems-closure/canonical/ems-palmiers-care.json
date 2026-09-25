@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-palmiers",
+    "slug": "ems-palmiers",
+    "expectedName": "EMS Les Palmiers",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "fondation-balcons-du-lac",
+      "name": "Fondation Balcons du Lac",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F47",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E47",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 43,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G47",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "geriatric_care"
+      ],
+      "features": [
+        {
+          "kind": "care_profile",
+          "code": "geriatric_care",
+          "displayName": "Accompagnement gériatrique",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F35",
+            "kind": "provider",
+            "name": "Fondation Balcons du Lac — EMS Les Palmiers",
+            "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-palmiers-residence-pour-personnes-agees-service-hotelier-activites-et-soins",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": {
+        "value": "Admissions gérées par le BRIO régional.",
+        "evidence": {
+          "researchField": "Deep Enrichment!G35",
+          "kind": "provider",
+          "name": "Fondation Balcons du Lac — EMS Les Palmiers",
+          "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-palmiers-residence-pour-personnes-agees-service-hotelier-activites-et-soins",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.identity",
+      "value": "EMS Les Palmiers, Avenue du Casino 25, 1820 Montreux",
+      "reason": "Identity and address changes use the separate reviewed-provider correction workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B35:C35",
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — EMS Les Palmiers",
+        "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-palmiers-residence-pour-personnes-agees-service-hotelier-activites-et-soins",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.rooms",
+      "value": 38,
+      "reason": "The room count must not replace the official 43-bed EMS capacity.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G35",
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — EMS Les Palmiers",
+        "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-palmiers-residence-pour-personnes-agees-service-hotelier-activites-et-soins",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "services.nearby_practitioners",
+      "value": "nearby medical and wellbeing practitioners",
+      "reason": "Nearby independent practitioners are not establishment-delivered services.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F35",
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — EMS Les Palmiers",
+        "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-palmiers-residence-pour-personnes-agees-service-hotelier-activites-et-soins",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "services.broad",
+      "value": "generic activities and hotel services",
+      "reason": "Generic wording is not mapped to specific consumer services.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F35",
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — EMS Les Palmiers",
+        "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-palmiers-residence-pour-personnes-agees-service-hotelier-activites-et-soins",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.broad",
+      "value": "terraces and cafeteria",
+      "reason": "The wording does not establish an approved controlled facility mapping.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F35",
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — EMS Les Palmiers",
+        "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-palmiers-residence-pour-personnes-agees-service-hotelier-activites-et-soins",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Chablais"
+      ],
+      "reason": "Legacy tags remain unverified."
+    }
+  ],
+  "unresolved": []
+}

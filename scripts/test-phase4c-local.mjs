@@ -9,10 +9,15 @@ import { buildPhase4cEvidenceSet } from "./phase4c-care-evidence.mjs";
 
 const approvedEntries = buildPhase4cEvidenceSet()
   .filter(({ packet }) => packet.approval.localApply === true);
-const approvedSlugs = approvedEntries.map(({ slug }) => slug);
+const approvedSlugs = ["ems-boveresses", ...approvedEntries.map(({ slug }) => slug)];
 const protectedSlugs = new Set([...approvedSlugs, "ems-boveresses", "ems-signal", "nova-via"]);
 const legacyRows = inspectLegacyProviders().rows;
 const baselineBySlug = new Map(legacyRows.map((row) => [row.legacyId, row.provider]));
+const verifiedEntries = [{ packet: readBoveressesPacket(), baseline: boveressesProvider },
+  ...approvedEntries.map(({ packet }) => ({ packet, baseline: baselineBySlug.get(packet.identity.slug) }))];
+const freshResearchHoldSlugs = ["ems-signal", "ems-bethanie", "ems-novalles", "ems-oriel", "ems-gottrause"];
+const v1ExclusionSlugs = ["ems-orme", "ems-naz", "ems-mont-calme", "ems-aubepines", "ems-praz-sechaud",
+  "epsm-borde", "epsm-collonges", "epsm-rouvraie", "ems-penates", "ems-ligniere"];
 
 const fingerprintSql = `BEGIN;
 CREATE TEMP TABLE lia_phase4c_leads (snapshot jsonb);
@@ -184,9 +189,9 @@ ROLLBACK;`;
 }
 
 function verifyAppliedProviders() {
-  const results = approvedEntries.map(({ packet }) => verifyAppliedPacket(packet,
+  const results = verifiedEntries.map(({ packet }) => verifyAppliedPacket(packet,
     JSON.parse(runLocalSql(buildLocalProviderDetailSql(packet.identity.slug)).trim())));
-  const organizationSlugs = approvedEntries.flatMap(({ packet }) => packet.organizations.map((item) => item.slug));
+  const organizationSlugs = verifiedEntries.flatMap(({ packet }) => packet.organizations.map((item) => item.slug));
   for (const role of ["anon", "authenticated"]) {
     assert.deepEqual(visibilityFor(role, approvedSlugs, organizationSlugs), {
       providers: 0, organizations: 0, offerings: 0, features: 0,
@@ -194,6 +199,34 @@ function verifyAppliedProviders() {
     });
   }
   return results;
+}
+
+function verifyUntouchedClosureProviders(state) {
+  const verify = (slug) => {
+    const baseline = baselineBySlug.get(slug);
+    const provider = state.providers.find((item) => item.slug === slug);
+    assert.ok(baseline, `Missing legacy baseline for ${slug}`);
+    assert.ok(provider, `Missing local provider ${slug}`);
+    assert.deepEqual(Object.fromEntries(Object.entries(provider)
+      .filter(([key]) => !["id", "created_at", "updated_at"].includes(key))), baseline,
+    `${slug} no longer matches its untouched legacy identity`);
+    const sources = state.providerSources.filter((source) => source.provider_id === provider.id);
+    assert.equal(sources.length, 1, `${slug} has unexpected provenance mutations`);
+    assert.equal(sources[0].source_type, "legacy");
+    assert.equal(sources[0].external_record_id, slug);
+    assert.equal(state.relationships.some((item) => item.provider_id === provider.id), false,
+      `${slug} has an unexpected organization relationship`);
+    assert.equal(state.offerings.some((item) => item.provider_id === provider.id), false,
+      `${slug} has an unexpected care offering`);
+    assert.equal(state.serviceAreas.some((item) => item.provider_id === provider.id), false,
+      `${slug} has an unexpected service area`);
+    return slug;
+  };
+  return {
+    freshResearchHolds: freshResearchHoldSlugs.map(verify),
+    v1Exclusions: v1ExclusionSlugs.map(verify),
+    pendingDuplicate: verify("laurelles-residence"),
+  };
 }
 
 function databaseCounts(state) {
@@ -292,9 +325,7 @@ function runRollbackSuite() {
     "END $apply$;\nUPDATE public.providers SET name='Unsafe unrelated mutation' WHERE slug='ems-signal';");
   assert.throws(() => runLocalSql(unsafeUnrelated), /Unrelated or existing data changed/);
 
-  const appliedPackets = [{ packet: readBoveressesPacket(), baseline: boveressesProvider },
-    ...approvedEntries.map(({ packet }) => ({ packet, baseline: baselineBySlug.get(packet.identity.slug) }))];
-  for (const item of appliedPackets) {
+  for (const item of verifiedEntries) {
     assert.throws(() => runLocalSql(buildCareApplySql(item.packet, item.baseline, { rollback: true })),
       /Existing reviewed care state requires reconciliation/);
   }
@@ -314,8 +345,7 @@ const args = parseLocalArgs(process.argv.slice(2));
 if (args.mode === "--verify-local") {
   const state = snapshot();
   console.log(JSON.stringify({ mode: "verify-local", databaseWrites: 0,
-    approvedProviders: verifyAppliedProviders(), signalHeldAndUntouched: !state.offerings.some((offering) =>
-      offering.provider_id === state.providers.find((provider) => provider.slug === "ems-signal")?.id),
+    approvedProviders: verifyAppliedProviders(), closureRecords: verifyUntouchedClosureProviders(state),
     databaseCounts: databaseCounts(state) }, null, 2));
 } else if (args.mode === "--write-local") {
   console.log(JSON.stringify(runRollbackSuite(), null, 2));

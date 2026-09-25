@@ -3,14 +3,15 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { CARE_FEATURE_TAXONOMY } from "../lib/care-feature-taxonomy.js";
 import { ALL_PHASE4C_EVIDENCE_SLUGS, PHASE4C_BATCH_2_EVIDENCE_SLUGS, PHASE4C_BATCH_3_EVIDENCE_SLUGS,
-  PHASE4C_BATCH_4_EVIDENCE_SLUGS, PHASE4C_EVIDENCE_SLUGS } from "../lib/provider-care-evidence.mjs";
+  PHASE4C_BATCH_4_EVIDENCE_SLUGS, PHASE4C_EVIDENCE_SLUGS,
+  PHASE4E_CLOSURE_EVIDENCE_SLUGS } from "../lib/provider-care-evidence.mjs";
 import { buildPhase4cEvidenceSet } from "../scripts/phase4c-care-evidence.mjs";
 
 const entries = buildPhase4cEvidenceSet();
 const bySlug = new Map(entries.map((entry) => [entry.slug, entry]));
 const approvedSlugs = ["ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-girarde",
   ...PHASE4C_BATCH_2_EVIDENCE_SLUGS, ...PHASE4C_BATCH_3_EVIDENCE_SLUGS,
-  ...PHASE4C_BATCH_4_EVIDENCE_SLUGS];
+  ...PHASE4C_BATCH_4_EVIDENCE_SLUGS, ...PHASE4E_CLOSURE_EVIDENCE_SLUGS];
 
 test("durable evidence files match the immutable workbook and repository identities", () => {
   assert.deepEqual(entries.map((entry) => entry.slug), [...ALL_PHASE4C_EVIDENCE_SLUGS]);
@@ -19,7 +20,7 @@ test("durable evidence files match the immutable workbook and repository identit
     assert.equal(entry.packet.approval.localApply, approvedSlugs.includes(entry.slug));
     assert.equal(entry.packet.approval.publish, false);
     assert.equal(entry.packet.approval.verify, false);
-    assert.ok(entry.value.workbook.rows.every((row) => /^(Master Audit|Deep Enrichment)!/.test(row)));
+    assert.ok(entry.value.workbook.rows.every((row) => /^(Master Audit|Deep Enrichment|Structural Resolution)!/.test(row)));
     assert.doesNotMatch(JSON.stringify(entry.value), /google/i);
     assert.deepEqual(JSON.parse(readFileSync(entry.canonicalPath, "utf8")), entry.packet);
   }
@@ -62,6 +63,41 @@ test("batch four has human local-apply approval and preserves publication gates"
     assert.deepEqual(entry.packet.unresolved, []);
     assert.deepEqual(entry.value.taxonomyProposals, []);
   }
+});
+
+test("Phase 4E closure packets are approved and remain deliberately narrow", () => {
+  assert.deepEqual(PHASE4E_CLOSURE_EVIDENCE_SLUGS, [
+    "ems-chantemerle", "ems-joli-automne", "ems-grand-pre", "ems-lys",
+    "ems-rozavere", "ems-laurelles-vevey", "ems-palmiers",
+  ]);
+  for (const slug of PHASE4E_CLOSURE_EVIDENCE_SLUGS) {
+    const entry = bySlug.get(slug);
+    assert.equal(entry.value.review.status, "approved_for_local_apply");
+    assert.deepEqual(entry.packet.approval, { localApply: true, publish: false, verify: false });
+    assert.deepEqual(entry.packet.unresolved, []);
+    assert.deepEqual(entry.value.taxonomyProposals, []);
+    assert.deepEqual(entry.packet.offerings[0].stayModes,
+      { longStay: null, shortStay: null, respiteStay: null });
+  }
+  assert.equal(bySlug.get("ems-chantemerle").packet.offerings[0].capacity, null);
+  assert.deepEqual(bySlug.get("ems-chantemerle").packet.offerings[0].features.map((item) => item.code),
+    ["geriatric_care"]);
+  assert.equal(bySlug.get("ems-joli-automne").packet.offerings[0].capacity.value, 17);
+  assert.equal(bySlug.get("ems-grand-pre").packet.offerings[0].capacity.value, 34);
+  assert.equal(bySlug.get("ems-lys").packet.offerings[0].capacity.value, 36);
+  assert.equal(bySlug.get("ems-rozavere").packet.offerings[0].capacity.value, 161);
+  assert.equal(bySlug.get("ems-laurelles-vevey").packet.offerings[0].capacity.value, 33);
+  assert.deepEqual(bySlug.get("ems-laurelles-vevey").packet.offerings[0].features
+    .map((item) => `${item.kind}.${item.code}`),
+  ["care_profile.geriatric_care", "facility.garden_or_park"]);
+  assert.equal(bySlug.get("ems-palmiers").packet.offerings[0].capacity.value, 43);
+  assert.equal(bySlug.get("ems-grand-pre").packet.organizations[0].slug, "fondation-primeroche");
+  assert.equal(bySlug.get("ems-lys").packet.organizations[0].slug, "fondation-primeroche");
+  assert.equal(bySlug.get("ems-laurelles-vevey").packet.organizations[0].slug, "fondation-balcons-du-lac");
+  assert.equal(bySlug.get("ems-palmiers").packet.organizations[0].slug, "fondation-balcons-du-lac");
+  assert.ok(bySlug.get("ems-grand-pre").packet.deferred.some((item) => item.field === "offering.epsm"));
+  assert.ok(bySlug.get("ems-lys").packet.deferred.some((item) => item.field === "offering.epsm"));
+  assert.ok(bySlug.get("ems-rozavere").packet.deferred.some((item) => item.field === "offering.spah"));
 });
 
 test("only workbook-supported facts enter canonical packets", () => {

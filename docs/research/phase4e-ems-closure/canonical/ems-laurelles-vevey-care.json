@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-laurelles-vevey",
+    "slug": "ems-laurelles-vevey",
+    "expectedName": "EMS Les Laurelles",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "fondation-balcons-du-lac",
+      "name": "Fondation Balcons du Lac",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F45",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E45",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 33,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G45",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "geriatric_care"
+      ],
+      "features": [
+        {
+          "kind": "care_profile",
+          "code": "geriatric_care",
+          "displayName": "Accompagnement gériatrique",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F34",
+            "kind": "provider",
+            "name": "Fondation Balcons du Lac — EMS Les Laurelles",
+            "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-laurelles-residence-et-prestations-hotelieres-pour-personnes-agees-activites-et-soins",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "facility",
+          "code": "garden_or_park",
+          "displayName": "Jardin ou parc",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F34",
+            "kind": "provider",
+            "name": "Fondation Balcons du Lac — EMS Les Laurelles",
+            "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-laurelles-residence-et-prestations-hotelieres-pour-personnes-agees-activites-et-soins",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": {
+        "value": "Admissions gérées par le BRIO régional.",
+        "evidence": {
+          "researchField": "Deep Enrichment!G34",
+          "kind": "provider",
+          "name": "Fondation Balcons du Lac — EMS Les Laurelles",
+          "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-laurelles-residence-et-prestations-hotelieres-pour-personnes-agees-activites-et-soins",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.identity",
+      "value": "Avenue de Collonge 9, 1820 Territet-Montreux",
+      "reason": "The canonical locality is Montreux; this more specific address remains evidence only and original_location_text stays unchanged.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C34",
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — EMS Les Laurelles",
+        "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-laurelles-residence-et-prestations-hotelieres-pour-personnes-agees-activites-et-soins",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "duplicate.laurelles-residence",
+      "value": "pending senior-residence resolution",
+      "reason": "The possible duplicate remains completely untouched with no merge, deletion, or redirect.",
+      "evidence": {
+        "researchField": "Structural Resolution!A8:J8",
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — structural duplicate review",
+        "url": "https://www.balconsdulac.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "services.external",
+      "value": [
+        "physiotherapy",
+        "podology",
+        "hairdressing"
+      ],
+      "reason": "The workbook scopes these services externally; generic consumer service codes would lose that qualifier.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F34",
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — EMS Les Laurelles",
+        "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-laurelles-residence-et-prestations-hotelieres-pour-personnes-agees-activites-et-soins",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "services.broad",
+      "value": "interdisciplinary activities and hotel/spiritual wording",
+      "reason": "Broad wording is not mapped to a more specific consumer feature.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F34",
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — EMS Les Laurelles",
+        "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-laurelles-residence-et-prestations-hotelieres-pour-personnes-agees-activites-et-soins",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.rooms",
+      "value": 33,
+      "reason": "Room configuration is not imported as a facility and does not replace the official bed capacity.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G34",
+        "kind": "provider",
+        "name": "Fondation Balcons du Lac — EMS Les Laurelles",
+        "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-laurelles-residence-et-prestations-hotelieres-pour-personnes-agees-activites-et-soins",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Vue lac",
+        "Haut de gamme"
+      ],
+      "reason": "Legacy tags remain unverified."
+    }
+  ],
+  "unresolved": []
+}

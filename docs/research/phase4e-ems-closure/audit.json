@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "auditId": "phase4e-existing-provider-ems-closure",
+  "checkpoint": "08f9faadc3964810a376ebb96c5e6adf0bdf3601",
+  "workbook": {
+    "path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx",
+    "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450",
+    "auditDate": "2026-09-21"
+  },
+  "approval": {"identityCorrections": true, "localApply": true, "publish": false, "verify": false},
+  "counts": {"repositoryEmsRecords": 46, "alreadyEnriched": 24, "resolvableNow": 7, "freshResearchHolds": 5, "deferOrExcludeV1": 10},
+  "identityCorrections": [
+    {
+      "slug": "ems-chantemerle",
+      "currentRepository": {"name": "EMS de Chantemerle", "commune": "Lutry", "npa": "1093", "address": "Lutry · 1093"},
+      "reviewedIdentity": {"name": "EMS Chantemerle", "streetAddress": "Chemin de Chantemerle 3", "commune": "Lausanne", "npa": "1010", "operator": "Résidences Odysse SA"},
+      "proposedRepositoryCorrection": {"name": "EMS Chantemerle", "commune": "Lausanne", "npa": "1010", "address": "Lausanne · 1010"},
+      "slugRemainsStable": true,
+      "redirect": null,
+      "alias": {"required": false, "note": "The former name may be retained as provenance/search text, but the stable slug needs no redirect."},
+      "duplicateImplications": [],
+      "safeWithoutUnrelatedProviderMutation": true,
+      "carePacketBlockedUntilIdentityApproval": false,
+      "sources": [{"name": "Réseau Santé Région Lausanne — membres EMS", "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/", "workbookCells": ["Master Audit!A4:J4", "Deep Enrichment!A4:K4"]}]
+    },
+    {
+      "slug": "ems-rozavere",
+      "currentRepository": {"name": "EMS Rozavère", "commune": "Lausanne", "npa": "1010", "address": "Lausanne · 1010"},
+      "reviewedIdentity": {"name": "EMS Rovéréaz", "streetAddress": "Chemin de Rovéréaz 23", "commune": "Lausanne", "npa": "1012", "operator": "Fondation La Rozavère"},
+      "proposedRepositoryCorrection": {"name": "EMS Rovéréaz", "commune": "Lausanne", "npa": "1012", "address": "Lausanne · 1012"},
+      "slugRemainsStable": true,
+      "redirect": null,
+      "alias": {"required": false, "value": "EMS Rozavère", "note": "No alias system is added. The former name remains only in existing legacy provenance unless a later workflow explicitly supports search aliases."},
+      "duplicateImplications": [],
+      "safeWithoutUnrelatedProviderMutation": true,
+      "carePacketBlockedUntilIdentityApproval": false,
+      "sources": [
+        {"name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "workbookCells": ["Master Audit!A34:J34"]},
+        {"name": "Fondation La Rozavère — EMS Rovéréaz", "url": "https://rozavere.ch/resider/ems-rovereaz/", "workbookCells": ["Deep Enrichment!A24:K24"]}
+      ]
+    },
+    {
+      "slug": "ems-laurelles-vevey",
+      "currentRepository": {"name": "EMS Les Laurelles", "commune": "Vevey", "npa": "1800", "address": "Vevey · 1800"},
+      "reviewedIdentity": {"name": "EMS Les Laurelles", "streetAddress": "Avenue de Collonge 9", "commune": "Montreux", "localityLabel": "Territet-Montreux", "npa": "1820", "operator": "Fondation Balcons du Lac"},
+      "proposedRepositoryCorrection": {"name": "EMS Les Laurelles", "commune": "Montreux", "npa": "1820", "address": "Montreux · 1820"},
+      "slugRemainsStable": true,
+      "redirect": null,
+      "alias": {"required": false, "note": "No redirect is needed for the stable EMS slug. The stale Vevey locality remains preserved in legacy provenance."},
+      "duplicateImplications": [{"slug": "laurelles-residence", "finding": "The workbook finds no separate current residence entity.", "actionNow": "leave completely untouched", "futureWorkflow": "senior-residence duplicate resolution"}],
+      "safeWithoutUnrelatedProviderMutation": true,
+      "carePacketBlockedUntilIdentityApproval": false,
+      "sources": [
+        {"name": "Fondation Balcons du Lac — EMS Les Laurelles", "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-laurelles-residence-et-prestations-hotelieres-pour-personnes-agees-activites-et-soins", "workbookCells": ["Master Audit!A45:J45", "Deep Enrichment!A34:K34"]},
+        {"name": "Structural duplicate review", "url": "https://www.balconsdulac.ch/", "workbookCells": ["Structural Resolution!A8:J8"]}
+      ]
+    },
+    {
+      "slug": "ems-palmiers",
+      "currentRepository": {"name": "EMS Les Palmiers", "commune": "Aigle", "npa": "1860", "address": "Aigle · 1860"},
+      "reviewedIdentity": {"name": "EMS Les Palmiers", "streetAddress": "Avenue du Casino 25", "commune": "Montreux", "npa": "1820", "operator": "Fondation Balcons du Lac"},
+      "proposedRepositoryCorrection": {"name": "EMS Les Palmiers", "commune": "Montreux", "npa": "1820", "address": "Montreux · 1820"},
+      "slugRemainsStable": true,
+      "redirect": null,
+      "alias": {"required": false, "note": "The stable slug and establishment name do not change; the stale Aigle locality remains legacy provenance only."},
+      "duplicateImplications": [],
+      "safeWithoutUnrelatedProviderMutation": true,
+      "carePacketBlockedUntilIdentityApproval": false,
+      "sources": [{"name": "Fondation Balcons du Lac — EMS Les Palmiers", "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-palmiers-residence-pour-personnes-agees-service-hotelier-activites-et-soins", "workbookCells": ["Master Audit!A47:J47", "Deep Enrichment!A35:K35"]}]
+    }
+  ],
+  "carePlans": [
+    {"slug": "ems-chantemerle", "status": "approved_for_local_apply_after_identity_correction", "operator": "Résidences Odysse SA", "offering": "ems", "capacityBeds": null, "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null}, "careProfiles": ["geriatric_care"], "services": [], "facilities": [], "admissions": null, "separateOfferings": [], "deferred": ["All detailed services and capacity remain unknown."], "evidenceCells": ["Master Audit!F4", "Master Audit!E4", "Deep Enrichment!F4"], "packetPath": "docs/research/phase4e-ems-closure/canonical/ems-chantemerle-care.json"},
+    {"slug": "ems-joli-automne", "status": "approved_for_local_apply", "operator": "Tertianum Vaud SA", "offering": "ems", "capacityBeds": 17, "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null}, "careProfiles": [], "services": [], "facilities": [], "admissions": null, "separateOfferings": [], "deferred": ["Unstable long/short care configuration", "Medicalized-room wording", "Communal spaces and terrace", "Live availability", "Legacy care-profile tags"], "evidenceCells": ["Master Audit!F7", "Master Audit!E7", "Master Audit!G7", "Deep Enrichment!F6:G6"], "packetPath": "docs/research/phase4e-ems-closure/canonical/ems-joli-automne-care.json"},
+    {"slug": "ems-grand-pre", "status": "approved_for_local_apply", "operator": "Fondation Primeroche", "offering": "ems", "capacityBeds": 34, "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null}, "careProfiles": [], "services": [], "facilities": [], "admissions": null, "separateOfferings": ["14-place EPSM"], "deferred": ["48-resident site total", "All mixed-site services and facilities", "Legacy care-profile tags"], "evidenceCells": ["Master Audit!F13", "Master Audit!E13", "Master Audit!G13", "Deep Enrichment!F30:G30"], "packetPath": "docs/research/phase4e-ems-closure/canonical/ems-grand-pre-care.json"},
+    {"slug": "ems-lys", "status": "approved_for_local_apply", "operator": "Fondation Primeroche", "offering": "ems", "capacityBeds": 36, "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null}, "careProfiles": [], "services": [], "facilities": [], "admissions": null, "separateOfferings": ["30-place EPSM"], "deferred": ["Mixed-unit psychogeriatric profile", "All mixed EMS/EPSM services", "Site/foundation admissions priority", "Legacy care-profile tags"], "evidenceCells": ["Master Audit!F20", "Master Audit!E20", "Master Audit!G20", "Deep Enrichment!F12:G12"], "packetPath": "docs/research/phase4e-ems-closure/canonical/ems-lys-care.json"},
+    {"slug": "ems-rozavere", "status": "approved_for_local_apply_after_identity_correction", "operator": "Fondation La Rozavère", "offering": "ems", "capacityBeds": 161, "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null}, "careProfiles": [], "services": [], "facilities": [], "admissions": null, "separateOfferings": ["30-bed SPAH"], "deferred": ["50-resident R1 Ouest-Est unit count", "Site-wide geriatric/advanced-age psychiatric wording", "Individualized accompaniment and activities"], "evidenceCells": ["Master Audit!F34", "Master Audit!E34", "Master Audit!G34", "Deep Enrichment!F24:G24"], "packetPath": "docs/research/phase4e-ems-closure/canonical/ems-rozavere-care.json"},
+    {"slug": "ems-laurelles-vevey", "status": "approved_for_local_apply_after_identity_correction", "operator": "Fondation Balcons du Lac", "offering": "ems", "capacityBeds": 33, "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null}, "careProfiles": ["geriatric_care"], "services": [], "facilities": ["garden_or_park"], "admissions": "Admissions handled through the regional BRIO.", "separateOfferings": [], "deferred": ["External physiotherapy", "External podology", "External hairdressing", "Interdisciplinary activities", "Hotel-style and spiritual wording", "33-room configuration"], "evidenceCells": ["Master Audit!F45", "Master Audit!E45", "Master Audit!G45", "Deep Enrichment!F34:G34"], "packetPath": "docs/research/phase4e-ems-closure/canonical/ems-laurelles-vevey-care.json"},
+    {"slug": "ems-palmiers", "status": "approved_for_local_apply_after_identity_correction", "operator": "Fondation Balcons du Lac", "offering": "ems", "capacityBeds": 43, "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null}, "careProfiles": ["geriatric_care"], "services": [], "facilities": [], "admissions": "Admissions handled through the regional BRIO.", "separateOfferings": [], "deferred": ["38-room configuration", "Generic activities and hotel services", "Terraces and cafeteria", "Nearby medical and wellbeing practitioners"], "evidenceCells": ["Master Audit!F47", "Master Audit!E47", "Master Audit!G47", "Deep Enrichment!F35:G35"], "packetPath": "docs/research/phase4e-ems-closure/canonical/ems-palmiers-care.json"}
+  ],
+  "freshResearchHolds": [
+    {"slug": "ems-signal", "reason": "24 official beds conflict with approximately 30 provider-described residents.", "workbookCells": ["Master Audit!G16", "Deep Enrichment!G9"]},
+    {"slug": "ems-bethanie", "reason": "Official/provider heading says 120 beds while the provider's detailed units total 119.", "workbookCells": ["Master Audit!G42", "Deep Enrichment!G32"]},
+    {"slug": "ems-novalles", "reason": "NOVALLES JBC versus NOVALLES CHATEAU identity, exact Renens address and operator form remain unresolved.", "workbookCells": ["Master Audit!E21:G21", "Deep Enrichment!C13:G13"]},
+    {"slug": "ems-oriel", "reason": "Current EMS versus EPSM transition status and operator remain unresolved.", "workbookCells": ["Master Audit!D8:J8"]},
+    {"slug": "ems-gottrause", "reason": "No matching current establishment or operator is established.", "workbookCells": ["Master Audit!D46:J46"]}
+  ],
+  "deferOrExcludeV1": [
+    {"slug": "ems-orme", "reason": "Generic legacy identity must split into Bossons and Mélodie/Plaines-du-Loup establishments.", "workbookCells": ["Master Audit!D6:J6", "New Listing Candidates!A2:L3"]},
+    {"slug": "ems-naz", "reason": "Closed in 2009 and replaced by the Donatella Mauri establishment.", "workbookCells": ["Master Audit!D10:J10"]},
+    {"slug": "ems-mont-calme", "reason": "No longer a current independent establishment; BUGNON is the current target identity.", "workbookCells": ["Master Audit!D40:J40"]},
+    {"slug": "ems-aubepines", "reason": "Current official classification is EPSM, not EMS.", "workbookCells": ["Master Audit!D18:J18"]},
+    {"slug": "ems-praz-sechaud", "reason": "Current official classification is EPSM; no current EMS entry was established.", "workbookCells": ["Master Audit!D30:J30"]},
+    {"slug": "epsm-borde", "reason": "Explicit EPSM outside Lia EMS V1.", "workbookCells": ["Master Audit!D36:J36"]},
+    {"slug": "epsm-collonges", "reason": "Explicit EPSM outside Lia EMS V1.", "workbookCells": ["Master Audit!D37:J37"]},
+    {"slug": "epsm-rouvraie", "reason": "Explicit EPSM outside Lia EMS V1.", "workbookCells": ["Master Audit!D38:J38"]},
+    {"slug": "ems-penates", "reason": "Home non médicalisé and home-care activity, not a current EMS.", "workbookCells": ["Master Audit!D41:J41"]},
+    {"slug": "ems-ligniere", "reason": "Current clinic, therapy and home-care operation; no current EMS listing.", "workbookCells": ["Master Audit!D43:J43"]}
+  ],
+  "alreadyEnriched": ["ems-boveresses", "ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-girarde", "ems-marronnier", "ems-petit-flon", "ems-pre-fleuri", "ems-praz-joret", "ems-sauvabelin", "ems-mauri", "ems-pins", "ems-jardins-leman", "ems-arcades", "ems-meillerie", "ems-valency", "ems-meridienne", "ems-paix-soir", "ems-vernie", "ems-boissonnet", "ems-odysse", "ems-pre-pariset", "ems-pre-tour", "ems-tremieres"],
+  "closureCondition": "After the four approved identity corrections and seven approved care packets are applied through their guarded local workflows, the existing-provider EMS track can close at 31 enriched, 5 fresh-research holds and 10 V1 exclusions."
+}

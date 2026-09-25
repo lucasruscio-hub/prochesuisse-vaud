@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-palmiers", "slug": "ems-palmiers", "repositoryName": "EMS Les Palmiers", "researchedName": "EMS Les Palmiers", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A47:J47", "Deep Enrichment!A35:K35"]},
+  "identity": {"status": "reconciled", "rationale": "The approved identity correction reconciles the stale Aigle locality to the current Montreux EMS Les Palmiers.", "facts": [
+    {"field": "site.name", "value": "EMS Les Palmiers", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B35"}},
+    {"field": "site.address", "value": "Avenue du Casino 25, 1820 Montreux", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C35"}}
+  ]},
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I47"},
+    {"id": "provider-site", "kind": "provider", "name": "Fondation Balcons du Lac — EMS Les Palmiers", "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-palmiers-residence-pour-personnes-agees-service-hotelier-activites-et-soins", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H35"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-balcons-du-lac", "name": "Fondation Balcons du Lac", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F47"}}],
+    "offerings": [{"slug": "ems", "name": "Établissement médico-social", "offeringType": "ems", "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E47"},
+      "capacity": {"value": 43, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G47"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [{"kind": "care_profile", "code": "geriatric_care", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F35"}}],
+      "admissions": {"value": "Admissions gérées par le BRIO régional.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G35"}},
+      "financing": null, "publicInterestStatus": null, "pricing": null}]
+  },
+  "deferredClaims": [
+    {"field": "site.identity", "value": "EMS Les Palmiers, Avenue du Casino 25, 1820 Montreux", "reason": "Identity and address changes use the separate reviewed-provider correction workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B35:C35"}},
+    {"field": "facility.rooms", "value": 38, "reason": "The room count must not replace the official 43-bed EMS capacity.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G35"}},
+    {"field": "services.nearby_practitioners", "value": "nearby medical and wellbeing practitioners", "reason": "Nearby independent practitioners are not establishment-delivered services.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F35"}},
+    {"field": "services.broad", "value": "generic activities and hotel services", "reason": "Generic wording is not mapped to specific consumer services.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F35"}},
+    {"field": "facility.broad", "value": "terraces and cafeteria", "reason": "The wording does not establish an approved controlled facility mapping.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F35"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Chablais"], "reason": "Legacy tags remain unverified."}
+  ],
+  "unresolvedIssues": [], "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

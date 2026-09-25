@@ -1,0 +1,21 @@
+{
+  "research_packet_version": 1, "legacy_id": "ems-palmiers",
+  "review_state": "human_researched_pending_local_apply", "publication_allowed": false,
+  "verification_granted": false,
+  "identity": {
+    "canonical_name": {"value": "EMS Les Palmiers", "source": {"type": "official_web", "name": "Fondation Balcons du Lac — EMS Les Palmiers", "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-palmiers-residence-pour-personnes-agees-service-hotelier-activites-et-soins", "accessed_on": "2026-09-21"}},
+    "provider_type": {"value": "ems", "source": {"type": "official_web", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessed_on": "2026-09-21"}},
+    "operator": {"value": "Fondation Balcons du Lac", "source": {"type": "official_web", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessed_on": "2026-09-21"}}
+  },
+  "location": {
+    "address": {"value": "Avenue du Casino 25", "source": {"type": "official_web", "name": "Fondation Balcons du Lac — EMS Les Palmiers", "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-palmiers-residence-pour-personnes-agees-service-hotelier-activites-et-soins", "accessed_on": "2026-09-21"}},
+    "postal_code": {"value": "1820", "source": {"type": "official_web", "name": "Fondation Balcons du Lac — EMS Les Palmiers", "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-palmiers-residence-pour-personnes-agees-service-hotelier-activites-et-soins", "accessed_on": "2026-09-21"}},
+    "commune": {"value": "Montreux", "source": {"type": "official_web", "name": "Fondation Balcons du Lac — EMS Les Palmiers", "url": "https://www.balconsdulac.ch/nos-etablissements/ems-les-palmiers-residence-pour-personnes-agees-service-hotelier-activites-et-soins", "accessed_on": "2026-09-21"}},
+    "canton": null, "country_code": "CH", "latitude": null, "longitude": null
+  },
+  "office_location": null, "contact": {"phone": null, "email": null, "website": null},
+  "capacity": null, "verified_services": [], "verified_attributes": [], "care_offerings": [],
+  "service_area": null, "dynamic_data": {"availability": null},
+  "legacy_tags": ["Gériatrie", "Chablais"], "legacy_tags_are_verified": false,
+  "review_notes": ["Human-approved Phase 4E identity correction. The 38-room description and nearby practitioners are not identity facts."]
+}

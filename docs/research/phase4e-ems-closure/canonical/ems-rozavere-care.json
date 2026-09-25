@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-rozavere",
+    "slug": "ems-rozavere",
+    "expectedName": "EMS Rovéréaz",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "fondation-la-rozavere",
+      "name": "Fondation La Rozavère",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F34",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E34",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 161,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G34",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [],
+      "features": [],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.identity",
+      "value": "EMS Rovéréaz, Chemin de Rovéréaz 23, 1012 Lausanne",
+      "reason": "Identity and address changes use the separate reviewed-provider correction workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B24:C24",
+        "kind": "provider",
+        "name": "Fondation La Rozavère — EMS Rovéréaz",
+        "url": "https://rozavere.ch/resider/ems-rovereaz/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "unit.r1_ouest_est_capacity",
+      "value": 50,
+      "reason": "This is one unit count and must not replace the 161-bed total EMS capacity.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G24",
+        "kind": "provider",
+        "name": "Fondation La Rozavère — EMS Rovéréaz",
+        "url": "https://rozavere.ch/resider/ems-rovereaz/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "offering.spah",
+      "value": "30-bed SPAH",
+      "reason": "SPAH is separate from the EMS offering and is not flattened into its capacity or care facts.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F24:G24",
+        "kind": "provider",
+        "name": "Fondation La Rozavère — EMS Rovéréaz",
+        "url": "https://rozavere.ch/resider/ems-rovereaz/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "care_profile.site_wide",
+      "value": "geriatric and advanced-age psychiatric mission wording",
+      "reason": "The provider wording is not scoped narrowly enough to import a controlled EMS profile.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F24",
+        "kind": "provider",
+        "name": "Fondation La Rozavère — EMS Rovéréaz",
+        "url": "https://rozavere.ch/resider/ems-rovereaz/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "services.site_wide",
+      "value": "individualized accompaniment and activities",
+      "reason": "Broad site-wide wording does not establish a controlled consumer service.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F24",
+        "kind": "provider",
+        "name": "Fondation La Rozavère — EMS Rovéréaz",
+        "url": "https://rozavere.ch/resider/ems-rovereaz/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Soins palliatifs"
+      ],
+      "reason": "Legacy tags remain unverified."
+    }
+  ],
+  "unresolved": []
+}

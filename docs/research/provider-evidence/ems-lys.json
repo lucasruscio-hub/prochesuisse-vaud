@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-lys", "slug": "ems-lys", "repositoryName": "EMS Les Lys – Fondation Primeroche", "researchedName": "Etablissement Les Lys", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A20:J20", "Deep Enrichment!A12:K12"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The official-list row and current Fondation Primeroche establishment page identify the existing Les Lys site and explicitly separate its 36-place EMS from its 30-place EPSM.",
+    "facts": [
+      {"field": "site.name", "value": "Etablissement Les Lys", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B12"}},
+      {"field": "site.address", "value": "Rue des Métiers 3, 1008 Prilly", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C12"}},
+      {"field": "site.phone", "value": "021 545 55 55", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D12"}},
+      {"field": "site.email", "value": "info@primeroche.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E12"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I20"},
+    {"id": "provider-site", "kind": "provider", "name": "Fondation Primeroche — Etablissement Les Lys", "url": "https://www.primeroche.ch/etablissement-les-lys", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H12"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-primeroche", "name": "Fondation Primeroche", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F20"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E20"},
+      "capacity": {"value": 36, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G20"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [],
+      "admissions": null, "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "Etablissement Les Lys", "reason": "Reviewed establishment naming belongs to the provider identity workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B12"}},
+    {"field": "site.address", "value": "Rue des Métiers 3, 1008 Prilly", "reason": "Address data remains outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C12"}},
+    {"field": "site.phone", "value": "021 545 55 55", "reason": "Contact data remains outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D12"}},
+    {"field": "site.email", "value": "info@primeroche.ch", "reason": "Contact data remains outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E12"}},
+    {"field": "offering.epsm", "value": "Separate 30-place EPSM", "reason": "EPSM is a separate offering and must not be flattened into the 36-bed EMS offering.", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G20"}},
+    {"field": "care_profile.psychogeriatric", "value": true, "reason": "The workbook describes mixed EMS/EPSM care units and does not scope the psychogeriatric mission specifically to the EMS offering.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F12"}},
+    {"field": "services.mixed_offering", "value": ["hairdresser", "aesthetic care", "pedicure", "aromatherapy", "art therapy", "music therapy", "animation"], "reason": "The service list applies to mixed EMS/EPSM units and cannot be imported into the EMS consumer taxonomy without offering-specific scope.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F12"}},
+    {"field": "admissions.priority_policy", "value": "Priority for foundation communes and neighbours", "reason": "The workbook describes a site/foundation policy without proving that it applies exclusively to the EMS offering.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G12"}},
+    {"field": "legacy_tags", "value": ["Gériatrie"], "reason": "Legacy tags remain unverified and are not used as care-profile evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}
