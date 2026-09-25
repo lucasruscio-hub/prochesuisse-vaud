@@ -8,20 +8,40 @@ import { inspectLegacyProviders } from "./ingest-legacy-providers.mjs";
 import { LOCAL_CONFIRMATION, runLocalSql } from "../lib/local-provider-writer.mjs";
 
 const root = new URL("../", import.meta.url);
-const manifestUrl = new URL("../docs/research/phase4c-care-batch/batch.json", import.meta.url);
-const expectedCandidates = ["ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-signal", "ems-girarde"];
+const DEFAULT_BATCH_ID = "phase4c-care-pilot-01";
+const BATCH_2_ID = "phase4c-care-batch-02";
+const batchDefinitions = Object.freeze({
+  [DEFAULT_BATCH_ID]: {
+    manifestUrl: new URL("../docs/research/phase4c-care-batch/batch.json", import.meta.url),
+    expectedCandidates: ["ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-signal", "ems-girarde"],
+    protectedExisting: ["ems-boveresses"],
+  },
+  [BATCH_2_ID]: {
+    manifestUrl: new URL("../docs/research/phase4c-care-batch-02/batch.json", import.meta.url),
+    expectedCandidates: ["ems-marronnier", "ems-petit-flon", "ems-pre-fleuri", "ems-praz-joret",
+      "ems-sauvabelin", "ems-mauri", "ems-pins", "ems-jardins-leman"],
+    protectedExisting: ["ems-boveresses", "ems-chateau-rive", "ems-clair-soleil", "ems-le-home",
+      "ems-girarde", "ems-signal"],
+  },
+});
 const providerIds = new Set(providers.map((provider) => provider.id));
 const baselines = new Map(inspectLegacyProviders().rows.map((row) => [row.legacyId, row.provider]));
 
-export function loadCareBatch() {
-  return JSON.parse(readFileSync(manifestUrl, "utf8"));
+export function loadCareBatch(batchId = DEFAULT_BATCH_ID) {
+  const definition = batchDefinitions[batchId];
+  if (!definition) throw new Error(`Unknown Phase 4C batch: ${batchId}`);
+  return JSON.parse(readFileSync(definition.manifestUrl, "utf8"));
 }
 
 export function validateCareBatch(manifest, readPacket = (path) => JSON.parse(readFileSync(new URL(path, root), "utf8"))) {
+  const definition = batchDefinitions[manifest?.batchId];
   if (manifest?.schemaVersion !== 1 || !Array.isArray(manifest.candidates)
     || !Array.isArray(manifest.packetPaths) || !Array.isArray(manifest.protectedExisting)
-    || JSON.stringify(manifest.candidates.map((item) => item.slug)) !== JSON.stringify(expectedCandidates)
-    || !manifest.protectedExisting.includes("ems-boveresses")) throw new Error("Invalid Phase 4C batch manifest");
+    || !definition
+    || JSON.stringify(manifest.candidates.map((item) => item.slug)) !== JSON.stringify(definition.expectedCandidates)
+    || definition.protectedExisting.some((slug) => !manifest.protectedExisting.includes(slug))) {
+    throw new Error("Invalid Phase 4C batch manifest");
+  }
   const candidates = new Map();
   for (const candidate of manifest.candidates) {
     if (!providerIds.has(candidate.slug) || candidates.has(candidate.slug)
@@ -143,7 +163,12 @@ export function describeCareApplyPlan({ slug, packet }) {
 }
 
 export function main(args) {
-  const manifest = loadCareBatch();
+  let batchId = DEFAULT_BATCH_ID;
+  if (args[0] === "--batch") {
+    batchId = args[1];
+    args = args.slice(2);
+  }
+  const manifest = loadCareBatch(batchId);
   if (args.length === 1 && ["--check-batch", "--dry-run"].includes(args[0])) {
     const checked = validateCareBatch(manifest);
     console.log(JSON.stringify({ mode: args[0].slice(2), databaseWrites: 0, batchId: manifest.batchId,
@@ -172,7 +197,7 @@ export function main(args) {
     console.log(JSON.stringify({ mode: "write-local", target: "verified-local-container", results }, null, 2));
     return;
   }
-  throw new Error("Use --check-batch, --dry-run, --plan-apply <slugs>, or --write-local <slugs> --confirm Lia-vaud:local:54322");
+  throw new Error("Use [--batch <batch-id>] --check-batch, --dry-run, --plan-apply <slugs>, or --write-local <slugs> --confirm Lia-vaud:local:54322");
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

@@ -54,6 +54,21 @@ test("the Phase 4C.1 batch exposes exactly four locally approved packets and hol
   }
 });
 
+test("the Phase 4C.2 batch exposes eight locally approved packets and protects prior state", () => {
+  const checked = validateCareBatch(loadCareBatch("phase4c-care-batch-02"));
+  assert.equal(checked.candidates.size, 8);
+  assert.equal(checked.packets.size, 8);
+  assert.deepEqual(checked.readyForHumanReview, []);
+  assert.deepEqual(checked.approvedForLocalApply.map((item) => item.packet.identity.slug), [
+    "ems-marronnier", "ems-petit-flon", "ems-pre-fleuri", "ems-praz-joret",
+    "ems-sauvabelin", "ems-mauri", "ems-pins", "ems-jardins-leman",
+  ]);
+  assert.deepEqual(checked.heldPackets, []);
+  assert.deepEqual(checked.evidenceMissing, []);
+  assert.deepEqual(loadCareBatch("phase4c-care-batch-02").protectedExisting,
+    ["ems-boveresses", "ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-girarde", "ems-signal"]);
+});
+
 test("a valid packet is reviewable but cannot be selected before explicit approval", () => {
   const value = packet();
   const manifest = manifestFor(value);

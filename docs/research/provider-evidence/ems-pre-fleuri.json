@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-pre-fleuri", "slug": "ems-pre-fleuri", "repositoryName": "EMS Pré-Fleuri", "researchedName": "Résidence Pré-Fleuri", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A29:J29", "Deep Enrichment!A20:K20"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The workbook keeps the legacy Pré-Fleuri establishment and records its current Résidence Pré-Fleuri name at the same Lausanne site.",
+    "facts": [
+      {"field": "site.name", "value": "Résidence Pré-Fleuri", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B20"}},
+      {"field": "site.address", "value": "Route de la Clochatte 10C, 1018 Lausanne", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C20"}},
+      {"field": "site.phone", "value": "021 652 14 22", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D20"}},
+      {"field": "site.email", "value": "info@pre-fleuri.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E20"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I29"},
+    {"id": "provider-site", "kind": "provider", "name": "Résidence Pré-Fleuri", "url": "https://www.pre-fleuri.ch/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H20"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "necc-sa", "name": "NECC SA", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F29"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E29"},
+      "capacity": {"value": 53, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G29"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "care_profile", "code": "psychiatric_care", "details": "Mission de psychiatrie de l’âge avancé.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F20"}},
+        {"kind": "service", "code": "social_activities", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F20"}},
+        {"kind": "facility", "code": "garden_or_park", "details": "Jardin et terrasse.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F20"}}
+      ],
+      "admissions": null, "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "Résidence Pré-Fleuri", "reason": "Reviewed establishment naming belongs to the provider identity workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B20"}},
+    {"field": "site.address", "value": "Route de la Clochatte 10C, 1018 Lausanne", "reason": "Site address belongs to the separate reviewed provider-field workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C20"}},
+    {"field": "site.phone", "value": "021 652 14 22", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D20"}},
+    {"field": "site.email", "value": "info@pre-fleuri.ch", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E20"}},
+    {"field": "facility.room_configuration", "value": "Individual rooms with semi-private bathrooms", "reason": "Room configuration has no V1 offering field and is not capacity.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F20"}},
+    {"field": "facility.wifi_and_shared_spaces", "value": "Wi-Fi, unit lounges and dining", "reason": "These bundled amenities lack accepted V1 mappings.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F20"}},
+    {"field": "service.medical_psychogeriatric_follow_up", "value": true, "reason": "The wording does not map precisely to an accepted controlled service.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F20"}},
+    {"field": "admissions", "value": "Admission documentation available", "reason": "The workbook does not preserve the actual admission terms.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G20"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Alzheimer"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

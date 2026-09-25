@@ -14,6 +14,7 @@ test("V1 taxonomy exposes only the three database feature families", () => {
   assert.equal(CARE_FEATURE_TAXONOMY.service.social_activities, "Activités sociales et socioculturelles");
   assert.equal(CARE_FEATURE_TAXONOMY.facility.emergency_call_system, "Système d’appel d’urgence");
   assert.equal(CARE_FEATURE_TAXONOMY.facility.garden_or_park, "Jardin ou parc");
+  assert.equal(CARE_FEATURE_TAXONOMY.facility.restaurant, "Restaurant sur place");
 });
 
 test("controlled projection accepts known codes and returns canonical labels", () => {
@@ -28,11 +29,13 @@ test("controlled projection accepts known codes and returns canonical labels", (
     { kind: "facility", code: "emergency_call_system" },
     { kind: "service", code: "social_activities" },
     { kind: "facility", code: "garden_or_park" },
+    { kind: "facility", code: "restaurant" },
   ]), [
     { kind: "care_profile", code: "dementia_support", displayName: "Accompagnement des troubles cognitifs", details: null },
     { kind: "facility", code: "emergency_call_system", displayName: "Système d’appel d’urgence", details: null },
     { kind: "service", code: "social_activities", displayName: "Activités sociales et socioculturelles", details: null },
     { kind: "facility", code: "garden_or_park", displayName: "Jardin ou parc", details: null },
+    { kind: "facility", code: "restaurant", displayName: "Restaurant sur place", details: null },
   ]);
 });
 

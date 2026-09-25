@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-jardins-leman",
+    "slug": "ems-jardins-leman",
+    "expectedName": "EMS Les Jardins du Léman – GHOL",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "ghol",
+      "name": "GHOL",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F44",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E44",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 51,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G44",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [],
+      "features": [
+        {
+          "kind": "service",
+          "code": "social_activities",
+          "displayName": "Activités sociales et socioculturelles",
+          "details": "Animation.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F33",
+            "kind": "provider",
+            "name": "GHOL — EMS Les Jardins du Léman",
+            "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "physiotherapy",
+          "displayName": "Physiothérapie",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F33",
+            "kind": "provider",
+            "name": "GHOL — EMS Les Jardins du Léman",
+            "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "occupational_therapy",
+          "displayName": "Ergothérapie",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F33",
+            "kind": "provider",
+            "name": "GHOL — EMS Les Jardins du Léman",
+            "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "podology",
+          "displayName": "Podologie",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F33",
+            "kind": "provider",
+            "name": "GHOL — EMS Les Jardins du Léman",
+            "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "facility",
+          "code": "garden_or_park",
+          "displayName": "Jardin ou parc",
+          "details": "Jardins accessibles.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F33",
+            "kind": "provider",
+            "name": "GHOL — EMS Les Jardins du Léman",
+            "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "facility",
+          "code": "restaurant",
+          "displayName": "Restaurant sur place",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F33",
+            "kind": "provider",
+            "name": "GHOL — EMS Les Jardins du Léman",
+            "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": {
+        "value": "Inscription uniquement par le BRIO du Réseau Santé La Côte.",
+        "evidence": {
+          "researchField": "Deep Enrichment!G33",
+          "kind": "provider",
+          "name": "GHOL — EMS Les Jardins du Léman — devenir résident",
+          "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/devenir-resident-e/devenir-resident-e-p_137625.html",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "EMS Les Jardins du Léman",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B33",
+        "kind": "provider",
+        "name": "GHOL — EMS Les Jardins du Léman",
+        "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Route de l'Hôpital 24, 1180 Rolle",
+      "reason": "Site address belongs to the separate reviewed provider-field workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C33",
+        "kind": "provider",
+        "name": "GHOL — EMS Les Jardins du Léman",
+        "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "+41 21 703 53 00",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D33",
+        "kind": "provider",
+        "name": "GHOL — EMS Les Jardins du Léman",
+        "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "emslesjardinsduleman@ghol.ch",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E33",
+        "kind": "provider",
+        "name": "GHOL — EMS Les Jardins du Léman",
+        "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.medical_social_hotel_nursing",
+      "value": true,
+      "reason": "The bundled wording is too broad for controlled feature import.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F33",
+        "kind": "provider",
+        "name": "GHOL — EMS Les Jardins du Léman",
+        "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.private_room_amenities",
+      "value": "Individual rooms with private bathroom, TV, phone and internet",
+      "reason": "Room amenities have no V1 offering field and are not capacity.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F33",
+        "kind": "provider",
+        "name": "GHOL — EMS Les Jardins du Léman",
+        "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.dentistry",
+      "value": true,
+      "reason": "Human review did not approve a dentistry code because the evidence does not establish on-site treatment, a visiting dentist or organized external access.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F33",
+        "kind": "provider",
+        "name": "GHOL — EMS Les Jardins du Léman",
+        "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.psychogeriatric_consultant",
+      "value": true,
+      "reason": "A consultant does not establish an offering-wide care profile or accepted controlled service.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F33",
+        "kind": "provider",
+        "name": "GHOL — EMS Les Jardins du Léman",
+        "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Court séjour",
+        "La Côte"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": []
+}

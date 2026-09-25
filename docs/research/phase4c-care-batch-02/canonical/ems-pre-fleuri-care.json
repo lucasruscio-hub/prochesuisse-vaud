@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-pre-fleuri",
+    "slug": "ems-pre-fleuri",
+    "expectedName": "EMS Pré-Fleuri",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "necc-sa",
+      "name": "NECC SA",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F29",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E29",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 53,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G29",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "psychiatric_care"
+      ],
+      "features": [
+        {
+          "kind": "care_profile",
+          "code": "psychiatric_care",
+          "displayName": "Accompagnement psychiatrique",
+          "details": "Mission de psychiatrie de l’âge avancé.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F20",
+            "kind": "provider",
+            "name": "Résidence Pré-Fleuri",
+            "url": "https://www.pre-fleuri.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "social_activities",
+          "displayName": "Activités sociales et socioculturelles",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F20",
+            "kind": "provider",
+            "name": "Résidence Pré-Fleuri",
+            "url": "https://www.pre-fleuri.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "facility",
+          "code": "garden_or_park",
+          "displayName": "Jardin ou parc",
+          "details": "Jardin et terrasse.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F20",
+            "kind": "provider",
+            "name": "Résidence Pré-Fleuri",
+            "url": "https://www.pre-fleuri.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "Résidence Pré-Fleuri",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B20",
+        "kind": "provider",
+        "name": "Résidence Pré-Fleuri",
+        "url": "https://www.pre-fleuri.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Route de la Clochatte 10C, 1018 Lausanne",
+      "reason": "Site address belongs to the separate reviewed provider-field workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C20",
+        "kind": "provider",
+        "name": "Résidence Pré-Fleuri",
+        "url": "https://www.pre-fleuri.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 652 14 22",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D20",
+        "kind": "provider",
+        "name": "Résidence Pré-Fleuri",
+        "url": "https://www.pre-fleuri.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "info@pre-fleuri.ch",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E20",
+        "kind": "provider",
+        "name": "Résidence Pré-Fleuri",
+        "url": "https://www.pre-fleuri.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.room_configuration",
+      "value": "Individual rooms with semi-private bathrooms",
+      "reason": "Room configuration has no V1 offering field and is not capacity.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F20",
+        "kind": "provider",
+        "name": "Résidence Pré-Fleuri",
+        "url": "https://www.pre-fleuri.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.wifi_and_shared_spaces",
+      "value": "Wi-Fi, unit lounges and dining",
+      "reason": "These bundled amenities lack accepted V1 mappings.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F20",
+        "kind": "provider",
+        "name": "Résidence Pré-Fleuri",
+        "url": "https://www.pre-fleuri.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.medical_psychogeriatric_follow_up",
+      "value": true,
+      "reason": "The wording does not map precisely to an accepted controlled service.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F20",
+        "kind": "provider",
+        "name": "Résidence Pré-Fleuri",
+        "url": "https://www.pre-fleuri.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "admissions",
+      "value": "Admission documentation available",
+      "reason": "The workbook does not preserve the actual admission terms.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G20",
+        "kind": "provider",
+        "name": "Résidence Pré-Fleuri",
+        "url": "https://www.pre-fleuri.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Alzheimer"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": []
+}

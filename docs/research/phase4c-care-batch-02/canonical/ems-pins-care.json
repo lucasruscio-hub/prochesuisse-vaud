@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-pins",
+    "slug": "ems-pins",
+    "expectedName": "EMS Les Pins",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "ems-le-home-les-pins-sa",
+      "name": "EMS Le Home - Les Pins SA",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F22",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E22",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 60,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G22",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": {
+          "value": true,
+          "evidence": {
+            "researchField": "Deep Enrichment!F31",
+            "kind": "provider",
+            "name": "EMS Le Home - Les Pins",
+            "url": "https://www.lehome-lespins.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "psychiatric_care"
+      ],
+      "features": [
+        {
+          "kind": "care_profile",
+          "code": "psychiatric_care",
+          "displayName": "Accompagnement psychiatrique",
+          "details": "Psychiatrie de l’âge avancé.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F31",
+            "kind": "provider",
+            "name": "EMS Le Home - Les Pins",
+            "url": "https://www.lehome-lespins.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "social_activities",
+          "displayName": "Activités sociales et socioculturelles",
+          "details": "Activités individuelles et de groupe.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F31",
+            "kind": "provider",
+            "name": "EMS Le Home - Les Pins",
+            "url": "https://www.lehome-lespins.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": {
+        "value": "Admissions selon la mission; orientation vers le BRIO lorsque nécessaire.",
+        "evidence": {
+          "researchField": "Deep Enrichment!G31",
+          "kind": "provider",
+          "name": "EMS Le Home - Les Pins — admissions",
+          "url": "https://www.lehome-lespins.ch/admissions-et-questions/",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "financing": null,
+      "publicInterestStatus": {
+        "value": "recognized",
+        "evidence": {
+          "researchField": "Deep Enrichment!J31",
+          "kind": "provider",
+          "name": "EMS Le Home - Les Pins",
+          "url": "https://www.lehome-lespins.ch/",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.address",
+      "value": "Chemin de Grand-Vennes 15, 1010 Lausanne",
+      "reason": "Site address belongs to the separate reviewed provider-field workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C31",
+        "kind": "provider",
+        "name": "EMS Le Home - Les Pins",
+        "url": "https://www.lehome-lespins.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 654 46 54",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D31",
+        "kind": "provider",
+        "name": "EMS Le Home - Les Pins",
+        "url": "https://www.lehome-lespins.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "info@lehome-lespins.ch",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E31",
+        "kind": "provider",
+        "name": "EMS Le Home - Les Pins",
+        "url": "https://www.lehome-lespins.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.nursing_care",
+      "value": true,
+      "reason": "Broad nursing-care wording does not map to the home-care-specific V1 code.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F31",
+        "kind": "provider",
+        "name": "EMS Le Home - Les Pins",
+        "url": "https://www.lehome-lespins.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.socio_hotel",
+      "value": true,
+      "reason": "Bundled socio-hotel wording is too broad for controlled feature import.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F31",
+        "kind": "provider",
+        "name": "EMS Le Home - Les Pins",
+        "url": "https://www.lehome-lespins.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.mobility_adapted_transport",
+      "value": true,
+      "reason": "This service lacks an accepted V1 controlled code.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F31",
+        "kind": "provider",
+        "name": "EMS Le Home - Les Pins",
+        "url": "https://www.lehome-lespins.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": []
+}

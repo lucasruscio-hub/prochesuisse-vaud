@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-pins", "slug": "ems-pins", "repositoryName": "EMS Les Pins", "researchedName": "EMS Les Pins", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A22:J22", "Deep Enrichment!A31:K31"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The workbook confirms Les Pins as a separate Lausanne establishment operated with Le Home by EMS Le Home - Les Pins SA.",
+    "facts": [
+      {"field": "site.name", "value": "EMS Les Pins", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B31"}},
+      {"field": "site.address", "value": "Chemin de Grand-Vennes 15, 1010 Lausanne", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C31"}},
+      {"field": "site.phone", "value": "021 654 46 54", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D31"}},
+      {"field": "site.email", "value": "info@lehome-lespins.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E31"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I22"},
+    {"id": "provider-site", "kind": "provider", "name": "EMS Le Home - Les Pins", "url": "https://www.lehome-lespins.ch/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H31"},
+    {"id": "provider-admissions", "kind": "provider", "name": "EMS Le Home - Les Pins — admissions", "url": "https://www.lehome-lespins.ch/admissions-et-questions/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!K31"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "ems-le-home-les-pins-sa", "name": "EMS Le Home - Les Pins SA", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F22"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E22"},
+      "capacity": {"value": 60, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G22"}},
+      "stayModes": {"longStay": {"value": true, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F31"}}, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "care_profile", "code": "psychiatric_care", "details": "Psychiatrie de l’âge avancé.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F31"}},
+        {"kind": "service", "code": "social_activities", "details": "Activités individuelles et de groupe.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F31"}}
+      ],
+      "admissions": {"value": "Admissions selon la mission; orientation vers le BRIO lorsque nécessaire.", "evidence": {"sourceId": "provider-admissions", "workbookCell": "Deep Enrichment!G31"}},
+      "financing": null,
+      "publicInterestStatus": {"value": "recognized", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!J31"}},
+      "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.address", "value": "Chemin de Grand-Vennes 15, 1010 Lausanne", "reason": "Site address belongs to the separate reviewed provider-field workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C31"}},
+    {"field": "site.phone", "value": "021 654 46 54", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D31"}},
+    {"field": "site.email", "value": "info@lehome-lespins.ch", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E31"}},
+    {"field": "service.nursing_care", "value": true, "reason": "Broad nursing-care wording does not map to the home-care-specific V1 code.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F31"}},
+    {"field": "service.socio_hotel", "value": true, "reason": "Bundled socio-hotel wording is too broad for controlled feature import.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F31"}},
+    {"field": "service.mobility_adapted_transport", "value": true, "reason": "This service lacks an accepted V1 controlled code.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F31"}},
+    {"field": "legacy_tags", "value": ["Gériatrie"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

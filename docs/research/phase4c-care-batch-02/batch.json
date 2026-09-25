@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "batchId": "phase4c-care-batch-02",
+  "description": "Eight-provider Phase 4C.2 Vaud care-enrichment batch approved for local apply planning from the 2026-09-21 master audit workbook.",
+  "protectedExisting": ["ems-boveresses", "ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-girarde", "ems-signal"],
+  "packetPaths": [
+    {"slug": "ems-marronnier", "path": "docs/research/phase4c-care-batch-02/canonical/ems-marronnier-care.json"},
+    {"slug": "ems-petit-flon", "path": "docs/research/phase4c-care-batch-02/canonical/ems-petit-flon-care.json"},
+    {"slug": "ems-pre-fleuri", "path": "docs/research/phase4c-care-batch-02/canonical/ems-pre-fleuri-care.json"},
+    {"slug": "ems-praz-joret", "path": "docs/research/phase4c-care-batch-02/canonical/ems-praz-joret-care.json"},
+    {"slug": "ems-sauvabelin", "path": "docs/research/phase4c-care-batch-02/canonical/ems-sauvabelin-care.json"},
+    {"slug": "ems-mauri", "path": "docs/research/phase4c-care-batch-02/canonical/ems-mauri-care.json"},
+    {"slug": "ems-pins", "path": "docs/research/phase4c-care-batch-02/canonical/ems-pins-care.json"},
+    {"slug": "ems-jardins-leman", "path": "docs/research/phase4c-care-batch-02/canonical/ems-jardins-leman-care.json"}
+  ],
+  "candidates": [
+    {
+      "slug": "ems-marronnier",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-marronnier.json"],
+      "supportedCareFacts": ["Fondation Le Marronnier operator", "EMS offering", "56 beds", "long stay", "no short-stay bed", "social activities", "admission criteria"],
+      "proposedFacts": ["operator fondation-le-marronnier", "offering ems", "capacity 56 beds", "long_stay true", "short_stay false", "service.social_activities", "admissions summary"],
+      "deferred": ["Provider contact fields remain outside the care apply.", "Bundled medical, nursing and socio-hotel care lacks precise V1 mappings.", "CAT remains a separate offering.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["service.social_activities"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "EMS Le Marronnier"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-petit-flon",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-petit-flon.json"],
+      "supportedCareFacts": ["Fondation Bois-Gentil operator", "EMS offering", "77 beds", "geriatric care", "compatible psychogeriatric care", "social activities", "on-site restaurant", "BRIO admission pathway"],
+      "proposedFacts": ["operator fondation-bois-gentil", "offering ems", "capacity 77 beds", "care_profile.geriatric_care", "care_profile.psychiatric_care", "service.social_activities", "facility.restaurant", "admissions summary"],
+      "deferred": ["Provider identity/contact fields remain outside the care apply.", "Room mix and individualized accompaniment lack V1 fields.", "Dietetic support lacks an accepted code.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["care_profile.geriatric_care", "care_profile.psychiatric_care", "service.social_activities", "facility.restaurant"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Fondation Bois-Gentil — EMS Petit-Flon"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-pre-fleuri",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-pre-fleuri.json"],
+      "supportedCareFacts": ["NECC SA operator", "EMS offering", "53 beds", "advanced-age psychiatric care", "social activities", "garden or park"],
+      "proposedFacts": ["operator necc-sa", "offering ems", "capacity 53 beds", "care_profile.psychiatric_care", "service.social_activities", "facility.garden_or_park"],
+      "deferred": ["Reviewed provider identity/contact fields remain outside the care apply.", "Room configuration, Wi-Fi and shared spaces lack V1 fields.", "Medical follow-up wording lacks a precise controlled service.", "Admission documentation is mentioned without terms.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["care_profile.psychiatric_care", "service.social_activities", "facility.garden_or_park"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Résidence Pré-Fleuri"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-praz-joret",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-praz-joret.json"],
+      "supportedCareFacts": ["Fondation EMS du Jorat operator", "EMS offering", "26 beds", "long stay", "short stay", "geriatric care", "compatible psychogeriatric care", "palliative care", "social activities", "large park"],
+      "proposedFacts": ["operator fondation-ems-du-jorat", "offering ems", "capacity 26 beds", "long_stay true", "short_stay true", "care_profile.geriatric_care", "care_profile.psychiatric_care", "service.palliative_care", "service.social_activities", "facility.garden_or_park"],
+      "deferred": ["Reviewed provider identity/contact fields remain outside the care apply.", "Individualized accompaniment lacks a V1 field.", "Restoration wording lacks a precise mapping.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["care_profile.geriatric_care", "care_profile.psychiatric_care", "service.palliative_care", "service.social_activities", "facility.garden_or_park"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Fondation EMS du Jorat — Praz Joret"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-sauvabelin",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-sauvabelin.json"],
+      "supportedCareFacts": ["Fondation Bois-Gentil operator", "EMS offering", "56 beds", "geriatric care", "compatible psychogeriatric care", "social activities", "public restaurant and terrace", "BRIO admission pathway"],
+      "proposedFacts": ["operator fondation-bois-gentil", "offering ems", "capacity 56 beds", "care_profile.geriatric_care", "care_profile.psychiatric_care", "service.social_activities", "facility.restaurant", "admissions summary"],
+      "deferred": ["Provider identity/contact fields remain outside the care apply.", "Room mix and individualized accompaniment lack V1 fields.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["care_profile.geriatric_care", "care_profile.psychiatric_care", "service.social_activities", "facility.restaurant"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Fondation Bois-Gentil — EMS Sauvabelin"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-mauri",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-mauri.json"],
+      "supportedCareFacts": ["Fondation Donatella Mauri operator", "EMS offering", "58 beds", "long stay", "advanced-age psychiatric care", "qualified garden and terrace access"],
+      "proposedFacts": ["operator fondation-donatella-mauri", "offering ems", "capacity 58 beds", "long_stay true", "care_profile.psychiatric_care", "facility.garden_or_park"],
+      "deferred": ["Provider contact fields remain outside the care apply.", "Broad 24/7 medico-social accompaniment and secure structure lack precise V1 mappings.", "CAT remains a separate offering.", "La Naz history remains archival.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["care_profile.psychiatric_care", "facility.garden_or_park"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Fondation Donatella Mauri", "Fondation Donatella Mauri — histoire"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-pins",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-pins.json"],
+      "supportedCareFacts": ["EMS Le Home - Les Pins SA operator", "EMS offering", "60 beds", "long stay", "advanced-age psychiatric care", "social activities", "BRIO-oriented admissions", "recognized public-interest EMS"],
+      "proposedFacts": ["operator ems-le-home-les-pins-sa", "offering ems", "capacity 60 beds", "long_stay true", "care_profile.psychiatric_care", "service.social_activities", "admissions summary", "public_interest_status recognized"],
+      "deferred": ["Provider contact fields remain outside the care apply.", "Broad nursing and socio-hotel wording lacks precise V1 mappings.", "Mobility-adapted transport lacks an accepted code.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["care_profile.psychiatric_care", "service.social_activities"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "EMS Le Home - Les Pins", "EMS Le Home - Les Pins — admissions"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-jardins-leman",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-jardins-leman.json"],
+      "supportedCareFacts": ["GHOL operator", "EMS offering", "51 beds", "social activities", "physiotherapy", "occupational therapy", "podology", "accessible gardens", "restaurant", "BRIO-only registration"],
+      "proposedFacts": ["operator ghol", "offering ems", "capacity 51 beds", "service.social_activities", "service.physiotherapy", "service.occupational_therapy", "service.podology", "facility.garden_or_park", "facility.restaurant", "admissions summary"],
+      "deferred": ["Provider identity/contact fields remain outside the care apply.", "Bundled medical, hotel and nursing wording is too broad.", "Room amenities lack V1 fields.", "Dentistry remains deferred after human review.", "A consultant does not establish an offering-wide care profile.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["service.social_activities", "service.physiotherapy", "service.occupational_therapy", "service.podology", "facility.garden_or_park", "facility.restaurant"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "GHOL — EMS Les Jardins du Léman — devenir résident", "GHOL — EMS Les Jardins du Léman"],
+      "unresolved": [],
+      "localApply": true
+    }
+  ]
+}

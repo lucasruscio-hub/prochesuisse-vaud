@@ -7,11 +7,12 @@ import { buildLocalProviderDetailSql } from "./read-local-provider-detail.mjs";
 import { expectedProvider as boveressesProvider, reviewedPacket as readBoveressesPacket } from "./phase4b-care.mjs";
 import { buildPhase4cEvidenceSet } from "./phase4c-care-evidence.mjs";
 
-const approvedSlugs = ["ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-girarde"];
-const protectedSlugs = new Set(["ems-boveresses", ...approvedSlugs, "ems-signal", "nova-via"]);
+const approvedEntries = buildPhase4cEvidenceSet()
+  .filter(({ packet }) => packet.approval.localApply === true);
+const approvedSlugs = approvedEntries.map(({ slug }) => slug);
+const protectedSlugs = new Set([...approvedSlugs, "ems-boveresses", "ems-signal", "nova-via"]);
 const legacyRows = inspectLegacyProviders().rows;
 const baselineBySlug = new Map(legacyRows.map((row) => [row.legacyId, row.provider]));
-const approvedEntries = buildPhase4cEvidenceSet().filter((entry) => approvedSlugs.includes(entry.slug));
 
 const fingerprintSql = `BEGIN;
 CREATE TEMP TABLE lia_phase4c_leads (snapshot jsonb);

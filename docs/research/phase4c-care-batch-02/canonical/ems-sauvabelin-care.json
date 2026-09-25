@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-sauvabelin",
+    "slug": "ems-sauvabelin",
+    "expectedName": "EMS Sauvabelin – Fondation Bois-Gentil",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "fondation-bois-gentil",
+      "name": "Fondation Bois-Gentil",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F35",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E35",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 56,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G35",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "geriatric_care",
+        "psychiatric_care"
+      ],
+      "features": [
+        {
+          "kind": "care_profile",
+          "code": "geriatric_care",
+          "displayName": "Accompagnement gériatrique",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F25",
+            "kind": "provider",
+            "name": "Fondation Bois-Gentil — EMS Sauvabelin",
+            "url": "https://www.fbg.ch/personne-agee/quest-ce-quun-ems/ems-sauvabelin/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "care_profile",
+          "code": "psychiatric_care",
+          "displayName": "Accompagnement psychiatrique",
+          "details": "Mission psychogériatrique compatible.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F25",
+            "kind": "provider",
+            "name": "Fondation Bois-Gentil — EMS Sauvabelin",
+            "url": "https://www.fbg.ch/personne-agee/quest-ce-quun-ems/ems-sauvabelin/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "social_activities",
+          "displayName": "Activités sociales et socioculturelles",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F25",
+            "kind": "provider",
+            "name": "Fondation Bois-Gentil — EMS Sauvabelin",
+            "url": "https://www.fbg.ch/personne-agee/quest-ce-quun-ems/ems-sauvabelin/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "facility",
+          "code": "restaurant",
+          "displayName": "Restaurant sur place",
+          "details": "Restaurant public et terrasse.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F25",
+            "kind": "provider",
+            "name": "Fondation Bois-Gentil — EMS Sauvabelin",
+            "url": "https://www.fbg.ch/personne-agee/quest-ce-quun-ems/ems-sauvabelin/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": {
+        "value": "Démarche d’admission auprès du BRIO compétent; pré-visites possibles directement.",
+        "evidence": {
+          "researchField": "Deep Enrichment!G25",
+          "kind": "provider",
+          "name": "Fondation Bois-Gentil — EMS Sauvabelin",
+          "url": "https://www.fbg.ch/personne-agee/quest-ce-quun-ems/ems-sauvabelin/",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "EMS Sauvabelin",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B25",
+        "kind": "provider",
+        "name": "Fondation Bois-Gentil — EMS Sauvabelin",
+        "url": "https://www.fbg.ch/personne-agee/quest-ce-quun-ems/ems-sauvabelin/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Route du Pavement 20, CP 115, 1000 Lausanne 18",
+      "reason": "Site address belongs to the separate reviewed provider-field workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C25",
+        "kind": "provider",
+        "name": "Fondation Bois-Gentil — EMS Sauvabelin",
+        "url": "https://www.fbg.ch/personne-agee/quest-ce-quun-ems/ems-sauvabelin/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 512 34 00",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D25",
+        "kind": "provider",
+        "name": "Fondation Bois-Gentil — EMS Sauvabelin",
+        "url": "https://www.fbg.ch/personne-agee/quest-ce-quun-ems/ems-sauvabelin/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "reception.sauvabelin@fbg.ch",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E25",
+        "kind": "provider",
+        "name": "Fondation Bois-Gentil — EMS Sauvabelin",
+        "url": "https://www.fbg.ch/personne-agee/quest-ce-quun-ems/ems-sauvabelin/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.rooms",
+      "value": "48 single rooms and 4 double rooms",
+      "reason": "Room mix is not offering capacity and has no V1 field.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F25",
+        "kind": "provider",
+        "name": "Fondation Bois-Gentil — EMS Sauvabelin",
+        "url": "https://www.fbg.ch/personne-agee/quest-ce-quun-ems/ems-sauvabelin/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "care_approach.individualized",
+      "value": true,
+      "reason": "The V1 model has no controlled care-approach field.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F25",
+        "kind": "provider",
+        "name": "Fondation Bois-Gentil — EMS Sauvabelin",
+        "url": "https://www.fbg.ch/personne-agee/quest-ce-quun-ems/ems-sauvabelin/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Psychiatrie",
+        "Parc"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": []
+}

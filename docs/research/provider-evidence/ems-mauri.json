@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-mauri", "slug": "ems-mauri", "repositoryName": "Fondation Donatella Mauri", "researchedName": "Fondation Donatella Mauri", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A39:J39", "Master Audit!I44", "Deep Enrichment!A26:K26"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The workbook confirms Donatella Mauri as the current Romanel establishment and distinguishes it from the closed historical La Naz identity.",
+    "facts": [
+      {"field": "site.name", "value": "Fondation Donatella Mauri", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B26"}},
+      {"field": "site.address", "value": "Chemin du Brit 2, CP 17, 1032 Romanel-sur-Lausanne", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C26"}},
+      {"field": "site.phone", "value": "021 641 07 00", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D26"}},
+      {"field": "site.email", "value": "administration@donatellamauri.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E26"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I44"},
+    {"id": "provider-site", "kind": "provider", "name": "Fondation Donatella Mauri", "url": "https://donatellamauri.ch/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H26"},
+    {"id": "provider-history", "kind": "provider", "name": "Fondation Donatella Mauri — histoire", "url": "https://donatellamauri.ch/histoire/", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I39"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-donatella-mauri", "name": "Fondation Donatella Mauri", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "provider-history", "workbookCell": "Master Audit!F39"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G39"},
+      "capacity": {"value": 58, "unit": "beds", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G26"}},
+      "stayModes": {"longStay": {"value": true, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F26"}}, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "care_profile", "code": "psychiatric_care", "details": "Psychiatrie de l’âge avancé.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F26"}},
+        {"kind": "facility", "code": "garden_or_park", "details": "Accès au jardin et aux terrasses pour les résidents conservant leur autonomie.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F26"}}
+      ],
+      "admissions": null, "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.address", "value": "Chemin du Brit 2, CP 17, 1032 Romanel-sur-Lausanne", "reason": "Site address belongs to the separate reviewed provider-field workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C26"}},
+    {"field": "site.phone", "value": "021 641 07 00", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D26"}},
+    {"field": "site.email", "value": "administration@donatellamauri.ch", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E26"}},
+    {"field": "care_approach.medico_social_24_7", "value": true, "reason": "The broad accompaniment wording has no precise V1 controlled mapping.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F26"}},
+    {"field": "facility.secure_closed_structure", "value": true, "reason": "No accepted V1 facility code represents this access model.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F26"}},
+    {"field": "offering.cat", "value": "Separate CAT for up to 10 daytime beneficiaries", "reason": "CAT is a separate offering and must not be flattened into the EMS offering.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G26"}},
+    {"field": "historical_identity", "value": "EMS La Naz closed in 2009 and moved here", "reason": "Historical identity belongs to a separate archival/redirect workflow.", "evidence": {"sourceId": "provider-history", "workbookCell": "Master Audit!G39"}},
+    {"field": "legacy_tags", "value": ["Gériatrie"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

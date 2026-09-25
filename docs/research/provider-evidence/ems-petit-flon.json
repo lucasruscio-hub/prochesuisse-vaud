@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-petit-flon", "slug": "ems-petit-flon", "repositoryName": "EMS Petit-Flon – Fondation Bois-Gentil", "researchedName": "EMS Petit-Flon", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A26:J26", "Deep Enrichment!A17:K17"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The workbook confirms Petit-Flon as the existing establishment and separates Fondation Bois-Gentil as its operator.",
+    "facts": [
+      {"field": "site.name", "value": "EMS Petit-Flon", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B17"}},
+      {"field": "site.address", "value": "Chemin du Petit-Flon 49, CP 180, 1000 Lausanne 18", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C17"}},
+      {"field": "site.phone", "value": "021 512 32 00", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D17"}},
+      {"field": "site.email", "value": "reception.petit-flon@fbg.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E17"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I26"},
+    {"id": "provider-site", "kind": "provider", "name": "Fondation Bois-Gentil — EMS Petit-Flon", "url": "https://www.fbg.ch/personne-agee/quest-ce-quun-ems/ems-petit-flon/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H17"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-bois-gentil", "name": "Fondation Bois-Gentil", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F26"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E26"},
+      "capacity": {"value": 77, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G26"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "care_profile", "code": "geriatric_care", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F17"}},
+        {"kind": "care_profile", "code": "psychiatric_care", "details": "Mission psychogériatrique compatible.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F17"}},
+        {"kind": "service", "code": "social_activities", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F17"}},
+        {"kind": "facility", "code": "restaurant", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F17"}}
+      ],
+      "admissions": {"value": "Démarche d’admission auprès du BRIO compétent; pré-visites possibles directement.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G17"}},
+      "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "EMS Petit-Flon", "reason": "Reviewed establishment naming belongs to the provider identity workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B17"}},
+    {"field": "site.address", "value": "Chemin du Petit-Flon 49, CP 180, 1000 Lausanne 18", "reason": "Site address belongs to the separate reviewed provider-field workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C17"}},
+    {"field": "site.phone", "value": "021 512 32 00", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D17"}},
+    {"field": "site.email", "value": "reception.petit-flon@fbg.ch", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E17"}},
+    {"field": "facility.rooms", "value": "21 single rooms and 28 double rooms", "reason": "Room mix is not offering capacity and has no V1 field.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F17"}},
+    {"field": "care_approach.individualized", "value": true, "reason": "The V1 model has no controlled care-approach field.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F17"}},
+    {"field": "service.dietetic_support", "value": true, "reason": "This service lacks an accepted V1 controlled code.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F17"}},
+    {"field": "legacy_tags", "value": ["Psychiatrie", "Gériatrie"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

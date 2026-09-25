@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-sauvabelin", "slug": "ems-sauvabelin", "repositoryName": "EMS Sauvabelin – Fondation Bois-Gentil", "researchedName": "EMS Sauvabelin", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A35:J35", "Deep Enrichment!A25:K25"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The workbook confirms Sauvabelin as the existing establishment and separates Fondation Bois-Gentil as its operator.",
+    "facts": [
+      {"field": "site.name", "value": "EMS Sauvabelin", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B25"}},
+      {"field": "site.address", "value": "Route du Pavement 20, CP 115, 1000 Lausanne 18", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C25"}},
+      {"field": "site.phone", "value": "021 512 34 00", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D25"}},
+      {"field": "site.email", "value": "reception.sauvabelin@fbg.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E25"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I35"},
+    {"id": "provider-site", "kind": "provider", "name": "Fondation Bois-Gentil — EMS Sauvabelin", "url": "https://www.fbg.ch/personne-agee/quest-ce-quun-ems/ems-sauvabelin/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H25"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-bois-gentil", "name": "Fondation Bois-Gentil", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F35"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E35"},
+      "capacity": {"value": 56, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G35"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "care_profile", "code": "geriatric_care", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F25"}},
+        {"kind": "care_profile", "code": "psychiatric_care", "details": "Mission psychogériatrique compatible.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F25"}},
+        {"kind": "service", "code": "social_activities", "details": null, "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F25"}},
+        {"kind": "facility", "code": "restaurant", "details": "Restaurant public et terrasse.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F25"}}
+      ],
+      "admissions": {"value": "Démarche d’admission auprès du BRIO compétent; pré-visites possibles directement.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!G25"}},
+      "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "EMS Sauvabelin", "reason": "Reviewed establishment naming belongs to the provider identity workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!B25"}},
+    {"field": "site.address", "value": "Route du Pavement 20, CP 115, 1000 Lausanne 18", "reason": "Site address belongs to the separate reviewed provider-field workflow.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!C25"}},
+    {"field": "site.phone", "value": "021 512 34 00", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!D25"}},
+    {"field": "site.email", "value": "reception.sauvabelin@fbg.ch", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!E25"}},
+    {"field": "facility.rooms", "value": "48 single rooms and 4 double rooms", "reason": "Room mix is not offering capacity and has no V1 field.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F25"}},
+    {"field": "care_approach.individualized", "value": true, "reason": "The V1 model has no controlled care-approach field.", "evidence": {"sourceId": "provider-site", "workbookCell": "Deep Enrichment!F25"}},
+    {"field": "legacy_tags", "value": ["Psychiatrie", "Parc"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

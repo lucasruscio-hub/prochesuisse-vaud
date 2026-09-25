@@ -1,14 +1,17 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
 import { providers } from "../lib/providers.js";
 import { buildCarePacketFromEvidence, CARE_EVIDENCE_WORKBOOK,
-  PHASE4C_EVIDENCE_SLUGS, readProviderCareEvidence,
+  ALL_PHASE4C_EVIDENCE_SLUGS, PHASE4C_BATCH_2_EVIDENCE_SLUGS,
+  readProviderCareEvidence,
   validateProviderCareEvidence } from "../lib/provider-care-evidence.mjs";
 
 const workbookUrl = new URL(`../${CARE_EVIDENCE_WORKBOOK}`, import.meta.url);
 const evidenceUrl = (slug) => new URL(`../docs/research/provider-evidence/${slug}.json`, import.meta.url);
-const canonicalUrl = (slug) => new URL(`../docs/research/phase4c-care-batch/canonical/${slug}-care.json`, import.meta.url);
+const canonicalUrl = (slug) => new URL(PHASE4C_BATCH_2_EVIDENCE_SLUGS.includes(slug)
+  ? `../docs/research/phase4c-care-batch-02/canonical/${slug}-care.json`
+  : `../docs/research/phase4c-care-batch/canonical/${slug}-care.json`, import.meta.url);
 const providerBySlug = new Map(providers.map((provider) => [provider.id, provider]));
 
 function importableFactCount(packet) {
@@ -22,7 +25,7 @@ function importableFactCount(packet) {
 export function buildPhase4cEvidenceSet() {
   if (!existsSync(workbookUrl)) throw new Error("Phase 4C.1 source workbook is missing");
   const workbookBytes = readFileSync(workbookUrl);
-  return PHASE4C_EVIDENCE_SLUGS.map((slug) => {
+  return ALL_PHASE4C_EVIDENCE_SLUGS.map((slug) => {
     const value = readProviderCareEvidence(evidenceUrl(slug));
     const checked = validateProviderCareEvidence(value, { workbookBytes });
     const repository = providerBySlug.get(slug);
@@ -40,8 +43,10 @@ export function main(args) {
   }
   const entries = buildPhase4cEvidenceSet();
   if (args[0] === "--write-canonical") {
-    mkdirSync(new URL("../docs/research/phase4c-care-batch/canonical/", import.meta.url), { recursive: true });
-    for (const entry of entries) writeFileSync(entry.canonicalPath, `${JSON.stringify(entry.packet, null, 2)}\n`);
+    for (const entry of entries) {
+      mkdirSync(dirname(entry.canonicalPath), { recursive: true });
+      writeFileSync(entry.canonicalPath, `${JSON.stringify(entry.packet, null, 2)}\n`);
+    }
   } else {
     for (const entry of entries) {
       if (!existsSync(entry.canonicalPath)) throw new Error(`Missing canonical packet: ${entry.slug}`);

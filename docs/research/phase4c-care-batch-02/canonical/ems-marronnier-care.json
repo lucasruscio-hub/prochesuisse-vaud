@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-marronnier",
+    "slug": "ems-marronnier",
+    "expectedName": "EMS Le Marronnier",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "fondation-le-marronnier",
+      "name": "Fondation Le Marronnier",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F15",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E15",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 56,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G15",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": {
+          "value": true,
+          "evidence": {
+            "researchField": "Deep Enrichment!F8",
+            "kind": "provider",
+            "name": "EMS Le Marronnier",
+            "url": "https://www.ems-lemarronnier.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        "shortStay": {
+          "value": false,
+          "evidence": {
+            "researchField": "Deep Enrichment!G8",
+            "kind": "provider",
+            "name": "EMS Le Marronnier",
+            "url": "https://www.ems-lemarronnier.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        "respiteStay": null
+      },
+      "careProfiles": [],
+      "features": [
+        {
+          "kind": "service",
+          "code": "social_activities",
+          "displayName": "Activités sociales et socioculturelles",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F8",
+            "kind": "provider",
+            "name": "EMS Le Marronnier",
+            "url": "https://www.ems-lemarronnier.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": {
+        "value": "Admission dès 65 ans, résidence vaudoise avec priorité à Lutry et aux environs, pour un placement volontaire de long séjour.",
+        "evidence": {
+          "researchField": "Deep Enrichment!G8",
+          "kind": "provider",
+          "name": "EMS Le Marronnier",
+          "url": "https://www.ems-lemarronnier.ch/",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.address",
+      "value": "Route de Lavaux 20, 1095 Lutry",
+      "reason": "Site address belongs to the separate reviewed provider-field workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C8",
+        "kind": "provider",
+        "name": "EMS Le Marronnier",
+        "url": "https://www.ems-lemarronnier.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 796 70 70",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D8",
+        "kind": "provider",
+        "name": "EMS Le Marronnier",
+        "url": "https://www.ems-lemarronnier.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "info@ems-lemarronnier.ch",
+      "reason": "Contact data is outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E8",
+        "kind": "provider",
+        "name": "EMS Le Marronnier",
+        "url": "https://www.ems-lemarronnier.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.medical_nursing_socio_hotel",
+      "value": "Medical, nursing and socio-hotel care",
+      "reason": "The bundled wording is broader than the controlled V1 service taxonomy.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F8",
+        "kind": "provider",
+        "name": "EMS Le Marronnier",
+        "url": "https://www.ems-lemarronnier.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "offering.cat",
+      "value": "CAT operated by the same foundation",
+      "reason": "CAT is a separate offering and must not be flattened into the EMS offering.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F8",
+        "kind": "provider",
+        "name": "EMS Le Marronnier",
+        "url": "https://www.ems-lemarronnier.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Lavaux"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": []
+}

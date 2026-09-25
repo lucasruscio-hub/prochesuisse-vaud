@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-jardins-leman", "slug": "ems-jardins-leman", "repositoryName": "EMS Les Jardins du Léman – GHOL", "researchedName": "EMS Les Jardins du Léman", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A44:J44", "Deep Enrichment!A33:K33"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The workbook confirms the existing Jardins du Léman establishment and its current Rolle site under GHOL.",
+    "facts": [
+      {"field": "site.name", "value": "EMS Les Jardins du Léman", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!B33"}},
+      {"field": "site.address", "value": "Route de l'Hôpital 24, 1180 Rolle", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!C33"}},
+      {"field": "site.phone", "value": "+41 21 703 53 00", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!D33"}},
+      {"field": "site.email", "value": "emslesjardinsduleman@ghol.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!E33"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I44"},
+    {"id": "provider-admissions", "kind": "provider", "name": "GHOL — EMS Les Jardins du Léman — devenir résident", "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/devenir-resident-e/devenir-resident-e-p_137625.html", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H33"},
+    {"id": "provider-overview", "kind": "provider", "name": "GHOL — EMS Les Jardins du Léman", "url": "https://www.ghol.ch/jcms/fr/navigation/ems-les-jardins-du-leman/ems-les-jardins-du-leman-p_5756.html", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!K33"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "ghol", "name": "GHOL", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F44"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E44"},
+      "capacity": {"value": 51, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G44"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "service", "code": "social_activities", "details": "Animation.", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!F33"}},
+        {"kind": "service", "code": "physiotherapy", "details": null, "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!F33"}},
+        {"kind": "service", "code": "occupational_therapy", "details": null, "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!F33"}},
+        {"kind": "service", "code": "podology", "details": null, "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!F33"}},
+        {"kind": "facility", "code": "garden_or_park", "details": "Jardins accessibles.", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!F33"}},
+        {"kind": "facility", "code": "restaurant", "details": null, "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!F33"}}
+      ],
+      "admissions": {"value": "Inscription uniquement par le BRIO du Réseau Santé La Côte.", "evidence": {"sourceId": "provider-admissions", "workbookCell": "Deep Enrichment!G33"}},
+      "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "EMS Les Jardins du Léman", "reason": "Reviewed establishment naming belongs to the provider identity workflow.", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!B33"}},
+    {"field": "site.address", "value": "Route de l'Hôpital 24, 1180 Rolle", "reason": "Site address belongs to the separate reviewed provider-field workflow.", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!C33"}},
+    {"field": "site.phone", "value": "+41 21 703 53 00", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!D33"}},
+    {"field": "site.email", "value": "emslesjardinsduleman@ghol.ch", "reason": "Contact data is outside the care offering apply.", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!E33"}},
+    {"field": "service.medical_social_hotel_nursing", "value": true, "reason": "The bundled wording is too broad for controlled feature import.", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!F33"}},
+    {"field": "facility.private_room_amenities", "value": "Individual rooms with private bathroom, TV, phone and internet", "reason": "Room amenities have no V1 offering field and are not capacity.", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!F33"}},
+    {"field": "service.dentistry", "value": true, "reason": "Human review did not approve a dentistry code because the evidence does not establish on-site treatment, a visiting dentist or organized external access.", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!F33"}},
+    {"field": "service.psychogeriatric_consultant", "value": true, "reason": "A consultant does not establish an offering-wide care profile or accepted controlled service.", "evidence": {"sourceId": "provider-overview", "workbookCell": "Deep Enrichment!F33"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Court séjour", "La Côte"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}
