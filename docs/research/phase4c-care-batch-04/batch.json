@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "batchId": "phase4c-care-batch-04",
+  "description": "Five-provider Phase 4C.4 Vaud care-enrichment batch prepared for human review from the 2026-09-21 master audit workbook.",
+  "protectedExisting": ["ems-boveresses", "ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-girarde", "ems-signal", "ems-marronnier", "ems-petit-flon", "ems-pre-fleuri", "ems-praz-joret", "ems-sauvabelin", "ems-mauri", "ems-pins", "ems-jardins-leman", "ems-arcades", "ems-meillerie", "ems-valency", "ems-meridienne", "ems-paix-soir", "ems-vernie"],
+  "packetPaths": [
+    {"slug": "ems-boissonnet", "path": "docs/research/phase4c-care-batch-04/canonical/ems-boissonnet-care.json"},
+    {"slug": "ems-odysse", "path": "docs/research/phase4c-care-batch-04/canonical/ems-odysse-care.json"},
+    {"slug": "ems-pre-pariset", "path": "docs/research/phase4c-care-batch-04/canonical/ems-pre-pariset-care.json"},
+    {"slug": "ems-pre-tour", "path": "docs/research/phase4c-care-batch-04/canonical/ems-pre-tour-care.json"},
+    {"slug": "ems-tremieres", "path": "docs/research/phase4c-care-batch-04/canonical/ems-tremieres-care.json"}
+  ],
+  "candidates": [
+    {
+      "slug": "ems-boissonnet",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-boissonnet.json"],
+      "supportedCareFacts": ["Fondation Louis Boissonnet operator", "EMS offering", "106 beds", "social activities", "hairdressing"],
+      "proposedFacts": ["operator fondation-louis-boissonnet", "offering ems", "capacity 106 beds", "service.social_activities", "service.hairdressing"],
+      "deferred": ["Provider identity/contact fields remain outside care apply.", "Generic medico-social, nursing/medical and hotel wording is not mapped.", "Spiritual support remains deferred.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["service.social_activities", "service.hairdressing"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Fondation Louis Boissonnet"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-odysse",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-odysse.json"],
+      "supportedCareFacts": ["Résidences Odysse SA operator", "EMS offering", "53 beds", "geriatric care"],
+      "proposedFacts": ["operator residences-odysse-sa", "offering ems", "capacity 53 beds", "care_profile.geriatric_care"],
+      "deferred": ["Provider identity/contact fields remain outside care apply.", "No additional precise service facts are preserved.", "Legacy short-stay tag remains unverified."],
+      "taxonomyMappings": ["care_profile.geriatric_care"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Réseau Santé Région Lausanne — membres EMS", "Résidences Odysse — Résidence Odysse"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-pre-pariset",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-pre-pariset.json"],
+      "supportedCareFacts": ["Fondation Pré Pariset operator", "EMS offering", "82 beds", "long stay", "podology", "hairdressing", "social activities", "terrace and park", "recognized public-interest status"],
+      "proposedFacts": ["operator fondation-pre-pariset", "offering ems", "capacity 82 beds", "long_stay true", "service.podology", "service.hairdressing", "service.social_activities", "facility.garden_or_park", "public_interest_status recognized"],
+      "deferred": ["Provider identity/contact fields remain outside care apply.", "Room, lounge, dining-room, wellbeing-salon, aesthetics and library claims remain deferred.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["service.podology", "service.hairdressing", "service.social_activities", "facility.garden_or_park"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Fondation Pré Pariset — EMS Pré Pariset"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-pre-tour",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-pre-tour.json"],
+      "supportedCareFacts": ["Fondation Pré Pariset operator", "EMS offering", "50 beds", "long stay", "social activities", "public restaurant Le Delta", "recognized public-interest status"],
+      "proposedFacts": ["operator fondation-pre-pariset", "offering ems", "capacity 50 beds", "long_stay true", "service.social_activities", "facility.restaurant", "public_interest_status recognized"],
+      "deferred": ["Provider identity/contact fields remain outside care apply.", "Room, wellbeing-salon, dining-room and terrace claims remain deferred.", "CAT remains a separate offering.", "Foundation-wide short stay is not attributed to this site.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["service.social_activities", "facility.restaurant"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Fondation Pré Pariset — EMS Pré de la Tour"],
+      "unresolved": [],
+      "localApply": true
+    },
+    {
+      "slug": "ems-tremieres",
+      "status": "packet_approved_for_local_apply",
+      "repositoryMaterial": ["docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "docs/research/provider-evidence/ems-tremieres.json"],
+      "supportedCareFacts": ["Résidence Les Trémières SA operator", "EMS offering", "28 beds", "geriatric care"],
+      "proposedFacts": ["operator residence-les-tremieres-sa", "offering ems", "capacity 28 beds", "care_profile.geriatric_care"],
+      "deferred": ["Provider identity/contact fields remain outside care apply.", "No current detailed service claims are imported.", "Legacy tags remain unverified."],
+      "taxonomyMappings": ["care_profile.geriatric_care"],
+      "sourceNames": ["Canton de Vaud — Liste officielle 2026 des établissements", "Réseau Santé Région Lausanne — membres EMS"],
+      "unresolved": [],
+      "localApply": true
+    }
+  ]
+}

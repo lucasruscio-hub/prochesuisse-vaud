@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-pre-tour", "slug": "ems-pre-tour", "repositoryName": "EMS Pré-de-la-Tour", "researchedName": "EMS Pré de la Tour", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A28:J28", "Deep Enrichment!A19:K19"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The official-list row and dedicated current provider page identify Pré de la Tour as a specific Pully EMS operated by Fondation Pré Pariset, distinct from Pré Pariset and Haute Combe.",
+    "facts": [
+      {"field": "site.name", "value": "EMS Pré de la Tour", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!B19"}},
+      {"field": "site.address", "value": "Place Neuve 3, 1009 Pully", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!C19"}},
+      {"field": "site.phone", "value": "021 721 18 11", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!D19"}},
+      {"field": "site.email", "value": "pre-pariset@pre-pariset.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!E19"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I28"},
+    {"id": "pre-tour-provider", "kind": "provider", "name": "Fondation Pré Pariset — EMS Pré de la Tour", "url": "https://www.pre-pariset.ch/etablissements/pre_de_la_tour", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H19"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-pre-pariset", "name": "Fondation Pré Pariset", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F28"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E28"},
+      "capacity": {"value": 50, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G28"}},
+      "stayModes": {"longStay": {"value": true, "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!F19"}}, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "service", "code": "social_activities", "details": null, "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!F19"}},
+        {"kind": "facility", "code": "restaurant", "details": "Restaurant public Le Delta.", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!F19"}}
+      ],
+      "admissions": null, "financing": null,
+      "publicInterestStatus": {"value": "recognized", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!J19"}},
+      "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "EMS Pré de la Tour", "reason": "Reviewed establishment naming belongs to the provider identity workflow.", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!B19"}},
+    {"field": "site.address", "value": "Place Neuve 3, 1009 Pully", "reason": "Address data remains outside the care offering apply.", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!C19"}},
+    {"field": "site.phone", "value": "021 721 18 11", "reason": "Contact data remains outside the care offering apply.", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!D19"}},
+    {"field": "site.email", "value": "pre-pariset@pre-pariset.ch", "reason": "Contact data remains outside the care offering apply.", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!E19"}},
+    {"field": "facility.rooms", "value": "Individual and double rooms", "reason": "Room configuration has no controlled care-feature mapping.", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!F19"}},
+    {"field": "facility.wellbeing_salon", "value": "Wellbeing salon", "reason": "The wording does not map to an existing controlled facility.", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!F19"}},
+    {"field": "facility.dining_room_and_terrace", "value": "Dining room and terrace", "reason": "These generic facilities are not separately represented; the restaurant mapping relies only on the explicit public restaurant claim.", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!F19"}},
+    {"field": "offering.cat", "value": "CAT in the same building", "reason": "CAT/day care remains a separate offering and is not flattened into the EMS.", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!F19"}},
+    {"field": "offering.short_stay", "value": "Fondation Pré Pariset offers short stays across the foundation", "reason": "The workbook explicitly says not to attribute every foundation-wide stay mode to this site without site-specific confirmation.", "evidence": {"sourceId": "pre-tour-provider", "workbookCell": "Deep Enrichment!G19"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Vue lac"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

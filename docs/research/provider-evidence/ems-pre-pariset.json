@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-pre-pariset", "slug": "ems-pre-pariset", "repositoryName": "EMS Pré Pariset", "researchedName": "EMS Pré Pariset", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A27:J27", "Deep Enrichment!A18:K18"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The official-list row and the dedicated current provider page identify Pré Pariset as a specific Pully EMS operated by Fondation Pré Pariset, distinct from Pré de la Tour and Haute Combe.",
+    "facts": [
+      {"field": "site.name", "value": "EMS Pré Pariset", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!B18"}},
+      {"field": "site.address", "value": "Chemin du Stand 1, 1009 Pully", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!C18"}},
+      {"field": "site.phone", "value": "021 721 18 11", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!D18"}},
+      {"field": "site.email", "value": "pre-pariset@pre-pariset.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!E18"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I27"},
+    {"id": "pre-pariset-provider", "kind": "provider", "name": "Fondation Pré Pariset — EMS Pré Pariset", "url": "https://www.pre-pariset.ch/etablissements/pre_pariset", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H18"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-pre-pariset", "name": "Fondation Pré Pariset", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F27"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E27"},
+      "capacity": {"value": 82, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G27"}},
+      "stayModes": {"longStay": {"value": true, "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!F18"}}, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "service", "code": "podology", "details": null, "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!F18"}},
+        {"kind": "service", "code": "hairdressing", "details": null, "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!F18"}},
+        {"kind": "service", "code": "social_activities", "details": null, "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!F18"}},
+        {"kind": "facility", "code": "garden_or_park", "details": "Terrasse et parc.", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!F18"}}
+      ],
+      "admissions": null, "financing": null,
+      "publicInterestStatus": {"value": "recognized", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!J18"}},
+      "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "EMS Pré Pariset", "reason": "Reviewed establishment naming belongs to the provider identity workflow.", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!B18"}},
+    {"field": "site.address", "value": "Chemin du Stand 1, 1009 Pully", "reason": "Address data remains outside the care offering apply.", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!C18"}},
+    {"field": "site.phone", "value": "021 721 18 11", "reason": "Contact data remains outside the care offering apply.", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!D18"}},
+    {"field": "site.email", "value": "pre-pariset@pre-pariset.ch", "reason": "Contact data remains outside the care offering apply.", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!E18"}},
+    {"field": "facility.rooms", "value": "Individual and double rooms", "reason": "Room configuration has no controlled care-feature mapping.", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!F18"}},
+    {"field": "facility.floor_lounges_and_dining_rooms", "value": "Floor lounges and dining rooms", "reason": "Generic lounges and dining rooms do not establish an on-site restaurant or another controlled facility.", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!F18"}},
+    {"field": "service.aesthetics", "value": "Aesthetics", "reason": "The taxonomy has no sufficiently scoped aesthetics concept.", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!F18"}},
+    {"field": "facility.wellbeing_salon", "value": "Wellbeing salon", "reason": "The wording does not map to an existing controlled facility.", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!F18"}},
+    {"field": "facility.library", "value": "Library", "reason": "A single library claim does not justify a new taxonomy concept in this batch.", "evidence": {"sourceId": "pre-pariset-provider", "workbookCell": "Deep Enrichment!F18"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Vue lac"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

@@ -1,0 +1,199 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-boissonnet",
+    "slug": "ems-boissonnet",
+    "expectedName": "EMS Fondation Louis Boissonnet",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "fondation-louis-boissonnet",
+      "name": "Fondation Louis Boissonnet",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F5",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E5",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 106,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G5",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [],
+      "features": [
+        {
+          "kind": "service",
+          "code": "social_activities",
+          "displayName": "Activités sociales et socioculturelles",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F5",
+            "kind": "provider",
+            "name": "Fondation Louis Boissonnet",
+            "url": "https://boissonnet.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "hairdressing",
+          "displayName": "Coiffure",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F5",
+            "kind": "provider",
+            "name": "Fondation Louis Boissonnet",
+            "url": "https://boissonnet.ch/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.public_name",
+      "value": "Fondation Louis Boissonnet",
+      "reason": "The provider page uses the foundation name publicly; provider naming stays in the separate identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B5",
+        "kind": "provider",
+        "name": "Fondation Louis Boissonnet",
+        "url": "https://boissonnet.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Chemin de Boissonnet 51, 1010 Lausanne",
+      "reason": "Address data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C5",
+        "kind": "provider",
+        "name": "Fondation Louis Boissonnet",
+        "url": "https://boissonnet.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 651 31 11",
+      "reason": "Contact data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D5",
+        "kind": "provider",
+        "name": "Fondation Louis Boissonnet",
+        "url": "https://boissonnet.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "boissonnet@boissonnet.ch",
+      "reason": "Contact data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E5",
+        "kind": "provider",
+        "name": "Fondation Louis Boissonnet",
+        "url": "https://boissonnet.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "care.medico_social_accompaniment",
+      "value": "24/7 medico-social accompaniment",
+      "reason": "Broad accompaniment wording has no precise controlled mapping.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F5",
+        "kind": "provider",
+        "name": "Fondation Louis Boissonnet",
+        "url": "https://boissonnet.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "care.nursing_and_medical",
+      "value": "Nursing and medical services",
+      "reason": "Generic nursing and medical wording is not mapped to a narrower consumer feature.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F5",
+        "kind": "provider",
+        "name": "Fondation Louis Boissonnet",
+        "url": "https://boissonnet.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.hotel",
+      "value": "Hotel services",
+      "reason": "Generic hotel-service wording has no accepted controlled mapping.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F5",
+        "kind": "provider",
+        "name": "Fondation Louis Boissonnet",
+        "url": "https://boissonnet.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.spiritual_support",
+      "value": "Spiritual support",
+      "reason": "The current taxonomy has no sufficiently established recurring spiritual-support concept.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F5",
+        "kind": "provider",
+        "name": "Fondation Louis Boissonnet",
+        "url": "https://boissonnet.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Soins palliatifs"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": []
+}

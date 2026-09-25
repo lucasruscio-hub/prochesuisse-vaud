@@ -3,13 +3,14 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { CARE_FEATURE_TAXONOMY } from "../lib/care-feature-taxonomy.js";
 import { ALL_PHASE4C_EVIDENCE_SLUGS, PHASE4C_BATCH_2_EVIDENCE_SLUGS, PHASE4C_BATCH_3_EVIDENCE_SLUGS,
-  PHASE4C_EVIDENCE_SLUGS } from "../lib/provider-care-evidence.mjs";
+  PHASE4C_BATCH_4_EVIDENCE_SLUGS, PHASE4C_EVIDENCE_SLUGS } from "../lib/provider-care-evidence.mjs";
 import { buildPhase4cEvidenceSet } from "../scripts/phase4c-care-evidence.mjs";
 
 const entries = buildPhase4cEvidenceSet();
 const bySlug = new Map(entries.map((entry) => [entry.slug, entry]));
 const approvedSlugs = ["ems-chateau-rive", "ems-clair-soleil", "ems-le-home", "ems-girarde",
-  ...PHASE4C_BATCH_2_EVIDENCE_SLUGS, ...PHASE4C_BATCH_3_EVIDENCE_SLUGS];
+  ...PHASE4C_BATCH_2_EVIDENCE_SLUGS, ...PHASE4C_BATCH_3_EVIDENCE_SLUGS,
+  ...PHASE4C_BATCH_4_EVIDENCE_SLUGS];
 
 test("durable evidence files match the immutable workbook and repository identities", () => {
   assert.deepEqual(entries.map((entry) => entry.slug), [...ALL_PHASE4C_EVIDENCE_SLUGS]);
@@ -42,6 +43,19 @@ test("batch three has human local-apply approval and preserves publication gates
     "ems-arcades", "ems-meillerie", "ems-valency", "ems-meridienne", "ems-paix-soir", "ems-vernie",
   ]);
   for (const slug of PHASE4C_BATCH_3_EVIDENCE_SLUGS) {
+    const entry = bySlug.get(slug);
+    assert.equal(entry.value.review.status, "approved_for_local_apply");
+    assert.deepEqual(entry.packet.approval, { localApply: true, publish: false, verify: false });
+    assert.deepEqual(entry.packet.unresolved, []);
+    assert.deepEqual(entry.value.taxonomyProposals, []);
+  }
+});
+
+test("batch four has human local-apply approval and preserves publication gates", () => {
+  assert.deepEqual(PHASE4C_BATCH_4_EVIDENCE_SLUGS, [
+    "ems-boissonnet", "ems-odysse", "ems-pre-pariset", "ems-pre-tour", "ems-tremieres",
+  ]);
+  for (const slug of PHASE4C_BATCH_4_EVIDENCE_SLUGS) {
     const entry = bySlug.get(slug);
     assert.equal(entry.value.review.status, "approved_for_local_apply");
     assert.deepEqual(entry.packet.approval, { localApply: true, publish: false, verify: false });
@@ -164,4 +178,35 @@ test("batch three projects only narrow workbook-supported EMS facts", () => {
   assert.ok(vernie.packet.deferred.some((item) => item.field === "offering.epsm"));
   assert.ok(vernie.packet.deferred.some((item) => item.field === "service.dentistry"));
   assert.ok(!vernie.packet.offerings[0].features.some((item) => item.code === "dentistry"));
+});
+
+test("batch four keeps narrow site-scoped facts and defers ambiguous claims", () => {
+  const boissonnet = bySlug.get("ems-boissonnet").packet.offerings[0];
+  assert.equal(boissonnet.capacity.value, 106);
+  assert.deepEqual(boissonnet.features.map((item) => item.code), ["social_activities", "hairdressing"]);
+
+  const odysse = bySlug.get("ems-odysse").packet.offerings[0];
+  assert.equal(odysse.capacity.value, 53);
+  assert.deepEqual(odysse.features.map((item) => item.code), ["geriatric_care"]);
+
+  const prePariset = bySlug.get("ems-pre-pariset").packet.offerings[0];
+  assert.equal(prePariset.capacity.value, 82);
+  assert.equal(prePariset.stayModes.longStay.value, true);
+  assert.equal(prePariset.publicInterestStatus.value, "recognized");
+  assert.deepEqual(prePariset.features.map((item) => item.code), [
+    "podology", "hairdressing", "social_activities", "garden_or_park",
+  ]);
+
+  const preTour = bySlug.get("ems-pre-tour").packet.offerings[0];
+  assert.equal(preTour.capacity.value, 50);
+  assert.equal(preTour.stayModes.longStay.value, true);
+  assert.equal(preTour.stayModes.shortStay, null);
+  assert.equal(preTour.publicInterestStatus.value, "recognized");
+  assert.deepEqual(preTour.features.map((item) => `${item.kind}.${item.code}`), [
+    "service.social_activities", "facility.restaurant",
+  ]);
+
+  const tremieres = bySlug.get("ems-tremieres").packet.offerings[0];
+  assert.equal(tremieres.capacity.value, 28);
+  assert.deepEqual(tremieres.features.map((item) => item.code), ["geriatric_care"]);
 });

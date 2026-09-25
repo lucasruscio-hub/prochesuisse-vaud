@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-pre-pariset",
+    "slug": "ems-pre-pariset",
+    "expectedName": "EMS Pré Pariset",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "fondation-pre-pariset",
+      "name": "Fondation Pré Pariset",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F27",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E27",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 82,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G27",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": {
+          "value": true,
+          "evidence": {
+            "researchField": "Deep Enrichment!F18",
+            "kind": "provider",
+            "name": "Fondation Pré Pariset — EMS Pré Pariset",
+            "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [],
+      "features": [
+        {
+          "kind": "service",
+          "code": "podology",
+          "displayName": "Podologie",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F18",
+            "kind": "provider",
+            "name": "Fondation Pré Pariset — EMS Pré Pariset",
+            "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "hairdressing",
+          "displayName": "Coiffure",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F18",
+            "kind": "provider",
+            "name": "Fondation Pré Pariset — EMS Pré Pariset",
+            "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "social_activities",
+          "displayName": "Activités sociales et socioculturelles",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F18",
+            "kind": "provider",
+            "name": "Fondation Pré Pariset — EMS Pré Pariset",
+            "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+            "accessedOn": "2026-09-21"
+          }
+        },
+        {
+          "kind": "facility",
+          "code": "garden_or_park",
+          "displayName": "Jardin ou parc",
+          "details": "Terrasse et parc.",
+          "evidence": {
+            "researchField": "Deep Enrichment!F18",
+            "kind": "provider",
+            "name": "Fondation Pré Pariset — EMS Pré Pariset",
+            "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": {
+        "value": "recognized",
+        "evidence": {
+          "researchField": "Deep Enrichment!J18",
+          "kind": "provider",
+          "name": "Fondation Pré Pariset — EMS Pré Pariset",
+          "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "EMS Pré Pariset",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B18",
+        "kind": "provider",
+        "name": "Fondation Pré Pariset — EMS Pré Pariset",
+        "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Chemin du Stand 1, 1009 Pully",
+      "reason": "Address data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C18",
+        "kind": "provider",
+        "name": "Fondation Pré Pariset — EMS Pré Pariset",
+        "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 721 18 11",
+      "reason": "Contact data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D18",
+        "kind": "provider",
+        "name": "Fondation Pré Pariset — EMS Pré Pariset",
+        "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "pre-pariset@pre-pariset.ch",
+      "reason": "Contact data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E18",
+        "kind": "provider",
+        "name": "Fondation Pré Pariset — EMS Pré Pariset",
+        "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.rooms",
+      "value": "Individual and double rooms",
+      "reason": "Room configuration has no controlled care-feature mapping.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F18",
+        "kind": "provider",
+        "name": "Fondation Pré Pariset — EMS Pré Pariset",
+        "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.floor_lounges_and_dining_rooms",
+      "value": "Floor lounges and dining rooms",
+      "reason": "Generic lounges and dining rooms do not establish an on-site restaurant or another controlled facility.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F18",
+        "kind": "provider",
+        "name": "Fondation Pré Pariset — EMS Pré Pariset",
+        "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "service.aesthetics",
+      "value": "Aesthetics",
+      "reason": "The taxonomy has no sufficiently scoped aesthetics concept.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F18",
+        "kind": "provider",
+        "name": "Fondation Pré Pariset — EMS Pré Pariset",
+        "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.wellbeing_salon",
+      "value": "Wellbeing salon",
+      "reason": "The wording does not map to an existing controlled facility.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F18",
+        "kind": "provider",
+        "name": "Fondation Pré Pariset — EMS Pré Pariset",
+        "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "facility.library",
+      "value": "Library",
+      "reason": "A single library claim does not justify a new taxonomy concept in this batch.",
+      "evidence": {
+        "researchField": "Deep Enrichment!F18",
+        "kind": "provider",
+        "name": "Fondation Pré Pariset — EMS Pré Pariset",
+        "url": "https://www.pre-pariset.ch/etablissements/pre_pariset",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Vue lac"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": []
+}

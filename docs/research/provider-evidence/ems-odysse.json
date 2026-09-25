@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-odysse", "slug": "ems-odysse", "repositoryName": "EMS Odysse SA", "researchedName": "Résidence Odysse", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A24:J24", "Deep Enrichment!A15:K15"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The workbook distinguishes the current Résidence Odysse establishment from Résidences Odysse SA as operator and ties it to the existing Lutry repository record.",
+    "facts": [
+      {"field": "site.name", "value": "Résidence Odysse", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "odysse-provider", "workbookCell": "Deep Enrichment!B15"}},
+      {"field": "organization.name", "value": "Résidences Odysse SA", "scope": "organization", "status": "reviewed", "evidence": {"sourceId": "rsrl-directory", "workbookCell": "Master Audit!F24"}},
+      {"field": "site.address", "value": "Chemin de Crêt-de-Plan 122, 1093 Lutry", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "odysse-provider", "workbookCell": "Deep Enrichment!C15"}},
+      {"field": "site.phone", "value": "021 796 30 90", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "odysse-provider", "workbookCell": "Deep Enrichment!D15"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I44"},
+    {"id": "rsrl-directory", "kind": "public", "name": "Réseau Santé Région Lausanne — membres EMS", "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I24"},
+    {"id": "odysse-provider", "kind": "provider", "name": "Résidences Odysse — Résidence Odysse", "url": "https://www.odysse.ch/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H15"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "residences-odysse-sa", "name": "Résidences Odysse SA", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "rsrl-directory", "workbookCell": "Master Audit!F24"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E24"},
+      "capacity": {"value": 53, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G24"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "care_profile", "code": "geriatric_care", "details": null, "evidence": {"sourceId": "rsrl-directory", "workbookCell": "Deep Enrichment!F15"}}
+      ],
+      "admissions": null, "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.name", "value": "Résidence Odysse", "reason": "Reviewed establishment naming belongs to the provider identity workflow.", "evidence": {"sourceId": "odysse-provider", "workbookCell": "Deep Enrichment!B15"}},
+    {"field": "site.address", "value": "Chemin de Crêt-de-Plan 122, 1093 Lutry", "reason": "Address data remains outside the care offering apply.", "evidence": {"sourceId": "odysse-provider", "workbookCell": "Deep Enrichment!C15"}},
+    {"field": "site.phone", "value": "021 796 30 90", "reason": "Contact data remains outside the care offering apply.", "evidence": {"sourceId": "odysse-provider", "workbookCell": "Deep Enrichment!D15"}},
+    {"field": "care_details", "value": "Provider website is under construction and current service detail is limited", "reason": "No additional precise site-level care facts are preserved for controlled import.", "evidence": {"sourceId": "odysse-provider", "workbookCell": "Deep Enrichment!G15"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Court séjour"], "reason": "Legacy tags remain unverified; the court-stay tag does not establish short stay."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

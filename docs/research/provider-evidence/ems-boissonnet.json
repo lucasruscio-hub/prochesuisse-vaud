@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "provider": {"legacyId": "ems-boissonnet", "slug": "ems-boissonnet", "repositoryName": "EMS Fondation Louis Boissonnet", "researchedName": "Boissonnet", "primaryType": "ems"},
+  "workbook": {"path": "docs/research/source-material/Lia_Vaud_provider_master_audit_2026-09-21.xlsx", "sha256": "2f3e5ed512e7df196356d6f0f7d66df5f08fd7168b8c90f19c0f213ff27b4450", "auditDate": "2026-09-21", "rows": ["Master Audit!A5:J5", "Deep Enrichment!A5:K5"]},
+  "identity": {
+    "status": "reconciled",
+    "rationale": "The official-list row separates the current BOISSONNET establishment from Fondation Louis Boissonnet as operator, while the current foundation source describes the same 106-resident EMS at Chemin de Boissonnet 51.",
+    "facts": [
+      {"field": "site.name", "value": "Boissonnet", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E5"}},
+      {"field": "organization.name", "value": "Fondation Louis Boissonnet", "scope": "organization", "status": "reviewed", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F5"}},
+      {"field": "site.address", "value": "Chemin de Boissonnet 51, 1010 Lausanne", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "boissonnet-provider", "workbookCell": "Deep Enrichment!C5"}},
+      {"field": "site.phone", "value": "021 651 31 11", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "boissonnet-provider", "workbookCell": "Deep Enrichment!D5"}},
+      {"field": "site.email", "value": "boissonnet@boissonnet.ch", "scope": "site", "status": "reviewed", "evidence": {"sourceId": "boissonnet-provider", "workbookCell": "Deep Enrichment!E5"}}
+    ]
+  },
+  "sources": [
+    {"id": "vaud-ems-2026", "kind": "public", "name": "Canton de Vaud — Liste officielle 2026 des établissements", "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf", "accessedOn": "2026-09-21", "workbookCell": "Master Audit!I5"},
+    {"id": "boissonnet-provider", "kind": "provider", "name": "Fondation Louis Boissonnet", "url": "https://boissonnet.ch/", "accessedOn": "2026-09-21", "workbookCell": "Deep Enrichment!H5"}
+  ],
+  "carePacketProposal": {
+    "organizations": [{"slug": "fondation-louis-boissonnet", "name": "Fondation Louis Boissonnet", "relationshipType": "operator", "isPrimary": true, "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!F5"}}],
+    "offerings": [{
+      "slug": "ems", "name": "Établissement médico-social", "offeringType": "ems",
+      "typeEvidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!E5"},
+      "capacity": {"value": 106, "unit": "beds", "evidence": {"sourceId": "vaud-ems-2026", "workbookCell": "Master Audit!G5"}},
+      "stayModes": {"longStay": null, "shortStay": null, "respiteStay": null},
+      "features": [
+        {"kind": "service", "code": "social_activities", "details": null, "evidence": {"sourceId": "boissonnet-provider", "workbookCell": "Deep Enrichment!F5"}},
+        {"kind": "service", "code": "hairdressing", "details": null, "evidence": {"sourceId": "boissonnet-provider", "workbookCell": "Deep Enrichment!F5"}}
+      ],
+      "admissions": null, "financing": null, "publicInterestStatus": null, "pricing": null
+    }]
+  },
+  "deferredClaims": [
+    {"field": "site.public_name", "value": "Fondation Louis Boissonnet", "reason": "The provider page uses the foundation name publicly; provider naming stays in the separate identity workflow.", "evidence": {"sourceId": "boissonnet-provider", "workbookCell": "Deep Enrichment!B5"}},
+    {"field": "site.address", "value": "Chemin de Boissonnet 51, 1010 Lausanne", "reason": "Address data remains outside the care offering apply.", "evidence": {"sourceId": "boissonnet-provider", "workbookCell": "Deep Enrichment!C5"}},
+    {"field": "site.phone", "value": "021 651 31 11", "reason": "Contact data remains outside the care offering apply.", "evidence": {"sourceId": "boissonnet-provider", "workbookCell": "Deep Enrichment!D5"}},
+    {"field": "site.email", "value": "boissonnet@boissonnet.ch", "reason": "Contact data remains outside the care offering apply.", "evidence": {"sourceId": "boissonnet-provider", "workbookCell": "Deep Enrichment!E5"}},
+    {"field": "care.medico_social_accompaniment", "value": "24/7 medico-social accompaniment", "reason": "Broad accompaniment wording has no precise controlled mapping.", "evidence": {"sourceId": "boissonnet-provider", "workbookCell": "Deep Enrichment!F5"}},
+    {"field": "care.nursing_and_medical", "value": "Nursing and medical services", "reason": "Generic nursing and medical wording is not mapped to a narrower consumer feature.", "evidence": {"sourceId": "boissonnet-provider", "workbookCell": "Deep Enrichment!F5"}},
+    {"field": "service.hotel", "value": "Hotel services", "reason": "Generic hotel-service wording has no accepted controlled mapping.", "evidence": {"sourceId": "boissonnet-provider", "workbookCell": "Deep Enrichment!F5"}},
+    {"field": "service.spiritual_support", "value": "Spiritual support", "reason": "The current taxonomy has no sufficiently established recurring spiritual-support concept.", "evidence": {"sourceId": "boissonnet-provider", "workbookCell": "Deep Enrichment!F5"}},
+    {"field": "legacy_tags", "value": ["Gériatrie", "Soins palliatifs"], "reason": "Legacy tags remain unverified and are not used as evidence."}
+  ],
+  "unresolvedIssues": [],
+  "taxonomyProposals": [],
+  "review": {"status": "approved_for_local_apply", "localApply": true, "publish": false, "verify": false}
+}

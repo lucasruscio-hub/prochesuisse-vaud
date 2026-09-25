@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-odysse",
+    "slug": "ems-odysse",
+    "expectedName": "EMS Odysse SA",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "residences-odysse-sa",
+      "name": "Résidences Odysse SA",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F24",
+        "kind": "public",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E24",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 53,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G24",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "geriatric_care"
+      ],
+      "features": [
+        {
+          "kind": "care_profile",
+          "code": "geriatric_care",
+          "displayName": "Accompagnement gériatrique",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F15",
+            "kind": "public",
+            "name": "Réseau Santé Région Lausanne — membres EMS",
+            "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "Résidence Odysse",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B15",
+        "kind": "provider",
+        "name": "Résidences Odysse — Résidence Odysse",
+        "url": "https://www.odysse.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Chemin de Crêt-de-Plan 122, 1093 Lutry",
+      "reason": "Address data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C15",
+        "kind": "provider",
+        "name": "Résidences Odysse — Résidence Odysse",
+        "url": "https://www.odysse.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 796 30 90",
+      "reason": "Contact data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D15",
+        "kind": "provider",
+        "name": "Résidences Odysse — Résidence Odysse",
+        "url": "https://www.odysse.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "care_details",
+      "value": "Provider website is under construction and current service detail is limited",
+      "reason": "No additional precise site-level care facts are preserved for controlled import.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G15",
+        "kind": "provider",
+        "name": "Résidences Odysse — Résidence Odysse",
+        "url": "https://www.odysse.ch/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Court séjour"
+      ],
+      "reason": "Legacy tags remain unverified; the court-stay tag does not establish short stay."
+    }
+  ],
+  "unresolved": []
+}

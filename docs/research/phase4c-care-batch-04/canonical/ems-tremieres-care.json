@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "ems-tremieres",
+    "slug": "ems-tremieres",
+    "expectedName": "EMS Résidence Les Trémières",
+    "expectedType": "ems"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "residence-les-tremieres-sa",
+      "name": "Résidence Les Trémières SA",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "Master Audit!F32",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "ems",
+      "name": "Établissement médico-social",
+      "offeringType": "ems",
+      "typeEvidence": {
+        "researchField": "Master Audit!E32",
+        "kind": "public",
+        "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+        "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+        "accessedOn": "2026-09-21"
+      },
+      "capacity": {
+        "value": 28,
+        "unit": "beds",
+        "evidence": {
+          "researchField": "Master Audit!G32",
+          "kind": "public",
+          "name": "Canton de Vaud — Liste officielle 2026 des établissements",
+          "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/EMS/Documentation/Liste_officielle_2026.pdf",
+          "accessedOn": "2026-09-21"
+        }
+      },
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "geriatric_care"
+      ],
+      "features": [
+        {
+          "kind": "care_profile",
+          "code": "geriatric_care",
+          "displayName": "Accompagnement gériatrique",
+          "details": null,
+          "evidence": {
+            "researchField": "Deep Enrichment!F22",
+            "kind": "public",
+            "name": "Réseau Santé Région Lausanne — membres EMS",
+            "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+            "accessedOn": "2026-09-21"
+          }
+        }
+      ],
+      "admissions": null,
+      "financing": null,
+      "publicInterestStatus": null,
+      "pricing": null
+    }
+  ],
+  "deferred": [
+    {
+      "field": "site.name",
+      "value": "Résidence Les Trémières",
+      "reason": "Reviewed establishment naming belongs to the provider identity workflow.",
+      "evidence": {
+        "researchField": "Deep Enrichment!B22",
+        "kind": "public",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.address",
+      "value": "Chemin de Pré-Fleuri 8, 1006 Lausanne",
+      "reason": "Address data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!C22",
+        "kind": "public",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.phone",
+      "value": "021 616 88 26",
+      "reason": "Contact data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!D22",
+        "kind": "public",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "site.email",
+      "value": "ems@residence-tremieres.ch",
+      "reason": "Contact data remains outside the care offering apply.",
+      "evidence": {
+        "researchField": "Deep Enrichment!E22",
+        "kind": "public",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "care_details",
+      "value": "Current service details still need a fresh primary source",
+      "reason": "The workbook explicitly limits the available evidence to identity, operator, EMS type, capacity and geriatric mission.",
+      "evidence": {
+        "researchField": "Deep Enrichment!G22",
+        "kind": "public",
+        "name": "Réseau Santé Région Lausanne — membres EMS",
+        "url": "https://www.reseau-sante-region-lausanne.ch/membres-ems/",
+        "accessedOn": "2026-09-21"
+      }
+    },
+    {
+      "field": "legacy_tags",
+      "value": [
+        "Gériatrie",
+        "Centre"
+      ],
+      "reason": "Legacy tags remain unverified and are not used as evidence."
+    }
+  ],
+  "unresolved": []
+}
