@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   CARE_FEATURE_KINDS,
   CARE_FEATURE_TAXONOMY,
+  HOME_CARE_SERVICE_DEFINITIONS,
   controlledCareFeature,
   projectControlledCareFeatures,
 } from "../lib/care-feature-taxonomy.js";
@@ -15,6 +16,33 @@ test("V1 taxonomy exposes only the three database feature families", () => {
   assert.equal(CARE_FEATURE_TAXONOMY.facility.emergency_call_system, "Système d’appel d’urgence");
   assert.equal(CARE_FEATURE_TAXONOMY.facility.garden_or_park, "Jardin ou parc");
   assert.equal(CARE_FEATURE_TAXONOMY.facility.restaurant, "Restaurant sur place");
+  assert.deepEqual(Object.keys(HOME_CARE_SERVICE_DEFINITIONS), [
+    "on_call_24h", "companionship", "meal_delivery", "respite_at_home", "emergency_call_service",
+  ]);
+  assert.deepEqual(Object.fromEntries(Object.entries(HOME_CARE_SERVICE_DEFINITIONS)
+    .map(([code, definition]) => [code, definition.label])), {
+    on_call_24h: "Permanence 24h/24",
+    companionship: "Présence et compagnie",
+    meal_delivery: "Livraison de repas",
+    respite_at_home: "Relève à domicile",
+    emergency_call_service: "Service de téléalarme",
+  });
+});
+
+test("home-care additions have explicit meanings and non-inference guardrails", () => {
+  for (const [code, definition] of Object.entries(HOME_CARE_SERVICE_DEFINITIONS)) {
+    assert.equal(CARE_FEATURE_TAXONOMY.service[code], definition.label);
+    assert.ok(definition.meaning.length > 30);
+    assert.match(definition.evidenceRule, /Exiger|ne jamais|ne pas/i);
+    assert.deepEqual(controlledCareFeature("service", code), {
+      kind: "service", code, displayName: definition.label, details: null,
+    });
+  }
+  assert.match(HOME_CARE_SERVICE_DEFINITIONS.on_call_24h.meaning, /sans présumer une présence continue/i);
+  assert.match(HOME_CARE_SERVICE_DEFINITIONS.emergency_call_service.evidenceRule, /ne pas confondre.*24h\/24/i);
+  assert.match(HOME_CARE_SERVICE_DEFINITIONS.companionship.evidenceRule, /ne jamais l’inférer/i);
+  assert.match(HOME_CARE_SERVICE_DEFINITIONS.respite_at_home.evidenceRule, /domicile/i);
+  assert.match(HOME_CARE_SERVICE_DEFINITIONS.meal_delivery.evidenceRule, /livraison|apport/i);
 });
 
 test("controlled projection accepts known codes and returns canonical labels", () => {
