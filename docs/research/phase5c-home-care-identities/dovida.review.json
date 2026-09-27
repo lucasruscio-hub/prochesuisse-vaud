@@ -1,0 +1,53 @@
+{
+  "researchPacketVersion": 1,
+  "legacyIdentity": {
+    "legacyId": "dovida",
+    "slug": "dovida",
+    "name": "Dovida",
+    "primaryType": "domicile",
+    "locality": "Lausanne",
+    "postalCode": "1006",
+    "originalLocationText": "Lausanne · 1006",
+    "legacyTags": ["Aide domicile", "Alzheimer", "Nuit"]
+  },
+  "reviewState": "identity_researched_pending_human_review",
+  "approval": {"localApply": false, "publish": false, "verify": false},
+  "proposedIdentity": {
+    "publicName": "Dovida",
+    "legalOrganization": "Seniorendienste Schweiz AG",
+    "brand": "Dovida (formerly Home Instead Schweiz)",
+    "scopes": ["regional_network", "local_operating_unit", "care_provider"],
+    "contactIdentity": "Vaud/Valais office identified publicly as Bureau de Crissier; 021 614 00 50; info.romandie@dovida.ch",
+    "organizationRelationship": "Dovida is the current Swiss brand of Seniorendienste Schweiz AG; a Dovida regional branch supplies services while official local pages also refer to a separate local partner agency."
+  },
+  "sources": [
+    {"id": "dovida-rebrand-fr", "title": "Nous sommes désormais Dovida : un nouveau nom, la même qualité", "url": "https://dovida.ch/fr/neuigkeiten/nous-sommes-desormais-dovida-un-nouveau-nom-la-meme-qualite-daccompagnement-a-domicile/", "accessedOn": "2026-09-27", "authority": "official_provider", "temporalContext": "historical"},
+    {"id": "dovida-rebrand-de", "title": "Home Instead Schweiz heisst neu Dovida", "url": "https://dovida.ch/neuigkeiten/home-instead-schweiz-heisst-neu-dovida-neuer-name-gleiche-betreuung/", "accessedOn": "2026-09-27", "authority": "official_provider", "temporalContext": "historical"},
+    {"id": "dovida-privacy", "title": "Dovida — déclaration de protection des données", "url": "https://dovida.ch/fr/declaration-de-protection-des-donnees/", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"},
+    {"id": "dovida-lausanne", "title": "Dovida — accompagnement à domicile à Lausanne", "url": "https://dovida.ch/fr/local-office/lausanne/", "accessedOn": "2026-09-27", "authority": "official_provider", "temporalContext": "current"},
+    {"id": "dovida-offices", "title": "Dovida — location de personnel pour les institutions", "url": "https://dovida.ch/fr/pro/location-de-personnel-pour-les-institutions/", "accessedOn": "2026-09-27", "authority": "official_provider", "temporalContext": "current"},
+    {"id": "dovida-management", "title": "Direction générale de Dovida — Seniorendienste Schweiz AG", "url": "https://dovida.ch/fr/a-propos-de-nous/direction-generale/", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"}
+  ],
+  "conclusions": [
+    {"key": "current_public_name", "statement": "The current Swiss public-facing brand is Dovida; Home Instead Schweiz is the former brand.", "confidence": "high", "ambiguity": null, "sourceIds": ["dovida-rebrand-fr", "dovida-rebrand-de"]},
+    {"key": "legal_organization", "statement": "The current legal organization presented by Dovida is Seniorendienste Schweiz AG, headquartered in Rheinfelden.", "confidence": "high", "ambiguity": null, "sourceIds": ["dovida-privacy", "dovida-management"]},
+    {"key": "history", "statement": "In March 2025, the Swiss operation changed brand from Home Instead Schweiz to Dovida after ending its partnership with Home Instead, while stating continuity of the team and Swiss business.", "confidence": "high", "ambiguity": "The public announcement demonstrates operating continuity but is not itself a corporate-register history of every franchise or branch.", "sourceIds": ["dovida-rebrand-fr", "dovida-rebrand-de"]},
+    {"key": "record_scope", "statement": "The legacy Lia record is best understood as a placeholder for the current Vaud/Valais regional Dovida operation, not the national organization alone.", "confidence": "medium", "ambiguity": "The legacy Lausanne 1006 address is not corroborated; current official material identifies the Vaud/Valais office only as Bureau de Crissier.", "sourceIds": ["dovida-lausanne", "dovida-offices"]},
+    {"key": "network_relationship", "statement": "Official local pages distinguish a local independent partner agency from the local Dovida branch that provides the services.", "confidence": "high", "ambiguity": "The page does not name the partner agency's legal entity or explain the precise franchise/contractual boundary.", "sourceIds": ["dovida-lausanne"]}
+  ],
+  "unresolved": [
+    "The exact street address and registered branch identity of the current Crissier Vaud/Valais office.",
+    "The legal identity and role of the independent local partner agency referenced on Dovida's Lausanne page.",
+    "Whether Lausanne, Nyon, Riviera, and other public local pages are marketing service regions or separately accountable operating units.",
+    "Whether the legacy Lausanne 1006 record came from a former Home Instead office and, if so, which legal entity operated it."
+  ],
+  "recommendation": {
+    "actions": ["hold", "link_as_organization", "supersede_historically"],
+    "oneRecordDisposition": "Hold the existing record pending exact Crissier branch and partner-agency resolution. Later link the current Dovida operating identity to Seniorendienste Schweiz AG and preserve Home Instead Schweiz as a historical brand; do not create regional duplicates from marketing pages alone.",
+    "reasoning": [
+      "The brand succession is explicit, but the current local legal and branch topology is not complete enough for a safe record rewrite.",
+      "The existing Dovida name is current, while its legacy Lausanne 1006 location is not supported by the reviewed current sources."
+    ]
+  },
+  "dataWrites": []
+}

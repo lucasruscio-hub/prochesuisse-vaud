@@ -1,0 +1,50 @@
+{
+  "researchPacketVersion": 1,
+  "legacyIdentity": {
+    "legacyId": "senevita-vaud",
+    "slug": "senevita-vaud",
+    "name": "Senevita Casa Vaud",
+    "primaryType": "domicile",
+    "locality": "Renens",
+    "postalCode": "1020",
+    "originalLocationText": "Renens · 1020",
+    "legacyTags": ["Spitex", "LAMal", "24h/24", "Tout Vaud"]
+  },
+  "reviewState": "identity_researched_pending_human_review",
+  "approval": {"localApply": false, "publish": false, "verify": false},
+  "proposedIdentity": {
+    "publicName": "Senevita Casa Vaud",
+    "legalOrganization": "Senevita AG",
+    "brand": "Senevita Casa",
+    "scopes": ["local_operating_unit", "office", "care_provider"],
+    "contactIdentity": "Avenue des Baumettes 3, 1020 Renens; 021 311 19 20",
+    "organizationRelationship": "Vaud home-care site of Senevita AG, presented as one Senevita Casa location with internal regional field teams."
+  },
+  "sources": [
+    {"id": "senevita-site", "title": "Senevita Casa Vaud — site officiel", "url": "https://www.senevita.ch/fr/sites/spitex-vaud/", "accessedOn": "2026-09-27", "authority": "official_provider", "temporalContext": "current"},
+    {"id": "senevita-sites", "title": "Senevita — aperçu des sites", "url": "https://www.senevita.ch/fr/sites/", "accessedOn": "2026-09-27", "authority": "official_provider", "temporalContext": "current"},
+    {"id": "senevita-team", "title": "Senevita Casa Vaud — notre équipe", "url": "https://www.senevita.ch/fr/sites/spitex-vaud/equipe/", "accessedOn": "2026-09-27", "authority": "official_provider", "temporalContext": "current"},
+    {"id": "senevita-imprint", "title": "Senevita — mentions légales", "url": "https://www.senevita.ch/fr/impressum/", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"},
+    {"id": "senevita-rebrand", "title": "Spitex pour la ville et la campagne devient Senevita Casa", "url": "https://www.senevita.ch/fr/actualites/medienmitteilungen/2021/spitex-pour-la-ville-et-la-campagne-devient-senevita-casa.php", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "historical"}
+  ],
+  "conclusions": [
+    {"key": "current_public_name", "statement": "The current public-facing name is Senevita Casa Vaud.", "confidence": "high", "ambiguity": null, "sourceIds": ["senevita-site", "senevita-sites"]},
+    {"key": "legal_organization", "statement": "The official site identifies Senevita AG as the legal organization and headquarters identity.", "confidence": "high", "ambiguity": "The reviewed pages do not identify a separately registered Vaud legal entity.", "sourceIds": ["senevita-imprint"]},
+    {"key": "record_scope", "statement": "The Lia record corresponds to an actual Vaud home-care operating site with a Renens office, not merely the national Senevita organization.", "confidence": "high", "ambiguity": null, "sourceIds": ["senevita-site", "senevita-sites"]},
+    {"key": "operating_units", "statement": "The official team page presents regional field responsibilities inside one Vaud site; it does not establish separately identified Lia provider units.", "confidence": "medium", "ambiguity": "Operational or licensing boundaries beneath the Vaud site are not stated.", "sourceIds": ["senevita-team"]},
+    {"key": "history", "statement": "Senevita Casa succeeded the former Spitex pour la Ville et la Campagne brand on 1 July 2021 after that operation had been wholly owned by the Senevita group since 2016.", "confidence": "high", "ambiguity": null, "sourceIds": ["senevita-rebrand"]}
+  ],
+  "unresolved": [
+    "Whether Senevita Casa Vaud has a separate cantonal authorization or legal registration beneath Senevita AG.",
+    "Whether any regional field teams should ever become distinct provider records; the current official identity evidence does not support that split."
+  ],
+  "recommendation": {
+    "actions": ["keep", "link_as_organization"],
+    "oneRecordDisposition": "Keep one Senevita Casa Vaud provider identity for later review and link it to Senevita AG; do not split the internal regional team structure now.",
+    "reasoning": [
+      "The official directory and site page consistently identify one Vaud home-care site in Renens.",
+      "The legal organization and the consumer-facing operating identity are distinct and should be represented by the existing organization/provider architecture."
+    ]
+  },
+  "dataWrites": []
+}

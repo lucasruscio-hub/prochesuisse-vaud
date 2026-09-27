@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "batchId": "phase5c-home-care-identity-resolution",
+  "accessedOn": "2026-09-27",
+  "providers": ["senevita-vaud", "pro-senectute", "avasad-cms", "dovida"],
+  "safety": {
+    "databaseWrites": 0,
+    "providerWrites": false,
+    "organizationWrites": false,
+    "offeringWrites": false,
+    "featureWrites": false,
+    "languageWrites": false,
+    "serviceAreaWrites": false,
+    "publicationWrites": false,
+    "verificationWrites": false
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "researchPacketVersion": 1,
+  "legacyIdentity": {
+    "legacyId": "pro-senectute",
+    "slug": "pro-senectute",
+    "name": "Pro Senectute Vaud",
+    "primaryType": "domicile",
+    "locality": "Lausanne",
+    "postalCode": "1012",
+    "originalLocationText": "Lausanne · 1012",
+    "legacyTags": ["Public", "Tarif social", "Aide ménagère"]
+  },
+  "reviewState": "identity_researched_pending_human_review",
+  "approval": {"localApply": false, "publish": false, "verify": false},
+  "proposedIdentity": {
+    "publicName": "Pro Senectute Vaud",
+    "legalOrganization": "Pro Senectute Vaud (CHE-106.079.897)",
+    "brand": "Pro Senectute",
+    "scopes": ["cantonal_organization"],
+    "contactIdentity": "Rue du Maupas 51, 1004 Lausanne; 021 646 17 21",
+    "organizationRelationship": "Legally independent cantonal Pro Senectute organization within the federated Pro Senectute system; Pro Senectute Suisse is the national umbrella."
+  },
+  "sources": [
+    {"id": "psv-structure", "title": "Pro Senectute Vaud — structure", "url": "https://vd.prosenectute.ch/fr/l-association/notre-association/structure", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"},
+    {"id": "psv-imprint", "title": "Pro Senectute Vaud — impressum", "url": "https://vd.prosenectute.ch/fr/impressum.html", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"},
+    {"id": "ps-system", "title": "L’ensemble de l’organisation Pro Senectute", "url": "https://fr.prosenectute.ch/pro-senectute/fr/qui-sommes-nous/l-ensemble-de-l-organisation.html", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"},
+    {"id": "ps-strategy", "title": "Pro Senectute — stratégie", "url": "https://www.prosenectute.ch/fr/qui-sommes-nous/l-ensemble-de-l-organisation/strategie", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"},
+    {"id": "psv-accompaniment", "title": "Pro Senectute Vaud — accompagnement", "url": "https://vd.prosenectute.ch/fr/services/accompagnement.html", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"},
+    {"id": "ps-home-help", "title": "Pro Senectute — accompagnement et aide à domicile", "url": "https://vd.prosenectute.ch/pro-senectute/fr/services/aides/aide-a-domicile.html", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"}
+  ],
+  "conclusions": [
+    {"key": "current_public_name", "statement": "The current Vaud public-facing and registered name is Pro Senectute Vaud.", "confidence": "high", "ambiguity": null, "sourceIds": ["psv-structure", "psv-imprint"]},
+    {"key": "legal_organization", "statement": "Pro Senectute Vaud is identified under UID CHE-106.079.897 and is legally independent from Pro Senectute Suisse.", "confidence": "high", "ambiguity": "The reviewed official pages use both association language and the registered name without requiring Lia to choose a legal-form label now.", "sourceIds": ["psv-imprint", "ps-strategy"]},
+    {"key": "record_scope", "statement": "The Lia record points to the cantonal elderly-support organization, not a specific home-care office, Spitex unit, or nursing provider.", "confidence": "high", "ambiguity": null, "sourceIds": ["psv-structure", "ps-system"]},
+    {"key": "home_support_boundary", "statement": "Pro Senectute Vaud currently presents home visits and practical/social accompaniment, while official Pro Senectute material distinguishes accompaniment from medical and nursing care provided primarily by health professionals and home-care services.", "confidence": "high", "ambiguity": "National service descriptions instruct users to consult cantonal organizations; they do not prove that every listed service is directly operated in Vaud.", "sourceIds": ["psv-accompaniment", "ps-home-help"]},
+    {"key": "contact_identity", "statement": "The current cantonal contact is Rue du Maupas 51, 1004 Lausanne, which does not match the legacy Lausanne 1012 location string.", "confidence": "high", "ambiguity": null, "sourceIds": ["psv-imprint", "psv-accompaniment"]}
+  ],
+  "unresolved": [
+    "Whether any Pro Senectute Vaud accompaniment program belongs in Lia's provider catalog requires a later offering-level inclusion decision.",
+    "Which home-support services are directly operated by Pro Senectute Vaud, rather than described nationally or delivered through partners, must be evidenced service by service.",
+    "The origin of the legacy Lausanne 1012 location is not established by current official sources."
+  ],
+  "recommendation": {
+    "actions": ["hold", "link_as_organization"],
+    "oneRecordDisposition": "Represent Pro Senectute Vaud as a cantonal organization first. Hold the legacy domicile-provider row until a later review proves a concrete, in-scope Vaud operating offering; do not split it merely because services are delivered regionally.",
+    "reasoning": [
+      "The official identity is broader than home care and includes advice, social support, activities, housing, and accompaniment.",
+      "An older-adult mission or a home visit does not by itself establish a medical home-care provider identity."
+    ]
+  },
+  "dataWrites": []
+}

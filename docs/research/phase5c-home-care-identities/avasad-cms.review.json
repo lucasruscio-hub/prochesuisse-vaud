@@ -1,0 +1,52 @@
+{
+  "researchPacketVersion": 1,
+  "legacyIdentity": {
+    "legacyId": "avasad-cms",
+    "slug": "avasad-cms",
+    "name": "AVASAD – CMS Vaud",
+    "primaryType": "domicile",
+    "locality": "Lausanne",
+    "postalCode": "1004",
+    "originalLocationText": "Lausanne · 1004",
+    "legacyTags": ["Public", "CMS", "LAMal", "Soins"]
+  },
+  "reviewState": "identity_researched_pending_human_review",
+  "approval": {"localApply": false, "publish": false, "verify": false},
+  "proposedIdentity": {
+    "publicName": "AVASAD",
+    "legalOrganization": "Association vaudoise d’aide et de soins à domicile (AVASAD)",
+    "brand": "CMS Vaud",
+    "scopes": ["cantonal_organization", "regional_network"],
+    "contactIdentity": "Services transversaux AVASAD, Avenue de Rhodanie 60, 1014 Lausanne; 021 623 36 36",
+    "organizationRelationship": "Cantonal public-law umbrella whose home-care system is operated through seven regional associations/foundations and their local CMS units."
+  },
+  "sources": [
+    {"id": "cms-home", "title": "CMS Vaud — aide et soins à domicile", "url": "https://www.cms-vaud.ch/", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"},
+    {"id": "avasad-about", "title": "CMS Vaud — AVASAD", "url": "https://www.cms-vaud.ch/avasad/", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"},
+    {"id": "avasad-structure", "title": "CMS Vaud — organisation du dispositif", "url": "https://www.cms-vaud.ch/organisation-du-dispositif/", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"},
+    {"id": "avasad-services", "title": "CMS Vaud — direction générale et services", "url": "https://www.cms-vaud.ch/avasad/direction-generale-et-services/", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"},
+    {"id": "vaud-home-care", "title": "État de Vaud — aide et soins à domicile", "url": "https://www.vd.ch/sante-soins-et-handicap/vivre-a-domicile/aide-a-domicile", "accessedOn": "2026-09-27", "authority": "official_public_authority", "temporalContext": "current"},
+    {"id": "avasad-charter", "title": "Charte des CMS", "url": "https://www.cms-vaud.ch/app/uploads/Charte-des-CMS.pdf", "accessedOn": "2026-09-27", "authority": "official_organization", "temporalContext": "current"}
+  ],
+  "conclusions": [
+    {"key": "current_public_name", "statement": "AVASAD is the cantonal organization and CMS Vaud is the public network identity used for the local centers.", "confidence": "high", "ambiguity": "The compound legacy label AVASAD – CMS Vaud conflates two levels of the system.", "sourceIds": ["cms-home", "avasad-about"]},
+    {"key": "legal_organization", "statement": "AVASAD is an autonomous public-law association with legal personality.", "confidence": "high", "ambiguity": null, "sourceIds": ["avasad-charter"]},
+    {"key": "record_scope", "statement": "The existing Lia record is a network-level umbrella identity, not one CMS operating unit or office.", "confidence": "high", "ambiguity": null, "sourceIds": ["avasad-structure", "avasad-services"]},
+    {"key": "operating_units", "statement": "The system has seven regional associations/foundations and approximately fifty local CMS units; the regional bodies are the employers through which CMS services are delivered.", "confidence": "high", "ambiguity": "The official CMS site currently says 50 CMS while the Vaud public page says 49, likely reflecting different update dates.", "sourceIds": ["cms-home", "avasad-structure", "avasad-services", "vaud-home-care"]},
+    {"key": "contact_identity", "statement": "The current AVASAD central/transversal contact is at Avenue de Rhodanie 60, 1014 Lausanne, not the legacy provider locality string Lausanne 1004.", "confidence": "high", "ambiguity": "This central address is not a patient-facing local CMS identity.", "sourceIds": ["avasad-about"]}
+  ],
+  "unresolved": [
+    "The authoritative current count is inconsistent between 49 and 50 CMS across official sources.",
+    "The exact provider-record granularity should be decided before selecting which local CMS units enter Lia.",
+    "No evidence reviewed supports mapping the legacy Lausanne 1004 location to a current AVASAD or CMS operating unit."
+  ],
+  "recommendation": {
+    "actions": ["hold", "link_as_organization", "split_later"],
+    "oneRecordDisposition": "Do not retain AVASAD – CMS Vaud as a single patient-facing provider. Preserve AVASAD as an organization identity and later create only explicitly resolved local CMS provider records linked through their regional organizations.",
+    "reasoning": [
+      "The legacy record collapses cantonal governance, seven regional operators, and many local centers into one provider row.",
+      "Repurposing the umbrella row would misstate both contact identity and operating-unit scope."
+    ]
+  },
+  "dataWrites": []
+}
