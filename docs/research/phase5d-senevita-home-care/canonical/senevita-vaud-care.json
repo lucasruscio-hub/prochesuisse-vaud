@@ -1,0 +1,401 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "senevita-vaud",
+    "slug": "senevita-vaud",
+    "expectedName": "Senevita Casa Vaud",
+    "expectedType": "domicile"
+  },
+  "approval": {
+    "localApply": true,
+    "publish": false,
+    "verify": false
+  },
+  "organizations": [
+    {
+      "slug": "senevita-ag",
+      "name": "Senevita AG",
+      "relationshipType": "operator",
+      "isPrimary": true,
+      "evidence": {
+        "researchField": "identity.operator",
+        "kind": "provider",
+        "name": "Senevita — mentions légales",
+        "url": "https://www.senevita.ch/fr/impressum/",
+        "accessedOn": "2026-09-27",
+        "evidenceContext": "Les mentions légales identifient Senevita AG.",
+        "confidence": "high",
+        "reviewStatus": "accepted"
+      }
+    }
+  ],
+  "offerings": [
+    {
+      "slug": "home-care",
+      "name": "Aide et soins à domicile",
+      "offeringType": "home_care",
+      "typeEvidence": {
+        "researchField": "offering.type",
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-27",
+        "evidenceContext": "Le site Vaud présente explicitement des soins et une aide à domicile.",
+        "confidence": "high",
+        "reviewStatus": "accepted"
+      },
+      "summary": {
+        "value": "Soins, assistance et aide au ménage à domicile pour soutenir la vie chez soi.",
+        "evidence": {
+          "researchField": "offering.summary",
+          "kind": "provider",
+          "name": "Senevita",
+          "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+          "accessedOn": "2026-09-27",
+          "evidenceContext": "Synthèse limitée aux catégories explicitement annoncées sur la page Vaud.",
+          "confidence": "high",
+          "reviewStatus": "accepted"
+        }
+      },
+      "capacity": null,
+      "stayModes": {
+        "longStay": null,
+        "shortStay": null,
+        "respiteStay": null
+      },
+      "careProfiles": [
+        "dementia_support"
+      ],
+      "features": [
+        {
+          "kind": "service",
+          "code": "home_nursing",
+          "displayName": "Soins infirmiers à domicile",
+          "details": null,
+          "evidence": {
+            "researchField": "service.home_nursing",
+            "kind": "provider",
+            "name": "Senevita Casa Vaud — soins ambulatoires",
+            "url": "https://www.senevita.ch/fr/sites/spitex-vaud/soins-ambulatoires/",
+            "accessedOn": "2026-09-27",
+            "evidenceContext": "La page détaille notamment plaies, médicaments, perfusions et injections.",
+            "confidence": "high",
+            "reviewStatus": "accepted"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "basic_care",
+          "displayName": "Soins de base",
+          "details": null,
+          "evidence": {
+            "researchField": "service.basic_care",
+            "kind": "provider",
+            "name": "Senevita Casa Vaud — soins ambulatoires",
+            "url": "https://www.senevita.ch/fr/sites/spitex-vaud/soins-ambulatoires/",
+            "accessedOn": "2026-09-27",
+            "evidenceContext": "La page décrit explicitement les soins de base, dont soins corporels et habillage.",
+            "confidence": "high",
+            "reviewStatus": "accepted"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "daily_life_assistance",
+          "displayName": "Aide à la vie quotidienne",
+          "details": null,
+          "evidence": {
+            "researchField": "service.daily_life_assistance",
+            "kind": "provider",
+            "name": "Senevita Casa Vaud — soins ambulatoires",
+            "url": "https://www.senevita.ch/fr/sites/spitex-vaud/soins-ambulatoires/",
+            "accessedOn": "2026-09-27",
+            "evidenceContext": "Mobilisation, positionnement, alimentation et autres activités quotidiennes sont détaillés.",
+            "confidence": "high",
+            "reviewStatus": "accepted"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "household_help",
+          "displayName": "Aide au ménage",
+          "details": null,
+          "evidence": {
+            "researchField": "service.household_help",
+            "kind": "provider",
+            "name": "Senevita Casa Vaud — aide au ménage",
+            "url": "https://www.senevita.ch/fr/sites/spitex-vaud/aide-au-menage/",
+            "accessedOn": "2026-09-27",
+            "evidenceContext": "Nettoyage, achats, cuisine, lessive et repassage sont explicitement proposés.",
+            "confidence": "high",
+            "reviewStatus": "accepted"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "complex_care",
+          "displayName": "Soins complexes",
+          "details": null,
+          "evidence": {
+            "researchField": "service.complex_care",
+            "kind": "provider",
+            "name": "Senevita",
+            "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+            "accessedOn": "2026-09-27",
+            "evidenceContext": "La page Vaud nomme explicitement les soins complexes.",
+            "confidence": "high",
+            "reviewStatus": "accepted"
+          }
+        },
+        {
+          "kind": "care_profile",
+          "code": "dementia_support",
+          "displayName": "Accompagnement des troubles cognitifs",
+          "details": null,
+          "evidence": {
+            "researchField": "care_profile.dementia_support",
+            "kind": "provider",
+            "name": "Senevita — soins et assistance à domicile",
+            "url": "https://www.senevita.ch/fr/soins-assistance-a-domicile/",
+            "accessedOn": "2026-09-27",
+            "evidenceContext": "La page nationale Senevita Casa indique l'accompagnement de la démence dans son offre à domicile en Suisse.",
+            "confidence": "medium",
+            "reviewStatus": "accepted"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "palliative_care",
+          "displayName": "Soins palliatifs",
+          "details": null,
+          "evidence": {
+            "researchField": "service.palliative_care",
+            "kind": "provider",
+            "name": "Senevita — soins et assistance à domicile",
+            "url": "https://www.senevita.ch/fr/soins-assistance-a-domicile/",
+            "accessedOn": "2026-09-27",
+            "evidenceContext": "La page nationale Senevita Casa indique les soins palliatifs dans son offre à domicile en Suisse.",
+            "confidence": "medium",
+            "reviewStatus": "accepted"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "night_watch",
+          "displayName": "Veille de nuit",
+          "details": null,
+          "evidence": {
+            "researchField": "service.night_watch",
+            "kind": "provider",
+            "name": "Senevita",
+            "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+            "accessedOn": "2026-09-27",
+            "evidenceContext": "La page Vaud nomme explicitement les veilles de nuit.",
+            "confidence": "high",
+            "reviewStatus": "accepted"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "companionship",
+          "displayName": "Présence et compagnie",
+          "details": null,
+          "evidence": {
+            "researchField": "service.companionship",
+            "kind": "provider",
+            "name": "Senevita Casa Vaud — aide au ménage",
+            "url": "https://www.senevita.ch/fr/sites/spitex-vaud/aide-au-menage/",
+            "accessedOn": "2026-09-27",
+            "evidenceContext": "La page propose explicitement compagnie, divertissement et échange autour d'un café.",
+            "confidence": "high",
+            "reviewStatus": "accepted"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "respite_at_home",
+          "displayName": "Relève à domicile",
+          "details": null,
+          "evidence": {
+            "researchField": "service.respite_at_home",
+            "kind": "provider",
+            "name": "Senevita Casa Vaud — soulagement des proches",
+            "url": "https://www.senevita.ch/fr/sites/spitex-vaud/soulagement-des-proches/",
+            "accessedOn": "2026-09-27",
+            "evidenceContext": "La page décrit une relève individualisée qui décharge concrètement les proches à domicile.",
+            "confidence": "high",
+            "reviewStatus": "accepted"
+          }
+        },
+        {
+          "kind": "service",
+          "code": "family_caregiver_support",
+          "displayName": "Soutien aux proches aidants",
+          "details": null,
+          "evidence": {
+            "researchField": "service.family_caregiver_support",
+            "kind": "provider",
+            "name": "Senevita Casa Vaud — soulagement des proches",
+            "url": "https://www.senevita.ch/fr/sites/spitex-vaud/soulagement-des-proches/",
+            "accessedOn": "2026-09-27",
+            "evidenceContext": "La page est consacrée au soutien et au soulagement des proches.",
+            "confidence": "high",
+            "reviewStatus": "accepted"
+          }
+        }
+      ],
+      "admissions": {
+        "value": "Prendre contact avec Senevita Casa Vaud; l'équipe clarifie les besoins, puis établit l'évaluation, l'offre et le plan d'intervention. Les prescripteurs peuvent utiliser OPAN.",
+        "evidence": {
+          "researchField": "admissions",
+          "kind": "provider",
+            "name": "Senevita",
+          "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+          "accessedOn": "2026-09-27",
+          "evidenceContext": "Le parcours de prise de contact et d'évaluation est décrit sur la page Vaud.",
+          "confidence": "high",
+          "reviewStatus": "accepted"
+        }
+      },
+      "financing": {
+        "value": "Les soins reconnus sont financés selon les règles applicables avec participation de l'assurance-maladie et des pouvoirs publics; les prestations non-soignantes restent à la charge du client, sous réserve d'une assurance complémentaire.",
+        "evidence": {
+          "researchField": "financing",
+          "kind": "provider",
+          "name": "Senevita Casa Vaud — coûts et décompte",
+          "url": "https://www.senevita.ch/fr/sites/spitex-vaud/couts-et-decompte/",
+          "accessedOn": "2026-09-27",
+          "evidenceContext": "Résumé prudent du contexte de financement et de facturation publié.",
+          "confidence": "high",
+          "reviewStatus": "accepted"
+        }
+      },
+      "publicInterestStatus": null,
+      "pricing": {
+        "value": "Durée minimale d'intervention: une heure. Aide au ménage et accompagnement, région tarifaire 1: CHF 53.50 par heure en semaine et CHF 58.90 le week-end et les jours fériés, selon la liste 2026.",
+        "evidence": {
+          "researchField": "pricing",
+          "kind": "provider",
+          "name": "Senevita Casa — tarifs 2026",
+          "url": "https://www.senevita.ch/wAssets/docs/01_aktuelles/Preisliste/ohne-ORPEA-logo/Preise_Spitex_2026_PR1_f.pdf",
+          "accessedOn": "2026-09-27",
+          "evidenceContext": "Tarifs 2026 liés depuis la page Vaud; aucune durée ou date n'est inventée.",
+          "confidence": "high",
+          "reviewStatus": "accepted"
+        }
+      }
+    }
+  ],
+  "serviceAreas": [
+    {
+      "offeringSlug": "home-care",
+      "coverageType": "region",
+      "coverageLabel": "dans la région de Vaud",
+      "cantonCode": null,
+      "municipalityId": null,
+      "evidence": {
+        "researchField": "coverage.narrative",
+        "kind": "provider",
+          "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-27",
+        "evidenceContext": "Libellé régional du site; contexte d'affichage uniquement, sans municipalités déduites.",
+        "confidence": "high",
+        "reviewStatus": "accepted"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "field": "service.on_call_24h",
+      "value": null,
+      "reason": "Les mentions d'assistance ou soutien 24h/24 ne prouvent pas sans ambiguïté une permanence sur appel distincte d'une présence continue.",
+      "evidence": {
+        "researchField": "service.on_call_24h",
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-27",
+        "evidenceContext": "Les mentions d'assistance ou soutien 24h/24 ne prouvent pas sans ambiguïté une permanence sur appel distincte d'une présence continue.",
+        "confidence": "high",
+        "reviewStatus": "deferred"
+      }
+    },
+    {
+      "field": "service.continuous_assistance",
+      "value": null,
+      "reason": "Le modèle exact de l'assistance 24h/24 n'est pas assez précis pour une catégorie canonique.",
+      "evidence": {
+        "researchField": "service.continuous_assistance",
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-27",
+        "evidenceContext": "Le modèle exact de l'assistance 24h/24 n'est pas assez précis pour une catégorie canonique.",
+        "confidence": "high",
+        "reviewStatus": "deferred"
+      }
+    },
+    {
+      "field": "service.meal_delivery",
+      "value": null,
+      "reason": "La préparation de repas ne prouve pas une livraison de repas.",
+      "evidence": {
+        "researchField": "service.meal_delivery",
+        "kind": "provider",
+        "name": "Senevita Casa Vaud — aide au ménage",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/aide-au-menage/",
+        "accessedOn": "2026-09-27",
+        "evidenceContext": "La préparation de repas ne prouve pas une livraison de repas.",
+        "confidence": "high",
+        "reviewStatus": "deferred"
+      }
+    },
+    {
+      "field": "service.emergency_call_service",
+      "value": null,
+      "reason": "Aucune téléalarme ni prestation d'appel d'urgence explicite n'a été trouvée.",
+      "evidence": {
+        "researchField": "service.emergency_call_service",
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-27",
+        "evidenceContext": "Aucune téléalarme ni prestation d'appel d'urgence explicite n'a été trouvée.",
+        "confidence": "high",
+        "reviewStatus": "deferred"
+      }
+    },
+    {
+      "field": "languages",
+      "value": null,
+      "reason": "La langue de la page ne prouve pas les langues de prestation.",
+      "evidence": {
+        "researchField": "languages",
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-27",
+        "evidenceContext": "La langue de la page ne prouve pas les langues de prestation.",
+        "confidence": "high",
+        "reviewStatus": "deferred"
+      }
+    },
+    {
+      "field": "coverage.structured",
+      "value": null,
+      "reason": "Aucune liste officielle de communes ni géographie structurée explicite n'est publiée sur la source retenue.",
+      "evidence": {
+        "researchField": "coverage.structured",
+        "kind": "provider",
+        "name": "Senevita",
+        "url": "https://www.senevita.ch/fr/sites/spitex-vaud/",
+        "accessedOn": "2026-09-27",
+        "evidenceContext": "Aucune liste officielle de communes ni géographie structurée explicite n'est publiée sur la source retenue.",
+        "confidence": "high",
+        "reviewStatus": "deferred"
+      }
+    }
+  ],
+  "unresolved": []
+}

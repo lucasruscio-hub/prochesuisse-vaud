@@ -28,7 +28,7 @@ function snapshot() {
     organizationLinks: [{ organization,
       relationship: { provider_id: provider.id, organization_id: organization.id,
         relationship_type: "operator", is_primary: true }, source: source("public", publicUrl) }],
-    offerings: [{ offering, availabilityCount: 0,
+    offerings: [{ offering, availabilityCount: 0, serviceAreas: [],
       sources: [
         { link: { provider_id: provider.id, offering_id: offering.id,
           fields_supported: ["offering_type", "capacity_value", "capacity_unit"] }, source: source("public", publicUrl) },
@@ -47,6 +47,7 @@ test("Boveresses care projection exposes only applied offering facts", () => {
   assert.deepEqual(detail.offerings[0], {
     name: "Établissement médico-social", summary: null, careProfiles: [], capacity: "42 lits",
     stayModes: ["Long séjour"], services: ["Coiffure", "Ergothérapie", "Soins palliatifs", "Physiothérapie", "Podologie"],
+    coverage: [], unknownNotice: "Les prestations et zones non affichées restent non confirmées.",
     accommodation: [], facilities: [], admissions: null, financing: null, pricing: null,
     publicInterestStatus: null,
   });

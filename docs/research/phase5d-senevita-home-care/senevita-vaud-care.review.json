@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "identity": {
+    "legacyId": "senevita-vaud",
+    "slug": "senevita-vaud",
+    "expectedName": "Senevita Casa Vaud",
+    "expectedType": "domicile",
+    "phase5cPacket": "../phase5c-home-care-identities/canonical/senevita-vaud.json"
+  },
+  "reviewState": "care_evidence_reviewed_for_local_pilot",
+  "approval": { "localApply": false, "publish": false, "verify": false },
+  "sources": [
+    { "id": "site", "kind": "provider", "name": "Senevita", "url": "https://www.senevita.ch/fr/sites/spitex-vaud/", "accessedOn": "2026-09-27", "titleContext": "Senevita Casa Vaud — présentation, contact et accès aux prestations du site vaudois", "temporalContext": "current" },
+    { "id": "nursing", "kind": "provider", "name": "Senevita Casa Vaud — soins ambulatoires", "url": "https://www.senevita.ch/fr/sites/spitex-vaud/soins-ambulatoires/", "accessedOn": "2026-09-27", "titleContext": "Soins infirmiers, soins de base et aide aux activités quotidiennes", "temporalContext": "current" },
+    { "id": "household", "kind": "provider", "name": "Senevita Casa Vaud — aide au ménage", "url": "https://www.senevita.ch/fr/sites/spitex-vaud/aide-au-menage/", "accessedOn": "2026-09-27", "titleContext": "Ménage, courses, cuisine, lessive et compagnie", "temporalContext": "current" },
+    { "id": "respite", "kind": "provider", "name": "Senevita Casa Vaud — soulagement des proches", "url": "https://www.senevita.ch/fr/sites/spitex-vaud/soulagement-des-proches/", "accessedOn": "2026-09-27", "titleContext": "Relève individualisée et soutien des proches à domicile", "temporalContext": "current" },
+    { "id": "national-care", "kind": "provider", "name": "Senevita — soins et assistance à domicile", "url": "https://www.senevita.ch/fr/soins-assistance-a-domicile/", "accessedOn": "2026-09-27", "titleContext": "Périmètre national Senevita Casa, démence et soins palliatifs", "temporalContext": "current" },
+    { "id": "costs", "kind": "provider", "name": "Senevita Casa Vaud — coûts et décompte", "url": "https://www.senevita.ch/fr/sites/spitex-vaud/couts-et-decompte/", "accessedOn": "2026-09-27", "titleContext": "Financement des soins et facturation des prestations non-soignantes", "temporalContext": "current" },
+    { "id": "prices", "kind": "provider", "name": "Senevita Casa — tarifs 2026", "url": "https://www.senevita.ch/wAssets/docs/01_aktuelles/Preisliste/ohne-ORPEA-logo/Preise_Spitex_2026_PR1_f.pdf", "accessedOn": "2026-09-27", "titleContext": "Liste de prix liée depuis le site Vaud, valable dès le 1er janvier 2026", "temporalContext": "current" },
+    { "id": "imprint", "kind": "provider", "name": "Senevita — mentions légales", "url": "https://www.senevita.ch/fr/impressum/", "accessedOn": "2026-09-27", "titleContext": "Identité juridique Senevita AG réutilisée du paquet Phase 5C", "temporalContext": "current" }
+  ],
+  "facts": [
+    { "field": "identity.operator", "value": "Senevita AG", "sourceId": "imprint", "evidenceContext": "Les mentions légales identifient Senevita AG.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "offering.type", "value": "home_care", "sourceId": "site", "evidenceContext": "Le site Vaud présente explicitement des soins et une aide à domicile.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "offering.summary", "value": "Soins, assistance et aide au ménage à domicile pour soutenir la vie chez soi.", "sourceId": "site", "evidenceContext": "Synthèse limitée aux catégories explicitement annoncées sur la page Vaud.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "service.home_nursing", "value": "home_nursing", "sourceId": "nursing", "evidenceContext": "La page détaille notamment plaies, médicaments, perfusions et injections.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "service.basic_care", "value": "basic_care", "sourceId": "nursing", "evidenceContext": "La page décrit explicitement les soins de base, dont soins corporels et habillage.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "service.daily_life_assistance", "value": "daily_life_assistance", "sourceId": "nursing", "evidenceContext": "Mobilisation, positionnement, alimentation et autres activités quotidiennes sont détaillés.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "service.household_help", "value": "household_help", "sourceId": "household", "evidenceContext": "Nettoyage, achats, cuisine, lessive et repassage sont explicitement proposés.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "service.complex_care", "value": "complex_care", "sourceId": "site", "evidenceContext": "La page Vaud nomme explicitement les soins complexes.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "care_profile.dementia_support", "value": "dementia_support", "sourceId": "national-care", "evidenceContext": "La page nationale Senevita Casa indique l'accompagnement de la démence dans son offre à domicile en Suisse.", "confidence": "medium", "reviewStatus": "accepted" },
+    { "field": "service.palliative_care", "value": "palliative_care", "sourceId": "national-care", "evidenceContext": "La page nationale Senevita Casa indique les soins palliatifs dans son offre à domicile en Suisse.", "confidence": "medium", "reviewStatus": "accepted" },
+    { "field": "service.night_watch", "value": "night_watch", "sourceId": "site", "evidenceContext": "La page Vaud nomme explicitement les veilles de nuit.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "service.companionship", "value": "companionship", "sourceId": "household", "evidenceContext": "La page propose explicitement compagnie, divertissement et échange autour d'un café.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "service.respite_at_home", "value": "respite_at_home", "sourceId": "respite", "evidenceContext": "La page décrit une relève individualisée qui décharge concrètement les proches à domicile.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "service.family_caregiver_support", "value": "family_caregiver_support", "sourceId": "respite", "evidenceContext": "La page est consacrée au soutien et au soulagement des proches.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "coverage.narrative", "value": "dans la région de Vaud", "sourceId": "site", "evidenceContext": "Libellé régional du site; contexte d'affichage uniquement, sans municipalités déduites.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "admissions", "value": "Prendre contact avec Senevita Casa Vaud; l'équipe clarifie les besoins, puis établit l'évaluation, l'offre et le plan d'intervention. Les prescripteurs peuvent utiliser OPAN.", "sourceId": "site", "evidenceContext": "Le parcours de prise de contact et d'évaluation est décrit sur la page Vaud.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "financing", "value": "Les soins reconnus sont financés selon les règles applicables avec participation de l'assurance-maladie et des pouvoirs publics; les prestations non-soignantes restent à la charge du client, sous réserve d'une assurance complémentaire.", "sourceId": "costs", "evidenceContext": "Résumé prudent du contexte de financement et de facturation publié.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "pricing", "value": "Durée minimale d'intervention: une heure. Aide au ménage et accompagnement, région tarifaire 1: CHF 53.50 par heure en semaine et CHF 58.90 le week-end et les jours fériés, selon la liste 2026.", "sourceId": "prices", "evidenceContext": "Tarifs 2026 liés depuis la page Vaud; aucune durée ou date n'est inventée.", "confidence": "high", "reviewStatus": "accepted" },
+    { "field": "service.on_call_24h", "value": null, "sourceId": "site", "evidenceContext": "Les mentions d'assistance ou soutien 24h/24 ne prouvent pas sans ambiguïté une permanence sur appel distincte d'une présence continue.", "confidence": "high", "reviewStatus": "deferred" },
+    { "field": "service.continuous_assistance", "value": null, "sourceId": "site", "evidenceContext": "Le modèle exact de l'assistance 24h/24 n'est pas assez précis pour une catégorie canonique.", "confidence": "high", "reviewStatus": "deferred" },
+    { "field": "service.meal_delivery", "value": null, "sourceId": "household", "evidenceContext": "La préparation de repas ne prouve pas une livraison de repas.", "confidence": "high", "reviewStatus": "deferred" },
+    { "field": "service.emergency_call_service", "value": null, "sourceId": "site", "evidenceContext": "Aucune téléalarme ni prestation d'appel d'urgence explicite n'a été trouvée.", "confidence": "high", "reviewStatus": "deferred" },
+    { "field": "languages", "value": null, "sourceId": "site", "evidenceContext": "La langue de la page ne prouve pas les langues de prestation.", "confidence": "high", "reviewStatus": "deferred" },
+    { "field": "coverage.structured", "value": null, "sourceId": "site", "evidenceContext": "Aucune liste officielle de communes ni géographie structurée explicite n'est publiée sur la source retenue.", "confidence": "high", "reviewStatus": "deferred" }
+  ],
+  "dataWrites": []
+}

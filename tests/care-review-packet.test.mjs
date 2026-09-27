@@ -19,7 +19,7 @@ test("canonical care packet is a deterministic projection of reviewed Phase 3B e
   assert.deepEqual(compared, expected);
   assert.deepEqual(validateBoveressesCarePacket(canonical), {
     valid: true, localApplyReady: true, offeringCount: 1,
-    importedFeatureCount: 5, deferredCount: 3, unresolvedCount: 0,
+    importedFeatureCount: 5, serviceAreaCount: 0, deferredCount: 3, unresolvedCount: 0,
   });
 });
 
@@ -63,5 +63,6 @@ test("guarded SQL is additive, offering scoped, sourced, and rejects repeat stat
   assert.match(sql, /Unrelated or existing data changed/);
   assert.match(sql, /ROLLBACK;\s*$/);
   assert.match(sql, /INSERT INTO public\.provider_sources/);
-  assert.doesNotMatch(sql, /UPDATE public\.|DELETE FROM public\.|\bUPSERT\b|ON CONFLICT\s*\(/i);
+  assert.match(sql, /UPDATE public\.provider_sources SET accessed_on=/);
+  assert.doesNotMatch(sql, /UPDATE public\.(?!provider_sources\b)|DELETE FROM public\.|\bUPSERT\b|ON CONFLICT\s*\(/i);
 });

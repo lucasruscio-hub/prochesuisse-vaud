@@ -42,6 +42,13 @@ SELECT jsonb_build_object(
         ORDER BY s.source_type,s.source_url),'[]')
         FROM public.care_offering_sources os JOIN public.provider_sources s
           ON s.id=os.source_id AND s.provider_id=os.provider_id WHERE os.offering_id=o.id),
+      'serviceAreas',(SELECT coalesce(jsonb_agg(jsonb_build_object('area',to_jsonb(a),
+        'source',jsonb_build_object('source_type',s.source_type,'source_name',s.source_name,
+          'source_url',s.source_url,'external_record_id',s.external_record_id))
+        ORDER BY a.coverage_type,a.coverage_label,a.canton_code,a.municipality_id),'[]')
+        FROM public.provider_service_areas a JOIN public.provider_sources s
+          ON s.id=a.source_id AND s.provider_id=a.provider_id
+        WHERE a.care_offering_id=o.id AND a.provider_id=o.provider_id),
       'availabilityCount',(SELECT count(*) FROM public.care_offering_availability a WHERE a.offering_id=o.id)
     ) ORDER BY o.id),'[]') FROM public.care_offerings o JOIN public.providers p ON p.id=o.provider_id
       WHERE p.legacy_id = (${identity} #>> '{}'))

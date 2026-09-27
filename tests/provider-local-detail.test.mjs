@@ -106,8 +106,9 @@ test("local Senevita shows office locality and sourced contact without coverage"
   assert.deepEqual(view.offerings, []);
   assert.deepEqual(projected.tags, base.tags);
   local.serviceAreaCount = 1;
-  const fallback = await getProviderDetailBySlug(base.slug, { preview: true, readLocal: async () => local });
-  assert.deepEqual(fallback, base);
+  const withCareCoverage = await getProviderDetailBySlug(base.slug, { preview: true, readLocal: async () => local });
+  assert.equal(withCareCoverage.name, "Senevita Casa Vaud");
+  assert.deepEqual(withCareCoverage.detail.contact, projected.detail.contact);
 });
 
 test("unpublished and provenance guards reject unsafe local data without losing static fallback", async () => {
