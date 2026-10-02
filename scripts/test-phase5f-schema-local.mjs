@@ -27,6 +27,10 @@ const stateSql = `SELECT jsonb_build_object(
   'enrichedEms',(SELECT count(DISTINCT p.id) FROM public.providers p
     JOIN public.care_offerings o ON o.provider_id=p.id WHERE p.primary_type='ems'),
   'homeSupportOfferings',(SELECT count(*) FROM public.care_offerings WHERE offering_type='home_support'),
+  'batchAOrganizations',(SELECT count(*) FROM public.organizations WHERE slug IN
+    ('avasad','fondation-soins-lausanne','apromad','apremadol','asante-sana','absmad','fondation-de-la-cote','aspmad')),
+  'batchAArchivedProvider',(SELECT count(*) FROM public.providers WHERE slug='avasad-cms'
+    AND status='archived' AND NOT is_published AND verification_status='unverified'),
   'senevitaOrganizations',(SELECT count(*) FROM public.provider_organizations po
     JOIN public.providers p ON p.id=po.provider_id WHERE p.slug='senevita-vaud'),
   'senevitaOfferings',(SELECT count(*) FROM public.care_offerings o
@@ -58,6 +62,16 @@ const stateSql = `SELECT jsonb_build_object(
       FROM public.provider_service_areas a JOIN public.providers hp ON hp.id=a.provider_id
       WHERE hp.primary_type='domicile' AND hp.slug<>'senevita-vaud'))::text
       FROM public.providers p WHERE p.primary_type='domicile' AND p.slug<>'senevita-vaud')),
+  'nonTargetHomeFingerprint',md5((SELECT jsonb_build_object(
+    'providers',coalesce(jsonb_agg(to_jsonb(p) ORDER BY p.id),'[]'::jsonb),
+    'offerings',(SELECT coalesce(jsonb_agg(to_jsonb(o) ORDER BY o.id),'[]'::jsonb)
+      FROM public.care_offerings o JOIN public.providers hp ON hp.id=o.provider_id
+      WHERE hp.primary_type='domicile' AND hp.slug NOT IN ('senevita-vaud','avasad-cms')),
+    'areas',(SELECT coalesce(jsonb_agg(to_jsonb(a) ORDER BY a.id),'[]'::jsonb)
+      FROM public.provider_service_areas a JOIN public.providers hp ON hp.id=a.provider_id
+      WHERE hp.primary_type='domicile' AND hp.slug NOT IN ('senevita-vaud','avasad-cms')))::text
+      FROM public.providers p WHERE p.primary_type='domicile'
+        AND p.slug NOT IN ('senevita-vaud','avasad-cms'))),
   'providerFingerprint',md5((SELECT coalesce(jsonb_agg(to_jsonb(p) ORDER BY p.id),'[]'::jsonb)::text
     FROM public.providers p)),
   'existingDataFingerprint',md5(concat_ws('|',
@@ -90,8 +104,15 @@ function assertBaseline(value) {
   assert.equal(value.enrichedEms, 31, "31 EMS enrichment baseline changed");
   assert.equal(value.emsFingerprint, "b8756e81599062f1091dc7ee64359653",
     "31 EMS enrichment fingerprint changed");
-  assert.equal(value.otherHomeFingerprint, "367ce3bc3612c56d3da6386167739020",
-    "legacy domicile fingerprint changed");
+  assert.equal(value.nonTargetHomeFingerprint, "153f50c79913cd0b3f47646cbf82ecb2",
+    "non-target legacy domicile fingerprint changed");
+  const batchAApplied = value.batchAOrganizations === 8 && value.batchAArchivedProvider === 1;
+  if (!batchAApplied) {
+    assert.equal(value.batchAOrganizations, 0, "partial Batch A organization state detected");
+    assert.equal(value.batchAArchivedProvider, 0, "partial Batch A provider state detected");
+    assert.equal(value.otherHomeFingerprint, "367ce3bc3612c56d3da6386167739020",
+      "pre-Batch-A legacy domicile fingerprint changed");
+  }
   assert.equal(value.homeSupportOfferings, 0, "home_support must not be assigned automatically");
   assert.equal(value.senevitaOrganizations, 1);
   assert.equal(value.senevitaOfferings, 1);
@@ -117,22 +138,40 @@ const args = parseLocalArgs(process.argv.slice(2));
 const target = inspectLocalTarget();
 const before = state();
 assertBaseline(before);
+const batchAAlreadyApplied = before.batchAOrganizations === 8 && before.batchAArchivedProvider === 1;
 
 if (args.mode === "--write-local") {
+  assert.equal(batchAAlreadyApplied, false,
+    "Schema migration write mode is unavailable after Phase 5F identity batches begin");
   assert.equal(before.newTables, 0, "Phase 5F migration is already present");
   runLocalSql(`BEGIN;\n${withoutTransaction(migration)}\n${withoutTransaction(dryRun)}\nROLLBACK;`);
   assert.deepEqual(state(), before, "combined rollback validation changed schema or existing data");
   runLocalSql(migration);
 }
 
-runLocalSql(dryRun);
+if (!batchAAlreadyApplied) runLocalSql(dryRun);
 const after = state();
 assertBaseline(after);
 assert.equal(after.newTables, 6, "Phase 5F schema tables are incomplete");
 assert.equal(after.providerFingerprint, before.providerFingerprint, "provider rows changed");
 assert.equal(after.existingDataFingerprint, before.existingDataFingerprint, "existing provider/care data changed");
 const newRows = JSON.parse(runLocalSql(newStateSql).trim());
-assert.ok(Object.values(newRows).every((count) => count === 0), "Phase 5F migration wrote foundation data");
+const batchAApplied = after.batchAOrganizations === 8 && after.batchAArchivedProvider === 1;
+assert.deepEqual(newRows, batchAApplied ? {
+  organizationSources: 8,
+  providerNames: 0,
+  organizationNames: 0,
+  providerIdentityLinks: 0,
+  organizationRelationships: 7,
+  regulatoryDesignations: 0,
+} : {
+  organizationSources: 0,
+  providerNames: 0,
+  organizationNames: 0,
+  providerIdentityLinks: 0,
+  organizationRelationships: 0,
+  regulatoryDesignations: 0,
+}, "Phase 5F foundation/Batch A state is inconsistent");
 const senevita = verifySenevitaProjection();
 
 console.log(JSON.stringify({
@@ -141,11 +180,14 @@ console.log(JSON.stringify({
   confirmation: args.mode === "--write-local" ? LOCAL_CONFIRMATION : undefined,
   migration: migrationName,
   rollbackValidation: args.mode === "--write-local" ? "passed" : "not-requested",
-  providerRowsUntouched: true,
-  existingDataUntouched: true,
+  foundationConstraintDryRun: batchAAlreadyApplied ? "skipped-after-Batch-A" : "passed",
+  schemaVerificationDidNotMutateProviderRows: true,
+  schemaVerificationDidNotMutateExistingData: true,
   existing31EmsFingerprintUnchanged: true,
-  legacyDomicileFingerprintUnchanged: true,
-  newFoundationRows: newRows,
+  nonTargetLegacyDomicileFingerprintUnchanged: true,
+  targetIncludedLegacyDomicileFingerprint: after.otherHomeFingerprint,
+  batchAState: batchAApplied ? "applied" : "not-applied",
+  phase5fRows: newRows,
   senevitaProjection: senevita,
   databaseCounts: after,
 }, null, 2));
