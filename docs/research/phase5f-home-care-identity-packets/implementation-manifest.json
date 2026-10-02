@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "preparedOn": "2026-10-02",
+  "schemaCheckpoint": "8bb9721f3ed1e1b730cc2a1f042644206185cbe4",
+  "executionAuthorized": false,
+  "productionAccessAuthorized": false,
+  "phase5gAuthorized": false,
+  "localDatabaseBaseline": {
+    "observedOn": "2026-10-02",
+    "target": "fixed Lia-vaud local Supabase container on host port 54322",
+    "providers": 66,
+    "organizations": 22,
+    "providerOrganizations": 32,
+    "careOfferings": 32,
+    "providerServiceAreas": 1,
+    "homeSupportOfferings": 0,
+    "newFoundationTableRows": 0,
+    "existingMatches": {
+      "avasad-cms": "active, unpublished, unverified, no organization links, offerings, or service areas",
+      "dovida": "active, unpublished, unverified, no organization links, offerings, or service areas",
+      "homeinstead": "active, unpublished, unverified, no organization links, offerings, or service areas"
+    },
+    "productionAccessed": false
+  },
+  "actionVocabulary": ["create", "update", "alias", "organization-only", "hold"],
+  "countBasis": "Exact rows for the safe identity plan in these twelve packets: one entity-owned source per new entity, one offering source per new offering, only explicit alias rows, no features, availability, publication, verification, inferred service areas, optional brand organizations, or held identities. If implementation needs an additional source row, the manifest must be revised before execution.",
+  "packetIndex": [
+    {"packetId": "avasad-regional-organizations-and-cms", "file": "canonical/avasad-cms.json", "readyProviderCreates": 50, "heldProviderCreates": 0},
+    {"packetId": "amad-homecare", "file": "canonical/amad-homecare.json", "readyProviderCreates": 2, "heldProviderCreates": 1},
+    {"packetId": "dovida-home-instead", "file": "canonical/dovida-home-instead.json", "readyProviderCreates": 0, "heldProviderCreates": 0},
+    {"packetId": "vivradom", "file": "canonical/vivradom.json", "readyProviderCreates": 2, "heldProviderCreates": 0},
+    {"packetId": "pole-sante-pays-denhaut", "file": "canonical/pole-sante-pays-denhaut.json", "readyProviderCreates": 1, "heldProviderCreates": 0, "note": "Provider counted in CMS Batch B, not again in Batch D."},
+    {"packetId": "sciensus-hthc", "file": "canonical/sciensus-hthc.json", "readyProviderCreates": 0, "heldProviderCreates": 1},
+    {"packetId": "altoan-home-support", "file": "canonical/altoan.json", "readyProviderCreates": 1, "heldProviderCreates": 0},
+    {"packetId": "cpse-alexandra", "file": "canonical/cpse-alexandra.json", "readyProviderCreates": 0, "heldProviderCreates": 1},
+    {"packetId": "nurse-home-care", "file": "canonical/nurse-home-care.json", "readyProviderCreates": 0, "heldProviderCreates": 1},
+    {"packetId": "soinvaud-soinsvaud", "file": "canonical/soinvaud-soinsvaud.json", "readyProviderCreates": 0, "heldProviderCreates": 1},
+    {"packetId": "fondation-beau-sejour", "file": "canonical/fondation-beau-sejour.json", "readyProviderCreates": 1, "heldProviderCreates": 0},
+    {"packetId": "levant-samsa", "file": "canonical/levant-samsa.json", "readyProviderCreates": 1, "heldProviderCreates": 0}
+  ],
+  "actionSummary": {
+    "organization-only": 21,
+    "create": 57,
+    "update": 2,
+    "alias": 8,
+    "hold": 7,
+    "notes": [
+      "The 57 creates are 50 CMS, two AMAD sites, two Vivradom sites, Beau-Séjour OSAD, SAMSA Levant, and Altoan.",
+      "CMS Pays-d’Enhaut is counted once inside the 50 CMS.",
+      "Home Instead has action alias; its future alias operation also archives the existing legacy provider and creates one successor link.",
+      "No action creates CMS Vaud as a separate provider or treats a regional network as an owner."
+    ]
+  },
+  "safeBatches": [
+    {
+      "batchId": "A",
+      "name": "AVASAD and regional organizations",
+      "dependsOn": ["Phase 5F schema checkpoint applied locally"],
+      "includes": ["AVASAD", "FSL", "APROMAD", "APREMADOL", "ASANTE SANA", "ABSMAD", "Fondation de La Côte", "ASPMAD", "legacy avasad-cms retirement"],
+      "expectedRows": {
+        "organizations.create": 8,
+        "organization_sources.create": 8,
+        "organization_relationships.create": 7,
+        "providers.update": 1,
+        "provider_sources.create": 1
+      },
+      "expectedNetNewRows": 24,
+      "preconditions": ["Resolve full legal_name only where the packet marks it known; otherwise leave legal_name null.", "Keep all organizations and the legacy provider unpublished and unverified."],
+      "rollback": "One transaction. Delete seven organization_relationships, eight organization_sources and eight organizations; delete the new legacy-provider source and restore the avasad-cms before-image."
+    },
+    {
+      "batchId": "B",
+      "name": "CMS providers by regional organization",
+      "dependsOn": ["Batch A", "Pôle Santé organization from Batch D before the ASANTE SANA sub-batch"],
+      "subBatches": [
+        {"id": "B-FSL", "providers": 8, "provider_sources": 8, "care_offerings": 8, "care_offering_sources": 8, "provider_organizations": 16, "provider_identity_links": 8, "regulatory_designations": 8, "netNewRows": 64},
+        {"id": "B-APROMAD", "providers": 8, "provider_sources": 8, "care_offerings": 8, "care_offering_sources": 8, "provider_organizations": 16, "provider_identity_links": 8, "regulatory_designations": 8, "netNewRows": 64},
+        {"id": "B-APREMADOL", "providers": 4, "provider_sources": 4, "care_offerings": 4, "care_offering_sources": 4, "provider_organizations": 8, "provider_identity_links": 4, "regulatory_designations": 4, "netNewRows": 32},
+        {"id": "B-ASANTE-SANA", "providers": 10, "provider_sources": 10, "care_offerings": 10, "care_offering_sources": 10, "provider_organizations": 21, "provider_identity_links": 10, "regulatory_designations": 10, "netNewRows": 81},
+        {"id": "B-ABSMAD", "providers": 3, "provider_sources": 3, "care_offerings": 3, "care_offering_sources": 3, "provider_organizations": 6, "provider_identity_links": 3, "regulatory_designations": 3, "netNewRows": 24},
+        {"id": "B-FLC", "providers": 9, "provider_sources": 9, "care_offerings": 9, "care_offering_sources": 9, "provider_organizations": 18, "provider_identity_links": 9, "regulatory_designations": 9, "netNewRows": 72},
+        {"id": "B-ASPMAD", "providers": 8, "provider_sources": 8, "care_offerings": 8, "care_offering_sources": 8, "provider_organizations": 16, "provider_identity_links": 8, "regulatory_designations": 8, "netNewRows": 64}
+      ],
+      "expectedRows": {
+        "providers.create": 50,
+        "provider_sources.create": 50,
+        "care_offerings.create": 50,
+        "care_offering_sources.create": 50,
+        "provider_organizations.create": 101,
+        "provider_identity_links.create": 50,
+        "care_offering_regulatory_designations.create": 50,
+        "provider_service_areas.create": 0
+      },
+      "expectedNetNewRows": 401,
+      "preconditions": ["Implement one regional sub-batch per transaction.", "For 49 ordinary CMS, create one primary operator link and one AVASAD network link.", "For CMS Pays-d’Enhaut, create Pôle Santé as primary operator and ASANTE SANA plus AVASAD as network links.", "Do not add municipality coverage from names, addresses, or regional membership."],
+      "rollback": "Rollback one regional sub-batch at a time. Delete designation and offering-source rows, offerings, provider-organization and split links, provider sources, then the newly created providers. Batch A organizations and the legacy provider before-image remain untouched."
+    },
+    {
+      "batchId": "C",
+      "name": "Straightforward private-OSAD organizations in this packet set",
+      "dependsOn": ["Phase 5F schema checkpoint applied locally"],
+      "includes": ["Nurse Home Care Sàrl organization", "SoinVaud Sàrl organization"],
+      "expectedRows": {"organizations.create": 2, "organization_sources.create": 2},
+      "expectedNetNewRows": 4,
+      "heldOutsideBatch": ["Nurse Home Care provider", "SoinVaud/Soinsvaud provider and trading alias"],
+      "preconditions": ["Attach current legal-register evidence before implementation; if it cannot be attached, defer the corresponding organization too."],
+      "rollback": "Delete the two organization_sources then the two organizations. No provider rows exist to unwind."
+    },
+    {
+      "batchId": "D",
+      "name": "Complex networks and multi-site providers",
+      "dependsOn": ["Phase 5F schema checkpoint applied locally"],
+      "includes": ["AMAD Lutry and Nyon", "Vivradom Renens and Orbe", "Dovida/Home Instead", "Pôle Santé organization"],
+      "expectedRows": {
+        "organizations.create": 6,
+        "organization_sources.create": 6,
+        "organization_names.create": 3,
+        "providers.create": 4,
+        "providers.update": 2,
+        "provider_sources.create": 6,
+        "provider_names.create": 1,
+        "provider_identity_links.create": 1,
+        "provider_organizations.create": 5,
+        "care_offerings.create": 5,
+        "care_offering_sources.create": 5,
+        "care_offering_regulatory_designations.create": 4,
+        "provider_service_areas.create": 1
+      },
+      "expectedNetNewRows": 47,
+      "heldOutsideBatch": ["AMAD Yverdon", "Dovida unnamed partner agency", "Vivràdom shared brand organization"],
+      "preconditions": ["Capture before-images for dovida and homeinstead.", "Archive homeinstead and retain it unpublished; link it to dovida as historical successor/duplicate evidence according to the reviewed implementation SQL.", "Do not create Dovida municipality rows until municipality identities and partner topology are reconciled."],
+      "rollback": "One transaction per cluster. Remove dependent offering/designation/name/link rows and new providers/organizations in reverse order; restore dovida and homeinstead from exact before-images. Pôle Santé may be rolled back only before B-ASANTE-SANA exists."
+    },
+    {
+      "batchId": "E",
+      "name": "Specialist and institution-linked providers",
+      "dependsOn": ["Phase 5F schema checkpoint applied locally"],
+      "includes": ["Fondation Beau-Séjour OSAD", "SAMSA Levant", "Sciensus AG organization and historical legal name", "CPSE Alexandra organization"],
+      "expectedRows": {
+        "organizations.create": 4,
+        "organization_sources.create": 4,
+        "organization_names.create": 1,
+        "providers.create": 2,
+        "provider_sources.create": 2,
+        "provider_names.create": 2,
+        "provider_organizations.create": 2,
+        "care_offerings.create": 2,
+        "care_offering_sources.create": 2,
+        "care_offering_regulatory_designations.create": 2,
+        "provider_service_areas.create": 1
+      },
+      "expectedNetNewRows": 24,
+      "heldOutsideBatch": ["Sciensus provider", "CP Alexandra provider"],
+      "preconditions": ["Use specialist summaries only; do not add generalist service features.", "Keep Vevey and greater-Lausanne geography as packet evidence only until exact service-area targets are implementation-ready."],
+      "rollback": "One transaction per organization/provider cluster. Delete designations, offering sources, offerings, provider names and provider-organization links, then provider sources/providers; remove organization names/sources and organizations last."
+    },
+    {
+      "batchId": "F",
+      "name": "Non-medical home support",
+      "dependsOn": ["Phase 5F schema checkpoint applied locally with home_support allowed"],
+      "includes": ["Altoan SA", "Altoan home-support provider"],
+      "expectedRows": {
+        "organizations.create": 1,
+        "organization_sources.create": 1,
+        "providers.create": 1,
+        "provider_sources.create": 1,
+        "provider_organizations.create": 1,
+        "care_offerings.create": 1,
+        "care_offering_sources.create": 1,
+        "provider_service_areas.create": 1,
+        "care_offering_regulatory_designations.create": 0
+      },
+      "expectedNetNewRows": 8,
+      "preconditions": ["Offering type must be home_support.", "Create only the evidenced in-scope CH-VD canton row; do not imply medical, OSAD, nursing, or LAMal status."],
+      "rollback": "Delete the service-area and offering-source rows, offering, provider-organization link, provider source/provider, then organization source/organization."
+    }
+  ],
+  "globalRollbackExpectations": [
+    "Every future batch must run first as a local rollback dry run against the fixed Lia-vaud local container.",
+    "Each transaction must assert the 66-provider pre-batch baseline or the exact predecessor batch fingerprint, plus unchanged EMS and non-target domicile fingerprints.",
+    "Updates require serialized before-images; rollback restores every changed column, not only name/status.",
+    "New-row rollback uses the manifest's explicit stable IDs/slugs and deletes only those rows in reverse foreign-key order.",
+    "A count mismatch, unexpected pre-existing slug, missing source owner, or newly resolved hold aborts the whole sub-batch.",
+    "Publication and verification remain false after every identity batch.",
+    "No rollback or implementation command may target production Supabase."
+  ],
+  "dataWrites": []
+}

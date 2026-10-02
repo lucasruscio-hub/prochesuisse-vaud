@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "packetId": "cpse-alexandra",
+  "observedThrough": "2026-10-02",
+  "approval": {"localApply": false, "productionApply": false, "publish": false, "verify": false},
+  "sources": [
+    {"id": "phase5e-workbook", "kind": "lia_research", "title": "Lia Phase 5E final reconciliation", "path": "../../source-material/Lia_Phase5E_FINAL_reconciled_Vaud_homecare_2026-09-28.xlsx", "accessedOn": "2026-10-02", "observationDate": "2026-09-28"},
+    {"id": "cpse-site", "kind": "official_provider", "title": "CPSE Alexandra contact page", "url": "https://cpsealexandra.ch/", "accessedOn": "2026-10-02", "observationDate": "2026-10-02"},
+    {"id": "rshl-type1", "kind": "regional_health_network", "title": "Réseau Santé Haut-Léman — Type 1 OSAD list", "url": "https://reseau-sante-haut-leman.ch/centres-medico-sociaux-cms-et-organisations-de-soins-a-domicile-privees-osad/", "accessedOn": "2026-09-28", "observationDate": "2026-09-28"}
+  ],
+  "identities": [
+    {"identityId": "cpse-alexandra", "identityKind": "organization", "canonicalPublicName": "CPSE Alexandra", "legalOrganization": "CPSE Alexandra Sàrl", "historicalTradingNames": [], "organizationRelationships": [], "providerSiteIdentity": null, "offeringType": null, "regulatoryDesignation": null, "serviceAreaEvidence": null, "existingLiaMatch": null, "intendedAction": "organization-only", "unresolved": ["The legal form is carried from the Phase 5E reconciliation and should be checked against a current register extract before legal_name is written."], "sourceIds": ["phase5e-workbook", "cpse-site"]},
+    {"identityId": "cp-alexandra", "identityKind": "provider", "canonicalPublicName": "CP Alexandra", "legalOrganization": "CPSE Alexandra Sàrl", "historicalTradingNames": [], "organizationRelationships": [{"organization": "cpse-alexandra", "type": "operator", "isPrimary": true}], "providerSiteIdentity": "Dedicated home-care contact at Avenue des Alpes 17, 1820 Montreux; cp.osad@cpsealexandra.ch; 021 961 10 22.", "offeringType": "home_care", "offeringScope": "Psychiatric/institution-linked home care; do not inherit a generalist offering.", "regulatoryDesignation": {"designationType": "classification", "scheme": "vd_regional_osad_class", "designationCode": "type_1", "exactSourceLabel": "CPSE Alexandra Sàrl", "jurisdiction": "CH-VD", "status": null, "effectiveOn": null, "observedOn": "2026-09-28", "sourceIds": ["rshl-type1"], "implementationStatus": "hold_until_authorization_basis_reconciled"}, "serviceAreaEvidence": {"kind": "regional_network_narrative", "statement": "Riviera evidence is narrative, not a municipality set.", "futureServiceAreaRows": 0}, "existingLiaMatch": null, "intendedAction": "hold", "unresolved": ["Current authorization basis and reason for absence from the 02.03.2026 official file.", "Whether CP Alexandra is the exact authorized operating-unit name."], "sourceIds": ["cpse-site", "rshl-type1"]}
+  ],
+  "packetDecision": "The patient-facing unit is CP Alexandra, not the entire CPSE institution. Provider creation remains held on authorization and exact operating-unit identity.",
+  "dataWrites": []
+}

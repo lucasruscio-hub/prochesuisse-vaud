@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "packetId": "pole-sante-pays-denhaut",
+  "observedThrough": "2026-10-02",
+  "approval": {"localApply": false, "productionApply": false, "publish": false, "verify": false},
+  "sources": [
+    {"id": "phase5e-workbook", "kind": "lia_research", "title": "Lia Phase 5E final reconciliation", "path": "../../source-material/Lia_Phase5E_FINAL_reconciled_Vaud_homecare_2026-09-28.xlsx", "accessedOn": "2026-10-02", "observationDate": "2026-09-28"},
+    {"id": "vd-osad-20260302", "kind": "public_authority", "title": "Vaud official OSAD file", "accessedOn": "2026-09-28", "observationDate": "2026-03-02"},
+    {"id": "cms-asante-sana", "kind": "official_network", "title": "ASANTE SANA — centres médico-sociaux", "url": "https://www.cms-vaud.ch/asantesana/centres-medico-sociaux-3/", "accessedOn": "2026-10-02", "observationDate": "2026-10-02"},
+    {"id": "pspe-home-care", "kind": "official_provider", "title": "Pôle Santé du Pays-d'Enhaut — aide et soins à domicile", "url": "https://www.pspe.ch/jcms/pae_7779/fr/aide-soins-a-domicile", "accessedOn": "2026-10-02", "observationDate": "2026-10-02"}
+  ],
+  "identities": [
+    {"identityId": "pole-sante-pays-denhaut", "identityKind": "organization", "canonicalPublicName": "Pôle Santé du Pays-d'Enhaut", "legalOrganization": null, "historicalTradingNames": ["Pôle Santé du Pays d'Enhaut"], "organizationRelationships": [], "providerSiteIdentity": null, "offeringType": null, "regulatoryDesignation": null, "serviceAreaEvidence": null, "existingLiaMatch": null, "intendedAction": "organization-only", "unresolved": ["Exact legal name/form must be checked against statutes before legal_name is populated."], "sourceIds": ["pspe-home-care", "vd-osad-20260302"]},
+    {"identityId": "pole-sante-osad-row", "identityKind": "alias", "canonicalPublicName": "Pôle Santé du Pays d'Enhaut", "legalOrganization": "Pôle Santé du Pays-d'Enhaut", "historicalTradingNames": [], "organizationRelationships": [], "providerSiteIdentity": "Dated official-list label for the same delegated CMS operation, not another provider.", "offeringType": null, "regulatoryDesignation": null, "serviceAreaEvidence": null, "existingLiaMatch": null, "intendedAction": "alias", "aliasType": "trading", "unresolved": [], "sourceIds": ["vd-osad-20260302"]}
+  ],
+  "canonicalProviderReference": {"identityId": "cms-pays-denhaut", "packet": "avasad-cms.json", "intendedAction": "create", "canonicalPublicName": "CMS Pays-d’Enhaut", "legalOrganization": "Pôle Santé du Pays-d'Enhaut", "providerSiteIdentity": "Service aide et soins à domicile, Route de l'Hôpital 36, 1660 Château-d'Œx", "offeringType": "home_care", "organizationRelationships": [{"organization": "pole-sante-pays-denhaut", "type": "operator", "isPrimary": true}, {"organization": "asante-sana", "type": "network", "isPrimary": false}, {"organization": "avasad", "type": "network", "isPrimary": false}], "regulatoryDesignation": {"designationType": "classification", "scheme": "vd_home_care_provider_class", "designationCode": "cms", "exactSourceLabel": "CMS Pays d’Enhaut : sur délégation au Pôle Santé Pays-d’enhaut – PSPE", "jurisdiction": "CH-VD", "status": null, "effectiveOn": null, "observedOn": "2026-10-02"}, "serviceAreaEvidence": {"kind": "narrative_region", "statement": "No municipality set is enumerated.", "futureServiceAreaRows": 0}, "unresolved": ["No separate generic Pôle Santé provider should be created from the dated OSAD row."]},
+  "packetDecision": "One organization and one patient-facing CMS. The canonical provider action lives in avasad-cms.json and is referenced here rather than duplicated. The official OSAD row is deduplicated into CMS Pays-d’Enhaut; ASANTE SANA and AVASAD are networks, not owners.",
+  "dataWrites": []
+}

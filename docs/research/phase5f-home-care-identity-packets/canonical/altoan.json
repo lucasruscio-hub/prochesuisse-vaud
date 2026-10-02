@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "packetId": "altoan-home-support",
+  "observedThrough": "2026-10-02",
+  "approval": {"localApply": false, "productionApply": false, "publish": false, "verify": false},
+  "sources": [
+    {"id": "phase5e-workbook", "kind": "lia_research", "title": "Lia Phase 5E final reconciliation", "path": "../../source-material/Lia_Phase5E_FINAL_reconciled_Vaud_homecare_2026-09-28.xlsx", "accessedOn": "2026-10-02", "observationDate": "2026-09-28"},
+    {"id": "altoan-contact", "kind": "official_provider", "title": "Altoan — contact and frequently asked questions", "url": "https://altoan.com/contact", "accessedOn": "2026-10-02", "observationDate": "2026-10-02"}
+  ],
+  "identities": [
+    {"identityId": "altoan-sa", "identityKind": "organization", "canonicalPublicName": "Altoan SA", "legalOrganization": "Altoan SA", "historicalTradingNames": [], "organizationRelationships": [], "providerSiteIdentity": null, "offeringType": null, "regulatoryDesignation": null, "serviceAreaEvidence": null, "existingLiaMatch": null, "intendedAction": "organization-only", "unresolved": ["The packet does not independently reproduce a commercial-register extract."], "sourceIds": ["altoan-contact", "phase5e-workbook"]},
+    {"identityId": "altoan", "identityKind": "provider", "canonicalPublicName": "Altoan", "legalOrganization": "Altoan SA", "historicalTradingNames": [], "organizationRelationships": [{"organization": "altoan-sa", "type": "operator", "isPrimary": true}], "providerSiteIdentity": "Private accompaniment operation with contact at Ch. des Travers-Bancs 4b, 1092 Belmont-sur-Lausanne.", "offeringType": "home_support", "regulatoryDesignation": null, "regulatoryClassificationStatement": "The provider explicitly states that it is strictly non-medical. This is not stored as a negative regulatory designation.", "serviceAreaEvidence": {"kind": "explicit_cantons", "statement": "The provider explicitly states Vaud, Valais and Geneva.", "futureServiceAreaRows": 1, "implementationScope": ["CH-VD"], "note": "The Vaud batch may store only the evidenced in-scope canton row; omission of VS/GE is not a denial of those areas."}, "existingLiaMatch": null, "intendedAction": "create", "unresolved": [], "sourceIds": ["altoan-contact"]}
+  ],
+  "packetDecision": "Create as non-medical home_support. Do not assign home_care, OSAD, nursing, or LAMal authorization semantics.",
+  "dataWrites": []
+}

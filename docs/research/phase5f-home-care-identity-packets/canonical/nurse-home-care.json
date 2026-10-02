@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "packetId": "nurse-home-care",
+  "observedThrough": "2026-10-02",
+  "approval": {"localApply": false, "productionApply": false, "publish": false, "verify": false},
+  "sources": [
+    {"id": "phase5e-workbook", "kind": "lia_research", "title": "Lia Phase 5E final reconciliation", "path": "../../source-material/Lia_Phase5E_FINAL_reconciled_Vaud_homecare_2026-09-28.xlsx", "accessedOn": "2026-10-02", "observationDate": "2026-09-28"},
+    {"id": "rslc-type1", "kind": "regional_health_network", "title": "Réseau Santé la Côte — membres affiliés", "url": "https://reseau-sante-lacote.ch/membres-affilies/", "accessedOn": "2026-09-28", "observationDate": "2026-09-28"}
+  ],
+  "identities": [
+    {"identityId": "nurse-home-care-sarl", "identityKind": "organization", "canonicalPublicName": "Nurse Home Care Sàrl", "legalOrganization": "Nurse Home Care Sàrl", "historicalTradingNames": [], "organizationRelationships": [], "providerSiteIdentity": null, "offeringType": null, "regulatoryDesignation": null, "serviceAreaEvidence": null, "existingLiaMatch": null, "intendedAction": "organization-only", "unresolved": ["A current register source should be attached before legal_name is written."], "sourceIds": ["phase5e-workbook"]},
+    {"identityId": "nurse-home-care", "identityKind": "provider", "canonicalPublicName": "Nurse Home Care", "legalOrganization": "Nurse Home Care Sàrl", "historicalTradingNames": [], "organizationRelationships": [{"organization": "nurse-home-care-sarl", "type": "operator", "isPrimary": true}], "providerSiteIdentity": "Regional directory identity at Rue des Charpentiers 26, 1110 Morges; no official provider website is established.", "offeringType": "home_care", "regulatoryDesignation": {"designationType": "classification", "scheme": "vd_regional_osad_class", "designationCode": "type_1", "exactSourceLabel": "Nurse Home Care", "jurisdiction": "CH-VD", "status": null, "effectiveOn": null, "observedOn": "2026-09-28", "sourceIds": ["rslc-type1"], "implementationStatus": "hold_until_authorization_basis_reconciled"}, "serviceAreaEvidence": {"kind": "regional_network_narrative", "statement": "La Côte membership is not municipality coverage.", "futureServiceAreaRows": 0}, "existingLiaMatch": null, "intendedAction": "hold", "unresolved": ["Current authorization date/source and reason for absence from the 02.03.2026 official file.", "Current provider-owned contact path and website."], "sourceIds": ["rslc-type1", "phase5e-workbook"]}
+  ],
+  "packetDecision": "Legal identity and regional Type 1 observation are sufficient for a research packet, not for provider creation.",
+  "dataWrites": []
+}

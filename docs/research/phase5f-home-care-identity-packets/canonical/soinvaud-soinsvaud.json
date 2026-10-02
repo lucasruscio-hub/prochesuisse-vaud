@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "packetId": "soinvaud-soinsvaud",
+  "observedThrough": "2026-10-02",
+  "approval": {"localApply": false, "productionApply": false, "publish": false, "verify": false},
+  "sources": [
+    {"id": "phase5e-workbook", "kind": "lia_research", "title": "Lia Phase 5E final reconciliation", "path": "../../source-material/Lia_Phase5E_FINAL_reconciled_Vaud_homecare_2026-09-28.xlsx", "accessedOn": "2026-10-02", "observationDate": "2026-09-28"},
+    {"id": "rslc-type1", "kind": "regional_health_network", "title": "Réseau Santé la Côte — membres affiliés", "url": "https://reseau-sante-lacote.ch/membres-affilies/", "accessedOn": "2026-09-28", "observationDate": "2026-09-28"},
+    {"id": "soinvaud-register", "kind": "commercial_register_republication", "title": "SoinVaud Sàrl", "url": "https://www.moneyhouse.ch/fr/company/soinvaud-sarl-20792789311", "accessedOn": "2026-09-28", "observationDate": "2026-09-28"}
+  ],
+  "identities": [
+    {"identityId": "soinvaud-sarl", "identityKind": "organization", "canonicalPublicName": "SoinVaud Sàrl", "legalOrganization": "SoinVaud Sàrl", "historicalTradingNames": [], "organizationRelationships": [], "providerSiteIdentity": null, "offeringType": null, "regulatoryDesignation": null, "serviceAreaEvidence": null, "existingLiaMatch": null, "intendedAction": "organization-only", "unresolved": [], "sourceIds": ["soinvaud-register"]},
+    {"identityId": "soinsvaud", "identityKind": "alias", "canonicalPublicName": "Soinsvaud", "legalOrganization": "SoinVaud Sàrl", "historicalTradingNames": [], "organizationRelationships": [], "providerSiteIdentity": null, "offeringType": null, "regulatoryDesignation": null, "serviceAreaEvidence": null, "existingLiaMatch": null, "intendedAction": "alias", "aliasType": "trading", "unresolved": ["No provider-owned source establishes whether Soinsvaud is the intended durable public brand or only the regional directory label."], "sourceIds": ["rslc-type1"]},
+    {"identityId": "soinvaud-provider", "identityKind": "provider", "canonicalPublicName": null, "legalOrganization": "SoinVaud Sàrl", "historicalTradingNames": ["Soinsvaud"], "organizationRelationships": [{"organization": "soinvaud-sarl", "type": "operator", "isPrimary": true}], "providerSiteIdentity": "The regional entry and legal entity match at Chemin des Berges 8, 1022 Chavannes-près-Renens and phone 021 552 00 54.", "offeringType": "home_care", "regulatoryDesignation": {"designationType": "classification", "scheme": "vd_regional_osad_class", "designationCode": "type_1", "exactSourceLabel": "Soinsvaud", "jurisdiction": "CH-VD", "status": null, "effectiveOn": null, "observedOn": "2026-09-28", "sourceIds": ["rslc-type1"], "implementationStatus": "hold_until_authorization_and_public_name_reconciled"}, "serviceAreaEvidence": {"kind": "regional_network_narrative", "statement": "La Côte membership is not municipality coverage.", "futureServiceAreaRows": 0}, "existingLiaMatch": null, "intendedAction": "hold", "unresolved": ["Current authorization date/source and reason for absence from the 02.03.2026 official file.", "Canonical public provider name: SoinVaud or Soinsvaud.", "Provider-owned website/contact evidence."], "sourceIds": ["rslc-type1", "soinvaud-register"]}
+  ],
+  "packetDecision": "The legal entity and directory alias resolve to one identity. Provider creation is held; no duplicate SoinVaud/Soinsvaud rows.",
+  "dataWrites": []
+}
