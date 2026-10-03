@@ -31,6 +31,9 @@ const stateSql = `SELECT jsonb_build_object(
     ('avasad','fondation-soins-lausanne','apromad','apremadol','asante-sana','absmad','fondation-de-la-cote','aspmad')),
   'batchAArchivedProvider',(SELECT count(*) FROM public.providers WHERE slug='avasad-cms'
     AND status='archived' AND NOT is_published AND verification_status='unverified'),
+  'batchB1Providers',(SELECT count(*) FROM public.providers WHERE slug IN
+    ('cms-ancien-stand','cms-centre-ville','cms-chailly-sallaz','cms-montelly',
+     'cms-ouchy','cms-des-peupliers','cms-riponne','cms-valency')),
   'senevitaOrganizations',(SELECT count(*) FROM public.provider_organizations po
     JOIN public.providers p ON p.id=po.provider_id WHERE p.slug='senevita-vaud'),
   'senevitaOfferings',(SELECT count(*) FROM public.care_offerings o
@@ -66,12 +69,17 @@ const stateSql = `SELECT jsonb_build_object(
     'providers',coalesce(jsonb_agg(to_jsonb(p) ORDER BY p.id),'[]'::jsonb),
     'offerings',(SELECT coalesce(jsonb_agg(to_jsonb(o) ORDER BY o.id),'[]'::jsonb)
       FROM public.care_offerings o JOIN public.providers hp ON hp.id=o.provider_id
-      WHERE hp.primary_type='domicile' AND hp.slug NOT IN ('senevita-vaud','avasad-cms')),
+      WHERE hp.primary_type='domicile' AND hp.slug NOT IN ('senevita-vaud','avasad-cms',
+        'cms-ancien-stand','cms-centre-ville','cms-chailly-sallaz','cms-montelly',
+        'cms-ouchy','cms-des-peupliers','cms-riponne','cms-valency')),
     'areas',(SELECT coalesce(jsonb_agg(to_jsonb(a) ORDER BY a.id),'[]'::jsonb)
       FROM public.provider_service_areas a JOIN public.providers hp ON hp.id=a.provider_id
-      WHERE hp.primary_type='domicile' AND hp.slug NOT IN ('senevita-vaud','avasad-cms')))::text
+      WHERE hp.primary_type='domicile' AND hp.slug NOT IN ('senevita-vaud','avasad-cms',
+        'cms-ancien-stand','cms-centre-ville','cms-chailly-sallaz','cms-montelly',
+        'cms-ouchy','cms-des-peupliers','cms-riponne','cms-valency')))::text
       FROM public.providers p WHERE p.primary_type='domicile'
-        AND p.slug NOT IN ('senevita-vaud','avasad-cms'))),
+        AND p.slug NOT IN ('senevita-vaud','avasad-cms','cms-ancien-stand','cms-centre-ville',
+          'cms-chailly-sallaz','cms-montelly','cms-ouchy','cms-des-peupliers','cms-riponne','cms-valency'))),
   'providerFingerprint',md5((SELECT coalesce(jsonb_agg(to_jsonb(p) ORDER BY p.id),'[]'::jsonb)::text
     FROM public.providers p)),
   'existingDataFingerprint',md5(concat_ws('|',
@@ -100,7 +108,9 @@ const newStateSql = `SELECT jsonb_build_object(
 const state = () => JSON.parse(runLocalSql(stateSql).trim());
 
 function assertBaseline(value) {
-  assert.equal(value.providers, 66, "existing provider count changed");
+  assert.ok(value.batchB1Providers === 0 || value.batchB1Providers === 8,
+    "partial Batch B1 provider state detected");
+  assert.equal(value.providers, 66 + value.batchB1Providers, "existing provider count changed");
   assert.equal(value.enrichedEms, 31, "31 EMS enrichment baseline changed");
   assert.equal(value.emsFingerprint, "b8756e81599062f1091dc7ee64359653",
     "31 EMS enrichment fingerprint changed");
@@ -139,6 +149,7 @@ const target = inspectLocalTarget();
 const before = state();
 assertBaseline(before);
 const batchAAlreadyApplied = before.batchAOrganizations === 8 && before.batchAArchivedProvider === 1;
+const batchB1AlreadyApplied = before.batchB1Providers === 8;
 
 if (args.mode === "--write-local") {
   assert.equal(batchAAlreadyApplied, false,
@@ -157,7 +168,14 @@ assert.equal(after.providerFingerprint, before.providerFingerprint, "provider ro
 assert.equal(after.existingDataFingerprint, before.existingDataFingerprint, "existing provider/care data changed");
 const newRows = JSON.parse(runLocalSql(newStateSql).trim());
 const batchAApplied = after.batchAOrganizations === 8 && after.batchAArchivedProvider === 1;
-assert.deepEqual(newRows, batchAApplied ? {
+assert.deepEqual(newRows, batchB1AlreadyApplied ? {
+  organizationSources: 8,
+  providerNames: 0,
+  organizationNames: 0,
+  providerIdentityLinks: 8,
+  organizationRelationships: 7,
+  regulatoryDesignations: 8,
+} : batchAApplied ? {
   organizationSources: 8,
   providerNames: 0,
   organizationNames: 0,
@@ -171,7 +189,7 @@ assert.deepEqual(newRows, batchAApplied ? {
   providerIdentityLinks: 0,
   organizationRelationships: 0,
   regulatoryDesignations: 0,
-}, "Phase 5F foundation/Batch A state is inconsistent");
+}, "Phase 5F foundation/identity-batch state is inconsistent");
 const senevita = verifySenevitaProjection();
 
 console.log(JSON.stringify({
@@ -187,6 +205,7 @@ console.log(JSON.stringify({
   nonTargetLegacyDomicileFingerprintUnchanged: true,
   targetIncludedLegacyDomicileFingerprint: after.otherHomeFingerprint,
   batchAState: batchAApplied ? "applied" : "not-applied",
+  batchB1State: batchB1AlreadyApplied ? "applied" : "not-applied",
   phase5fRows: newRows,
   senevitaProjection: senevita,
   databaseCounts: after,
