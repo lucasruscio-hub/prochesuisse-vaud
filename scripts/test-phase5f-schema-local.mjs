@@ -37,6 +37,9 @@ const stateSql = `SELECT jsonb_build_object(
   'batchB2Providers',(SELECT count(*) FROM public.providers WHERE slug IN
     ('cms-cully','cms-echallens','cms-epalinges','cms-du-mont',
      'cms-oron','cms-prilly-nord','cms-prilly-sud','cms-pully')),
+  'batchB3Providers',(SELECT count(*) FROM public.providers WHERE slug IN
+    ('cms-bussigny-villars-ste-croix','cms-ecublens-saint-sulpice-chavannes',
+     'cms-renens-nord-crissier','cms-renens-sud')),
   'senevitaOrganizations',(SELECT count(*) FROM public.provider_organizations po
     JOIN public.providers p ON p.id=po.provider_id WHERE p.slug='senevita-vaud'),
   'senevitaOfferings',(SELECT count(*) FROM public.care_offerings o
@@ -76,19 +79,22 @@ const stateSql = `SELECT jsonb_build_object(
         'cms-ancien-stand','cms-centre-ville','cms-chailly-sallaz','cms-montelly',
         'cms-ouchy','cms-des-peupliers','cms-riponne','cms-valency','cms-cully',
         'cms-echallens','cms-epalinges','cms-du-mont','cms-oron','cms-prilly-nord',
-        'cms-prilly-sud','cms-pully')),
+        'cms-prilly-sud','cms-pully','cms-bussigny-villars-ste-croix',
+        'cms-ecublens-saint-sulpice-chavannes','cms-renens-nord-crissier','cms-renens-sud')),
     'areas',(SELECT coalesce(jsonb_agg(to_jsonb(a) ORDER BY a.id),'[]'::jsonb)
       FROM public.provider_service_areas a JOIN public.providers hp ON hp.id=a.provider_id
       WHERE hp.primary_type='domicile' AND hp.slug NOT IN ('senevita-vaud','avasad-cms',
         'cms-ancien-stand','cms-centre-ville','cms-chailly-sallaz','cms-montelly',
         'cms-ouchy','cms-des-peupliers','cms-riponne','cms-valency','cms-cully',
         'cms-echallens','cms-epalinges','cms-du-mont','cms-oron','cms-prilly-nord',
-        'cms-prilly-sud','cms-pully')))::text
+        'cms-prilly-sud','cms-pully','cms-bussigny-villars-ste-croix',
+        'cms-ecublens-saint-sulpice-chavannes','cms-renens-nord-crissier','cms-renens-sud')))::text
       FROM public.providers p WHERE p.primary_type='domicile'
         AND p.slug NOT IN ('senevita-vaud','avasad-cms','cms-ancien-stand','cms-centre-ville',
           'cms-chailly-sallaz','cms-montelly','cms-ouchy','cms-des-peupliers','cms-riponne','cms-valency',
           'cms-cully','cms-echallens','cms-epalinges','cms-du-mont','cms-oron','cms-prilly-nord',
-          'cms-prilly-sud','cms-pully'))),
+          'cms-prilly-sud','cms-pully','cms-bussigny-villars-ste-croix',
+          'cms-ecublens-saint-sulpice-chavannes','cms-renens-nord-crissier','cms-renens-sud'))),
   'providerFingerprint',md5((SELECT coalesce(jsonb_agg(to_jsonb(p) ORDER BY p.id),'[]'::jsonb)::text
     FROM public.providers p)),
   'existingDataFingerprint',md5(concat_ws('|',
@@ -121,9 +127,14 @@ function assertBaseline(value) {
     "partial Batch B1 provider state detected");
   assert.ok(value.batchB2Providers === 0 || value.batchB2Providers === 8,
     "partial Batch B2 provider state detected");
+  assert.ok(value.batchB3Providers === 0 || value.batchB3Providers === 4,
+    "partial Batch B3 provider state detected");
   if (value.batchB2Providers === 8) assert.equal(value.batchB1Providers, 8,
     "Batch B2 cannot exist without Batch B1");
-  assert.equal(value.providers, 66 + value.batchB1Providers + value.batchB2Providers,
+  if (value.batchB3Providers === 4) assert.equal(value.batchB2Providers, 8,
+    "Batch B3 cannot exist without Batch B2");
+  assert.equal(value.providers, 66 + value.batchB1Providers + value.batchB2Providers
+    + value.batchB3Providers,
     "existing provider count changed");
   assert.equal(value.enrichedEms, 31, "31 EMS enrichment baseline changed");
   assert.equal(value.emsFingerprint, "b8756e81599062f1091dc7ee64359653",
@@ -165,6 +176,7 @@ assertBaseline(before);
 const batchAAlreadyApplied = before.batchAOrganizations === 8 && before.batchAArchivedProvider === 1;
 const batchB1AlreadyApplied = before.batchB1Providers === 8;
 const batchB2AlreadyApplied = before.batchB2Providers === 8;
+const batchB3AlreadyApplied = before.batchB3Providers === 4;
 
 if (args.mode === "--write-local") {
   assert.equal(batchAAlreadyApplied, false,
@@ -183,7 +195,14 @@ assert.equal(after.providerFingerprint, before.providerFingerprint, "provider ro
 assert.equal(after.existingDataFingerprint, before.existingDataFingerprint, "existing provider/care data changed");
 const newRows = JSON.parse(runLocalSql(newStateSql).trim());
 const batchAApplied = after.batchAOrganizations === 8 && after.batchAArchivedProvider === 1;
-assert.deepEqual(newRows, batchB2AlreadyApplied ? {
+assert.deepEqual(newRows, batchB3AlreadyApplied ? {
+  organizationSources: 8,
+  providerNames: 0,
+  organizationNames: 0,
+  providerIdentityLinks: 20,
+  organizationRelationships: 7,
+  regulatoryDesignations: 20,
+} : batchB2AlreadyApplied ? {
   organizationSources: 8,
   providerNames: 0,
   organizationNames: 0,
@@ -229,6 +248,7 @@ console.log(JSON.stringify({
   batchAState: batchAApplied ? "applied" : "not-applied",
   batchB1State: batchB1AlreadyApplied ? "applied" : "not-applied",
   batchB2State: batchB2AlreadyApplied ? "applied" : "not-applied",
+  batchB3State: batchB3AlreadyApplied ? "applied" : "not-applied",
   phase5fRows: newRows,
   senevitaProjection: senevita,
   databaseCounts: after,
