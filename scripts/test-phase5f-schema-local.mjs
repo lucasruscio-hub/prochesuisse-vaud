@@ -40,6 +40,8 @@ const stateSql = `SELECT jsonb_build_object(
   'batchB3Providers',(SELECT count(*) FROM public.providers WHERE slug IN
     ('cms-bussigny-villars-ste-croix','cms-ecublens-saint-sulpice-chavannes',
      'cms-renens-nord-crissier','cms-renens-sud')),
+  'poleSanteOrganizations',(SELECT count(*) FROM public.organizations
+    WHERE slug='pole-sante-pays-denhaut'),
   'senevitaOrganizations',(SELECT count(*) FROM public.provider_organizations po
     JOIN public.providers p ON p.id=po.provider_id WHERE p.slug='senevita-vaud'),
   'senevitaOfferings',(SELECT count(*) FROM public.care_offerings o
@@ -129,10 +131,14 @@ function assertBaseline(value) {
     "partial Batch B2 provider state detected");
   assert.ok(value.batchB3Providers === 0 || value.batchB3Providers === 4,
     "partial Batch B3 provider state detected");
+  assert.ok(value.poleSanteOrganizations === 0 || value.poleSanteOrganizations === 1,
+    "partial Pôle Santé prerequisite state detected");
   if (value.batchB2Providers === 8) assert.equal(value.batchB1Providers, 8,
     "Batch B2 cannot exist without Batch B1");
   if (value.batchB3Providers === 4) assert.equal(value.batchB2Providers, 8,
     "Batch B3 cannot exist without Batch B2");
+  if (value.poleSanteOrganizations === 1) assert.equal(value.batchB3Providers, 4,
+    "Pôle Santé prerequisite cannot exist without Batch B3");
   assert.equal(value.providers, 66 + value.batchB1Providers + value.batchB2Providers
     + value.batchB3Providers,
     "existing provider count changed");
@@ -177,6 +183,7 @@ const batchAAlreadyApplied = before.batchAOrganizations === 8 && before.batchAAr
 const batchB1AlreadyApplied = before.batchB1Providers === 8;
 const batchB2AlreadyApplied = before.batchB2Providers === 8;
 const batchB3AlreadyApplied = before.batchB3Providers === 4;
+const poleSanteAlreadyApplied = before.poleSanteOrganizations === 1;
 
 if (args.mode === "--write-local") {
   assert.equal(batchAAlreadyApplied, false,
@@ -195,7 +202,14 @@ assert.equal(after.providerFingerprint, before.providerFingerprint, "provider ro
 assert.equal(after.existingDataFingerprint, before.existingDataFingerprint, "existing provider/care data changed");
 const newRows = JSON.parse(runLocalSql(newStateSql).trim());
 const batchAApplied = after.batchAOrganizations === 8 && after.batchAArchivedProvider === 1;
-assert.deepEqual(newRows, batchB3AlreadyApplied ? {
+assert.deepEqual(newRows, poleSanteAlreadyApplied ? {
+  organizationSources: 9,
+  providerNames: 0,
+  organizationNames: 1,
+  providerIdentityLinks: 20,
+  organizationRelationships: 7,
+  regulatoryDesignations: 20,
+} : batchB3AlreadyApplied ? {
   organizationSources: 8,
   providerNames: 0,
   organizationNames: 0,
@@ -249,6 +263,7 @@ console.log(JSON.stringify({
   batchB1State: batchB1AlreadyApplied ? "applied" : "not-applied",
   batchB2State: batchB2AlreadyApplied ? "applied" : "not-applied",
   batchB3State: batchB3AlreadyApplied ? "applied" : "not-applied",
+  poleSantePrerequisiteState: poleSanteAlreadyApplied ? "applied" : "not-applied",
   phase5fRows: newRows,
   senevitaProjection: senevita,
   databaseCounts: after,
