@@ -45,6 +45,9 @@ const stateSql = `SELECT jsonb_build_object(
      'cms-montreux','cms-rennaz','cms-vevey-est','cms-vevey-ouest','cms-pays-denhaut')),
   'batchB5Providers',(SELECT count(*) FROM public.providers WHERE slug IN
     ('cms-avenches','cms-moudon','cms-payerne')),
+  'batchB6Providers',(SELECT count(*) FROM public.providers WHERE slug IN
+    ('cms-cossonay','cms-grandson','cms-la-vallee','cms-orbe','cms-sainte-croix',
+     'cms-vallorbe','cms-yverdon','cms-yvonand')),
   'poleSanteOrganizations',(SELECT count(*) FROM public.organizations
     WHERE slug='pole-sante-pays-denhaut'),
   'senevitaOrganizations',(SELECT count(*) FROM public.provider_organizations po
@@ -90,7 +93,8 @@ const stateSql = `SELECT jsonb_build_object(
         'cms-ecublens-saint-sulpice-chavannes','cms-renens-nord-crissier','cms-renens-sud',
         'cms-chaussy','cms-clarens','cms-grande-eau','cms-gryonne','cms-la-tour-de-peilz',
         'cms-montreux','cms-rennaz','cms-vevey-est','cms-vevey-ouest','cms-pays-denhaut',
-        'cms-avenches','cms-moudon','cms-payerne')),
+        'cms-avenches','cms-moudon','cms-payerne','cms-cossonay','cms-grandson',
+        'cms-la-vallee','cms-orbe','cms-sainte-croix','cms-vallorbe','cms-yverdon','cms-yvonand')),
     'areas',(SELECT coalesce(jsonb_agg(to_jsonb(a) ORDER BY a.id),'[]'::jsonb)
       FROM public.provider_service_areas a JOIN public.providers hp ON hp.id=a.provider_id
       WHERE hp.primary_type='domicile' AND hp.slug NOT IN ('senevita-vaud','avasad-cms',
@@ -101,7 +105,8 @@ const stateSql = `SELECT jsonb_build_object(
         'cms-ecublens-saint-sulpice-chavannes','cms-renens-nord-crissier','cms-renens-sud',
         'cms-chaussy','cms-clarens','cms-grande-eau','cms-gryonne','cms-la-tour-de-peilz',
         'cms-montreux','cms-rennaz','cms-vevey-est','cms-vevey-ouest','cms-pays-denhaut',
-        'cms-avenches','cms-moudon','cms-payerne')))::text
+        'cms-avenches','cms-moudon','cms-payerne','cms-cossonay','cms-grandson',
+        'cms-la-vallee','cms-orbe','cms-sainte-croix','cms-vallorbe','cms-yverdon','cms-yvonand')))::text
       FROM public.providers p WHERE p.primary_type='domicile'
         AND p.slug NOT IN ('senevita-vaud','avasad-cms','cms-ancien-stand','cms-centre-ville',
           'cms-chailly-sallaz','cms-montelly','cms-ouchy','cms-des-peupliers','cms-riponne','cms-valency',
@@ -110,7 +115,8 @@ const stateSql = `SELECT jsonb_build_object(
           'cms-ecublens-saint-sulpice-chavannes','cms-renens-nord-crissier','cms-renens-sud',
           'cms-chaussy','cms-clarens','cms-grande-eau','cms-gryonne','cms-la-tour-de-peilz',
           'cms-montreux','cms-rennaz','cms-vevey-est','cms-vevey-ouest','cms-pays-denhaut',
-          'cms-avenches','cms-moudon','cms-payerne'))),
+          'cms-avenches','cms-moudon','cms-payerne','cms-cossonay','cms-grandson',
+          'cms-la-vallee','cms-orbe','cms-sainte-croix','cms-vallorbe','cms-yverdon','cms-yvonand'))),
   'providerFingerprint',md5((SELECT coalesce(jsonb_agg(to_jsonb(p) ORDER BY p.id),'[]'::jsonb)::text
     FROM public.providers p)),
   'existingDataFingerprint',md5(concat_ws('|',
@@ -149,6 +155,8 @@ function assertBaseline(value) {
     "partial Batch B4 provider state detected");
   assert.ok(value.batchB5Providers === 0 || value.batchB5Providers === 3,
     "partial Batch B5 provider state detected");
+  assert.ok(value.batchB6Providers === 0 || value.batchB6Providers === 8,
+    "partial Batch B6 provider state detected");
   assert.ok(value.poleSanteOrganizations === 0 || value.poleSanteOrganizations === 1,
     "partial Pôle Santé prerequisite state detected");
   if (value.batchB2Providers === 8) assert.equal(value.batchB1Providers, 8,
@@ -161,8 +169,11 @@ function assertBaseline(value) {
     "Batch B4 cannot exist without the Pôle Santé prerequisite");
   if (value.batchB5Providers === 3) assert.equal(value.batchB4Providers, 10,
     "Batch B5 cannot exist without Batch B4");
+  if (value.batchB6Providers === 8) assert.equal(value.batchB5Providers, 3,
+    "Batch B6 cannot exist without Batch B5");
   assert.equal(value.providers, 66 + value.batchB1Providers + value.batchB2Providers
-    + value.batchB3Providers + value.batchB4Providers + value.batchB5Providers,
+    + value.batchB3Providers + value.batchB4Providers + value.batchB5Providers
+    + value.batchB6Providers,
     "existing provider count changed");
   assert.equal(value.enrichedEms, 31, "31 EMS enrichment baseline changed");
   assert.equal(value.emsFingerprint, "b8756e81599062f1091dc7ee64359653",
@@ -208,6 +219,7 @@ const batchB3AlreadyApplied = before.batchB3Providers === 4;
 const poleSanteAlreadyApplied = before.poleSanteOrganizations === 1;
 const batchB4AlreadyApplied = before.batchB4Providers === 10;
 const batchB5AlreadyApplied = before.batchB5Providers === 3;
+const batchB6AlreadyApplied = before.batchB6Providers === 8;
 
 if (args.mode === "--write-local") {
   assert.equal(batchAAlreadyApplied, false,
@@ -226,7 +238,10 @@ assert.equal(after.providerFingerprint, before.providerFingerprint, "provider ro
 assert.equal(after.existingDataFingerprint, before.existingDataFingerprint, "existing provider/care data changed");
 const newRows = JSON.parse(runLocalSql(newStateSql).trim());
 const batchAApplied = after.batchAOrganizations === 8 && after.batchAArchivedProvider === 1;
-assert.deepEqual(newRows, batchB5AlreadyApplied ? {
+assert.deepEqual(newRows, batchB6AlreadyApplied ? {
+  organizationSources: 9, providerNames: 0, organizationNames: 1,
+  providerIdentityLinks: 41, organizationRelationships: 7, regulatoryDesignations: 41,
+} : batchB5AlreadyApplied ? {
   organizationSources: 9, providerNames: 0, organizationNames: 1,
   providerIdentityLinks: 33, organizationRelationships: 7, regulatoryDesignations: 33,
 } : batchB4AlreadyApplied ? {
@@ -300,6 +315,7 @@ console.log(JSON.stringify({
   poleSantePrerequisiteState: poleSanteAlreadyApplied ? "applied" : "not-applied",
   batchB4State: batchB4AlreadyApplied ? "applied" : "not-applied",
   batchB5State: batchB5AlreadyApplied ? "applied" : "not-applied",
+  batchB6State: batchB6AlreadyApplied ? "applied" : "not-applied",
   phase5fRows: newRows,
   senevitaProjection: senevita,
   databaseCounts: after,
