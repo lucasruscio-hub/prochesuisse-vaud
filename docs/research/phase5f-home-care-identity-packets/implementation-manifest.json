@@ -104,6 +104,7 @@
       "expectedNetNewRows": 4,
       "heldOutsideBatch": ["Nurse Home Care provider", "SoinVaud/Soinsvaud provider and trading alias"],
       "preconditions": ["Attach current legal-register evidence before implementation; if it cannot be attached, defer the corresponding organization too."],
+      "preconditionStatus": {"evaluatedOn": "2026-10-05", "result": "cleared", "officialEvidence": [{"packetId": "nurse-home-care", "sourceId": "uid-nurse-home-care", "uid": "CHE-270.603.185"}, {"packetId": "soinvaud-soinsvaud", "sourceId": "uid-soinvaud", "uid": "CHE-394.182.275"}], "revalidatedExpectedRows": {"organizations.create": 2, "organization_sources.create": 2}, "revalidatedNetNewRows": 4, "providerRows": 0},
       "rollback": "Delete the two organization_sources then the two organizations. No provider rows exist to unwind."
     },
     {
