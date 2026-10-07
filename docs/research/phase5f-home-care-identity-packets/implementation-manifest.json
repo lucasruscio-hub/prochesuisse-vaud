@@ -167,6 +167,23 @@
       "name": "Specialist and institution-linked providers",
       "dependsOn": ["Phase 5F schema checkpoint applied locally"],
       "includes": ["Fondation Beau-Séjour OSAD", "SAMSA Levant", "Sciensus AG organization and historical legal name", "CPSE Alexandra organization"],
+      "reconciledOn": "2026-10-07",
+      "reconciliationStatus": "24 net-new rows confirmed absent from the completed Batch D local checkpoint",
+      "status": "applied and verified locally",
+      "appliedOn": "2026-10-07",
+      "identityPlan": [
+        {"identityId": "fondation-beau-sejour", "action": "organization-only", "netNewRows": 2, "rows": {"organizations.create": 1, "organization_sources.create": 1}},
+        {"identityId": "osad-beau-sejour", "action": "create", "netNewRows": 6, "rows": {"providers.create": 1, "provider_sources.create": 1, "provider_organizations.create": 1, "care_offerings.create": 1, "care_offering_sources.create": 1, "care_offering_regulatory_designations.create": 1}, "excludedRows": {"provider_service_areas.create": 1}, "exclusion": "Vevey municipality reference/BFS identity is not populated"},
+        {"identityId": "fondation-du-levant", "action": "organization-only", "netNewRows": 2, "rows": {"organizations.create": 1, "organization_sources.create": 1}},
+        {"identityId": "samsa-levant", "action": "create", "netNewRows": 7, "rows": {"providers.create": 1, "provider_sources.create": 1, "provider_organizations.create": 1, "care_offerings.create": 1, "care_offering_sources.create": 1, "care_offering_regulatory_designations.create": 1, "provider_service_areas.create": 1}},
+        {"identityId": "osad-levant", "action": "alias", "netNewRows": 1, "rows": {"provider_names.create": 1}},
+        {"identityId": "levant-official-list-label", "action": "alias", "netNewRows": 1, "rows": {"provider_names.create": 1}},
+        {"identityId": "sciensus-ag", "action": "organization-only", "netNewRows": 2, "rows": {"organizations.create": 1, "organization_sources.create": 1}},
+        {"identityId": "hthc-high-tech-home-care-ag", "action": "alias", "netNewRows": 1, "rows": {"organization_names.create": 1}},
+        {"identityId": "sciensus-home-therapy", "action": "hold", "netNewRows": 0, "exclusion": "current Vaud authorization basis is unresolved"},
+        {"identityId": "cpse-alexandra", "action": "organization-only", "netNewRows": 2, "rows": {"organizations.create": 1, "organization_sources.create": 1}, "constraint": "legal_name remains null pending current register evidence"},
+        {"identityId": "cp-alexandra", "action": "hold", "netNewRows": 0, "exclusion": "authorization basis and exact authorized operating-unit name are unresolved"}
+      ],
       "expectedRows": {
         "organizations.create": 4,
         "organization_sources.create": 4,
