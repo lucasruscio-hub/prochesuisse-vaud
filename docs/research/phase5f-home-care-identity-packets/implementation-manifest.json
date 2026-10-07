@@ -153,9 +153,9 @@
       },
       "expectedNetNewRows": 44,
       "subBatches": [
-        {"id": "D1", "name": "AMAD", "netNewRows": 19},
-        {"id": "D2", "name": "Vivradom", "netNewRows": 16},
-        {"id": "D3", "name": "Dovida / Home Instead", "netNewRows": 9},
+        {"id": "D1", "name": "AMAD", "netNewRows": 19, "status": "applied and verified locally", "appliedOn": "2026-10-07"},
+        {"id": "D2", "name": "Vivradom", "netNewRows": 16, "status": "applied and verified locally", "appliedOn": "2026-10-07"},
+        {"id": "D3", "name": "Dovida / Home Instead", "netNewRows": 9, "status": "applied and verified locally", "appliedOn": "2026-10-07"},
         {"id": "D4", "name": "Pôle Santé remainder", "netNewRows": 0, "status": "already completed as B4 prerequisite"}
       ],
       "heldOutsideBatch": ["AMAD Yverdon", "Dovida unnamed partner agency", "Vivràdom shared brand organization"],
