@@ -111,8 +111,10 @@
       "batchId": "D",
       "name": "Complex networks and multi-site providers",
       "dependsOn": ["Phase 5F schema checkpoint applied locally"],
-      "includes": ["AMAD Lutry and Nyon", "Vivradom Renens and Orbe", "Dovida/Home Instead", "Pôle Santé organization"],
-      "expectedRows": {
+      "includes": ["AMAD Lutry and Nyon", "Vivradom Renens and Orbe", "Dovida/Home Instead"],
+      "reconciledOn": "2026-10-07",
+      "reconciliationStatus": "Pôle Santé prerequisite completed before B-ASANTE-SANA and excluded from remaining Batch D",
+      "originalExpectedRows": {
         "organizations.create": 6,
         "organization_sources.create": 6,
         "organization_names.create": 3,
@@ -127,10 +129,38 @@
         "care_offering_regulatory_designations.create": 4,
         "provider_service_areas.create": 1
       },
-      "expectedNetNewRows": 47,
+      "originalExpectedNetNewRows": 47,
+      "implementedPrerequisiteRows": {
+        "organizations.create": 1,
+        "organization_sources.create": 1,
+        "organization_names.create": 1
+      },
+      "implementedPrerequisiteNetNewRows": 3,
+      "expectedRows": {
+        "organizations.create": 5,
+        "organization_sources.create": 5,
+        "organization_names.create": 2,
+        "providers.create": 4,
+        "providers.update": 2,
+        "provider_sources.create": 6,
+        "provider_names.create": 1,
+        "provider_identity_links.create": 1,
+        "provider_organizations.create": 5,
+        "care_offerings.create": 5,
+        "care_offering_sources.create": 5,
+        "care_offering_regulatory_designations.create": 4,
+        "provider_service_areas.create": 1
+      },
+      "expectedNetNewRows": 44,
+      "subBatches": [
+        {"id": "D1", "name": "AMAD", "netNewRows": 19},
+        {"id": "D2", "name": "Vivradom", "netNewRows": 16},
+        {"id": "D3", "name": "Dovida / Home Instead", "netNewRows": 9},
+        {"id": "D4", "name": "Pôle Santé remainder", "netNewRows": 0, "status": "already completed as B4 prerequisite"}
+      ],
       "heldOutsideBatch": ["AMAD Yverdon", "Dovida unnamed partner agency", "Vivràdom shared brand organization"],
       "preconditions": ["Capture before-images for dovida and homeinstead.", "Archive homeinstead and retain it unpublished; link it to dovida as historical successor/duplicate evidence according to the reviewed implementation SQL.", "Do not create Dovida municipality rows until municipality identities and partner topology are reconciled."],
-      "rollback": "One transaction per cluster. Remove dependent offering/designation/name/link rows and new providers/organizations in reverse order; restore dovida and homeinstead from exact before-images. Pôle Santé may be rolled back only before B-ASANTE-SANA exists."
+      "rollback": "One transaction per remaining cluster. Remove dependent offering/designation/name/link rows and new providers/organizations in reverse order; restore dovida and homeinstead from exact before-images. The completed Pôle Santé prerequisite is outside Batch D rollback because B-ASANTE-SANA now depends on it."
     },
     {
       "batchId": "E",
