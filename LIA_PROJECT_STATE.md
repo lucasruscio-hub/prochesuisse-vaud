@@ -8,8 +8,8 @@
 ### Verified current repository facts
 
 - Working copy: `C:\Users\lucas\Lia-vaud`; branch: `marketplace-mvp`.
-- Local HEAD, `origin/marketplace-mvp`, and live `refs/heads/marketplace-mvp` all resolve to `a27faf198915710b4bb40bb5c1104a7494668bd2` (`Implement Phase 5F Batch F Altoan home support`).
-- The working tree contains only this untracked handoff file. Batch F is committed and present on the live remote branch.
+- The clean starting checkpoint for the migration-ledger reconciliation was `53613253735aff7c4c3536e84e907bd12a0f3ede` (`Add permanent Lia project state handoff`), with local HEAD equal to `origin/marketplace-mvp`.
+- Batch F and the permanent handoff are committed. The migration-ledger reconciliation changed only local database bookkeeping; this handoff update is the only repository-file change made by that workflow.
 - The repository contains six migration files through `20260928000100_phase5f_home_care_identity_foundation.sql`; see section 4.
 - All explicit repository paths referenced by this document were found. The `docs/research/phase5f-batch-*.md` reference is a glob and matches the committed batch records, including Batch F.
 - The runnable repository test set is 37 `tests/*.test.mjs` files and currently passes **188/188**. Repository-wide ESLint currently fails with two `react-hooks/set-state-in-effect` errors in `app/recherche/RechercheClient.js` and reports two `@next/next/no-img-element` warnings in `app/page.js`.
@@ -18,12 +18,13 @@
 
 - The guarded local target is the running `Lia-vaud` Supabase container on host port `54322`; no production database was accessed.
 - Batch F is applied locally: Altoan/Altoan SA exist, exactly one offering has type `home_support`, and the verified table counts are recorded in section 5.
-- The local schema contains all 16 expected public tables, including the Phase 5F foundation tables. The Supabase migration ledger records only `20260920000100 provider_foundation`; therefore later schema state is verified from the actual objects and guarded local verifiers, not from complete ledger history.
+- The local schema contains all 16 expected public tables, including the Phase 5F foundation tables. On 2026-10-11, a clean isolated replay of all six repository migrations was proven materially schema-equivalent to the enriched local schema, after reproducing the standard Supabase public-schema privilege baseline.
+- The local Supabase migration ledger is reconciled: all six repository migration versions are recorded as applied. The five missing historical versions were marked applied with the supported local-only Supabase repair mechanism, without rerunning their SQL. Public application data and the Batch A-F/EMS/Senevita fingerprints were unchanged.
 
 ### Historical facts
 
 - Phase and milestone summaries in sections 4–6 describe earlier completed work. Batch F at commit `a27faf1` is the latest committed and pushed implementation milestone; the earlier Batch E checkpoint remains in history at `7af12b5`.
-- Backup #25 remains the newest backup present on the SSD and captures the earlier Batch D commit, not the current repository or local database state.
+- Backup #26 is present on the SSD at the Batch F + handoff checkpoint `5361325`; the separate pre-reconciliation database dump is newer and preserves the local database before ledger repair.
 
 ### Planned work
 
@@ -37,6 +38,7 @@
 - Phase 5G has not started: no Phase 5G path exists, the manifest still has `phase5gAuthorized: false`, and the local counts remain the Batch F minimum state.
 - Current Vercel project, public URL, and deployment status could not be verified from repository metadata or public evidence.
 - Production Supabase schema/data state was not checked because production data access was prohibited for this audit.
+- Production migration history remains separately unknown and must be audited before any production schema deployment. The local repair is not evidence of production state.
 
 ## 1. Project overview and goals
 
@@ -219,7 +221,19 @@ All Phase 5F foundation tables were reported with RLS. Organization sources/prov
 
 The current local `public` schema was verified to contain: `providers`, `provider_sources`, `municipalities`, `provider_service_areas`, `organizations`, `organization_sources`, `organization_names`, `organization_relationships`, `provider_names`, `provider_identity_links`, `provider_organizations`, `care_offerings`, `care_offering_sources`, `care_offering_features`, `care_offering_availability`, and `care_offering_regulatory_designations`.
 
-Important migration-ledger caveat: `supabase_migrations.schema_migrations` currently records only `20260920000100 provider_foundation`. Later migration files are present and their resulting schema is present locally, but their application was not recorded in that ledger. Future migration work must not assume the ledger alone describes the local schema.
+### Local migration-ledger reconciliation — 2026-10-11
+
+The earlier ledger discrepancy is resolved locally. It happened because the initial provider-foundation migration was applied through Supabase migration tooling, while the legacy import and later schema migrations were historically executed directly through the repository's guarded, pinned-container SQL runners. Those direct executions created the intended schema/data but did not add rows to `supabase_migrations.schema_migrations`.
+
+Before repair, a restorable database dump was created at:
+
+`D:\Lia-backups\Lia-db-backup_2026-10-11_pre-migration-ledger-reconciliation\lia-local-postgres-pre-migration-ledger-reconciliation.dump`
+
+An isolated disposable database replayed the six checked-in migrations in chronological order, without any Batch A-F enrichment scripts. Its material public schema matched the current enriched local database exactly across tables/RLS, 184 columns and defaults, 120 constraints, 56 indexes, 12 policies, two functions, three triggers, grants/default privileges, and five deliberate comments. The disposable database also contained the expected 66-provider legacy footprint: 46 EMS, 12 domicile, 8 residence, 66 distinct legacy IDs, and 66 legacy source rows.
+
+Only after that equivalence proof, the supported Supabase CLI marked these versions applied locally without rerunning SQL: `20260921000100`, `20260923000100`, `20260923000200`, `20260926000100`, and `20260928000100`. The existing `20260920000100` entry was not modified. `supabase migration list --local` now shows all six local and database-history versions aligned, with none pending.
+
+Production migration history remains unknown. Audit it separately and read-only before any production migration or deployment; never infer production state from this local reconciliation.
 
 **Local database target used throughout Phase 4/5:** `Lia-vaud:local:54322` / local Supabase container. Production access has repeatedly been prohibited during these phases.
 
@@ -368,14 +382,15 @@ Historical final Batch E checkpoint:
 - local HEAD = tracking HEAD = live remote HEAD
 - production Supabase not accessed
 
-Current verified Batch F state:
+Current verified Batch F and post-reconciliation state:
 
 - local database: applied and verified with the exact 8-row Altoan plan;
 - repository implementation: committed and pushed (`implementation-manifest.json`, two Batch F records, Batch F library/script/test);
 - runnable suite including Batch F: **188/188 passed**;
 - repository-wide lint: **2 errors and 2 warnings**, all in the previously reported files;
 - production Supabase: not accessed;
-- Git checkpoint: Batch F at `a27faf1` locally, in the tracking ref, and on the live remote.
+- local migration history: all six repository versions aligned, with no existing migration pending;
+- Git checkpoint before this documentation update: `5361325`, clean and equal to its tracking ref.
 
 **Next intended Phase 5F action:** perform and document the Phase 5F completion review. Do not reimplement or reapply Batch F.
 
@@ -528,11 +543,17 @@ Verification procedure used:
 - confirm backup working tree clean
 - run `git fsck --full --strict`
 
-Latest backup present on the SSD and rechecked read-only on 2026-10-11:
+Latest repository-checkout backup present on the SSD and rechecked read-only on 2026-10-11:
 
-`D:\Lia-backups\Lia-backup-25_2026-10-07_phase5f-batch-d-private-structures`
+`D:\Lia-backups\Lia-backup-26_2026-10-11_phase5f-batch-f-handoff`
 
-Backup #25 is still the newest directory present. Its Git checkout is clean at `f66fbcdd7c6aeaedc7922e18d418021193c40e3a` (`feat: apply phase 5f batch d3 dovida`), and `git fsck --full --strict` completed without corrupt-object errors (it reported dangling trees only). It contains 385 files totaling 8,702,595 bytes. It is **not current** for Batch E, Batch F, this handoff, or the present local database; no newer verified backup was found.
+Backup #26 has a clean Git checkout at `53613253735aff7c4c3536e84e907bd12a0f3ede` (`Add permanent Lia project state handoff`). A read-only `git fsck --full --strict` recheck completed without corrupt-object errors and reported dangling trees only. This repository backup predates the local ledger reconciliation documented here; the database snapshot below preserves the corresponding pre-repair database state.
+
+Separate database safety snapshot created and verified before the 2026-10-11 local migration-ledger repair:
+
+`D:\Lia-backups\Lia-db-backup_2026-10-11_pre-migration-ledger-reconciliation\lia-local-postgres-pre-migration-ledger-reconciliation.dump`
+
+The custom-format PostgreSQL dump is 474,263 bytes, has SHA-256 `CE78EFB6DB749014E1D442CA439A9E82E499771EC8ACF60C28BC2D8139CC7418`, and passed `pg_restore --list`. It was not restored and must not be committed.
 
 ### Deployment
 
@@ -549,10 +570,10 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 **Verified on 2026-10-11:**
 
 - Branch: `marketplace-mvp`
-- HEAD: `a27faf198915710b4bb40bb5c1104a7494668bd2`
-- Commit message: `Implement Phase 5F Batch F Altoan home support`
-- Local HEAD = tracking HEAD = live remote HEAD
-- Working tree: only untracked `LIA_PROJECT_STATE.md` before its dedicated handoff commit; Batch F is cleanly committed
+- Clean checkpoint before local migration-ledger reconciliation: `53613253735aff7c4c3536e84e907bd12a0f3ede`
+- Checkpoint commit message: `Add permanent Lia project state handoff`
+- That checkpoint had local HEAD = tracking HEAD and a clean working tree.
+- The reconciliation changed no application or migration files and did not alter public application data; only this handoff was updated afterward.
 - Production Supabase: not accessed; current production state unresolved
 - Batch F: applied and verified locally, committed, and present on the live remote
 - Phase 5G: not started
@@ -580,7 +601,5 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 ### Facts that remain unresolved before the next development phase
 
 - Complete and document the Phase 5F completion review.
-- Reconcile the incomplete local Supabase migration ledger before using ledger state to plan future migrations; do not reset or reapply migrations casually because the schema/data are already present.
-- Create and verify backup #26 at the requested Batch F + handoff checkpoint; Backup #25 is currently the newest present but is behind both Batch E and Batch F.
 - Verify the current Vercel project, public deployment URL, and deployment status using authorized project access.
 - Verify production Supabase schema/migration state only under a separately authorized, read-only production audit; do not access production data merely to satisfy the handoff.
