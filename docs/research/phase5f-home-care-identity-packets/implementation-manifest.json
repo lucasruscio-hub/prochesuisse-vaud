@@ -206,7 +206,15 @@
       "batchId": "F",
       "name": "Non-medical home support",
       "dependsOn": ["Phase 5F schema checkpoint applied locally with home_support allowed"],
+      "reconciledOn": "2026-10-08",
+      "reconciliationStatus": "Exactly 8 net-new rows remain at the completed Batch E checkpoint; neither Altoan identity nor any home_support offering exists locally.",
+      "status": "applied and verified locally",
+      "appliedOn": "2026-10-08",
       "includes": ["Altoan SA", "Altoan home-support provider"],
+      "identityPlan": [
+        {"identityId": "altoan-sa", "action": "organization-only", "rows": 2, "note": "Create the supported public organization identity and source; keep legal_name null pending current commercial-register evidence."},
+        {"identityId": "altoan", "action": "create", "rows": 6, "note": "Create the patient-facing provider, source, primary operator link, one home_support offering and source, and the explicitly evidenced in-scope CH-VD canton service area."}
+      ],
       "expectedRows": {
         "organizations.create": 1,
         "organization_sources.create": 1,
@@ -219,6 +227,8 @@
         "care_offering_regulatory_designations.create": 0
       },
       "expectedNetNewRows": 8,
+      "blockingHolds": [],
+      "evidenceConstraints": ["The missing independently reproduced commercial-register extract prevents asserting Altoan SA as legal_name, but does not block the approved public organization identity or provider action."],
       "preconditions": ["Offering type must be home_support.", "Create only the evidenced in-scope CH-VD canton row; do not imply medical, OSAD, nursing, or LAMal status."],
       "rollback": "Delete the service-area and offering-source rows, offering, provider-organization link, provider source/provider, then organization source/organization."
     }
