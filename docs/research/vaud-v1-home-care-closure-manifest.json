@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "preparedOn": "2026-10-12",
+  "cohort": "Vaud V1 home-care closure",
+  "productionAccessAuthorized": false,
+  "phase5gAuthorized": false,
+  "source": {
+    "name": "Canton de Vaud official OSAD workbook — Etat du 02.03.2026",
+    "repositoryEvidence": "docs/research/source-material/Lia_Phase5E_FINAL_reconciled_Vaud_homecare_2026-09-28.xlsx",
+    "sourceUrl": "https://www.vd.ch/sante-soins-et-handicap/vivre-a-domicile/aide-a-domicile",
+    "observedOn": "2026-03-02",
+    "reconciledOn": "2026-09-28"
+  },
+  "expectedRows": {
+    "organizations.create": 5,
+    "organization_sources.create": 5,
+    "providers.create": 4,
+    "providers.update": 1,
+    "provider_sources.create": 5,
+    "provider_organizations.create": 5,
+    "care_offerings.create": 5,
+    "care_offering_sources.create": 5,
+    "care_offering_regulatory_designations.create": 5,
+    "provider_names.create": 0,
+    "provider_service_areas.create": 0,
+    "care_offering_features.create": 0,
+    "care_offering_availability.create": 0,
+    "netNewRows": 39
+  },
+  "identities": [
+    {
+      "identityId": "grptp",
+      "action": "create",
+      "provider": {"slug": "grptp", "name": "Groupe Romand Prévention Traitement Plaies (GRPTP)", "postalCode": "1699", "locality": "Bouloz", "street": "Impasse des Arbero", "houseNumber": "9", "phone": "021 651 81 06", "email": "info@grptp.ch", "website": "www.grptp.ch"},
+      "organization": {"slug": "grptp", "name": "Groupe Romand Prévention Traitement Plaies (GRPTP)"},
+      "offering": {"name": "Soins de plaies à domicile", "summary": "Soins à domicile spécialisés dans la prévention et le traitement des plaies; aucune gamme généraliste n’est affirmée."},
+      "officialLabel": "Groupe Romand Prévention Traitement Plaies (GRPTP)",
+      "classification": "Specialist wound-care OSAD"
+    },
+    {
+      "identityId": "ligue-pulmonaire-vaudoise",
+      "action": "create",
+      "provider": {"slug": "ligue-pulmonaire-vaudoise", "name": "Ligue pulmonaire vaudoise", "postalCode": "1007", "locality": "Lausanne", "street": "Avenue de Provence", "houseNumber": "4", "phone": "021 623 38 00", "email": "info@lpvd.ch", "website": "www.liguepulmonaire.ch"},
+      "organization": {"slug": "ligue-pulmonaire-vaudoise", "name": "Ligue pulmonaire vaudoise"},
+      "offering": {"name": "Soins respiratoires à domicile", "summary": "Soins à domicile spécialisés dans le domaine respiratoire; aucune gamme généraliste n’est affirmée."},
+      "officialLabel": "Ligue pulmonaire vaudoise",
+      "classification": "Specialist respiratory OSAD"
+    },
+    {
+      "identityId": "nomad",
+      "action": "create",
+      "provider": {"slug": "nomad", "name": "NOMàD", "postalCode": "1400", "locality": "Yverdon-les-Bains", "street": "Rue du Collège", "houseNumber": "4", "phone": "024 420 27 54", "email": "nomad@fondation-espace.com", "website": "www.nomad-osad.ch"},
+      "organization": {"slug": "fondation-espace", "name": "Fondation Espace"},
+      "offering": {"name": "Soins psychiatriques à domicile", "summary": "Soins à domicile spécialisés en psychiatrie; aucune gamme généraliste n’est affirmée."},
+      "officialLabel": "NOMAD (Fondation Espace)",
+      "classification": "Specialist psychiatric OSAD"
+    },
+    {
+      "identityId": "sbv-medical",
+      "action": "create",
+      "provider": {"slug": "sbv-medical", "name": "SBV Medical", "postalCode": "1820", "locality": "Montreux", "street": "Avenue des Alpes", "houseNumber": "1", "phone": "058 455 05 05", "email": "sbvmedical@hin.ch", "website": "www.sbv-medical.ch"},
+      "organization": {"slug": "sbv-medical-sarl", "name": "SBV Medical Sàrl"},
+      "offering": {"name": "Soins à domicile spécialisés", "summary": "Prestataire de soins à domicile à périmètre spécialisé; aucune gamme généraliste n’est affirmée."},
+      "officialLabel": "SBV Medical Sàrl",
+      "classification": "Home-care / specialist OSAD"
+    },
+    {
+      "identityId": "sitex",
+      "action": "update",
+      "existingProviderSlug": "sitex",
+      "provider": {"slug": "sitex", "name": "Sitex SA", "postalCode": "1196", "locality": "Gland", "street": "Route des Avouillons", "houseNumber": "30", "phone": "0848 11 00 01", "email": "info@sitexsa.ch", "website": "www.sitexsa.ch"},
+      "organization": {"slug": "sitex-sa", "name": "Sitex SA"},
+      "offering": {"name": "Soins à domicile spécialisés", "summary": "Prestataire national de soins à domicile à périmètre spécialisé; aucune gamme généraliste n’est affirmée."},
+      "officialLabel": "Sitex SA",
+      "classification": "Specialist/national home-care OSAD"
+    }
+  ],
+  "holds": [
+    {"identity": "AMAD Homecare Yverdon", "action": "hold", "unresolved": "The legal operator and the authorization identity covering the Yverdon site remain unproved."},
+    {"identity": "Nurse Home Care", "action": "hold", "unresolved": "Current authorization basis and a provider-owned current contact path remain absent."},
+    {"identity": "SoinVaud / Soinsvaud", "action": "hold", "unresolved": "Current authorization basis, durable public provider name, and provider-owned contact evidence remain absent."},
+    {"identity": "Sciensus", "action": "hold", "unresolved": "The current authorization basis applicable to Vaud and the reason for absence from the dated Canton file remain unresolved."},
+    {"identity": "Alterum", "action": "hold", "unresolved": "No preserved provider-owned/current source proves the present non-medical operation, contact identity, or operator."},
+    {"identity": "Service d’aide familiale de Morges", "action": "hold", "unresolved": "No preserved provider-owned/current source proves the present non-medical operation or association operator; legacy tags are not evidence."}
+  ]
+}
