@@ -12,6 +12,7 @@
 - The clean starting checkpoint for the migration-ledger reconciliation was `53613253735aff7c4c3536e84e907bd12a0f3ede` (`Add permanent Lia project state handoff`), with local HEAD equal to `origin/marketplace-mvp`.
 - Batch F and the permanent handoff are committed. The migration-ledger reconciliation changed only local database bookkeeping; this handoff update is the only repository-file change made by that workflow.
 - The repository contains six migration files through `20260928000100_phase5f_home_care_identity_foundation.sql`; see section 4.
+- The current committed checkpoint is `11cc85fbab0414ab2258d84ef51462bc14e08eb1` (`Implement final Vaud V1 home-care closure cohort`), equal to `origin/marketplace-mvp` before the Inquiry Foundation architecture documentation changes.
 - All explicit repository paths referenced by this document were found. The `docs/research/phase5f-batch-*.md` reference is a glob and matches the committed batch records, including Batch F.
 - The closure cohort adds one targeted test file with seven tests. The runnable repository set is now 39 `tests/*.test.mjs` files and passes **201/201**. Targeted ESLint passes for the closure library, runner, and test.
 
@@ -31,8 +32,9 @@
 
 ### Planned work
 
-- Continue only with separately authorized Vaud supply-completeness or launch-readiness work after checkpointing this final home-care closure cohort; do not start Phase 5G automatically.
-- Continue with the supply-completeness and product priorities in section 9 only after the current checkpoint is deliberately closed.
+- The Lia Inquiry Foundation architecture is approved and documented in `docs/architecture/lia-inquiry-foundation.md`. It defines four private core tables, separate inquiry/referral lifecycles, multiple organization-owned referrals, explicit provider-sharing authorization/disclosure, append-only activities plus current-state snapshots, retention/anonymization capability, and a future-compatible but unimplemented Partner Portal boundary.
+- The Inquiry Foundation schema-only migration is separately authorized for guarded local implementation after the architecture checkpoint and safety backups. It has not started at this documentation checkpoint. `/api/leads`, the family form, live inquiry creation, internal UI, assignments, Partner Portal, and full CRM remain unauthorized. No production schema/data was accessed.
+- Continue with the supply-completeness and product priorities in section 9 without starting Phase 5G, Partner Portal, or full CRM automatically.
 
 ### Unresolved or deliberately unverified
 
@@ -370,7 +372,7 @@ Key modeling decisions:
 
 ## 7. Current development phase and exact stopping point
 
-**Verified stopping point (2026-10-12):** the final Vaud V1 home-care closure cohort has been implemented and fully verified in local Supabase. It closes the specifically authorized pre-launch home-care review without starting Phase 5G.
+**Verified stopping point (2026-10-12):** the final Vaud V1 home-care closure cohort is committed and pushed at `11cc85fbab0414ab2258d84ef51462bc14e08eb1`. The Lia Inquiry Foundation architecture has subsequently been approved and reduced to an implementation-ready design, but no inquiry migration, application change, database write, Partner Portal, or full CRM implementation has started.
 
 Latest committed and pushed Batch F commit:
 
@@ -397,7 +399,7 @@ Current verified closure state:
 - local migration history: all six repository versions aligned, with no existing migration pending;
 - clean repository predecessor: `86a197a16b2551ed5dcee03a157cde63753daa93`, equal to its tracking ref before this cohort.
 
-**Next intended action:** checkpoint and push this closure cohort, then stop. Do not start Phase 5G, CMS municipality mapping, family inquiry implementation, Partner Portal, or CRM automatically.
+**Next intended action:** checkpoint the approved architecture, create verified repository/database backups, then implement and verify only the four-table Inquiry Foundation schema against `Lia-vaud:local:54322`. Do not change `/api/leads` or the family form, create inquiry data, access production, or start Phase 5G, Partner Portal, or full CRM.
 
 Do **not** start Phase 5G automatically after this cohort.
 
@@ -455,6 +457,8 @@ V1 goal:
 `family request -> private Lia inquiry -> internal review/matching -> provider contact -> outcome tracking`
 
 Architect now so a secure Partner Portal/CRM can be added later, but **do not implement the Partner Portal/CRM product yet**.
+
+The architecture step is now approved and documented. The migration/application step remains unstarted and separately gated. The approved core is `inquiry_contacts -> inquiries -> inquiry_referrals`, with append-only `inquiry_activities`; required referral recipient organization; optional provider/site and offering; explicit per-referral sharing authorization and `shared_at`; no V1 assignee model; and server-only access.
 
 Future-ready concepts should include:
 
@@ -577,13 +581,15 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 **Verified on 2026-10-12:**
 
 - Branch: `marketplace-mvp`
+- Current committed HEAD and tracking HEAD: `11cc85fbab0414ab2258d84ef51462bc14e08eb1`
 - Clean predecessor before the final home-care closure cohort: `86a197a16b2551ed5dcee03a157cde63753daa93`
-- Predecessor local HEAD equaled `origin/marketplace-mvp`; the closure cohort is ready for its separate checkpoint commit.
+- The final home-care closure cohort is committed and present on `origin/marketplace-mvp`.
 - The local database is at the verified 141-provider/64-organization/111-offering closure state.
 - Production Supabase: not accessed; current production state unresolved
 - Batch F: applied and verified locally, committed, and present on the live remote
 - Vaud V1 private-home-care completeness cohort: applied and verified locally; 16 identities implemented, none held, 128 net-new rows
 - Final Vaud V1 home-care closure cohort: 11 candidates reviewed; five implemented (four creates and one update), six held, 39 net-new rows
+- Inquiry Foundation: architecture approved and implementation-ready design documented; schema-only local migration authorized but not yet implemented at this checkpoint
 - Phase 5G: not started
 
 ## 13. Last updated date and handoff notes
@@ -605,6 +611,7 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 5. Keep each data batch independently reversible and checkpointed.
 6. Do not start a new major development phase merely because the previous batch passed; follow the explicit priority list above.
 7. Current product strategy after Vaud data completeness: prioritize family lead capture and internal inquiry tracking, architected for a future secure multi-organization Partner Portal/CRM but without building that portal yet.
+8. The Inquiry Foundation architecture is approved, but its migration remains a separately authorized future step. Read `docs/architecture/lia-inquiry-foundation.md` before proposing schema or application changes.
 
 ### Facts that remain unresolved before the next development phase
 
