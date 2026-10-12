@@ -11,17 +11,17 @@
 - The clean predecessor for the final Vaud V1 home-care closure cohort was `86a197a16b2551ed5dcee03a157cde63753daa93`, with local HEAD equal to `origin/marketplace-mvp`.
 - The clean starting checkpoint for the migration-ledger reconciliation was `53613253735aff7c4c3536e84e907bd12a0f3ede` (`Add permanent Lia project state handoff`), with local HEAD equal to `origin/marketplace-mvp`.
 - Batch F and the permanent handoff are committed. The migration-ledger reconciliation changed only local database bookkeeping; this handoff update is the only repository-file change made by that workflow.
-- The repository contains six migration files through `20260928000100_phase5f_home_care_identity_foundation.sql`; see section 4.
-- The current committed checkpoint is `11cc85fbab0414ab2258d84ef51462bc14e08eb1` (`Implement final Vaud V1 home-care closure cohort`), equal to `origin/marketplace-mvp` before the Inquiry Foundation architecture documentation changes.
+- The repository contains seven migration files through `20261012000100_inquiry_foundation.sql`; see section 4.
+- The approved architecture checkpoint is `14de241f3538d22bf4a70769e717dc099a2c2901` (`Document Lia Inquiry Foundation architecture`), equal to `origin/marketplace-mvp` before the schema-foundation changes.
 - All explicit repository paths referenced by this document were found. The `docs/research/phase5f-batch-*.md` reference is a glob and matches the committed batch records, including Batch F.
-- The closure cohort adds one targeted test file with seven tests. The runnable repository set is now 39 `tests/*.test.mjs` files and passes **201/201**. Targeted ESLint passes for the closure library, runner, and test.
+- The Inquiry Foundation adds one targeted test file with 11 tests. The runnable repository set is now 40 `tests/*.test.mjs` files and passes **212/212**. Targeted ESLint passes for the guarded verifier and targeted test.
 
 ### Verified current local-database facts
 
 - The guarded local target is the running `Lia-vaud` Supabase container on host port `54322`; no production database was accessed.
 - Batch F is applied locally: Altoan/Altoan SA exist, exactly one offering has type `home_support`, and the verified table counts are recorded in section 5.
-- The local schema contains all 16 expected public tables, including the Phase 5F foundation tables. On 2026-10-11, a clean isolated replay of all six repository migrations was proven materially schema-equivalent to the enriched local schema, after reproducing the standard Supabase public-schema privilege baseline.
-- The local Supabase migration ledger is reconciled: all six repository migration versions are recorded as applied. The five missing historical versions were marked applied with the supported local-only Supabase repair mechanism, without rerunning their SQL. Public application data and the Batch A-F/EMS/Senevita fingerprints were unchanged.
+- The local schema contains the 16 provider-domain public tables plus the four private Inquiry Foundation tables. On 2026-10-11, a clean isolated replay of the six predecessor migrations was proven materially schema-equivalent to the enriched provider schema, after reproducing the standard Supabase public-schema privilege baseline.
+- The local Supabase migration ledger is reconciled and all seven repository migration versions are recorded as applied. Public application data and provider-domain fingerprints remained unchanged throughout the Inquiry Foundation rollback/reapply proof.
 - The Vaud V1 private-home-care completeness cohort is applied locally: 14 new private generalist providers were created and the existing `swisscaring` and `boite-o` providers were reconciled without duplication. All 16 cohort providers have one minimum `home_care` offering and one dated 2026-03-02 official-file designation. No cohort service-area, feature, or availability rows were added.
 - The final Vaud V1 home-care closure cohort is applied locally: GRPTP, Ligue pulmonaire vaudoise, NOMàD, and SBV Medical were created; existing `sitex` was reconciled in place. Each remains unpublished/unverified and has one narrow specialist `home_care` offering plus one dated 2026-03-02 official-file designation. The other six reviewed candidates remain held; no service-area, feature, availability, or provider-name rows were added.
 
@@ -30,10 +30,10 @@
 - Phase and milestone summaries in sections 4–6 describe earlier completed work. Batch F remains in history at `a27faf1`; the private-generalist cohort is checkpointed at `86a197a`, which is the predecessor for this final closure cohort.
 - Backup #27 is present on the SSD at checkpoint `86a197a`; Backup #26 and the separate pre-reconciliation database dump remain historical safety artifacts.
 
-### Planned work
+### Current Inquiry Foundation boundary
 
 - The Lia Inquiry Foundation architecture is approved and documented in `docs/architecture/lia-inquiry-foundation.md`. It defines four private core tables, separate inquiry/referral lifecycles, multiple organization-owned referrals, explicit provider-sharing authorization/disclosure, append-only activities plus current-state snapshots, retention/anonymization capability, and a future-compatible but unimplemented Partner Portal boundary.
-- The Inquiry Foundation schema-only migration is separately authorized for guarded local implementation after the architecture checkpoint and safety backups. It has not started at this documentation checkpoint. `/api/leads`, the family form, live inquiry creation, internal UI, assignments, Partner Portal, and full CRM remain unauthorized. No production schema/data was accessed.
+- The Inquiry Foundation schema-only migration is implemented and verified against `Lia-vaud:local:54322`. Its four tables are empty, private, RLS-enabled, and have no client policies. `/api/leads`, the family form, live inquiry creation, internal UI, assignments, Partner Portal, and full CRM remain unauthorized and unchanged. No production schema/data was accessed.
 - Continue with the supply-completeness and product priorities in section 9 without starting Phase 5G, Partner Portal, or full CRM automatically.
 
 ### Unresolved or deliberately unverified
@@ -206,6 +206,7 @@ Migration files currently present, in order:
 - `supabase/migrations/20260923000200_offering_scoped_service_areas.sql`
 - `supabase/migrations/20260926000100_home_care_foundation.sql`
 - `supabase/migrations/20260928000100_phase5f_home_care_identity_foundation.sql`
+- `supabase/migrations/20261012000100_inquiry_foundation.sql`
 
 Phase 5F migration:
 
@@ -224,7 +225,11 @@ Added/extended support for:
 
 All Phase 5F foundation tables were reported with RLS. Organization sources/provider identity links are private; public-facing records require explicit publication rules.
 
-The current local `public` schema was verified to contain: `providers`, `provider_sources`, `municipalities`, `provider_service_areas`, `organizations`, `organization_sources`, `organization_names`, `organization_relationships`, `provider_names`, `provider_identity_links`, `provider_organizations`, `care_offerings`, `care_offering_sources`, `care_offering_features`, `care_offering_availability`, and `care_offering_regulatory_designations`.
+The provider domain contains: `providers`, `provider_sources`, `municipalities`, `provider_service_areas`, `organizations`, `organization_sources`, `organization_names`, `organization_relationships`, `provider_names`, `provider_identity_links`, `provider_organizations`, `care_offerings`, `care_offering_sources`, `care_offering_features`, `care_offering_availability`, and `care_offering_regulatory_designations`.
+
+### Inquiry Foundation schema — 2026-10-12
+
+`20261012000100_inquiry_foundation.sql` adds only `inquiry_contacts`, `inquiries`, `inquiry_referrals`, and `inquiry_activities`, plus their helper/trigger functions, constraints, indexes, and private grants. All four tables have RLS enabled and no client policies. Contacts/inquiries/referrals allow only required CRUD to `service_role`; activities allow only `SELECT`/`INSERT`. The final schema has 74 columns, 65 constraints, 21 indexes, seven triggers, and zero rows. Exact implementation and verification details are in `docs/architecture/lia-inquiry-foundation-schema-implementation.md`.
 
 ### Local migration-ledger reconciliation — 2026-10-11
 
@@ -236,7 +241,7 @@ Before repair, a restorable database dump was created at:
 
 An isolated disposable database replayed the six checked-in migrations in chronological order, without any Batch A-F enrichment scripts. Its material public schema matched the current enriched local database exactly across tables/RLS, 184 columns and defaults, 120 constraints, 56 indexes, 12 policies, two functions, three triggers, grants/default privileges, and five deliberate comments. The disposable database also contained the expected 66-provider legacy footprint: 46 EMS, 12 domicile, 8 residence, 66 distinct legacy IDs, and 66 legacy source rows.
 
-Only after that equivalence proof, the supported Supabase CLI marked these versions applied locally without rerunning SQL: `20260921000100`, `20260923000100`, `20260923000200`, `20260926000100`, and `20260928000100`. The existing `20260920000100` entry was not modified. `supabase migration list --local` now shows all six local and database-history versions aligned, with none pending.
+Only after that equivalence proof, the supported Supabase CLI marked these versions applied locally without rerunning SQL: `20260921000100`, `20260923000100`, `20260923000200`, `20260926000100`, and `20260928000100`. The existing `20260920000100` entry was not modified. The later Inquiry Foundation migration was applied normally; `supabase migration list --local` now shows all seven local and database-history versions aligned, with none pending.
 
 Production migration history remains unknown. Audit it separately and read-only before any production migration or deployment; never infer production state from this local reconciliation.
 
@@ -372,7 +377,7 @@ Key modeling decisions:
 
 ## 7. Current development phase and exact stopping point
 
-**Verified stopping point (2026-10-12):** the final Vaud V1 home-care closure cohort is committed and pushed at `11cc85fbab0414ab2258d84ef51462bc14e08eb1`. The Lia Inquiry Foundation architecture has subsequently been approved and reduced to an implementation-ready design, but no inquiry migration, application change, database write, Partner Portal, or full CRM implementation has started.
+**Verified stopping point (2026-10-12):** the Inquiry Foundation architecture checkpoint is committed and pushed at `14de241f3538d22bf4a70769e717dc099a2c2901`. The separately authorized four-table schema foundation is implemented and verified locally with zero inquiry rows. No application change, public intake write, production access, Partner Portal, or full CRM implementation has started.
 
 Latest committed and pushed Batch F commit:
 
@@ -392,14 +397,15 @@ Historical final Batch E checkpoint:
 Current verified closure state:
 
 - local database: rollback-only dry run passed, then apply → verify → rollback → exact predecessor comparison → reapply passed with the exact 39-row closure plan and one Sitex update;
+- Inquiry Foundation: rollback-only dry run, apply, verify, scoped rollback, exact provider-fingerprint comparison, corrected least-privilege reapply, and final verification all passed; four tables and zero inquiry rows remain;
 - repository implementation: canonical manifest, reconciliation record, guarded library/runner, and targeted tests are included in this cohort checkpoint;
-- runnable suite: **201/201 passed** across 39 test files;
-- targeted cohort ESLint: passed;
+- runnable suite: **212/212 passed** across 40 test files;
+- targeted Inquiry Foundation ESLint: passed;
 - production Supabase: not accessed;
-- local migration history: all six repository versions aligned, with no existing migration pending;
+- local migration history: all seven repository versions aligned, with no migration pending;
 - clean repository predecessor: `86a197a16b2551ed5dcee03a157cde63753daa93`, equal to its tracking ref before this cohort.
 
-**Next intended action:** checkpoint the approved architecture, create verified repository/database backups, then implement and verify only the four-table Inquiry Foundation schema against `Lia-vaud:local:54322`. Do not change `/api/leads` or the family form, create inquiry data, access production, or start Phase 5G, Partner Portal, or full CRM.
+**Next intended action:** stop at the schema-foundation checkpoint. Any `/api/leads` compatibility migration, family-form change, live inquiry creation, or internal workflow needs separate authorization. Do not access production or start Phase 5G, Partner Portal, assignments/tasks, memberships, or full CRM.
 
 Do **not** start Phase 5G automatically after this cohort.
 
@@ -458,7 +464,7 @@ V1 goal:
 
 Architect now so a secure Partner Portal/CRM can be added later, but **do not implement the Partner Portal/CRM product yet**.
 
-The architecture step is now approved and documented. The migration/application step remains unstarted and separately gated. The approved core is `inquiry_contacts -> inquiries -> inquiry_referrals`, with append-only `inquiry_activities`; required referral recipient organization; optional provider/site and offering; explicit per-referral sharing authorization and `shared_at`; no V1 assignee model; and server-only access.
+The architecture and schema-foundation steps are complete locally. Application work remains unstarted and separately gated. The implemented core is `inquiry_contacts -> inquiries -> inquiry_referrals`, with append-only `inquiry_activities`; required referral recipient organization; optional provider/site and offering; explicit per-referral sharing authorization and `shared_at`; no V1 assignee model; and server-only access.
 
 Future-ready concepts should include:
 
@@ -527,9 +533,9 @@ Do not substitute production URLs/credentials. Production was not accessed in th
 
 ### Tests
 
-Current verified runnable suite after the final Vaud V1 home-care closure implementation:
+Current verified runnable suite after the Inquiry Foundation schema implementation:
 
-**201 passed, 0 failed** across 39 `tests/*.test.mjs` files.
+**212 passed, 0 failed** across 40 `tests/*.test.mjs` files.
 
 `package.json` has no test script; enumerate the files in `tests/` and pass them to `node --test`. Running bare `node --test` also discovers guarded scripts named `test-*.mjs` under `scripts/`, which require explicit modes and is not the runnable-suite command. `npm run lint` runs repository-wide ESLint and currently exits nonzero with the two errors and two warnings recorded in section 8.
 
@@ -556,6 +562,12 @@ Verification procedure used:
 
 Latest repository-checkout backup created and fully verified on 2026-10-12:
 
+`D:\Lia-backups\Lia-backup-28_2026-10-12_pre-inquiry-foundation`
+
+Backup #28 contains 487 included files after excluding `node_modules`, `.next`, and `supabase\.temp`. Source and backup had zero missing files, extra files, length mismatches, or SHA-256 mismatches. Its clean `marketplace-mvp` checkout is at `14de241f3538d22bf4a70769e717dc099a2c2901`; `git fsck --full --strict` exited 0 and reported dangling historical trees only.
+
+Previous verified repository-checkout backup:
+
 `D:\Lia-backups\Lia-backup-27_2026-10-12_vaud-private-home-care-generalists`
 
 Backup #27 contains 454 included files after excluding `node_modules`, `.next`, and `supabase\.temp`. Source and backup had zero missing files, extra files, length mismatches, or SHA-256 mismatches. Its clean `marketplace-mvp` checkout is at `86a197a16b2551ed5dcee03a157cde63753daa93`; `git fsck --full --strict` exited 0 and reported dangling historical trees only.
@@ -565,6 +577,12 @@ Separate database safety snapshot created and verified before the 2026-10-11 loc
 `D:\Lia-backups\Lia-db-backup_2026-10-11_pre-migration-ledger-reconciliation\lia-local-postgres-pre-migration-ledger-reconciliation.dump`
 
 The custom-format PostgreSQL dump is 474,263 bytes, has SHA-256 `CE78EFB6DB749014E1D442CA439A9E82E499771EC8ACF60C28BC2D8139CC7418`, and passed `pg_restore --list`. It was not restored and must not be committed.
+
+Separate pre-Inquiry-Foundation local database snapshot:
+
+`D:\Lia-backups\Lia-db-backup_2026-10-12_pre-inquiry-foundation\lia-local-postgres-pre-inquiry-foundation.dump`
+
+The custom-format dump is 502,828 bytes, has SHA-256 `92B158A39DB77B5DFFFE8CF5C340878C3E59D7E4231BFEA2D7A86FB9A163B641`, and passed `pg_restore --list` with 809 TOC entries. It was not restored and must not be committed.
 
 ### Deployment
 
@@ -581,7 +599,7 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 **Verified on 2026-10-12:**
 
 - Branch: `marketplace-mvp`
-- Current committed HEAD and tracking HEAD: `11cc85fbab0414ab2258d84ef51462bc14e08eb1`
+- Architecture checkpoint before the schema commit: `14de241f3538d22bf4a70769e717dc099a2c2901`
 - Clean predecessor before the final home-care closure cohort: `86a197a16b2551ed5dcee03a157cde63753daa93`
 - The final home-care closure cohort is committed and present on `origin/marketplace-mvp`.
 - The local database is at the verified 141-provider/64-organization/111-offering closure state.
@@ -589,7 +607,7 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 - Batch F: applied and verified locally, committed, and present on the live remote
 - Vaud V1 private-home-care completeness cohort: applied and verified locally; 16 identities implemented, none held, 128 net-new rows
 - Final Vaud V1 home-care closure cohort: 11 candidates reviewed; five implemented (four creates and one update), six held, 39 net-new rows
-- Inquiry Foundation: architecture approved and implementation-ready design documented; schema-only local migration authorized but not yet implemented at this checkpoint
+- Inquiry Foundation: architecture approved; schema-only migration implemented and verified locally; all four tables empty; application work not started
 - Phase 5G: not started
 
 ## 13. Last updated date and handoff notes
@@ -611,7 +629,7 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 5. Keep each data batch independently reversible and checkpointed.
 6. Do not start a new major development phase merely because the previous batch passed; follow the explicit priority list above.
 7. Current product strategy after Vaud data completeness: prioritize family lead capture and internal inquiry tracking, architected for a future secure multi-organization Partner Portal/CRM but without building that portal yet.
-8. The Inquiry Foundation architecture is approved, but its migration remains a separately authorized future step. Read `docs/architecture/lia-inquiry-foundation.md` before proposing schema or application changes.
+8. The Inquiry Foundation architecture and local schema foundation are complete. Read `docs/architecture/lia-inquiry-foundation.md` and `docs/architecture/lia-inquiry-foundation-schema-implementation.md` before proposing application changes; application work remains separately gated.
 
 ### Facts that remain unresolved before the next development phase
 

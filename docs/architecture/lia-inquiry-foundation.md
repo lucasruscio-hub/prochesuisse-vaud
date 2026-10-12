@@ -1,10 +1,10 @@
 # Lia Inquiry Foundation
 
-Status: approved architecture and implementation-ready design; migration not yet authorized
+Status: approved architecture; schema foundation implemented and verified locally on 2026-10-12
 
 Scope: family inquiry intake, Lia-side qualification, multi-provider referrals, history, outcomes, and future CRM/Partner Portal compatibility
 
-Out of scope: migration execution, application implementation, production access, Partner Portal, full CRM, clinical records
+Out of scope after this checkpoint: application implementation, production access, Partner Portal, full CRM, clinical records
 
 ## 1. Approved architecture
 
@@ -729,7 +729,7 @@ External systems must call the same guarded lifecycle operations. They must not 
 
 ## 14. Implementation and test sequence
 
-No step below is authorized by this document alone.
+Steps 1–7 and the schema-focused parts of steps 11–15 were completed locally in the separately authorized schema-foundation workflow. Application steps remain separately gated.
 
 1. Approve the final review items in section 16.
 2. Create a clean checkpoint/backup under the established Lia process before schema work.
@@ -794,4 +794,4 @@ The core architecture, all controlled vocabularies in this document, and the nul
 3. Before production, resolve privacy notice/legal-basis, hosting/subprocessor/transfer, production contact, abuse-control, and operational-monitoring requirements.
 4. Before any Partner Portal work, approve membership, site permission, immutable share snapshot, portal RLS, and read-access audit designs.
 
-Until a migration is separately authorized, this document is the implementation-ready design only. No production storage or sharing is authorized by it.
+The schema foundation is implemented only in the verified local database. No production storage, application write path, or provider sharing is authorized by this checkpoint.
