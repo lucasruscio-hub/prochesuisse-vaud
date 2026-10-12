@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "preparedOn": "2026-10-12",
+  "cohort": "Vaud V1 private-home-care completeness",
+  "productionAccessAuthorized": false,
+  "phase5gAuthorized": false,
+  "source": {
+    "name": "Canton de Vaud official OSAD workbook — Etat du 02.03.2026",
+    "repositoryEvidence": "docs/research/source-material/Lia_Phase5E_FINAL_reconciled_Vaud_homecare_2026-09-28.xlsx",
+    "sourceUrl": "https://www.vd.ch/sante-soins-et-handicap/vivre-a-domicile/aide-a-domicile",
+    "observedOn": "2026-03-02",
+    "reconciledOn": "2026-09-28"
+  },
+  "expectedRows": {
+    "organizations.create": 16,
+    "organization_sources.create": 16,
+    "providers.create": 14,
+    "providers.update": 2,
+    "provider_sources.create": 16,
+    "provider_names.create": 2,
+    "provider_organizations.create": 16,
+    "care_offerings.create": 16,
+    "care_offering_sources.create": 16,
+    "care_offering_regulatory_designations.create": 16,
+    "provider_service_areas.create": 0,
+    "care_offering_features.create": 0,
+    "care_offering_availability.create": 0,
+    "netNewRows": 128
+  },
+  "heldScopedIdentities": [],
+  "preservedExternalHold": {
+    "identity": "La Réponse Sàrl",
+    "issue": "The relationship to La Boîte O Services remains unresolved and is not asserted by this cohort."
+  },
+  "identities": [
+    {
+      "identityId": "1-monde-patients",
+      "action": "create",
+      "provider": {"slug": "1-monde-patients", "name": "1 Monde PatientS", "postalCode": "1417", "locality": "Epautheyres", "street": "Chemin de la Repiaz", "houseNumber": "8a", "phone": "076 414 40 35", "email": "contact@1mondepatients.ch", "website": "https://1mp.ch/"},
+      "organization": {"slug": "1-monde-patients-cooperative", "name": "1 Monde PatientS, société coopérative"},
+      "officialLabel": "1 Monde PatientS",
+      "classification": "Generalist home-care OSAD",
+      "aliases": []
+    },
+    {
+      "identityId": "c-vital",
+      "action": "create",
+      "provider": {"slug": "c-vital", "name": "C-VITAL", "postalCode": "1610", "locality": "Oron-la-Ville", "street": "Route de Palézieux", "houseNumber": "16", "phone": "021 907 88 88", "email": "info@c-vital.ch", "website": "https://c-vital.digitalone.site/"},
+      "organization": {"slug": "c-vital-sarl", "name": "C-VITAL Sàrl"},
+      "officialLabel": "C-Vital Sàrl",
+      "classification": "Generalist home-care OSAD",
+      "aliases": []
+    },
+    {
+      "identityId": "osad-helvetia",
+      "action": "create",
+      "provider": {"slug": "osad-helvetia", "name": "OSAD Helvetia", "postalCode": "1880", "locality": "Bex", "street": "Route de Massongex", "houseNumber": "4", "phone": "024 472 11 47", "email": "info@osad-helvetia.ch", "website": "https://osad-helvetia.ch/"},
+      "organization": {"slug": "osad-helvetia-sarl", "name": "OSAD Helvetia Sàrl"},
+      "officialLabel": "Helvetia Sàrl OSAD",
+      "classification": "Generalist home-care OSAD",
+      "aliases": []
+    },
+    {
+      "identityId": "home-assistance",
+      "action": "create",
+      "provider": {"slug": "home-assistance", "name": "Home Assistance", "postalCode": "1018", "locality": "Lausanne", "street": "Route Aloys-Fauquez", "houseNumber": "2", "phone": "0800 949 494", "email": "info@homeassistance.ch", "website": "www.homeassistance.ch"},
+      "organization": {"slug": "home-assistance-sarl", "name": "Home Assistance Sàrl"},
+      "officialLabel": "Home Assistance Sàrl",
+      "classification": "Generalist home-care OSAD",
+      "aliases": []
+    },
+    {
+      "identityId": "hygie-soins",
+      "action": "create",
+      "provider": {"slug": "hygie-soins", "name": "Hygie-Soins", "postalCode": "1522", "locality": "Lucens", "street": "Chemin des Mésnages", "houseNumber": "3", "phone": "079 899 59 85", "email": "direction@hygie-soins.ch", "website": "https://hygie-soins.ch/"},
+      "organization": {"slug": "hygie-soins-sarl", "name": "Hygie-Soins Sàrl"},
+      "officialLabel": "Hygie-Soins Sàrl",
+      "classification": "Generalist home-care OSAD",
+      "aliases": []
+    },
+    {
+      "identityId": "la-source-a-domicile",
+      "action": "create",
+      "provider": {"slug": "la-source-a-domicile", "name": "La Source à domicile", "postalCode": "1004", "locality": "Lausanne", "street": "Avenue des Bergières", "houseNumber": "10", "phone": "021 310 73 00", "email": "soinsadomicile@lasource.ch", "website": "www.lasource.ch"},
+      "organization": {"slug": "la-source-a-domicile-sarl", "name": "La Source à domicile Sàrl"},
+      "officialLabel": "La Source à domicile Sàrl",
+      "classification": "Generalist home-care OSAD",
+      "aliases": [
+        {"name": "UniQue Care", "nameType": "historical"},
+        {"name": "Unique Soins à domicile", "nameType": "historical"}
+      ]
+    },
+    {
+      "identityId": "les-soins-volants",
+      "action": "create",
+      "provider": {"slug": "les-soins-volants", "name": "Les Soins Volants", "postalCode": "1815", "locality": "Clarens", "street": "Avenue Bosquets de Julie", "houseNumber": "8", "phone": "021 888 02 02", "email": "info@soinsvolants.ch", "website": "www.soinsvolants.ch"},
+      "organization": {"slug": "les-soins-volants-sarl", "name": "Les Soins Volants Sàrl"},
+      "officialLabel": "Les Soins Volants Sàrl",
+      "classification": "Generalist home-care OSAD",
+      "aliases": []
+    },
+    {
+      "identityId": "msg-soins",
+      "action": "create",
+      "provider": {"slug": "msg-soins", "name": "MSG Soins", "postalCode": "1816", "locality": "Chailly-Montreux", "street": "Route de Brent", "houseNumber": "13F", "phone": "021 944 03 95", "email": "info@msgsoins.ch", "website": "www.msgsoins.ch"},
+      "organization": {"slug": "msg-soins-sarl", "name": "MSG Soins Sàrl"},
+      "officialLabel": "MSG Soins Sàrl",
+      "classification": "Generalist home-care OSAD",
+      "aliases": []
+    },
+    {
+      "identityId": "o-sante",
+      "action": "create",
+      "provider": {"slug": "o-sante", "name": "Ô Santé", "postalCode": "1041", "locality": "Poliez-Pittet", "street": "Rue d'Echallens", "houseNumber": "41A", "phone": "021 881 23 23", "email": "info@o-sante.ch", "website": "www.o-sante.ch"},
+      "organization": {"slug": "o-sante-sarl", "name": "Ô Santé Sàrl"},
+      "officialLabel": "Ô Santé Sàrl",
+      "classification": "Generalist home-care OSAD",
+      "aliases": []
+    },
+    {
+      "identityId": "proxi-soins",
+      "action": "create",
+      "provider": {"slug": "proxi-soins", "name": "Proxi-Soins", "postalCode": "1028", "locality": "Préverenges", "street": "Allée du Rionzi", "houseNumber": "1", "phone": "0800 087 087\n021 948 87 43", "email": "proxi-soins@hin.ch", "website": "www.proxi-soins.ch"},
+      "organization": {"slug": "proxi-soins-sarl", "name": "Proxi-Soins Sàrl"},
+      "officialLabel": "PROXI-SOINS Sàrl",
+      "classification": "Generalist home-care OSAD",
+      "aliases": []
+    },
+    {
+      "identityId": "la-solution-ch",
+      "action": "create",
+      "provider": {"slug": "la-solution-ch", "name": "La-solution.ch", "postalCode": "1442", "locality": "Montagny-près-Yverdon", "street": "En Chamard", "houseNumber": "41 C", "phone": "0800 002 004", "email": "service-clients@la-solution.ch", "website": "www.la-solution.ch"},
+      "organization": {"slug": "sarai-la-solution-ch-sa", "name": "Saraï, La-solution.ch SA"},
+      "officialLabel": "Saraï, La-solution.ch SA",
+      "classification": "Generalist / commercial network",
+      "aliases": []
+    },
+    {
+      "identityId": "soins-riviera",
+      "action": "create",
+      "provider": {"slug": "soins-riviera", "name": "Soins Riviera", "postalCode": "1815", "locality": "Clarens", "street": "Chemin du Pierrier", "houseNumber": "1", "phone": "021 965 15 15", "email": "info@soinsriviera.ch", "website": "www.soinsriviera.ch"},
+      "organization": {"slug": "soins-riviera-sarl", "name": "Soins Riviera Sàrl"},
+      "officialLabel": "Soins Riviera Sàrl",
+      "classification": "Generalist home-care OSAD",
+      "aliases": []
+    },
+    {
+      "identityId": "swiss-agi-san",
+      "action": "create",
+      "provider": {"slug": "swiss-agi-san", "name": "Swiss Agi San", "postalCode": "1860", "locality": "Aigle", "street": "Rue de la Gare", "houseNumber": "11", "phone": "021 558 71 71", "email": "info@swissagisan.ch", "website": "www.swissagisan.ch"},
+      "organization": {"slug": "swiss-agi-san-sarl", "name": "Swiss Agi San Sàrl"},
+      "officialLabel": "Swiss Agi San Sàrl",
+      "classification": "Generalist home-care OSAD",
+      "aliases": []
+    },
+    {
+      "identityId": "val-soins",
+      "action": "create",
+      "provider": {"slug": "val-soins", "name": "Val'Soins", "postalCode": "1347", "locality": "Le Sentier", "street": "Chemin des Ecureuils", "houseNumber": "15", "phone": "079 200 08 52", "email": "info@soins-valleedejoux.ch", "website": null},
+      "organization": {"slug": "val-soins-sarl", "name": "Val'Soins Sàrl"},
+      "officialLabel": "Val'Soins Sàrl",
+      "classification": "Regional home-care OSAD",
+      "aliases": []
+    },
+    {
+      "identityId": "swisscaring-vaud",
+      "action": "update",
+      "existingProviderSlug": "swisscaring",
+      "provider": {"slug": "swisscaring", "name": "Swisscaring Vaud", "postalCode": "1052", "locality": "Le Mont-sur-Lausanne", "street": "En Budron", "houseNumber": "E7", "phone": "021 651 09 10", "email": "info@swisscaring.ch", "website": "www.swisscaring.ch"},
+      "organization": {"slug": "swisscaring-vaud-sarl", "name": "Swisscaring Vaud Sàrl"},
+      "officialLabel": "Swisscaring Vaud SARL",
+      "classification": "Generalist home-care OSAD",
+      "aliases": []
+    },
+    {
+      "identityId": "la-boite-o-services",
+      "action": "update",
+      "existingProviderSlug": "boite-o",
+      "provider": {"slug": "boite-o", "name": "La Boîte O Services", "postalCode": "1166", "locality": "Perroy", "street": "Route des Vignerons", "houseNumber": "30", "phone": "0800 00 44 33", "email": "info@laboiteoservices.ch", "website": "www.laboiteoservices.ch"},
+      "organization": {"slug": "la-boite-o-services-sarl", "name": "La Boîte O Services Sàrl"},
+      "officialLabel": "La Boîte O Services Sàrl",
+      "classification": "Generalist home-care OSAD",
+      "aliases": []
+    }
+  ]
+}

@@ -1,18 +1,19 @@
 # LIA_PROJECT_STATE
 
 > Permanent development handoff for the Lia repository.
-> **Provenance:** earlier foundation details below are grounded in the project master handoff. The current-state sections were audited on 2026-10-11 against the repository, the live Git remote, the running local Supabase database, and the attached SSD backup. Historical claims remain labeled as reported where primary evidence was not re-created during this audit. No secrets, credentials, API keys, or customer data belong in this file.
+> **Provenance:** earlier foundation details below are grounded in the project master handoff. The current-state sections were audited on 2026-10-12 against the repository and the running local Supabase database. Historical claims remain labeled as reported where primary evidence was not re-created during this audit. No secrets, credentials, API keys, or customer data belong in this file.
 
-## 0. State classification and 2026-10-11 audit snapshot
+## 0. State classification and 2026-10-12 audit snapshot
 
 ### Verified current repository facts
 
 - Working copy: `C:\Users\lucas\Lia-vaud`; branch: `marketplace-mvp`.
+- The clean predecessor for the Vaud V1 private-home-care completeness cohort was `1bc680fb1af3cfd248a2844774eaa04cbee7ac4e`, with local HEAD equal to `origin/marketplace-mvp`.
 - The clean starting checkpoint for the migration-ledger reconciliation was `53613253735aff7c4c3536e84e907bd12a0f3ede` (`Add permanent Lia project state handoff`), with local HEAD equal to `origin/marketplace-mvp`.
 - Batch F and the permanent handoff are committed. The migration-ledger reconciliation changed only local database bookkeeping; this handoff update is the only repository-file change made by that workflow.
 - The repository contains six migration files through `20260928000100_phase5f_home_care_identity_foundation.sql`; see section 4.
 - All explicit repository paths referenced by this document were found. The `docs/research/phase5f-batch-*.md` reference is a glob and matches the committed batch records, including Batch F.
-- The runnable repository test set is 37 `tests/*.test.mjs` files and currently passes **188/188**. Repository-wide ESLint currently fails with two `react-hooks/set-state-in-effect` errors in `app/recherche/RechercheClient.js` and reports two `@next/next/no-img-element` warnings in `app/page.js`.
+- The cohort adds one targeted test file with six tests. The runnable repository set is now 38 `tests/*.test.mjs` files and passes **194/194**. Targeted ESLint passes for the cohort library, runner, and test.
 
 ### Verified current local-database facts
 
@@ -20,22 +21,22 @@
 - Batch F is applied locally: Altoan/Altoan SA exist, exactly one offering has type `home_support`, and the verified table counts are recorded in section 5.
 - The local schema contains all 16 expected public tables, including the Phase 5F foundation tables. On 2026-10-11, a clean isolated replay of all six repository migrations was proven materially schema-equivalent to the enriched local schema, after reproducing the standard Supabase public-schema privilege baseline.
 - The local Supabase migration ledger is reconciled: all six repository migration versions are recorded as applied. The five missing historical versions were marked applied with the supported local-only Supabase repair mechanism, without rerunning their SQL. Public application data and the Batch A-F/EMS/Senevita fingerprints were unchanged.
+- The Vaud V1 private-home-care completeness cohort is applied locally: 14 new private generalist providers were created and the existing `swisscaring` and `boite-o` providers were reconciled without duplication. All 16 cohort providers have one minimum `home_care` offering and one dated 2026-03-02 official-file designation. No cohort service-area, feature, or availability rows were added.
 
 ### Historical facts
 
-- Phase and milestone summaries in sections 4–6 describe earlier completed work. Batch F at commit `a27faf1` is the latest committed and pushed implementation milestone; the earlier Batch E checkpoint remains in history at `7af12b5`.
+- Phase and milestone summaries in sections 4–6 describe earlier completed work. Batch F remains in history at `a27faf1`; the current cohort follows the migration-ledger handoff predecessor `1bc680f`.
 - Backup #26 is present on the SSD at the Batch F + handoff checkpoint `5361325`; the separate pre-reconciliation database dump is newer and preserves the local database before ledger repair.
 
 ### Planned work
 
-- Perform and document the Phase 5F completion review before authorizing any Phase 5G work.
-- Assess whether Vaud V1 home-care coverage is sufficient and which remaining holds are launch-critical, without starting enrichment.
+- Continue the remaining Vaud supply-completeness work after checkpointing the private-home-care cohort; do not start Phase 5G automatically.
 - Continue with the supply-completeness and product priorities in section 9 only after the current checkpoint is deliberately closed.
 
 ### Unresolved or deliberately unverified
 
-- No Phase 5F completion-review artifact was found; the implementation batches are locally complete through F, but Phase 5F as a reviewed/checkpointed phase is not yet closed.
-- Phase 5G has not started: no Phase 5G path exists, the manifest still has `phase5gAuthorized: false`, and the local counts remain the Batch F minimum state.
+- No separate Phase 5F completion-review artifact is present. The targeted Vaud V1 private-home-care completeness record now documents the largest identified private-generalist coverage gap and its closure; it is not Phase 5G.
+- Phase 5G has not started: no Phase 5G path exists and both the Phase 5F manifest and the cohort manifest keep `phase5gAuthorized: false`.
 - Current Vercel project, public URL, and deployment status could not be verified from repository metadata or public evidence.
 - Production Supabase schema/data state was not checked because production data access was prohibited for this audit.
 - Production migration history remains separately unknown and must be audited before any production schema deployment. The local repair is not evidence of production state.
@@ -239,23 +240,23 @@ Production migration history remains unknown. Audit it separately and read-only 
 
 ## 5. Provider-data coverage and latest verified counts
 
-### Verified local counts after Phase 5F Batch F
+### Verified local counts after the Vaud V1 private-home-care completeness cohort
 
-Read-only verification against the guarded local container on 2026-10-11 returned:
+Read-only verification against the guarded local container on 2026-10-12 returned:
 
-- Providers: **123**
+- Providers: **137**
 - CMS providers: **50**
-- Organizations: **43**
-- Provider sources: **195**
-- Organization sources: **21**
+- Organizations: **59**
+- Provider sources: **211**
+- Organization sources: **37**
 - Organization names: **4**
 - Organization relationships: **7**
-- Provider names: **3**
-- Provider-organization links: **141**
-- Care offerings: **90**
-- Offering sources: **111**
+- Provider names: **5**
+- Provider-organization links: **157**
+- Care offerings: **106**
+- Offering sources: **127**
 - Provider identity links: **51**
-- Regulatory designations: **56**
+- Regulatory designations: **72**
 - Features: **84**
 - Availability rows: **0**
 - Service-area rows: **4**
@@ -297,6 +298,7 @@ Potential later EMS candidates identified earlier include Bossons, Mélodie/Plai
 - Phase 5F Batch D added/updated key private structures including AMAD, Vivradom, and Dovida/Home Instead.
 - Phase 5F Batch E added specialist/institution-linked identities including Beau-Séjour OSAD and SAMSA Levant, plus organization-level Sciensus/CPSE Alexandra records where provider evidence remains held.
 - Batch F added the unpublished, unverified Altoan provider and Altoan SA organization locally, with one strictly non-medical `home_support` offering and one sourced `CH-VD` canton service-area row. The implementation is committed and pushed at `a27faf1`.
+- The Vaud V1 private-home-care completeness cohort added 14 private generalist providers and reconciled the existing Swisscaring Vaud and La Boîte O rows. All 16 are unpublished/unverified, have one minimum `home_care` offering and a dated official-file designation, and have no cohort service-area, feature, or availability rows. The exact implementation is documented in `docs/research/vaud-v1-private-home-care-completeness-cohort.md`.
 
 ### Senior residences
 
@@ -365,7 +367,7 @@ Key modeling decisions:
 
 ## 7. Current development phase and exact stopping point
 
-**Verified stopping point (2026-10-11):** Phase 5F Batch F has been implemented, applied and verified in local Supabase, committed, and pushed. The Phase 5F completion review has not been documented, and Phase 5G has not started.
+**Verified stopping point (2026-10-12):** the Vaud V1 private-home-care completeness cohort following Phase 5F Batch F has been implemented and fully verified in local Supabase. It closes the scoped private-generalist coverage gap without starting Phase 5G.
 
 Latest committed and pushed Batch F commit:
 
@@ -382,23 +384,25 @@ Historical final Batch E checkpoint:
 - local HEAD = tracking HEAD = live remote HEAD
 - production Supabase not accessed
 
-Current verified Batch F and post-reconciliation state:
+Current verified cohort state:
 
-- local database: applied and verified with the exact 8-row Altoan plan;
-- repository implementation: committed and pushed (`implementation-manifest.json`, two Batch F records, Batch F library/script/test);
-- runnable suite including Batch F: **188/188 passed**;
-- repository-wide lint: **2 errors and 2 warnings**, all in the previously reported files;
+- local database: rollback-only dry run passed, then apply → verify → rollback → exact predecessor comparison → reapply passed with the exact 128-row private-home-care plan;
+- repository implementation: canonical manifest, reconciliation record, guarded library/runner, and targeted tests are included in this cohort checkpoint;
+- runnable suite: **194/194 passed** across 38 test files;
+- targeted cohort ESLint: passed;
 - production Supabase: not accessed;
 - local migration history: all six repository versions aligned, with no existing migration pending;
-- Git checkpoint before this documentation update: `5361325`, clean and equal to its tracking ref.
+- clean repository predecessor: `1bc680fb1af3cfd248a2844774eaa04cbee7ac4e`, equal to its tracking ref before this cohort.
 
-**Next intended Phase 5F action:** perform and document the Phase 5F completion review. Do not reimplement or reapply Batch F.
+**Next intended action:** checkpoint and push this cohort, then continue only with separately authorized Vaud supply-completeness work. Do not start Phase 5G, specialist follow-up, family inquiry schema, Partner Portal, or CRM automatically.
 
-Do **not** start Phase 5G automatically after Batch F. First assess whether home-care coverage is already sufficient for Vaud V1 and which remaining research holds are launch-critical.
+Do **not** start Phase 5G automatically after this cohort.
 
 ## 8. Outstanding issues, held records, and blockers
 
-### Home-care / private-provider holds remaining after Batch F
+### Home-care / private-provider holds remaining after the completeness cohort
+
+No identity in the 16-provider completeness cohort is held. The pre-existing holds below remain outside that cohort and were unchanged. The La Boîte O/La Réponse relationship is also still unresolved; no relationship row was created.
 
 - AMAD Yverdon — operator/authorization unresolved
 - Vivradom — shared-brand entity/corporate relationship/coverage allocation unresolved
@@ -428,20 +432,18 @@ Verified on 2026-10-11: repository-wide lint still fails with two `react-hooks/s
 
 ## 9. Next three development tasks in priority order
 
-### 1. Finish Phase 5F cleanly
-
-- Perform and document the Phase 5F completion review.
-- Assess whether current Vaud V1 home-care coverage is sufficient and identify only launch-critical holds.
-- Preserve the verified `home_support` modeling and exact 8-row Altoan scope; do not repeat Batch F writes without a specific reason.
-- Keep Phase 5G unauthorized until the completion review is accepted.
-
-### 2. Finish Vaud supply completeness
+### 1. Finish remaining Vaud supply completeness
 
 - Final EMS universe/completeness pass, with private/commercial EMS prioritized commercially but all legitimate supply represented.
 - Build the real Vaud senior-residence/protected-living universe, resolve identities, and implement trustworthy V1 listings.
-- Confirm home-care supply is sufficiently complete for launch; do not over-enrich every record before user testing.
+- Treat the 16-provider private-home-care completeness cohort as complete; do not repeat it or start specialist follow-up without a separate authorization.
 
-### 3. Build family lead capture + internal inquiry tracking
+### 2. Run first-time-family UX and launch-readiness review
+
+- Review homepage, search, and provider detail flows with the now broader Vaud supply.
+- Keep Phase 5G enrichment unauthorized unless a later review identifies a specific launch-critical fact gap.
+
+### 3. Build family lead capture + internal inquiry tracking only when separately authorized
 
 V1 goal:
 
@@ -516,9 +518,9 @@ Do not substitute production URLs/credentials. Production was not accessed in th
 
 ### Tests
 
-Current verified runnable suite after the committed Batch F implementation:
+Current verified runnable suite after the Vaud V1 private-home-care completeness implementation:
 
-**188 passed, 0 failed** across 37 `tests/*.test.mjs` files.
+**194 passed, 0 failed** across 38 `tests/*.test.mjs` files.
 
 `package.json` has no test script; enumerate the files in `tests/` and pass them to `node --test`. Running bare `node --test` also discovers guarded scripts named `test-*.mjs` under `scripts/`, which require explicit modes and is not the runnable-suite command. `npm run lint` runs repository-wide ESLint and currently exits nonzero with the two errors and two warnings recorded in section 8.
 
@@ -567,20 +569,20 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 
 ## 12. Last verified Git branch, commit, and working-tree state
 
-**Verified on 2026-10-11:**
+**Verified on 2026-10-12:**
 
 - Branch: `marketplace-mvp`
-- Clean checkpoint before local migration-ledger reconciliation: `53613253735aff7c4c3536e84e907bd12a0f3ede`
-- Checkpoint commit message: `Add permanent Lia project state handoff`
-- That checkpoint had local HEAD = tracking HEAD and a clean working tree.
-- The reconciliation changed no application or migration files and did not alter public application data; only this handoff was updated afterward.
+- Clean predecessor before the private-home-care cohort: `1bc680fb1af3cfd248a2844774eaa04cbee7ac4e`
+- Predecessor local HEAD equaled `origin/marketplace-mvp`; the cohort is committed with this handoff update.
+- The local database is at the verified 137-provider/59-organization/106-offering cohort state.
 - Production Supabase: not accessed; current production state unresolved
 - Batch F: applied and verified locally, committed, and present on the live remote
+- Vaud V1 private-home-care completeness cohort: applied and verified locally; 16 identities implemented, none held, 128 net-new rows
 - Phase 5G: not started
 
 ## 13. Last updated date and handoff notes
 
-**Last updated:** 2026-10-11
+**Last updated:** 2026-10-12
 
 ### Handoff procedure for a new coding conversation
 
@@ -592,7 +594,7 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
    - latest migrations
    - local DB counts
    - latest backup
-3. Read the current Phase 5F packet/manifest and latest batch documentation before writing data.
+3. Read the current Phase 5F packet/manifest, the Vaud V1 private-home-care completeness manifest, and the latest implementation documentation before writing data.
 4. Never infer missing provider facts to satisfy expected row counts; stop and report a discrepancy instead.
 5. Keep each data batch independently reversible and checkpointed.
 6. Do not start a new major development phase merely because the previous batch passed; follow the explicit priority list above.
@@ -600,6 +602,6 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 
 ### Facts that remain unresolved before the next development phase
 
-- Complete and document the Phase 5F completion review.
+- A separate Phase 5F completion-review artifact is still absent; the private-generalist gap itself is now reconciled and implemented in the dedicated completeness-cohort record.
 - Verify the current Vercel project, public deployment URL, and deployment status using authorized project access.
 - Verify production Supabase schema/migration state only under a separately authorized, read-only production audit; do not access production data merely to satisfy the handoff.
