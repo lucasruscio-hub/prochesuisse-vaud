@@ -1,10 +1,10 @@
 # Lia Inquiry Foundation
 
-Status: approved architecture; schema foundation implemented and verified locally on 2026-10-12
+Status: approved architecture; schema foundation and `/api/leads` atomic intake implemented and verified locally through 2026-10-13
 
 Scope: family inquiry intake, Lia-side qualification, multi-provider referrals, history, outcomes, and future CRM/Partner Portal compatibility
 
-Out of scope after this checkpoint: application implementation, production access, Partner Portal, full CRM, clinical records
+Out of scope after this checkpoint: public-form redesign, production access/deployment, internal inquiry UI, referral workflow, provider sharing, Partner Portal, full CRM, clinical records
 
 ## 1. Approved architecture
 
@@ -114,7 +114,7 @@ Exact forward transitions are `shortlisted -> ready_to_share|closed`, `ready_to_
 
 ## 4. Exact four-table definitions
 
-The following definitions are the target for a future repository migration. They are not executable migration SQL in this document. All timestamps are `timestamptz` in UTC. All identifiers default to `gen_random_uuid()`.
+The following definitions describe the implemented repository schema. This document is not executable migration SQL. All timestamps are `timestamptz` in UTC. All identifiers default to `gen_random_uuid()`.
 
 ### 4.1 `inquiry_contacts`
 
@@ -692,6 +692,43 @@ Deployment sequence:
 9. Commit contact, inquiry, and initial activity before notification. Notification failure must not change a successful intake response or cause re-insertion.
 10. Minimize notification content; prefer inquiry reference/link over emailing the full request. Add an outbox later only if delivery reliability requires it.
 11. Introduce `/api/inquiries` later, migrate callers, then retire `/api/leads` separately.
+
+### Implemented `/api/leads` compatibility mapping
+
+The local application implementation uses `public.create_inquiry_from_public_intake`, a
+`SECURITY INVOKER` RPC executable only by `service_role`. The role already has the narrowly
+required table privileges, so the function does not need owner-bypassing `SECURITY DEFINER`
+authority. One transaction serializes on `intake_idempotency_key`, creates one contact, one
+`new` inquiry, and one `inquiry_created` activity, and creates no referral or disclosure.
+
+| Legacy input | Inquiry Foundation value |
+| --- | --- |
+| `firstName`, `lastName`, `email`, optional `phone` | Normalized contact fields; missing preference defaults to `email`. |
+| `need` | Exact controlled mapping to `care_type_code`. |
+| `urgency` | Exact controlled mapping to `timing_code`. |
+| No relationship field | `beneficiary_relation_code = unspecified`. |
+| `needs[]` | Exact controlled mapping, canonical sorting, and deduplication into `need_codes`. |
+| `location` | `location_text` only; no municipality inference. |
+| `details` | Optional trimmed `context_summary`, maximum 1,000 characters. |
+| `source = landing`, `page = homepage` | `source_channel = homepage`, `source_detail = landing`, `landing_page = /`. |
+| `consentContact = true` | Contact permission at the server transaction time. |
+
+The legacy `situation`, `age`, and `funding` values are deprecated compatibility fields.
+They remain exact-allowlist validated while the old form is live, but are intentionally not
+persisted in a core column, free text, or activity metadata.
+
+The contact checkbox establishes permission for Lia to contact the submitter. The adjacent
+submission notice states that sending the form accepts Lia's processing of the supplied
+information and links the privacy policy. Together, that displayed wording is recorded as
+privacy-notice version `homepage-intake-2026-10-13`. This server-owned constant must change
+whenever the relevant checkbox, submission notice, or linked privacy notice materially
+changes. It does not establish or imply provider-sharing permission.
+
+The browser sends one random UUID in `Idempotency-Key` for a submission attempt, retains it
+across an ambiguous retry, and clears it when the payload is edited or success is confirmed.
+The RPC compares canonical persisted intake/contact values. An exact retry returns the
+existing inquiry without new rows; reuse with different canonical values raises an
+idempotency conflict. Email and phone are never identity or idempotency keys.
 
 ### Legacy lead data
 

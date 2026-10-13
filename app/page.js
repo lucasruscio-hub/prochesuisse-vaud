@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   ClipboardList,
   MessageCircle,
@@ -197,6 +197,7 @@ function HeroImage() {
 function HeroForm() {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const idempotencyKeyRef = useRef(null);
   const [formData, setFormData] = useState({
     need: "",
     location: "",
@@ -216,10 +217,12 @@ function HeroForm() {
   const totalSteps = 10;
 
   const updateField = (field, value) => {
+    idempotencyKeyRef.current = null;
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const toggleNeed = (value) => {
+    idempotencyKeyRef.current = null;
     setFormData((prev) => {
       const exists = prev.needs.includes(value);
       return {
@@ -269,10 +272,13 @@ const handleSubmit = async (event) => {
   setSubmitError("");
 
   try {
+    const idempotencyKey = idempotencyKeyRef.current ?? crypto.randomUUID();
+    idempotencyKeyRef.current = idempotencyKey;
     const response = await fetch("/api/leads", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Idempotency-Key": idempotencyKey,
       },
       body: JSON.stringify({
         ...formData,
@@ -285,6 +291,7 @@ const handleSubmit = async (event) => {
       throw new Error("Impossible d’envoyer la demande.");
     }
 
+    idempotencyKeyRef.current = null;
     setSubmitted(true);
   } catch (error) {
     setSubmitError(
