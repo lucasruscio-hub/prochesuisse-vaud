@@ -746,6 +746,7 @@ version establishes or implies provider-sharing permission.
 
 The browser sends one random UUID in `Idempotency-Key` for a submission attempt, retains it
 across an ambiguous retry, and clears it when the payload is edited or success is confirmed.
+
 The RPC compares canonical persisted intake/contact values. An exact retry returns the
 existing inquiry without new rows; reuse with different canonical values raises an
 idempotency conflict. Email and phone are never identity or idempotency keys.
@@ -852,3 +853,12 @@ The core architecture, all controlled vocabularies in this document, and the nul
 4. Before any Partner Portal work, approve membership, site permission, immutable share snapshot, portal RLS, and read-access audit designs.
 
 The schema foundation is implemented only in the verified local database. No production storage, application write path, or provider sharing is authorized by this checkpoint.
+
+## 17. Implemented Lia-internal workflow checkpoint
+
+The separately authorized Lia-internal inbox and detail workflow is documented in
+`docs/architecture/lia-internal-inquiry-workflow.md`. It adds Supabase passwordless Auth with an
+exact server-side staff-email allowlist, authoritative server authorization on every private page
+and mutation, and two service-role-only atomic workflow RPCs. Direct browser-role inquiry access
+remains prohibited. The checkpoint creates no referral, disclosure, provider account, membership,
+assignment, task, analytics surface, or Partner Portal behavior.
