@@ -11,17 +11,17 @@
 - The clean predecessor for the final Vaud V1 home-care closure cohort was `86a197a16b2551ed5dcee03a157cde63753daa93`, with local HEAD equal to `origin/marketplace-mvp`.
 - The clean starting checkpoint for the migration-ledger reconciliation was `53613253735aff7c4c3536e84e907bd12a0f3ede` (`Add permanent Lia project state handoff`), with local HEAD equal to `origin/marketplace-mvp`.
 - Batch F and the permanent handoff are committed. The migration-ledger reconciliation changed only local database bookkeeping; this handoff update is the only repository-file change made by that workflow.
-- The repository contains nine migration files through `20261013000200_create_internal_inquiry_workflow_rpcs.sql`; see section 4.
+- The repository contains ten migration files through `20261013000300_create_internal_referral_workflow_rpcs.sql`; see section 4.
 - The approved architecture checkpoint is `14de241f3538d22bf4a70769e717dc099a2c2901` (`Document Lia Inquiry Foundation architecture`), equal to `origin/marketplace-mvp` before the schema-foundation changes.
 - All explicit repository paths referenced by this document were found. The `docs/research/phase5f-batch-*.md` reference is a glob and matches the committed batch records, including Batch F.
-- The intake and internal-workflow checkpoints now have 34 targeted tests across four test files. The runnable repository set is now 44 `tests/*.test.mjs` files and passes **246/246**. Targeted internal-workflow ESLint and the production build pass.
+- The runnable repository set is now 45 `tests/*.test.mjs` files and passes **250/250**. Targeted referral-workflow ESLint and the production build pass.
 
 ### Verified current local-database facts
 
 - The guarded local target is the running `Lia-vaud` Supabase container on host port `54322`; no production database was accessed.
 - Batch F is applied locally: Altoan/Altoan SA exist, exactly one offering has type `home_support`, and the verified table counts are recorded in section 5.
 - The local schema contains the 16 provider-domain public tables plus the four private Inquiry Foundation tables. On 2026-10-11, a clean isolated replay of the six predecessor migrations was proven materially schema-equivalent to the enriched provider schema, after reproducing the standard Supabase public-schema privilege baseline.
-- The local Supabase migration ledger is reconciled and all nine repository migration versions are recorded as applied. Public application data and the provider-domain fingerprint remained unchanged throughout the Inquiry Foundation, intake-RPC, and internal-workflow proofs.
+- The local Supabase migration ledger is reconciled and all ten repository migration versions are recorded as applied. Public application data and the provider-domain fingerprint remained unchanged throughout the Inquiry Foundation, intake-RPC, inquiry-workflow, and referral-workflow proofs.
 - The Vaud V1 private-home-care completeness cohort is applied locally: 14 new private generalist providers were created and the existing `swisscaring` and `boite-o` providers were reconciled without duplication. All 16 cohort providers have one minimum `home_care` offering and one dated 2026-03-02 official-file designation. No cohort service-area, feature, or availability rows were added.
 - The final Vaud V1 home-care closure cohort is applied locally: GRPTP, Ligue pulmonaire vaudoise, NOMàD, and SBV Medical were created; existing `sitex` was reconciled in place. Each remains unpublished/unverified and has one narrow specialist `home_care` offering plus one dated 2026-03-02 official-file designation. The other six reviewed candidates remain held; no service-area, feature, availability, or provider-name rows were added.
 
@@ -33,8 +33,8 @@
 ### Current Inquiry Foundation boundary
 
 - The Lia Inquiry Foundation architecture is approved and documented in `docs/architecture/lia-inquiry-foundation.md`. It defines four private core tables, separate inquiry/referral lifecycles, multiple organization-owned referrals, explicit provider-sharing authorization/disclosure, append-only activities plus current-state snapshots, retention/anonymization capability, and a future-compatible but unimplemented Partner Portal boundary.
-- The Inquiry Foundation and service-role-only atomic intake RPC are implemented and verified against `Lia-vaud:local:54322`. `/api/leads` remains the compatibility facade for the unchanged RPC and accepts both the legacy payload and the new controlled V1 payload. The public form now collects broad care type, beneficiary relationship, timing, coarse location/NPA, optional controlled need codes, optional context (maximum 1,000 characters), contact details, preferred contact method, a separate privacy acknowledgement, and separate permission for Lia to contact the family. It no longer asks for visible age, funding, or free-form situation fields and does not collect DOB, diagnosis, medication details, insurance/AVS, files, or detailed medical history. Submission does not authorize provider sharing. The four tables remain empty, private, RLS-enabled, and inaccessible to browser roles after transactional tests. Referrals, provider sharing, assignments, Partner Portal, and full CRM remain unauthorized and unchanged. No production schema/data was accessed.
-- The Lia-internal inquiry inbox and detail workflow are implemented under `/lia/inquiries`. Supabase passwordless Auth uses pre-provisioned users only (`shouldCreateUser: false`), an exact server-side `LIA_STAFF_EMAILS` allowlist, and an authoritative `requireLiaStaff()` check on every private page and mutation. The server-only data layer preserves the Inquiry Foundation grants. Two `SECURITY INVOKER`, service-role-only RPCs atomically handle optimistic status transitions and bounded internal notes. No referral, provider sharing, provider/customer account model, membership, assignment, task, analytics, or Partner Portal behavior was added. Local staff Auth configuration/provisioning remains an operator step; no real email or secret is committed.
+- The Inquiry Foundation and service-role-only atomic intake RPC are implemented and verified against `Lia-vaud:local:54322`. `/api/leads` remains the compatibility facade for the unchanged RPC and accepts both the legacy payload and the new controlled V1 payload. The public form now collects broad care type, beneficiary relationship, timing, coarse location/NPA, optional controlled need codes, optional context (maximum 1,000 characters), contact details, preferred contact method, a separate privacy acknowledgement, and separate permission for Lia to contact the family. It no longer asks for visible age, funding, or free-form situation fields and does not collect DOB, diagnosis, medication details, insurance/AVS, files, or detailed medical history. Submission does not authorize provider sharing. The four tables remain empty, private, RLS-enabled, and inaccessible to browser roles after transactional tests. Internal referrals and manual disclosure recording are now authorized and implemented; assignments, automated sharing, Partner Portal, and full CRM remain unauthorized and unchanged. No production schema/data was accessed.
+- The Lia-internal inquiry and referral workflow is implemented under `/lia/inquiries`. Supabase passwordless Auth uses pre-provisioned users only (`shouldCreateUser: false`), an exact server-side `LIA_STAFF_EMAILS` allowlist, and an authoritative `requireLiaStaff()` check on every private page and mutation. Lia staff can search active provider targets with a responsible operator/owner/brand organization, create shortlisted referrals, record referral-specific or valid general authorization, mark readiness, attest an actual manual disclosure, record provider response, and close or convert with an outcome. Six new `SECURITY INVOKER`, service-role-only RPCs make each referral state change and its activity history atomic. Authorization, readiness, and disclosure remain separate; no action sends data or email automatically. No provider login, Partner Portal, membership, assignment, task, analytics, or provider-facing access was added.
 - Continue with the supply-completeness and product priorities in section 9 without starting Phase 5G, Partner Portal, or full CRM automatically.
 
 ### Unresolved or deliberately unverified
@@ -211,6 +211,7 @@ Migration files currently present, in order:
 - `supabase/migrations/20261012000100_inquiry_foundation.sql`
 - `supabase/migrations/20261013000100_create_inquiry_intake_rpc.sql`
 - `supabase/migrations/20261013000200_create_internal_inquiry_workflow_rpcs.sql`
+- `supabase/migrations/20261013000300_create_internal_referral_workflow_rpcs.sql`
 
 Phase 5F migration:
 
@@ -254,7 +255,7 @@ Before repair, a restorable database dump was created at:
 
 An isolated disposable database replayed the six checked-in migrations in chronological order, without any Batch A-F enrichment scripts. Its material public schema matched the current enriched local database exactly across tables/RLS, 184 columns and defaults, 120 constraints, 56 indexes, 12 policies, two functions, three triggers, grants/default privileges, and five deliberate comments. The disposable database also contained the expected 66-provider legacy footprint: 46 EMS, 12 domicile, 8 residence, 66 distinct legacy IDs, and 66 legacy source rows.
 
-Only after that equivalence proof, the supported Supabase CLI marked these versions applied locally without rerunning SQL: `20260921000100`, `20260923000100`, `20260923000200`, `20260926000100`, and `20260928000100`. The existing `20260920000100` entry was not modified. The Inquiry Foundation, intake-RPC, and internal-workflow migrations were applied normally; `supabase migration list --local` now shows all nine local and database-history versions aligned, with none pending.
+Only after that equivalence proof, the supported Supabase CLI marked these versions applied locally without rerunning SQL: `20260921000100`, `20260923000100`, `20260923000200`, `20260926000100`, and `20260928000100`. The existing `20260920000100` entry was not modified. The Inquiry Foundation, intake-RPC, inquiry-workflow, and referral-workflow migrations were applied normally; `supabase migration list --local` now shows all ten local and database-history versions aligned, with none pending.
 
 Production migration history remains unknown. Audit it separately and read-only before any production migration or deployment; never infer production state from this local reconciliation.
 
@@ -390,7 +391,7 @@ Key modeling decisions:
 
 ## 7. Current development phase and exact stopping point
 
-**Verified stopping point (2026-10-13):** the Lia-internal staff-authenticated inquiry inbox and detail workflow are implemented locally. `/lia/login` requests passwordless links only for exact allowlisted, pre-provisioned staff emails and never creates users. `/lia/inquiries` exposes a minimal protected summary list; `/lia/inquiries/[id]` shows approved operational detail, consent evidence, chronological activities, controlled forward status transitions, and bounded internal notes. Every private read/action re-verifies the Supabase user and server allowlist. The two workflow RPCs are service-role-only and atomic, and provider sharing `not_recorded` is explicit. Transactional tests leave all four inquiry tables empty. No production access, referral/provider disclosure, Partner Portal, membership, assignment, task, analytics, or broader CRM behavior was added.
+**Verified stopping point (2026-10-13):** the Lia-internal staff-authenticated inquiry and referral workflow is implemented locally. `/lia/inquiries/[id]` now supports eligible-provider search, organization/provider/offering selection, multiple shortlisted referrals, separate authorization and readiness, explicit manual-disclosure attestation, provider response, and terminal outcome tracking. Every private read/action re-verifies the Supabase user and server allowlist. Six referral RPCs are service-role-only, optimistic, and atomic with append-only activity history. Transactional tests leave all four inquiry tables empty. No production access, automatic provider disclosure/email, provider login, Partner Portal, membership, assignment, task, analytics, or broader CRM behavior was added.
 
 Latest committed and pushed Batch F commit:
 
@@ -412,16 +413,16 @@ Current verified closure state:
 - local database: rollback-only dry run passed, then apply → verify → rollback → exact predecessor comparison → reapply passed with the exact 39-row closure plan and one Sitex update;
 - Inquiry Foundation: rollback-only dry run, apply, verify, scoped rollback, exact provider-fingerprint comparison, corrected least-privilege reapply, and final verification all passed; four tables and zero inquiry rows remain;
 - repository implementation: canonical manifest, reconciliation record, guarded library/runner, and targeted tests are included in this cohort checkpoint;
-- runnable suite: **246/246 passed** across 44 test files;
+- runnable suite: **250/250 passed** across 45 test files;
 - targeted intake ESLint: passed with only the two pre-existing `app/page.js` image warnings;
 - production build: passed;
 - public intake compatibility: 21/21 targeted tests passed, including controlled-code mapping, separate consent evidence, stable response, idempotent notification behavior, and prohibited-field assertions;
 - production Supabase: not accessed;
 - internal auth/workflow tests: **13/13 passed**;
-- local migration history: all nine repository versions aligned, with no migration pending;
+- local migration history: all ten repository versions aligned, with no migration pending;
 - clean repository predecessor for the public V1 intake update: `f7e4f4bd97d4e4584a7fcfedcbbf9cfd185a8902`, equal to its tracking ref before this work.
 
-**Next intended action:** stop at the locally verified Lia-internal inbox/detail checkpoint. Local staff account provisioning and environment configuration are operational setup, not committed data. Referral creation, provider/organization sharing, production migration/deployment, Phase 5G, Partner Portal, assignments/tasks, memberships, analytics, and full CRM all require separate authorization.
+**Next intended action:** stop at the locally verified Lia-internal referral-workflow checkpoint. Local staff account provisioning and environment configuration are operational setup, not committed data. Production migration/deployment, any automated disclosure/email, Phase 5G, Partner Portal, assignments/tasks, memberships, analytics, and full CRM all require separate authorization.
 
 Do **not** start Phase 5G automatically after this cohort.
 
@@ -470,7 +471,7 @@ Verified on 2026-10-11: repository-wide lint still fails with two `react-hooks/s
 - Review homepage, search, and provider detail flows with the now broader Vaud supply.
 - Keep Phase 5G enrichment unauthorized unless a later review identifies a specific launch-critical fact gap.
 
-### 3. Stabilize the internal inbox before separately authorizing referrals
+### 3. Operate and validate the internal matching/referral workflow
 
 V1 goal:
 
@@ -478,7 +479,7 @@ V1 goal:
 
 Architect now so a secure Partner Portal/CRM can be added later, but **do not implement the Partner Portal/CRM product yet**.
 
-The architecture, schema foundation, atomic public-intake path, public V1 family form, and minimal Lia-internal inbox/detail workflow are complete locally. Referral creation remains separately gated. The implemented core is `inquiry_contacts -> inquiries -> inquiry_referrals`, with append-only `inquiry_activities`; required referral recipient organization; optional provider/site and offering; explicit per-referral sharing authorization and `shared_at`; no V1 assignee model; and server-only access.
+The architecture, schema foundation, atomic public-intake path, public V1 family form, Lia-internal inbox/detail, and manual matching/referral workflow are complete locally. The implemented core is `inquiry_contacts -> inquiries -> inquiry_referrals`, with append-only `inquiry_activities`; required referral recipient organization; optional provider/site and offering; explicit per-referral sharing authorization and `shared_at`; no V1 assignee model; and server-only access. Validate the workflow with Lia staff before expanding its scope.
 
 Future-ready concepts should include:
 
@@ -547,9 +548,9 @@ Do not substitute production URLs/credentials. Production was not accessed in th
 
 ### Tests
 
-Current verified runnable suite after the Lia-internal workflow implementation:
+Current verified runnable suite after the Lia-internal referral-workflow implementation:
 
-**246 passed, 0 failed** across 44 `tests/*.test.mjs` files.
+**250 passed, 0 failed** across 45 `tests/*.test.mjs` files.
 
 `package.json` has no test script; enumerate the files in `tests/` and pass them to `node --test`. Running bare `node --test` also discovers guarded scripts named `test-*.mjs` under `scripts/`, which require explicit modes and is not the runnable-suite command. `npm run lint` runs repository-wide ESLint and currently exits nonzero with the two errors and two warnings recorded in section 8.
 
@@ -613,6 +614,7 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 **Verified on 2026-10-13:**
 
 - Branch: `marketplace-mvp`
+- Clean predecessor for the Lia-internal referral workflow: `3e861e83eafb6d8b01fae052a25867353bf4224c`, equal to its tracking ref before this work
 - Clean predecessor for the Lia-internal workflow: `c594dbb80f14e2eafbc38b83881aea77838fe066`, equal to its tracking and live remote refs before this work
 - Architecture checkpoint before the schema commit: `14de241f3538d22bf4a70769e717dc099a2c2901`
 - Clean predecessor before the final home-care closure cohort: `86a197a16b2551ed5dcee03a157cde63753daa93`
@@ -622,8 +624,9 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 - Batch F: applied and verified locally, committed, and present on the live remote
 - Vaud V1 private-home-care completeness cohort: applied and verified locally; 16 identities implemented, none held, 128 net-new rows
 - Final Vaud V1 home-care closure cohort: 11 candidates reviewed; five implemented (four creates and one update), six held, 39 net-new rows
-- Inquiry Foundation: architecture/schema, atomic intake RPC, `/api/leads` compatibility facade, staff-authenticated internal inbox/detail, and two atomic internal-workflow RPCs verified locally; all four tables empty after tests
-- Local migration history: nine repository versions aligned through `20261013000200_create_internal_inquiry_workflow_rpcs`
+- Inquiry Foundation: architecture/schema, atomic intake RPC, `/api/leads` compatibility facade, staff-authenticated internal inbox/detail, two atomic inquiry-workflow RPCs, and six atomic referral-workflow RPCs verified locally; all four tables empty after tests
+- Local migration history: ten repository versions aligned through `20261013000300_create_internal_referral_workflow_rpcs`
+- Provider-domain fingerprint after referral verification: `7442622ca5475ba03ceae56facbea673` (unchanged)
 - Phase 5G: not started
 
 ## 13. Last updated date and handoff notes
@@ -645,7 +648,7 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 5. Keep each data batch independently reversible and checkpointed.
 6. Do not start a new major development phase merely because the previous batch passed; follow the explicit priority list above.
 7. Current product strategy after Vaud data completeness: prioritize family lead capture and internal inquiry tracking, architected for a future secure multi-organization Partner Portal/CRM but without building that portal yet.
-8. The Inquiry Foundation architecture, local schema foundation, `/api/leads` atomic intake compatibility path, public V1 family form, and Lia-internal inbox/detail workflow are complete. Read `docs/architecture/lia-inquiry-foundation.md`, `docs/architecture/lia-inquiry-foundation-schema-implementation.md`, and `docs/architecture/lia-internal-inquiry-workflow.md` before proposing production deployment or referral work.
+8. The Inquiry Foundation architecture, local schema foundation, `/api/leads` atomic intake compatibility path, public V1 family form, Lia-internal inbox/detail workflow, and manual referral workflow are complete locally. Read `docs/architecture/lia-inquiry-foundation.md`, `docs/architecture/lia-inquiry-foundation-schema-implementation.md`, and `docs/architecture/lia-internal-inquiry-workflow.md` before proposing production deployment or broader CRM work.
 
 ### Facts that remain unresolved before the next development phase
 

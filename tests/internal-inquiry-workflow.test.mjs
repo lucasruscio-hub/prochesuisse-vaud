@@ -74,19 +74,19 @@ test("transactional SQL covers atomic failures, notes, closure, privileges, and 
   assert.match(sqlTest, /count\(\*\) FROM public\.inquiry_referrals/);
 });
 
-test("server actions authorize first and call only the approved workflow RPCs", () => {
+test("server actions authorize first and retain the approved inquiry workflow RPCs", () => {
   const actions = source("app/lia/inquiries/actions.js");
   const firstGuard = actions.indexOf("await requireLiaStaff()");
   assert.ok(firstGuard > -1 && firstGuard < actions.indexOf("supabase.rpc"));
   assert.match(actions, /transition_internal_inquiry_status/);
   assert.match(actions, /add_internal_inquiry_note/);
-  assert.doesNotMatch(actions, /from\("inquiry_referrals"\)|create.*referral/i);
+  assert.doesNotMatch(actions, /from\("inquiry_referrals"\)/);
 });
 
-test("detail UI makes absent sharing permission explicit and referral action inert", () => {
-  const page = source("app/lia/inquiries/[id]/page.js");
+test("detail UI makes absent sharing permission explicit", () => {
+  const page = source("app/lia/inquiries/[id]/page.js") + source("app/lia/inquiries/[id]/ReferralShareForm.js");
   assert.match(page, /Non enregistré — aucun partage autorisé/);
   assert.match(page, /Lia ne peut pas transmettre/);
   assert.match(page, /Trouver des prestataires/);
-  assert.match(page, /<button disabled/);
+  assert.match(page, /Lia n’envoie aucune donnée/);
 });

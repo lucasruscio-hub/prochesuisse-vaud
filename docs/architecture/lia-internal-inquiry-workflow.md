@@ -79,8 +79,10 @@ The Inquiry Foundation database posture is unchanged:
 - `/lia/inquiries/[id]` — protected detail, consent evidence, workflow actions, and chronological
   activity history.
 
-The detail page states explicitly when provider-sharing permission is `not_recorded`. The disabled
-“Trouver des prestataires” area is informational only and has no referral or disclosure operation.
+The detail page states explicitly when provider-sharing permission is `not_recorded`. Its internal
+matching area now searches active providers, but only exposes targets with an active recipient
+organization connected by an `operator`, `owner`, or `brand` relationship. Creating a shortlist
+never authorizes or transmits family data.
 
 ## Atomic workflow operations
 
@@ -112,6 +114,32 @@ The functions use the honest generic activity attribution `actor_type = 'lia_sta
 `actor_label = 'lia_internal'`. There is intentionally no invented actor ID or `auth.users` foreign
 key. Per-person immutable attribution requires a later approved staff identity model.
 
+## Atomic referral operations
+
+Migration `20261013000300_create_internal_referral_workflow_rpcs.sql` builds on the existing
+`inquiry_referrals` constraints without adding a table, column, policy, provider account, or
+browser-role grant. Its six `SECURITY INVOKER`, service-role-only functions provide:
+
+- atomic shortlisted-referral creation after validating the inquiry, active recipient organization,
+  responsible provider relationship, optional active offering, and active-referral uniqueness;
+- separate referral authorization using either a currently valid inquiry-level general permission
+  or an explicitly attested referral-specific permission;
+- immutable authorization withdrawal evidence, including after disclosure;
+- controlled `shortlisted -> ready_to_share` progression that never transmits data;
+- an idempotent, staff-attested manual-disclosure operation as the only path into `shared`;
+- provider-response recording as the only path from `shared` to `engaged`;
+- approved converted/closed outcomes with their milestone timestamps.
+
+Every operation locks the referral and inquiry, uses the expected referral status for optimistic
+concurrency where state changes, updates `inquiries.last_activity_at`, and appends the corresponding
+referral activity in the same database transaction. The disclosure RPC stores only occurrence
+evidence and an idempotency key; it has no email, webhook, provider session, or outbound transport.
+The browser converts the staff-entered local disclosure time to an ISO timestamp before submission.
+
+The Lia detail page displays the recipient organization, optional provider and offering, current
+authorization/disclosure evidence, provider response, and final outcome. Each active referral can
+be closed independently, and an inquiry still cannot close while any referral remains active.
+
 ## Verified local boundary
 
 The migration received a rollback-only dry run before application. Post-application transactional
@@ -121,7 +149,7 @@ denial; and rollback safety.
 
 Verified local result:
 
-- migration versions aligned: 9;
+- migration versions aligned: 10;
 - inquiry contacts: 0;
 - inquiries: 0;
 - referrals: 0;
@@ -129,8 +157,13 @@ Verified local result:
 - provider-domain fingerprint: `7442622ca5475ba03ceae56facbea673` (unchanged);
 - production: not accessed.
 
+The referral lifecycle verifier additionally covers duplicate-active-referral rollback, invalid
+general authorization, no auto-share on authorization/readiness, idempotent manual disclosure,
+response and terminal outcome activities, authorization withdrawal blocking later disclosure, and
+pre-share closure. It returns all inquiry tables to zero rows and leaves provider data unchanged.
+
 ## Explicit stopping point
 
-Do not add provider referrals, provider/organization sharing, Partner Portal access, memberships,
+Do not add automated email/data sharing, provider login, Partner Portal access, memberships,
 assignments, tasks, analytics, or broader CRM behavior from this checkpoint without separate
 authorization.
