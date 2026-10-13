@@ -480,7 +480,7 @@ Future Partner Portal sharing should create an immutable, versioned referral sha
 
 ## 7. Data minimization and public intake
 
-### Initial public fields
+### Implemented public V1 fields
 
 - first name;
 - last name;
@@ -490,16 +490,18 @@ Future Partner Portal sharing should create an immutable, versioned referral sha
 - broad care type;
 - beneficiary relationship;
 - timing/urgency band;
-- coarse location and optional postcode;
-- optional reliably resolved municipality;
+- coarse location, region, or postcode as one bounded text value;
 - optional controlled high-level need codes;
 - optional context summary capped at 1,000 characters;
 - bounded acquisition/source metadata;
-- contact permission and versioned privacy evidence.
+- separately acknowledged privacy information and contact permission, with versioned evidence.
 
 Provider-sharing permission may be requested separately when Lia is ready to share with selected providers. It must not be silently bundled into the intake privacy acknowledgement.
 
-Age band and funding-guidance category are not in the initial public form or V1 core columns. They require a later demonstrated need. The same applies to the current broad `situation` step.
+Age band, funding-guidance category, and the former broad `situation` step were removed from
+the visible V1 form. They remain accepted only by the temporary legacy endpoint compatibility
+branch and are not persisted. The V1 form also has no date of birth, diagnosis, medication
+detail, insurance/AVS field, clinical-history field, or file upload.
 
 ### Information V1 must explicitly discourage and not model
 
@@ -701,6 +703,23 @@ required table privileges, so the function does not need owner-bypassing `SECURI
 authority. One transaction serializes on `intake_idempotency_key`, creates one contact, one
 `new` inquiry, and one `inquiry_created` activity, and creates no referral or disclosure.
 
+The public V1 form submits controlled codes directly:
+
+| V1 input | Inquiry Foundation value |
+| --- | --- |
+| `careType` | Exact `care_type_code`. |
+| `beneficiaryRelationship` | Exact `beneficiary_relation_code`. |
+| `timing` | Exact `timing_code`. |
+| `needCodes[]` | Optional canonical `need_codes`. |
+| `location` | `location_text` only; no municipality inference. |
+| `contextSummary` | Optional trimmed `context_summary`, maximum 1,000 characters. |
+| `preferredContactMethod` | `email` or `phone`; phone selection requires a valid phone. |
+| `privacyAcknowledged`, `consentContact` | Separate required evidence gates. |
+
+Friendly French labels remain UI-only. The visible form no longer submits `situation`, `age`,
+`funding`, or their old field names. `/api/leads` continues to accept the prior payload for a
+bounded compatibility window; that branch retains the mapping below.
+
 | Legacy input | Inquiry Foundation value |
 | --- | --- |
 | `firstName`, `lastName`, `email`, optional `phone` | Normalized contact fields; missing preference defaults to `email`. |
@@ -717,12 +736,13 @@ The legacy `situation`, `age`, and `funding` values are deprecated compatibility
 They remain exact-allowlist validated while the old form is live, but are intentionally not
 persisted in a core column, free text, or activity metadata.
 
-The contact checkbox establishes permission for Lia to contact the submitter. The adjacent
-submission notice states that sending the form accepts Lia's processing of the supplied
-information and links the privacy policy. Together, that displayed wording is recorded as
-privacy-notice version `homepage-intake-2026-10-13`. This server-owned constant must change
-whenever the relevant checkbox, submission notice, or linked privacy notice materially
-changes. It does not establish or imply provider-sharing permission.
+The former combined wording remains identified as `homepage-intake-2026-10-13` for legacy
+compatibility submissions. The V1 form separately requires a privacy-information
+acknowledgement and permission for Lia to contact the submitter. That exact V1 wording is
+recorded as privacy-notice version `homepage-intake-v1-2026-10-13`. These server-owned
+constants are never accepted from the browser; the V1 version must change whenever the
+relevant privacy checkbox, contact checkbox, or linked notice materially changes. Neither
+version establishes or implies provider-sharing permission.
 
 The browser sends one random UUID in `Idempotency-Key` for a submission attempt, retains it
 across an ambiguous retry, and clears it when the payload is edited or success is confirmed.

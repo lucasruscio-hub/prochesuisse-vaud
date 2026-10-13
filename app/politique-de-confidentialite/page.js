@@ -26,9 +26,9 @@ export default function PrivacyPage() {
           id: "donnees-collectees",
           title: "Données collectées",
           paragraphs: [
-            "Lorsque vous remplissez le formulaire Lia, le site collecte les informations que vous fournissez : type de besoin recherché, commune ou région, niveau d’urgence, description de la situation, besoins sélectionnés, âge approximatif de la personne concernée, question relative au financement et détails libres si vous choisissez d’en ajouter.",
-            "Le formulaire collecte également vos coordonnées : prénom, nom, adresse e-mail et numéro de téléphone, ainsi que votre consentement au contact au sujet de votre demande.",
-            "Certaines informations concernant la situation d’un proche, ses besoins d’aide, son autonomie, une hospitalisation, une chute, des troubles cognitifs ou d’autres besoins de soins peuvent constituer des données personnelles sensibles lorsque la personne concernée est identifiable.",
+            "Lorsque vous remplissez le formulaire Lia, le site collecte le type de solution recherché, votre relation avec la personne concernée, le délai, une commune, une région ou un code postal, ainsi que les grandes catégories de soutien que vous choisissez. Vous pouvez aussi ajouter un bref contexte facultatif.",
+            "Le formulaire collecte vos prénom, nom et adresse e-mail, un numéro de téléphone facultatif, votre moyen de contact préféré, votre confirmation d’avoir pris connaissance des informations de confidentialité et votre permission pour que Lia vous contacte au sujet de la demande.",
+            "Le formulaire ne demande pas de date de naissance, diagnostic, dossier médical, détail de médicaments, numéro AVS ou d’assurance, ni document. Le contexte libre et les catégories de soutien peuvent néanmoins révéler des informations sensibles lorsque la personne concernée est identifiable.",
           ],
         },
         {
@@ -51,9 +51,9 @@ export default function PrivacyPage() {
           id: "destinataires",
           title: "Destinataires",
           paragraphs: [
-            "Les données transmises via le formulaire sont enregistrées dans Supabase, utilisé par Lia pour stocker les demandes reçues.",
+            "Les données transmises via le formulaire sont enregistrées dans Supabase, utilisé par Lia pour stocker les demandes reçues dans des tables privées.",
             "Une notification contenant les informations principales de la demande est envoyée via Resend à l’adresse interne configurée pour recevoir les leads.",
-            "Le code actuel ne montre pas d’envoi automatique des données de lead à des EMS, services d’aide à domicile, résidences seniors ou autres prestataires de soins.",
+            "L’envoi du formulaire n’autorise pas un partage avec un EMS, un service d’aide à domicile, une résidence senior ou un autre prestataire, et le formulaire ne déclenche aucun envoi automatique à ces organismes.",
             "L’accès aux données doit être limité aux personnes et prestataires techniques qui en ont besoin pour traiter la demande ou exploiter le service.",
           ],
         },

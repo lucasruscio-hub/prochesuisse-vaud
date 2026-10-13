@@ -14,7 +14,7 @@
 - The repository contains eight migration files through `20261013000100_create_inquiry_intake_rpc.sql`; see section 4.
 - The approved architecture checkpoint is `14de241f3538d22bf4a70769e717dc099a2c2901` (`Document Lia Inquiry Foundation architecture`), equal to `origin/marketplace-mvp` before the schema-foundation changes.
 - All explicit repository paths referenced by this document were found. The `docs/research/phase5f-batch-*.md` reference is a glob and matches the committed batch records, including Batch F.
-- The Inquiry Foundation intake work adds a second targeted test file with 12 tests. The runnable repository set is now 41 `tests/*.test.mjs` files and passes **224/224**. Targeted ESLint passes with only the two pre-existing `app/page.js` image warnings, and the production build passes.
+- The Inquiry Foundation intake work and the public V1 family-intake update now have 21 targeted tests across two intake test files. The runnable repository set is now 42 `tests/*.test.mjs` files and passes **233/233**. Targeted ESLint passes with only the two pre-existing `app/page.js` image warnings, and the production build passes.
 
 ### Verified current local-database facts
 
@@ -33,7 +33,7 @@
 ### Current Inquiry Foundation boundary
 
 - The Lia Inquiry Foundation architecture is approved and documented in `docs/architecture/lia-inquiry-foundation.md`. It defines four private core tables, separate inquiry/referral lifecycles, multiple organization-owned referrals, explicit provider-sharing authorization/disclosure, append-only activities plus current-state snapshots, retention/anonymization capability, and a future-compatible but unimplemented Partner Portal boundary.
-- The Inquiry Foundation and service-role-only atomic intake RPC are implemented and verified against `Lia-vaud:local:54322`. `/api/leads` is now the compatibility facade for the RPC, and the existing form sends a non-visible UUID idempotency header without changing its fields or UX. The four tables remain empty, private, RLS-enabled, and inaccessible to browser roles after transactional tests. The internal UI, referrals, provider sharing, assignments, Partner Portal, and full CRM remain unauthorized and unchanged. No production schema/data was accessed.
+- The Inquiry Foundation and service-role-only atomic intake RPC are implemented and verified against `Lia-vaud:local:54322`. `/api/leads` remains the compatibility facade for the unchanged RPC and accepts both the legacy payload and the new controlled V1 payload. The public form now collects broad care type, beneficiary relationship, timing, coarse location/NPA, optional controlled need codes, optional context (maximum 1,000 characters), contact details, preferred contact method, a separate privacy acknowledgement, and separate permission for Lia to contact the family. It no longer asks for visible age, funding, or free-form situation fields and does not collect DOB, diagnosis, medication details, insurance/AVS, files, or detailed medical history. Submission does not authorize provider sharing. The four tables remain empty, private, RLS-enabled, and inaccessible to browser roles after transactional tests. The internal UI, referrals, provider sharing, assignments, Partner Portal, and full CRM remain unauthorized and unchanged. No production schema/data was accessed.
 - Continue with the supply-completeness and product priorities in section 9 without starting Phase 5G, Partner Portal, or full CRM automatically.
 
 ### Unresolved or deliberately unverified
@@ -387,7 +387,7 @@ Key modeling decisions:
 
 ## 7. Current development phase and exact stopping point
 
-**Verified stopping point (2026-10-13):** the four-table Inquiry Foundation and the separately authorized atomic create-inquiry RPC are applied and verified locally. `/api/leads` validates and normalizes the legacy payload, creates the contact/inquiry/creation-activity triplet through the RPC, and treats persistence as authoritative before notification. The public form fields and UX are unchanged; its caller now supplies one UUID per submission attempt. Transactional tests leave all four inquiry tables empty. No production access, referral/provider disclosure, internal inquiry UI, Partner Portal, or full CRM implementation has started.
+**Verified stopping point (2026-10-13):** the public family-intake form has been updated to the approved V1 controlled field set and continues to use the existing `/api/leads` compatibility facade and unchanged atomic create-inquiry RPC. The endpoint validates both the new V1 payload and the prior legacy payload, creates the contact/inquiry/creation-activity triplet, and treats persistence as authoritative before notification. The form retains one UUID idempotency key across ambiguous retries, prevents duplicate submits, and resets the key after edits or confirmed success. Privacy acknowledgement and permission for Lia to contact the family are distinct; neither authorizes provider sharing. Transactional tests leave all four inquiry tables empty. No schema/RPC migration, production access, referral/provider disclosure, internal inquiry UI, Partner Portal, or full CRM implementation was added.
 
 Latest committed and pushed Batch F commit:
 
@@ -409,13 +409,15 @@ Current verified closure state:
 - local database: rollback-only dry run passed, then apply → verify → rollback → exact predecessor comparison → reapply passed with the exact 39-row closure plan and one Sitex update;
 - Inquiry Foundation: rollback-only dry run, apply, verify, scoped rollback, exact provider-fingerprint comparison, corrected least-privilege reapply, and final verification all passed; four tables and zero inquiry rows remain;
 - repository implementation: canonical manifest, reconciliation record, guarded library/runner, and targeted tests are included in this cohort checkpoint;
-- runnable suite: **224/224 passed** across 41 test files;
-- targeted Inquiry Foundation ESLint: passed;
+- runnable suite: **233/233 passed** across 42 test files;
+- targeted intake ESLint: passed with only the two pre-existing `app/page.js` image warnings;
+- production build: passed;
+- public intake compatibility: 21/21 targeted tests passed, including controlled-code mapping, separate consent evidence, stable response, idempotent notification behavior, and prohibited-field assertions;
 - production Supabase: not accessed;
 - local migration history: all eight repository versions aligned, with no migration pending;
-- clean repository predecessor: `86a197a16b2551ed5dcee03a157cde63753daa93`, equal to its tracking ref before this cohort.
+- clean repository predecessor for the public V1 intake update: `f7e4f4bd97d4e4584a7fcfedcbbf9cfd185a8902`, equal to its tracking ref before this work.
 
-**Next intended action:** stop at the locally verified `/api/leads` inquiry-intake checkpoint. The imminent public-form redesign, production migration/deployment, internal inquiry UI, referral workflow, provider sharing, Phase 5G, Partner Portal, assignments/tasks, memberships, and full CRM all require separate authorization.
+**Next intended action:** stop at the locally verified public V1 family-intake checkpoint. Production migration/deployment, internal inquiry UI, referral workflow, provider sharing, Phase 5G, Partner Portal, assignments/tasks, memberships, and full CRM all require separate authorization.
 
 Do **not** start Phase 5G automatically after this cohort.
 
@@ -445,7 +447,6 @@ No identity in the 16-provider completeness cohort is held. The pre-existing hol
 - final Vaud EMS universe completeness audit, especially private/commercial EMS
 - complete Vaud senior-residence universe discovery + implementation
 - first-time-family UX review of homepage/search/provider pages
-- family lead-capture flow
 - internal inquiry tracking / Lia-side CRM-lite
 - launch QA and feedback loop
 
@@ -466,7 +467,7 @@ Verified on 2026-10-11: repository-wide lint still fails with two `react-hooks/s
 - Review homepage, search, and provider detail flows with the now broader Vaud supply.
 - Keep Phase 5G enrichment unauthorized unless a later review identifies a specific launch-critical fact gap.
 
-### 3. Build family lead capture + internal inquiry tracking only when separately authorized
+### 3. Build internal inquiry tracking only when separately authorized
 
 V1 goal:
 
@@ -474,7 +475,7 @@ V1 goal:
 
 Architect now so a secure Partner Portal/CRM can be added later, but **do not implement the Partner Portal/CRM product yet**.
 
-The architecture and schema-foundation steps are complete locally. Application work remains unstarted and separately gated. The implemented core is `inquiry_contacts -> inquiries -> inquiry_referrals`, with append-only `inquiry_activities`; required referral recipient organization; optional provider/site and offering; explicit per-referral sharing authorization and `shared_at`; no V1 assignee model; and server-only access.
+The architecture, schema foundation, atomic public-intake path, and public V1 family form are complete locally. Internal workflow application work remains unstarted and separately gated. The implemented core is `inquiry_contacts -> inquiries -> inquiry_referrals`, with append-only `inquiry_activities`; required referral recipient organization; optional provider/site and offering; explicit per-referral sharing authorization and `shared_at`; no V1 assignee model; and server-only access.
 
 Future-ready concepts should include:
 
@@ -543,9 +544,9 @@ Do not substitute production URLs/credentials. Production was not accessed in th
 
 ### Tests
 
-Current verified runnable suite after the Inquiry Foundation intake implementation:
+Current verified runnable suite after the public V1 family-intake implementation:
 
-**224 passed, 0 failed** across 41 `tests/*.test.mjs` files.
+**233 passed, 0 failed** across 42 `tests/*.test.mjs` files.
 
 `package.json` has no test script; enumerate the files in `tests/` and pass them to `node --test`. Running bare `node --test` also discovers guarded scripts named `test-*.mjs` under `scripts/`, which require explicit modes and is not the runnable-suite command. `npm run lint` runs repository-wide ESLint and currently exits nonzero with the two errors and two warnings recorded in section 8.
 
@@ -639,7 +640,7 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 5. Keep each data batch independently reversible and checkpointed.
 6. Do not start a new major development phase merely because the previous batch passed; follow the explicit priority list above.
 7. Current product strategy after Vaud data completeness: prioritize family lead capture and internal inquiry tracking, architected for a future secure multi-organization Partner Portal/CRM but without building that portal yet.
-8. The Inquiry Foundation architecture, local schema foundation, and `/api/leads` atomic intake compatibility path are complete. Read `docs/architecture/lia-inquiry-foundation.md` and `docs/architecture/lia-inquiry-foundation-schema-implementation.md` before proposing the separately gated public-form redesign, production deployment, or internal workflow work.
+8. The Inquiry Foundation architecture, local schema foundation, `/api/leads` atomic intake compatibility path, and public V1 family form are complete. Read `docs/architecture/lia-inquiry-foundation.md` and `docs/architecture/lia-inquiry-foundation-schema-implementation.md` before proposing production deployment or internal workflow work.
 
 ### Facts that remain unresolved before the next development phase
 

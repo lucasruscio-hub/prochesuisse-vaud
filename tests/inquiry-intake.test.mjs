@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
   MAX_INTAKE_BODY_BYTES,
+  LEGACY_PRIVACY_NOTICE_VERSION,
   PRIVACY_NOTICE_VERSION,
   normalizeLegacyLead,
   normalizePhone,
@@ -55,7 +56,7 @@ test("legacy payload maps only approved normalized values into the intake RPC", 
     p_source_channel: "homepage",
     p_source_detail: "landing",
     p_landing_page: "/",
-    p_privacy_notice_version: PRIVACY_NOTICE_VERSION,
+    p_privacy_notice_version: LEGACY_PRIVACY_NOTICE_VERSION,
   });
   for (const deprecated of ["situation", "age", "funding"]) {
     assert.equal(JSON.stringify(normalized).includes(validBody[deprecated]), false);
@@ -183,7 +184,8 @@ test("caller preserves a retry key and resets it on edits or confirmed success",
 });
 
 test("privacy evidence version is server-owned and documented", () => {
-  assert.equal(PRIVACY_NOTICE_VERSION, "homepage-intake-2026-10-13");
+  assert.equal(LEGACY_PRIVACY_NOTICE_VERSION, "homepage-intake-2026-10-13");
+  assert.equal(PRIVACY_NOTICE_VERSION, "homepage-intake-v1-2026-10-13");
   assert.doesNotMatch(JSON.stringify(validBody), /privacy_notice_version|privacyNoticeVersion/);
-  assert.match(architecture, /homepage-intake-2026-10-13/);
+  assert.match(architecture, /homepage-intake-v1-2026-10-13/);
 });

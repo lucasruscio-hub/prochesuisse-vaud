@@ -13,6 +13,16 @@ import {
 } from "lucide-react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import {
+  CARE_TYPE_OPTIONS,
+  CONTACT_METHOD_OPTIONS,
+  EMPTY_PUBLIC_INTAKE,
+  NEED_OPTIONS,
+  RELATIONSHIP_OPTIONS,
+  TIMING_OPTIONS,
+  buildPublicIntakePayload,
+  validatePublicIntakeStep,
+} from "@/lib/public-intake-form.mjs";
 const Icon = ({ children, className = "" }) => (
   <span className={`inline-flex items-center justify-center ${className}`} aria-hidden="true">
     {children}
@@ -198,53 +208,33 @@ function HeroForm() {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const idempotencyKeyRef = useRef(null);
-  const [formData, setFormData] = useState({
-    need: "",
-    location: "",
-    urgency: "",
-    situation: "",
-    needs: [],
-    age: "",
-    funding: "",
-    details: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    consentContact: false,
-  });
+  const [formData, setFormData] = useState(() => ({
+    ...EMPTY_PUBLIC_INTAKE,
+    needCodes: [],
+  }));
 
-  const totalSteps = 10;
+  const totalSteps = 8;
 
   const updateField = (field, value) => {
     idempotencyKeyRef.current = null;
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const toggleNeed = (value) => {
+  const toggleNeedCode = (value) => {
     idempotencyKeyRef.current = null;
     setFormData((prev) => {
-      const exists = prev.needs.includes(value);
+      const exists = prev.needCodes.includes(value);
       return {
         ...prev,
-        needs: exists ? prev.needs.filter((item) => item !== value) : [...prev.needs, value],
+        needCodes: exists
+          ? prev.needCodes.filter((item) => item !== value)
+          : [...prev.needCodes, value],
       };
     });
   };
 
   const getStepError = () => {
-  if (step === 0 && !formData.need) return "Veuillez sélectionner une option.";
-  if (step === 1 && !formData.location.trim()) return "Veuillez indiquer la commune ou la région.";
-  if (step === 2 && !formData.urgency) return "Veuillez sélectionner l’urgence.";
-  if (step === 3 && !formData.situation) return "Veuillez sélectionner la phrase la plus proche.";
-  if (step === 5 && !formData.age) return "Veuillez indiquer l’âge approximatif.";
-  if (step === 6 && !formData.funding) return "Veuillez répondre à la question sur le financement.";
-  if (step === 8 && !formData.firstName.trim()) return "Veuillez indiquer votre prénom.";
-  if (step === 8 && !formData.lastName.trim()) return "Veuillez indiquer votre nom.";
-  if (step === 8 && !formData.email.trim()) return "Veuillez indiquer votre adresse e-mail.";
-  if (step === 8 && !formData.phone.trim()) return "Veuillez indiquer votre téléphone.";
-  if (step === 9 && !formData.consentContact) return "Veuillez accepter d’être contacté au sujet de cette demande.";
-  return "";
+    return validatePublicIntakeStep(step, formData);
 };
 
 const next = () => {
@@ -268,6 +258,12 @@ const [submitError, setSubmitError] = useState("");
 
 const handleSubmit = async (event) => {
   event.preventDefault();
+  if (isSubmitting) return;
+  const validationError = validatePublicIntakeStep(totalSteps - 1, formData);
+  if (validationError) {
+    setSubmitError(validationError);
+    return;
+  }
   setIsSubmitting(true);
   setSubmitError("");
 
@@ -281,22 +277,23 @@ const handleSubmit = async (event) => {
         "Idempotency-Key": idempotencyKey,
       },
       body: JSON.stringify({
-        ...formData,
-        source: "landing",
-        page: "homepage",
+        ...buildPublicIntakePayload(formData),
       }),
     });
 
     if (!response.ok) {
-      throw new Error("Impossible d’envoyer la demande.");
+      if (response.status === 409) idempotencyKeyRef.current = null;
+      if (response.status === 413) throw new Error("Votre demande contient trop de texte.");
+      if (response.status >= 500) throw new Error("Lia n’a pas pu enregistrer votre demande. Veuillez réessayer.");
+      throw new Error("Certaines informations sont invalides. Vérifiez le formulaire puis réessayez.");
     }
 
     idempotencyKeyRef.current = null;
     setSubmitted(true);
   } catch (error) {
-    setSubmitError(
-      "Une erreur est survenue. Veuillez réessayer ou nous contacter directement."
-    );
+    setSubmitError(error instanceof Error
+      ? error.message
+      : "Une erreur est survenue. Veuillez réessayer ou nous contacter directement.");
   } finally {
     setIsSubmitting(false);
   }
@@ -315,8 +312,8 @@ const handleSubmit = async (event) => {
   </p>
 
   <p>
-    Nous allons analyser les informations transmises afin de comprendre la
-    situation de votre proche et préparer une première sélection de solutions
+    Nous allons analyser les informations transmises afin de comprendre
+    votre demande et préparer une première sélection de solutions
     pertinentes.
   </p>
 
@@ -350,17 +347,12 @@ const handleSubmit = async (event) => {
 
       {step === 0 && (
         <div>
-          <label className="block text-base font-semibold text-slate-950">Quelle solution semble la plus proche de votre situation ?</label>
+          <label className="block text-base font-semibold text-slate-950">Quelle solution recherchez-vous ?</label>
+          <p className="mt-2 text-xs leading-5 text-slate-500">Choisissez l’option la plus proche. Vous pourrez préciser ensuite.</p>
           <div className="mt-4 space-y-3">
-            {[
-              "Un EMS / établissement médico-social",
-              "Une aide à domicile / Spitex privé",
-              "Une résidence senior / appartement protégé",
-              "Un court séjour / répit",
-              "Je ne sais pas encore",
-            ].map((option) => (
-              <button key={option} type="button" onClick={() => updateField("need", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.need === option ? "border-[#FF5F72] bg-[#FFF0EF] text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
-                {option}
+            {CARE_TYPE_OPTIONS.map((option) => (
+              <button key={option.value} type="button" onClick={() => updateField("careType", option.value)} aria-pressed={formData.careType === option.value} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.careType === option.value ? "border-[#FF5F72] bg-[#FFF0EF] text-[#10213D]" : "border-slate-200 bg-white text-slate-700 hover:border-rose-200"}`}>
+                {option.label}
               </button>
             ))}
           </div>
@@ -369,18 +361,24 @@ const handleSubmit = async (event) => {
 
       {step === 1 && (
         <div>
-          <label className="block text-base font-semibold text-slate-950">Où se situe votre proche ?</label>
-          <input value={formData.location} onChange={(e) => updateField("location", e.target.value)} placeholder="Ex. Lausanne, Nyon, Morges, Vevey, Yverdon..." className="mt-4 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-[#FFD8D4]" />
+          <label className="block text-base font-semibold text-slate-950">Pour qui faites-vous cette demande ?</label>
+          <div className="mt-4 space-y-3">
+            {RELATIONSHIP_OPTIONS.map((option) => (
+              <button key={option.value} type="button" onClick={() => updateField("beneficiaryRelationship", option.value)} aria-pressed={formData.beneficiaryRelationship === option.value} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.beneficiaryRelationship === option.value ? "border-[#FF5F72] bg-[#FFF0EF] text-[#10213D]" : "border-slate-200 bg-white text-slate-700 hover:border-rose-200"}`}>
+                {option.label}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 
       {step === 2 && (
         <div>
-          <label className="block text-base font-semibold text-slate-950">Quelle est l’urgence ?</label>
+          <label className="block text-base font-semibold text-slate-950">Dans quel délai cherchez-vous une solution ?</label>
           <div className="mt-4 space-y-3">
-            {["Très urgent — cette semaine", "Dans le mois", "Dans les 3 mois", "Je planifie à l’avance", "Simple renseignement"].map((option) => (
-              <button key={option} type="button" onClick={() => updateField("urgency", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.urgency === option ? "border-[#FF5F72] bg-[#FFF0EF] text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
-                {option}
+            {TIMING_OPTIONS.map((option) => (
+              <button key={option.value} type="button" onClick={() => updateField("timing", option.value)} aria-pressed={formData.timing === option.value} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.timing === option.value ? "border-[#FF5F72] bg-[#FFF0EF] text-[#10213D]" : "border-slate-200 bg-white text-slate-700 hover:border-rose-200"}`}>
+                {option.label}
               </button>
             ))}
           </div>
@@ -389,48 +387,21 @@ const handleSubmit = async (event) => {
 
       {step === 3 && (
         <div>
-          <label className="block text-base font-semibold text-slate-950">Quelle phrase décrit le mieux la situation ?</label>
-          <div className="mt-4 space-y-3">
-            {[
-              "Mon proche vit seul et ce n’est plus sûr",
-              "Sortie d’hôpital prévue ou récente",
-              "Chute récente / perte d’autonomie",
-              "Troubles cognitifs / Alzheimer / démence",
-              "La famille est épuisée ou ne peut plus assurer l’aide nécessaire",
-              "Nous voulons anticiper",
-              "Autre situation",
-            ].map((option) => (
-              <button key={option} type="button" onClick={() => updateField("situation", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.situation === option ? "border-[#FF5F72] bg-[#FFF0EF] text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
-                {option}
-              </button>
-            ))}
-          </div>
+          <label htmlFor="intake-location" className="block text-base font-semibold text-slate-950">Où la solution est-elle recherchée ?</label>
+          <p className="mt-2 text-xs leading-5 text-slate-500">Une commune, une région ou un code postal suffit. N’indiquez pas d’adresse privée.</p>
+          <input id="intake-location" value={formData.location} onChange={(e) => updateField("location", e.target.value)} placeholder="Ex. Lausanne, 1000, Nyon ou Riviera" maxLength={160} autoComplete="postal-code" className="mt-4 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-[#FF5F72] focus:ring-4 focus:ring-[#FFD8D4]" />
         </div>
       )}
 
       {step === 4 && (
         <div>
-          <label className="block text-base font-semibold text-slate-950">Quels besoins sont présents ?</label>
-          <p className="mt-2 text-xs text-slate-500">Vous pouvez en sélectionner plusieurs.</p>
+          <label className="block text-base font-semibold text-slate-950">Quels types de soutien seraient utiles ?</label>
+          <p className="mt-2 text-xs leading-5 text-slate-500">Facultatif. Sélectionnez seulement les grandes catégories utiles.</p>
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
-            {[
-              "Aide pour se laver / s’habiller",
-              "Aide pour les repas",
-              "Aide à la prise de médicaments",
-              "Courses / repas / ménage",
-              "Compagnie / présence",
-              "Transport / rendez-vous médicaux",
-              "Mobilité réduite",
-              "Fauteuil roulant",
-              "Surveillance régulière",
-              "Présence de nuit",
-              "Soins infirmiers",
-              "Troubles cognitifs / Alzheimer / démence",
-              "Je ne sais pas encore",
-            ].map((option) => (
-              <label key={option} className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 text-xs leading-5 transition ${formData.needs.includes(option) ? "border-[#FF5F72] bg-[#FFF0EF] text-emerald-900" : "border-slate-200 bg-white text-slate-700"}`}>
-                <input type="checkbox" checked={formData.needs.includes(option)} onChange={() => toggleNeed(option)} className="mt-1" />
-                <span>{option}</span>
+            {NEED_OPTIONS.map((option) => (
+              <label key={option.value} className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 text-xs leading-5 transition ${formData.needCodes.includes(option.value) ? "border-[#FF5F72] bg-[#FFF0EF] text-[#10213D]" : "border-slate-200 bg-white text-slate-700"}`}>
+                <input type="checkbox" checked={formData.needCodes.includes(option.value)} onChange={() => toggleNeedCode(option.value)} className="mt-1 accent-[#FF5F72]" />
+                <span>{option.label}</span>
               </label>
             ))}
           </div>
@@ -439,96 +410,75 @@ const handleSubmit = async (event) => {
 
       {step === 5 && (
         <div>
-          <label className="block text-base font-semibold text-slate-950">Quel est l’âge approximatif de la personne concernée ?</label>
-          <div className="mt-4 space-y-3">
-            {["Moins de 65 ans", "65–74 ans", "75–84 ans", "85 ans et plus", "Je ne sais pas"].map((option) => (
-              <button key={option} type="button" onClick={() => updateField("age", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.age === option ? "border-[#FF5F72] bg-[#FFF0EF] text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
-                {option}
-              </button>
-            ))}
-          </div>
+          <label htmlFor="intake-context" className="block text-base font-semibold text-slate-950">Souhaitez-vous ajouter un peu de contexte ?</label>
+          <p className="mt-2 text-xs leading-5 text-slate-500">Facultatif. Décrivez brièvement ce qui vous aiderait. N’indiquez pas de dossier médical, médicaments ou dosages, numéro AVS ou d’assurance. Aucun document ne doit être envoyé.</p>
+          <textarea id="intake-context" value={formData.contextSummary} onChange={(e) => updateField("contextSummary", e.target.value)} rows={5} maxLength={1000} placeholder="Quelques phrases suffisent." className="mt-4 w-full resize-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-[#FF5F72] focus:ring-4 focus:ring-[#FFD8D4]" />
+          <p className="mt-2 text-right text-xs text-slate-400">{formData.contextSummary.length}/1 000</p>
         </div>
       )}
 
       {step === 6 && (
         <div>
-          <label className="block text-base font-semibold text-slate-950">Avez-vous besoin d’aide pour comprendre le financement ?</label>
-          <div className="mt-4 space-y-3">
-            {["Oui, c’est une inquiétude importante", "Oui, mais ce n’est pas urgent", "Non, nous avons déjà une idée claire", "Je ne sais pas encore"].map((option) => (
-              <button key={option} type="button" onClick={() => updateField("funding", option)} className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${formData.funding === option ? "border-[#FF5F72] bg-[#FFF0EF] text-emerald-900" : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200"}`}>
-                {option}
-              </button>
-            ))}
+          <h4 className="text-base font-semibold text-slate-950">Comment Lia peut-elle vous répondre ?</h4>
+          <p className="mt-2 text-sm leading-6 text-slate-600">Vos coordonnées restent privées et ne sont pas transmises à un prestataire à cette étape.</p>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <input value={formData.firstName} onChange={(e) => updateField("firstName", e.target.value)} placeholder="Prénom" maxLength={100} autoComplete="given-name" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-[#FF5F72] focus:ring-4 focus:ring-[#FFD8D4]" />
+            <input value={formData.lastName} onChange={(e) => updateField("lastName", e.target.value)} placeholder="Nom" maxLength={100} autoComplete="family-name" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-[#FF5F72] focus:ring-4 focus:ring-[#FFD8D4]" />
+            <input type="email" value={formData.email} onChange={(e) => updateField("email", e.target.value)} placeholder="Adresse e-mail" maxLength={320} autoComplete="email" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-[#FF5F72] focus:ring-4 focus:ring-[#FFD8D4]" />
+            <input type="tel" value={formData.phone} onChange={(e) => updateField("phone", e.target.value)} placeholder="Téléphone (facultatif)" maxLength={40} autoComplete="tel" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-[#FF5F72] focus:ring-4 focus:ring-[#FFD8D4]" />
           </div>
+          <fieldset className="mt-5">
+            <legend className="text-sm font-semibold text-slate-800">Comment préférez-vous être contacté ?</legend>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              {CONTACT_METHOD_OPTIONS.map((option) => (
+                <label key={option.value} className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 text-sm ${formData.preferredContactMethod === option.value ? "border-[#FF5F72] bg-[#FFF0EF] text-[#10213D]" : "border-slate-200 text-slate-700"}`}>
+                  <input type="radio" name="preferred-contact-method" value={option.value} checked={formData.preferredContactMethod === option.value} onChange={() => updateField("preferredContactMethod", option.value)} className="accent-[#FF5F72]" />
+                  {option.label}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          {formData.preferredContactMethod === "phone" && !formData.phone.trim() && (
+            <p className="mt-3 text-xs leading-5 text-amber-700">Un numéro est nécessaire si vous choisissez le téléphone.</p>
+          )}
         </div>
       )}
 
       {step === 7 && (
         <div>
-          <label className="block text-base font-semibold text-slate-950">Expliquez brièvement la situation</label>
-          <textarea value={formData.details} onChange={(e) => updateField("details", e.target.value)} rows={5} placeholder="Exemple : Ma mère vit seule à Lausanne, elle a chuté récemment et nous ne savons pas s’il faut organiser une aide à domicile ou chercher un EMS." className="mt-4 w-full resize-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-[#FFD8D4]" />
-        </div>
-      )}
-
-      {step === 8 && (
-        <div>
-          <h4 className="text-base font-semibold text-slate-950">Bonne nouvelle, votre première orientation peut être préparée.</h4>
-          <p className="mt-2 text-sm leading-6 text-slate-600">Où devons-nous vous contacter ?</p>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            <input value={formData.firstName} onChange={(e) => updateField("firstName", e.target.value)} placeholder="Prénom" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-[#FFD8D4]" />
-            <input value={formData.lastName} onChange={(e) => updateField("lastName", e.target.value)} placeholder="Nom" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-[#FFD8D4]" />
-            <input type="email" value={formData.email} onChange={(e) => updateField("email", e.target.value)} placeholder="Adresse e-mail" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-[#FFD8D4]" />
-            <input value={formData.phone} onChange={(e) => updateField("phone", e.target.value)} placeholder="Téléphone — ex. 079 000 00 00" className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-[#FFD8D4]" />
-          </div>
-        </div>
-      )}
-
-      {step === 9 && (
-        <div>
-          <label className="block text-base font-semibold text-slate-950">Consentement</label>
+          <h4 className="text-base font-semibold text-slate-950">Confidentialité et contact</h4>
+          <p className="mt-2 text-sm leading-6 text-slate-600">Ces deux confirmations concernent uniquement le traitement de votre demande par Lia. Elles n’autorisent aucun partage avec un prestataire.</p>
           <div className="mt-4 space-y-3">
             <label className="flex items-start gap-3 rounded-xl bg-slate-50 p-4 text-xs leading-5 text-slate-600">
-              <input type="checkbox" checked={formData.consentContact} onChange={(e) => updateField("consentContact", e.target.checked)} className="mt-1" required />
-              <span>J’accepte d’être contacté par Lia au sujet de cette demande. Je comprends que Lia n’est pas un prestataire médical et ne remplace pas l’avis d’un professionnel de santé.</span>
+              <input type="checkbox" checked={formData.privacyAcknowledged} onChange={(e) => updateField("privacyAcknowledged", e.target.checked)} className="mt-1 accent-[#FF5F72]" />
+              <span>J’ai pris connaissance de la <a href="/politique-de-confidentialite" className="font-semibold text-[#10213D] underline underline-offset-4">politique de confidentialité</a> et des informations sur le traitement de cette demande.</span>
+            </label>
+            <label className="flex items-start gap-3 rounded-xl bg-slate-50 p-4 text-xs leading-5 text-slate-600">
+              <input type="checkbox" checked={formData.consentContact} onChange={(e) => updateField("consentContact", e.target.checked)} className="mt-1 accent-[#FF5F72]" />
+              <span>J’autorise Lia à me contacter au sujet de cette demande.</span>
             </label>
           </div>
         </div>
       )}
 {submitError && (
-  <p className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-700">
+  <p className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-700" role="alert" aria-live="polite">
     {submitError}
   </p>
 )}
       <div className="mt-6 flex items-center justify-between gap-4">
-        <button type="button" onClick={back} disabled={step === 0} className="rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-slate-300 disabled:cursor-not-allowed disabled:opacity-40">
+        <button type="button" onClick={back} disabled={step === 0 || isSubmitting} className="rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-slate-300 disabled:cursor-not-allowed disabled:opacity-40">
           Retour
         </button>
         {step < totalSteps - 1 ? (
-          <button type="button" onClick={next} className="ml-auto flex items-center justify-center gap-2 rounded-2xl bg-[#FF5F72] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-rose-200 transition hover:bg-[#E64B60]">
+          <button type="button" onClick={next} disabled={isSubmitting} className="ml-auto flex items-center justify-center gap-2 rounded-2xl bg-[#FF5F72] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-rose-200 transition hover:bg-[#E64B60] disabled:cursor-not-allowed disabled:opacity-60">
             Continuer <ArrowRight className="text-base" />
           </button>
         ) : (
-          <button type="submit" className="ml-auto flex items-center justify-center gap-2 rounded-xl bg-[#FF5F72] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#E64B60]">
+          <button type="submit" disabled={isSubmitting} className="ml-auto flex items-center justify-center gap-2 rounded-xl bg-[#FF5F72] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#E64B60] disabled:cursor-wait disabled:opacity-60">
             {isSubmitting ? "Envoi en cours..." : "Préparer ma sélection personnalisée"} <ArrowRight className="text-base" />
           </button>
         )}
       </div>
-
-      {step === totalSteps - 1 && (
-        <p className="mt-4 rounded-xl bg-[#FFF8F3] p-4 text-sm leading-6 text-slate-600 ring-1 ring-[#F1DDD7]">
-          En envoyant votre demande, vous acceptez que Lia traite les
-          informations fournies afin de comprendre votre situation et de vous
-          répondre. Certaines informations peuvent concerner la santé ou les
-          besoins d’accompagnement de votre proche. Consultez notre{" "}
-          <a
-            href="/politique-de-confidentialite"
-            className="font-semibold text-[#10213D] underline decoration-[#10213D] underline-offset-4"
-          >
-            Politique de confidentialité
-          </a>
-          .
-        </p>
-      )}
 
       <p className="mt-4 flex items-center gap-2 text-xs text-slate-500">
         <Shield className="text-[#FF5F72]" />
