@@ -1,0 +1,72 @@
+{
+  "ems-boveresses": {
+    "status": "approved",
+    "placeId": "ChIJ_xiUXPIvjEcR4n-sfZwEmOI",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-09-23",
+    "identityNote": "Tertianum Les Boveresses site in Lausanne."
+  },
+  "ems-chateau-rive": {
+    "status": "approved",
+    "placeId": "ChIJQR9rVTovjEcRhdKaRYr9vYg",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-09-23",
+    "identityNote": "Matches EMS Château de la Rive site in Lutry."
+  },
+  "ems-clair-soleil": {
+    "status": "approved",
+    "placeId": "ChIJl9Ku9BkxjEcRwivjNZ5qmCs",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-09-23",
+    "identityNote": "Matches EMS Clair-Soleil site in Ecublens."
+  },
+  "ems-girarde": {
+    "status": "approved",
+    "placeId": "ChIJvzqvF4EujEcRRcSEfYfORIE",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-09-23",
+    "identityNote": "Matches Résidence La Girarde EMS in Epalinges."
+  },
+  "ems-joli-automne": {
+    "status": "approved",
+    "placeId": "ChIJ9Yzg3RAxjEcRI_5TQ_mfV0E",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-09-23",
+    "identityNote": "Google listing uses Résidence Joli Automne SA; same Ecublens site as current Tertianum Joli Automne."
+  },
+  "ems-le-home": {
+    "status": "approved",
+    "placeId": "ChIJe7usYgAvjEcRaTkqsOQwfEg",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-09-23",
+    "identityNote": "Matches EMS Le Home site in Pully."
+  },
+  "ems-marronnier": {
+    "status": "approved",
+    "placeId": "ChIJR9PdpxAvjEcRANaFv8Qrduk",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-09-23",
+    "identityNote": "Matches EMS Le Marronnier site in Lutry."
+  },
+  "ems-petit-flon": {
+    "status": "approved",
+    "placeId": "ChIJ0W-i6B0ujEcRMhY9a0T9Pwk",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-09-23",
+    "identityNote": "Matches EMS Petit-Flon establishment."
+  },
+  "ems-pre-fleuri": {
+    "status": "approved",
+    "placeId": "ChIJY2RqYxEujEcRzk80tNQjqZg",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-09-23",
+    "identityNote": "Matches Résidence Pré-Fleuri in Lausanne."
+  },
+  "senevita-vaud": {
+    "status": "approved",
+    "placeId": "ChIJe-h8IzIujEcRhxtoW7dcFS0",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-09-23",
+    "identityNote": "Matches Senevita Casa Vaud Renens office only; does not represent service coverage."
+  }
+}

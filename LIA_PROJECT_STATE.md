@@ -7,6 +7,10 @@
 
 ### Verified current repository facts
 
+- On 2026-10-15 the public marketplace read path was cut over from the 66-row legacy static catalog to one server-only canonical projection. `/recherche`, provider cards, and `/prestataires/[slug]` now share the same repository. A checked-in, architecture-approved UUID+slug manifest gates exactly 111 canonical identities (31 EMS, 80 home care/support, zero residences) without changing any database publication or verification field.
+- The cutover preserves 36 legacy slugs exactly, permanently redirects only the evidenced `homeinstead` predecessor to `dovida`, returns a non-indexed unavailable response for the other 29 removed/held legacy identities, and adds 75 canonical-only routes. The reconciliation is recorded in `docs/reports/vaud-v1-marketplace-reconciliation.md`.
+- Legacy tags are no longer public facts or filters. Sourced offering fields and controlled features produce canonical badges; unsupported filters disappear. Provider-owned reviewed media has a rights/attribution contract, ten existing human-approved Google Place identities have a deployable server-only registry, and Google ratings/review counts/photos remain request-time external facts.
+- Marketplace verification passes: targeted marketplace tests 40/40, full runnable suite 254/254, targeted ESLint, production build, guarded local projection verification, and `git diff --check`. The final local provider-domain fingerprint remains `7442622ca5475ba03ceae56facbea673`; all four inquiry tables remain empty. Production was not accessed.
 - Working copy: `C:\Users\lucas\Lia-vaud`; branch: `marketplace-mvp`.
 - The clean predecessor for the final Vaud V1 home-care closure cohort was `86a197a16b2551ed5dcee03a157cde63753daa93`, with local HEAD equal to `origin/marketplace-mvp`.
 - The clean starting checkpoint for the migration-ledger reconciliation was `53613253735aff7c4c3536e84e907bd12a0f3ede` (`Add permanent Lia project state handoff`), with local HEAD equal to `origin/marketplace-mvp`.
@@ -14,10 +18,11 @@
 - The repository contains ten migration files through `20261013000300_create_internal_referral_workflow_rpcs.sql`; see section 4.
 - The approved architecture checkpoint is `14de241f3538d22bf4a70769e717dc099a2c2901` (`Document Lia Inquiry Foundation architecture`), equal to `origin/marketplace-mvp` before the schema-foundation changes.
 - All explicit repository paths referenced by this document were found. The `docs/research/phase5f-batch-*.md` reference is a glob and matches the committed batch records, including Batch F.
-- The runnable repository set is now 45 `tests/*.test.mjs` files and passes **250/250**. Targeted referral-workflow ESLint and the production build pass.
+- The runnable repository set is now 47 `tests/*.test.mjs` files and passes **254/254**. Repository-wide and targeted marketplace ESLint pass with two pre-existing image-element warnings; the production build passes.
 
 ### Verified current local-database facts
 
+- The canonical marketplace cutover performed read-only verification against the guarded local container. It changed zero provider, offering, inquiry, referral, or other database rows; all 141 providers remain unpublished and the reviewed manifest is the temporary explicit V1 publication gate.
 - The guarded local target is the running `Lia-vaud` Supabase container on host port `54322`; no production database was accessed.
 - Batch F is applied locally: Altoan/Altoan SA exist, exactly one offering has type `home_support`, and the verified table counts are recorded in section 5.
 - The local schema contains the 16 provider-domain public tables plus the four private Inquiry Foundation tables. On 2026-10-11, a clean isolated replay of the six predecessor migrations was proven materially schema-equivalent to the enriched provider schema, after reproducing the standard Supabase public-schema privilege baseline.
@@ -391,7 +396,7 @@ Key modeling decisions:
 
 ## 7. Current development phase and exact stopping point
 
-**Verified stopping point (2026-10-13):** the Lia-internal staff-authenticated inquiry and referral workflow is implemented locally. `/lia/inquiries/[id]` now supports eligible-provider search, organization/provider/offering selection, multiple shortlisted referrals, separate authorization and readiness, explicit manual-disclosure attestation, provider response, and terminal outcome tracking. Every private read/action re-verifies the Supabase user and server allowlist. Six referral RPCs are service-role-only, optimistic, and atomic with append-only activity history. Transactional tests leave all four inquiry tables empty. No production access, automatic provider disclosure/email, provider login, Partner Portal, membership, assignment, task, analytics, or broader CRM behavior was added.
+**Verified stopping point (2026-10-15):** the canonical Vaud V1 marketplace projection and safe cutover foundation are implemented. The public search and detail routes read the canonical provider repository through a server-only adapter and an exact reviewed manifest, with no legacy runtime fallback and no database publication-state mutation. The Lia-internal inquiry/referral workflow remains unchanged; all four private inquiry tables remain empty. Production was not accessed.
 
 Latest committed and pushed Batch F commit:
 
@@ -408,12 +413,13 @@ Historical final Batch E checkpoint:
 - local HEAD = tracking HEAD = live remote HEAD
 - production Supabase not accessed
 
-Current verified closure state:
+Current verified closure and marketplace state:
 
 - local database: rollback-only dry run passed, then apply → verify → rollback → exact predecessor comparison → reapply passed with the exact 39-row closure plan and one Sitex update;
 - Inquiry Foundation: rollback-only dry run, apply, verify, scoped rollback, exact provider-fingerprint comparison, corrected least-privilege reapply, and final verification all passed; four tables and zero inquiry rows remain;
 - repository implementation: canonical manifest, reconciliation record, guarded library/runner, and targeted tests are included in this cohort checkpoint;
-- runnable suite: **250/250 passed** across 45 test files;
+- runnable suite: **254/254 passed** across 47 test files;
+- canonical marketplace: 111 visible (31 EMS, 80 home care/support, zero residences), 36 exact legacy slugs, one evidenced redirect, 29 held/removed legacy identities without redirect, and 75 canonical-only identities;
 - targeted intake ESLint: passed with only the two pre-existing `app/page.js` image warnings;
 - production build: passed;
 - public intake compatibility: 21/21 targeted tests passed, including controlled-code mapping, separate consent evidence, stable response, idempotent notification behavior, and prohibited-field assertions;
@@ -422,7 +428,7 @@ Current verified closure state:
 - local migration history: all ten repository versions aligned, with no migration pending;
 - clean repository predecessor for the public V1 intake update: `f7e4f4bd97d4e4584a7fcfedcbbf9cfd185a8902`, equal to its tracking ref before this work.
 
-**Next intended action:** stop at the locally verified Lia-internal referral-workflow checkpoint. Local staff account provisioning and environment configuration are operational setup, not committed data. Production migration/deployment, any automated disclosure/email, Phase 5G, Partner Portal, assignments/tasks, memberships, analytics, and full CRM all require separate authorization.
+**Next intended action:** stop at the locally verified marketplace-cutover checkpoint. Production migration/data promotion and deployment require a separate audited plan; do not infer production readiness from the local canonical repository or manifest. Local staff account provisioning and environment configuration remain operational setup, not committed data. Any automated disclosure/email, Phase 5G, Partner Portal, assignments/tasks, memberships, analytics, and full CRM still require separate authorization.
 
 Do **not** start Phase 5G automatically after this cohort.
 
@@ -456,7 +462,7 @@ No identity in the 16-provider completeness cohort is held. The pre-existing hol
 
 ### Known code-quality items reported earlier
 
-Verified on 2026-10-11: repository-wide lint still fails with two `react-hooks/set-state-in-effect` errors in `app/recherche/RechercheClient.js` (lines 102 and 152) and reports two `@next/next/no-img-element` warnings in `app/page.js` (lines 173 and 844). These remain pre-existing, out-of-scope code-quality items and were not changed during this audit.
+Verified on 2026-10-15: the canonical marketplace work removed the two former `react-hooks/set-state-in-effect` errors from `app/recherche/RechercheClient.js`; targeted marketplace ESLint passes. Repository-wide lint still reports the two pre-existing `@next/next/no-img-element` warnings in `app/page.js`.
 
 ## 9. Next three development tasks in priority order
 
@@ -548,11 +554,11 @@ Do not substitute production URLs/credentials. Production was not accessed in th
 
 ### Tests
 
-Current verified runnable suite after the Lia-internal referral-workflow implementation:
+Current verified runnable suite after the canonical marketplace cutover implementation:
 
-**250 passed, 0 failed** across 45 `tests/*.test.mjs` files.
+**254 passed, 0 failed** across 47 `tests/*.test.mjs` files.
 
-`package.json` has no test script; enumerate the files in `tests/` and pass them to `node --test`. Running bare `node --test` also discovers guarded scripts named `test-*.mjs` under `scripts/`, which require explicit modes and is not the runnable-suite command. `npm run lint` runs repository-wide ESLint and currently exits nonzero with the two errors and two warnings recorded in section 8.
+`package.json` has no test script; enumerate the files in `tests/` and pass them to `node --test`. Running bare `node --test` also discovers guarded scripts named `test-*.mjs` under `scripts/`, which require explicit modes and is not the runnable-suite command. `npm run lint` runs repository-wide ESLint and currently passes with the two warnings recorded in section 8.
 
 ### Backups
 
@@ -611,7 +617,7 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 
 ## 12. Last verified Git branch, commit, and working-tree state
 
-**Verified on 2026-10-13:**
+**Verified on 2026-10-15:**
 
 - Branch: `marketplace-mvp`
 - Clean predecessor for the Lia-internal referral workflow: `3e861e83eafb6d8b01fae052a25867353bf4224c`, equal to its tracking ref before this work
@@ -627,11 +633,13 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 - Inquiry Foundation: architecture/schema, atomic intake RPC, `/api/leads` compatibility facade, staff-authenticated internal inbox/detail, two atomic inquiry-workflow RPCs, and six atomic referral-workflow RPCs verified locally; all four tables empty after tests
 - Local migration history: ten repository versions aligned through `20261013000300_create_internal_referral_workflow_rpcs`
 - Provider-domain fingerprint after referral verification: `7442622ca5475ba03ceae56facbea673` (unchanged)
+- Canonical public marketplace projection: 111 providers; guarded local verification confirms 31 EMS, 80 home care/support, zero residences, zero published provider rows, and zero inquiry-domain rows.
+- Architecture-only cutover checkpoint: `272745e` (`Document Vaud V1 marketplace data cutover`).
 - Phase 5G: not started
 
 ## 13. Last updated date and handoff notes
 
-**Last updated:** 2026-10-13
+**Last updated:** 2026-10-15
 
 ### Handoff procedure for a new coding conversation
 

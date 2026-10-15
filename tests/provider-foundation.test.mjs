@@ -2,10 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { registerHooks } from "node:module";
-import { providers, searchProviders as legacySearch, SPECIAL_FILTERS as legacyFilters } from "../lib/providers.js";
+import { providers } from "../lib/providers.js";
 import { searchProviders } from "../lib/provider-search.js";
 import { SPECIAL_FILTERS, SERVICE_CODES, proposeLegacyServices } from "../lib/provider-config.js";
 import { buildLegacyMappingRows, renderLegacyMappingReport } from "../scripts/generate-legacy-provider-report.mjs";
+import { readFixtureState } from "./fixtures/public-provider-state.mjs";
 
 // Next resolves this build-time boundary marker. Node's isolated unit harness
 // substitutes ONLY the marker; the real repository implementation is unchanged.
@@ -17,37 +18,24 @@ registerHooks({
 });
 const { listProviders, getProviderBySlug } = await import("../lib/provider-repository.js");
 
-test("repository preserves all 66 records, every legacy value and stable slugs", async () => {
-  const summaries = await listProviders();
-  assert.equal(summaries.length, 66);
-  assert.deepEqual(summaries.map(({ slug, ...legacy }) => legacy), providers);
-  assert.deepEqual(summaries.map((p) => p.slug), providers.map((p) => p.id));
-  assert.equal(new Set(summaries.map((p) => p.slug)).size, 66);
-  for (const provider of summaries) {
-    assert.match(provider.slug, /^[a-z0-9]+(-[a-z0-9]+)*$/);
-    assert.deepEqual(await getProviderBySlug(provider.slug), provider);
-  }
-  assert.equal(await getProviderBySlug("missing-provider"), null);
-  assert.equal(await getProviderBySlug(null), null);
-  summaries[0].tags.push("test mutation");
-  assert.ok(!(await listProviders())[0].tags.includes("test mutation"));
+test("repository exposes the exact canonical V1 manifest with stable UUIDs and slugs", async () => {
+  const summaries = await listProviders({ readState: readFixtureState });
+  assert.equal(summaries.length, 111);
+  assert.equal(new Set(summaries.map((provider) => provider.id)).size, 111);
+  assert.equal(new Set(summaries.map((provider) => provider.slug)).size, 111);
+  for (const provider of summaries) assert.match(provider.slug, /^[a-z0-9]+(-[a-z0-9]+)*$/);
+  const first = summaries[0];
+  assert.deepEqual(await getProviderBySlug(first.slug, { readState: readFixtureState }), first);
+  assert.equal(await getProviderBySlug("missing-provider", { readState: readFixtureState }), null);
+  assert.equal(await getProviderBySlug(null, { readState: readFixtureState }), null);
 });
 
-test("search preserves legacy filtering and ordering across types, regions, names, NPAs and tags", async () => {
-  const summaries = await listProviders();
-  const queries = [...new Set(["", "  LAUSANNE  ", "Épalinges", "Epalinges", "no-match", ...providers.flatMap((p) => [p.name, p.commune, p.npa, ...p.tags])])];
-  const regions = ["Tous", ...new Set(providers.map((p) => p.commune)), "La Côte", "Tout Vaud", "no-match"];
-  for (const type of ["ems", "domicile", "residence"]) {
-    for (const query of queries) {
-      for (const region of regions) {
-        const actual = searchProviders(summaries, query, type, region).map((p) => p.id);
-        const expected = legacySearch(query, type, region).map((p) => p.id);
-        assert.deepEqual(actual, expected, JSON.stringify({ type, query, region }));
-      }
-    }
-  }
-  assert.deepEqual(SPECIAL_FILTERS, legacyFilters);
-  assert.deepEqual(searchProviders(summaries).slice(0, 9).map((p) => p.id), legacySearch().slice(0, 9).map((p) => p.id));
+test("search uses canonical names, locations, postcodes and badges without legacy tags", async () => {
+  const summaries = await listProviders({ readState: readFixtureState });
+  assert.ok(searchProviders(summaries, "Lausanne", "ems").length > 0);
+  assert.ok(searchProviders(summaries, "1000", "domicile").length > 0);
+  assert.deepEqual(searchProviders(summaries, "no-match", "residence"), []);
+  assert.deepEqual(SPECIAL_FILTERS, ["Alzheimer", "Court séjour", "Vue lac", "Public"]);
 });
 
 test("mapping report preserves original data and does not silently infer broad-tag services", () => {

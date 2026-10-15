@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
   Search,
@@ -16,7 +16,7 @@ import {
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { SPECIAL_FILTERS } from "../../lib/provider-config";
+import { providerHasSpecialFilter, SPECIAL_FILTERS } from "../../lib/provider-config";
 import { providerPath } from "../../lib/provider-detail";
 import { searchProviders } from "../../lib/provider-search";
 
@@ -75,45 +75,23 @@ function ProviderIcon({ type }) {
   );
 }
 
-export default function RechercheClient({ providers }) {
-  const [activeTab, setActiveTab] = useState("ems");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeCommune, setActiveCommune] = useState("Tous");
-  const [activeSpecial, setActiveSpecial] = useState("");
+export default function RechercheClient({ providers, initialFilters }) {
+  const [activeTab, setActiveTab] = useState(initialFilters.type);
+  const [searchQuery, setSearchQuery] = useState(initialFilters.query);
+  const [activeCommune, setActiveCommune] = useState(initialFilters.commune);
+  const [activeSpecial, setActiveSpecial] = useState(initialFilters.special);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const communeOptions = useMemo(() => {
     const uniqueCommunes = Array.from(
-      new Set(providers.map((provider) => provider.commune))
+      new Set(providers.map((provider) => provider.commune).filter(Boolean))
     ).sort((a, b) => a.localeCompare(b, "fr"));
 
     return ["Tous", ...uniqueCommunes];
   }, [providers]);
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-
-    const requestedType = params.get("type");
-    const requestedQuery = params.get("query");
-    const requestedCommune = params.get("commune");
-    const requestedFilter = params.get("filter");
-
-    if (["ems", "domicile", "residence"].includes(requestedType)) {
-      setActiveTab(requestedType);
-    }
-
-    if (requestedQuery) {
-      setSearchQuery(requestedQuery);
-    }
-
-    if (requestedCommune && communeOptions.includes(requestedCommune)) {
-      setActiveCommune(requestedCommune);
-    }
-
-    if (requestedFilter && SPECIAL_FILTERS.includes(requestedFilter)) {
-      setActiveSpecial(requestedFilter);
-    }
-  }, [communeOptions]);
+  const availableSpecialFilters = useMemo(() => SPECIAL_FILTERS.filter((filter) =>
+    providers.some((provider) => providerHasSpecialFilter(provider, filter))), [providers]);
 
   const counts = useMemo(() => {
     return {
@@ -135,11 +113,7 @@ export default function RechercheClient({ providers }) {
 
     if (!activeSpecial) return baseResults;
 
-    const special = activeSpecial.toLowerCase();
-
-    return baseResults.filter((provider) =>
-      provider.tags.some((tag) => tag.toLowerCase().includes(special))
-    );
+    return baseResults.filter((provider) => providerHasSpecialFilter(provider, activeSpecial));
   }, [providers, searchQuery, activeTab, activeCommune, activeSpecial]);
 
   const visibleProviders = filteredProviders.slice(0, visibleCount);
@@ -148,14 +122,11 @@ export default function RechercheClient({ providers }) {
     searchQuery.trim() || activeCommune !== "Tous" || activeSpecial
   );
 
-  useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
-  }, [activeTab, searchQuery, activeCommune, activeSpecial]);
-
   function clearFilters() {
     setSearchQuery("");
     setActiveCommune("Tous");
     setActiveSpecial("");
+    setVisibleCount(PAGE_SIZE);
   }
 
   return (
@@ -189,7 +160,7 @@ export default function RechercheClient({ providers }) {
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
+                onChange={(event) => { setSearchQuery(event.target.value); setVisibleCount(PAGE_SIZE); }}
                 placeholder="Nom, commune, NPA ou besoin spécifique..."
                 className="w-full rounded-xl border-0 bg-[#FFFDFC] py-4 pl-12 pr-11 text-[15px] text-[#10213D] outline-none transition placeholder:text-[#9AA2AF] focus:bg-white focus:ring-2 focus:ring-[#FFD6DA]"
               />
@@ -197,7 +168,7 @@ export default function RechercheClient({ providers }) {
               {searchQuery && (
                 <button
                   type="button"
-                  onClick={() => setSearchQuery("")}
+                  onClick={() => { setSearchQuery(""); setVisibleCount(PAGE_SIZE); }}
                   aria-label="Effacer la recherche"
                   className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-[#8992A3] transition hover:bg-[#FFF0EF] hover:text-[#E64B60]"
                 >
@@ -221,7 +192,7 @@ export default function RechercheClient({ providers }) {
                 <button
                   key={tab.id}
                   type="button"
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => { setActiveTab(tab.id); setVisibleCount(PAGE_SIZE); }}
                   className={`group rounded-2xl border p-5 text-left transition duration-200 ${
                     active
                       ? "border-[#FF8C98] bg-[#FFF0EF] shadow-sm"
@@ -281,7 +252,7 @@ export default function RechercheClient({ providers }) {
                 id="commune"
                 value={activeCommune}
                 onChange={(event) =>
-                  setActiveCommune(event.target.value)
+                  { setActiveCommune(event.target.value); setVisibleCount(PAGE_SIZE); }
                 }
                 className="w-full rounded-xl border border-[#E4E0DD] bg-[#FFFDFC] px-4 py-3 text-sm text-[#3F4B60] outline-none transition focus:border-[#FF7A87] focus:ring-4 focus:ring-[#FFF0EF]"
               >
@@ -301,7 +272,7 @@ export default function RechercheClient({ providers }) {
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {SPECIAL_FILTERS.map((filter) => {
+                {availableSpecialFilters.map((filter) => {
                   const active = activeSpecial === filter;
 
                   return (
@@ -309,7 +280,7 @@ export default function RechercheClient({ providers }) {
                       key={filter}
                       type="button"
                       onClick={() =>
-                        setActiveSpecial(active ? "" : filter)
+                        { setActiveSpecial(active ? "" : filter); setVisibleCount(PAGE_SIZE); }
                       }
                       className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
                         active
@@ -414,9 +385,9 @@ export default function RechercheClient({ providers }) {
                     <span>{provider.address}</span>
                   </div>
 
-                  {provider.tags.length > 0 && (
+                  {provider.badges.length > 0 && (
                     <div className="mt-5 flex flex-wrap gap-2">
-                      {provider.tags.slice(0, 4).map((tag) => (
+                      {provider.badges.slice(0, 4).map((tag) => (
                         <span
                           key={tag}
                           className="rounded-full border border-[#F1E8E4] bg-[#FFF8F3] px-3 py-1.5 text-xs font-medium text-[#657084]"

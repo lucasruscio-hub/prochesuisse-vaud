@@ -1,0 +1,571 @@
+{
+  "schemaVersion": 1,
+  "cohort": "vaud-v1-marketplace",
+  "reviewedOn": "2026-10-13",
+  "approvalBasis": {
+    "document": "docs/architecture/vaud-v1-marketplace-data-cutover.md",
+    "commit": "272745e"
+  },
+  "transitionalDatabaseState": {
+    "isPublished": false,
+    "verificationStatus": "unverified",
+    "lastReviewedAt": null
+  },
+  "providers": [
+    {
+      "id": "1c33dc18-b851-5f32-a469-66976d41d83d",
+      "slug": "1-monde-patients",
+      "category": "domicile"
+    },
+    {
+      "id": "da0be452-2164-51eb-ae8c-b722132b280a",
+      "slug": "altoan",
+      "category": "domicile"
+    },
+    {
+      "id": "b8ca4a06-af37-5ed2-a5a3-89d26b77376b",
+      "slug": "amad-homecare-lutry",
+      "category": "domicile"
+    },
+    {
+      "id": "3fc5f3ad-616a-53bb-a874-ed8d697a45aa",
+      "slug": "amad-homecare-nyon",
+      "category": "domicile"
+    },
+    {
+      "id": "478d51b3-9158-4b69-8f85-4929931f6fbf",
+      "slug": "boite-o",
+      "category": "domicile"
+    },
+    {
+      "id": "93d8526e-37cd-5501-ad9f-4443043b0dd2",
+      "slug": "c-vital",
+      "category": "domicile"
+    },
+    {
+      "id": "7bfb9b9f-cc05-5ccf-ac50-2cdb74b27a83",
+      "slug": "cms-ancien-stand",
+      "category": "domicile"
+    },
+    {
+      "id": "e0686135-6358-5c01-a4b2-43625f18e127",
+      "slug": "cms-aubonne",
+      "category": "domicile"
+    },
+    {
+      "id": "baac01c9-dc6d-5048-a4fd-afbbca31150b",
+      "slug": "cms-avenches",
+      "category": "domicile"
+    },
+    {
+      "id": "0d3040da-edc3-5bad-a2f9-487e2bc9c69a",
+      "slug": "cms-bussigny-villars-ste-croix",
+      "category": "domicile"
+    },
+    {
+      "id": "336c0d59-60fa-5793-a445-d7255817961c",
+      "slug": "cms-centre-ville",
+      "category": "domicile"
+    },
+    {
+      "id": "281c2c3e-2e9c-58d2-a382-9e5b1fcdd8a6",
+      "slug": "cms-chailly-sallaz",
+      "category": "domicile"
+    },
+    {
+      "id": "15d082fa-6191-5e1f-a6bd-2c82c84c2951",
+      "slug": "cms-chaussy",
+      "category": "domicile"
+    },
+    {
+      "id": "b56f5688-9f2b-5b0b-a8cc-d289a2701e5f",
+      "slug": "cms-clarens",
+      "category": "domicile"
+    },
+    {
+      "id": "206e78e4-19e4-5124-af45-655819ab265b",
+      "slug": "cms-cossonay",
+      "category": "domicile"
+    },
+    {
+      "id": "610277b3-ca41-5e86-a5f5-ff2ad4d1ebb6",
+      "slug": "cms-cully",
+      "category": "domicile"
+    },
+    {
+      "id": "4d970550-7fb7-573c-a6c9-8091c7f88be9",
+      "slug": "cms-des-peupliers",
+      "category": "domicile"
+    },
+    {
+      "id": "387b79ea-ebc2-5bb7-a240-10976014694a",
+      "slug": "cms-du-mont",
+      "category": "domicile"
+    },
+    {
+      "id": "da98e7b0-58b6-549d-a71c-caa3ee44085a",
+      "slug": "cms-echallens",
+      "category": "domicile"
+    },
+    {
+      "id": "011f05fe-c107-5294-a803-a4c8cd6ee6ae",
+      "slug": "cms-ecublens-saint-sulpice-chavannes",
+      "category": "domicile"
+    },
+    {
+      "id": "a555d313-27d5-55a2-abb2-7fcf57fd7f91",
+      "slug": "cms-epalinges",
+      "category": "domicile"
+    },
+    {
+      "id": "66e32d91-1123-5818-a441-78b3deca026b",
+      "slug": "cms-gland-region",
+      "category": "domicile"
+    },
+    {
+      "id": "2cedad16-e41a-5709-a5ba-eae3c1d2802f",
+      "slug": "cms-gland-ville",
+      "category": "domicile"
+    },
+    {
+      "id": "5d1c6e06-2132-52b6-aad8-5b7608773407",
+      "slug": "cms-grande-eau",
+      "category": "domicile"
+    },
+    {
+      "id": "96665f25-de16-592e-ac78-f58dc182b173",
+      "slug": "cms-grandson",
+      "category": "domicile"
+    },
+    {
+      "id": "cf2cfd4b-12b2-527a-a5c0-9d7234ceebaa",
+      "slug": "cms-gryonne",
+      "category": "domicile"
+    },
+    {
+      "id": "0399c216-0ad0-5cce-a3b0-03d973260e21",
+      "slug": "cms-la-tour-de-peilz",
+      "category": "domicile"
+    },
+    {
+      "id": "45f5037d-2220-59e5-a398-912a17956661",
+      "slug": "cms-la-vallee",
+      "category": "domicile"
+    },
+    {
+      "id": "e8e25e81-1436-5f15-a41f-8dd5ba0d48fb",
+      "slug": "cms-montelly",
+      "category": "domicile"
+    },
+    {
+      "id": "51968585-423c-59a0-aacd-6dbfc7b280ba",
+      "slug": "cms-montreux",
+      "category": "domicile"
+    },
+    {
+      "id": "172d6f8b-0073-508e-a9aa-145b086184a5",
+      "slug": "cms-morges-est",
+      "category": "domicile"
+    },
+    {
+      "id": "525bd8b9-a307-56e7-a108-63fb709f87c8",
+      "slug": "cms-morges-ouest",
+      "category": "domicile"
+    },
+    {
+      "id": "3a0b2262-806d-5605-a64b-ca7f606d1f96",
+      "slug": "cms-moudon",
+      "category": "domicile"
+    },
+    {
+      "id": "5e37fea3-57fd-55ab-af20-1d9f466db886",
+      "slug": "cms-nyon",
+      "category": "domicile"
+    },
+    {
+      "id": "29b6abe7-8cb2-58df-abfc-da61e8970176",
+      "slug": "cms-orbe",
+      "category": "domicile"
+    },
+    {
+      "id": "ab643c6a-3e1a-52df-a789-eca405a31652",
+      "slug": "cms-oron",
+      "category": "domicile"
+    },
+    {
+      "id": "9919bfba-7e1a-50ab-a7d1-18e2d3013323",
+      "slug": "cms-ouchy",
+      "category": "domicile"
+    },
+    {
+      "id": "4722f4e0-65f1-5d95-ae39-50dad0506bc6",
+      "slug": "cms-payerne",
+      "category": "domicile"
+    },
+    {
+      "id": "63ebc8a2-2a48-52aa-af61-359ac9f454ab",
+      "slug": "cms-pays-denhaut",
+      "category": "domicile"
+    },
+    {
+      "id": "f667e0f3-2d5b-5ce8-a770-8451ecc89eaf",
+      "slug": "cms-prilly-nord",
+      "category": "domicile"
+    },
+    {
+      "id": "50f72ef7-b63a-55e5-a6ae-b20f6d889099",
+      "slug": "cms-prilly-sud",
+      "category": "domicile"
+    },
+    {
+      "id": "ae1f5d23-ee3a-54c4-a3ac-84b59f0fdf3e",
+      "slug": "cms-pully",
+      "category": "domicile"
+    },
+    {
+      "id": "c4017e72-de09-5a06-a971-0e2ce32d5d0a",
+      "slug": "cms-renens-nord-crissier",
+      "category": "domicile"
+    },
+    {
+      "id": "f435ec72-e347-58bd-a811-ac0114d94990",
+      "slug": "cms-renens-sud",
+      "category": "domicile"
+    },
+    {
+      "id": "7c98ee1b-d7b7-5fd9-add9-af2895b3bae1",
+      "slug": "cms-rennaz",
+      "category": "domicile"
+    },
+    {
+      "id": "db6e3c4b-d7f4-5e54-abb0-c831ef7844d0",
+      "slug": "cms-riponne",
+      "category": "domicile"
+    },
+    {
+      "id": "e0593d4c-a8b5-549f-a5fc-cbfd1de5d122",
+      "slug": "cms-rolle",
+      "category": "domicile"
+    },
+    {
+      "id": "cea5af5e-a507-5d06-a9f8-e8272afae827",
+      "slug": "cms-saint-prex",
+      "category": "domicile"
+    },
+    {
+      "id": "9104d52f-42e5-5fea-a1c5-550092da2c0a",
+      "slug": "cms-sainte-croix",
+      "category": "domicile"
+    },
+    {
+      "id": "83535e53-de36-55cd-ab9f-cda10a23b6af",
+      "slug": "cms-terre-sainte",
+      "category": "domicile"
+    },
+    {
+      "id": "0a4e66eb-289c-58e6-ae9c-3cfb955f0beb",
+      "slug": "cms-valency",
+      "category": "domicile"
+    },
+    {
+      "id": "c681883c-b65c-5842-ac1d-0c7ccf7ef7d9",
+      "slug": "cms-vallorbe",
+      "category": "domicile"
+    },
+    {
+      "id": "e6fdf759-4b80-52a3-ab2f-2e341b481eab",
+      "slug": "cms-vevey-est",
+      "category": "domicile"
+    },
+    {
+      "id": "54fd5ad7-a827-5c61-a8cb-89399bb80738",
+      "slug": "cms-vevey-ouest",
+      "category": "domicile"
+    },
+    {
+      "id": "812912c5-bfb4-5dc4-a21a-052999337f6b",
+      "slug": "cms-yverdon",
+      "category": "domicile"
+    },
+    {
+      "id": "6514ec8d-c7b0-5964-a4dc-a594d4880408",
+      "slug": "cms-yvonand",
+      "category": "domicile"
+    },
+    {
+      "id": "302b21e8-bbf7-49dc-aac1-11b879fada2e",
+      "slug": "dovida",
+      "category": "domicile"
+    },
+    {
+      "id": "d5fa5dec-8ef5-4897-b822-ace1869f2955",
+      "slug": "ems-arcades",
+      "category": "ems"
+    },
+    {
+      "id": "d65f973c-1b10-4cc8-9f1f-9d07e414cbe0",
+      "slug": "ems-boissonnet",
+      "category": "ems"
+    },
+    {
+      "id": "41a3379e-9e71-4e0d-9b10-f95677b9e775",
+      "slug": "ems-boveresses",
+      "category": "ems"
+    },
+    {
+      "id": "48dfe3fe-cc93-4bac-9288-9bd46798196f",
+      "slug": "ems-chantemerle",
+      "category": "ems"
+    },
+    {
+      "id": "9f675d17-5232-4333-8dbf-5cba5293e405",
+      "slug": "ems-chateau-rive",
+      "category": "ems"
+    },
+    {
+      "id": "5e69fe70-4016-42c1-940d-092b23e8307b",
+      "slug": "ems-clair-soleil",
+      "category": "ems"
+    },
+    {
+      "id": "98529a17-8380-4ada-9f89-743763455957",
+      "slug": "ems-girarde",
+      "category": "ems"
+    },
+    {
+      "id": "d7b690f6-3b18-4810-a390-a140be5c17f6",
+      "slug": "ems-grand-pre",
+      "category": "ems"
+    },
+    {
+      "id": "0f360e51-9702-4afa-bd01-f693b4feb6ba",
+      "slug": "ems-jardins-leman",
+      "category": "ems"
+    },
+    {
+      "id": "51c941e1-bd29-4d85-948b-b0089bf6b8ec",
+      "slug": "ems-joli-automne",
+      "category": "ems"
+    },
+    {
+      "id": "28710427-eb57-4853-978c-39c22bdf2078",
+      "slug": "ems-laurelles-vevey",
+      "category": "ems"
+    },
+    {
+      "id": "9487b83b-fd11-49ca-8691-0004aa2729be",
+      "slug": "ems-le-home",
+      "category": "ems"
+    },
+    {
+      "id": "76dbe921-8419-4d3a-8c2f-71700fa9b294",
+      "slug": "ems-lys",
+      "category": "ems"
+    },
+    {
+      "id": "f9355006-2684-4171-8326-04d65d086356",
+      "slug": "ems-marronnier",
+      "category": "ems"
+    },
+    {
+      "id": "bf9bdc7d-3e3b-4f12-8dcf-2220a01a910a",
+      "slug": "ems-mauri",
+      "category": "ems"
+    },
+    {
+      "id": "a04b9f51-f7b5-4520-8072-e350f0c4d0f4",
+      "slug": "ems-meillerie",
+      "category": "ems"
+    },
+    {
+      "id": "1dd51ce1-3085-43bd-b8f3-a8812f17f330",
+      "slug": "ems-meridienne",
+      "category": "ems"
+    },
+    {
+      "id": "2da0829c-7729-4bcb-864c-d1bf664b401e",
+      "slug": "ems-odysse",
+      "category": "ems"
+    },
+    {
+      "id": "f625785f-01b9-4242-aa7d-40ff804b8e9d",
+      "slug": "ems-paix-soir",
+      "category": "ems"
+    },
+    {
+      "id": "478aeca1-2891-4ca8-8ec5-85a2d8b7f41d",
+      "slug": "ems-palmiers",
+      "category": "ems"
+    },
+    {
+      "id": "26aebc53-c72c-4d36-bc94-400b37b80191",
+      "slug": "ems-petit-flon",
+      "category": "ems"
+    },
+    {
+      "id": "e651cfbc-6537-4f58-b87a-49020055806b",
+      "slug": "ems-pins",
+      "category": "ems"
+    },
+    {
+      "id": "3adab47a-29a1-46a6-b830-89778180d041",
+      "slug": "ems-praz-joret",
+      "category": "ems"
+    },
+    {
+      "id": "253c9382-a1ff-4387-b9e3-967ab660f0e8",
+      "slug": "ems-pre-fleuri",
+      "category": "ems"
+    },
+    {
+      "id": "ebd07987-d377-456b-bbd0-68e7dc838bce",
+      "slug": "ems-pre-pariset",
+      "category": "ems"
+    },
+    {
+      "id": "30ac5348-d7c2-49e4-9fd3-6610d88047fb",
+      "slug": "ems-pre-tour",
+      "category": "ems"
+    },
+    {
+      "id": "5ac4f950-6fbd-40dd-bdd7-6d77c553ceaa",
+      "slug": "ems-rozavere",
+      "category": "ems"
+    },
+    {
+      "id": "a80a0a97-0e33-4e75-a75a-9aafcb42e494",
+      "slug": "ems-sauvabelin",
+      "category": "ems"
+    },
+    {
+      "id": "97e47311-e40d-40b3-b92d-33830b1069f7",
+      "slug": "ems-tremieres",
+      "category": "ems"
+    },
+    {
+      "id": "c651756d-12a3-485b-93ba-49880c46c3f9",
+      "slug": "ems-valency",
+      "category": "ems"
+    },
+    {
+      "id": "1cc673ad-2ba8-4fd4-af9d-e514779f3b71",
+      "slug": "ems-vernie",
+      "category": "ems"
+    },
+    {
+      "id": "ea4cd486-7861-54e3-a2ce-e0aaba36bc0d",
+      "slug": "grptp",
+      "category": "domicile"
+    },
+    {
+      "id": "062474d5-987d-5f3e-ab3a-2cdee84d7157",
+      "slug": "home-assistance",
+      "category": "domicile"
+    },
+    {
+      "id": "97be4470-ad14-5a22-a22d-e57294385edc",
+      "slug": "hygie-soins",
+      "category": "domicile"
+    },
+    {
+      "id": "2d6dbfce-569c-5899-a11a-1ab3047efbb5",
+      "slug": "la-solution-ch",
+      "category": "domicile"
+    },
+    {
+      "id": "ce8ea4db-4035-5b1e-ab58-ab7cf9462d9a",
+      "slug": "la-source-a-domicile",
+      "category": "domicile"
+    },
+    {
+      "id": "812a7e36-5d3c-5e1b-a495-3d6c4d589c33",
+      "slug": "les-soins-volants",
+      "category": "domicile"
+    },
+    {
+      "id": "4cc28014-0a6b-54b5-a000-57ed4c905fcf",
+      "slug": "ligue-pulmonaire-vaudoise",
+      "category": "domicile"
+    },
+    {
+      "id": "fe53841b-a6f4-564d-a3fa-7ea89d3d6603",
+      "slug": "msg-soins",
+      "category": "domicile"
+    },
+    {
+      "id": "0f00f446-295b-559e-ad56-d1ac4b98b870",
+      "slug": "nomad",
+      "category": "domicile"
+    },
+    {
+      "id": "ebaad7b6-a25b-55f3-a606-7d560932de72",
+      "slug": "o-sante",
+      "category": "domicile"
+    },
+    {
+      "id": "d97a1e82-4059-5722-a04f-5ab54714438e",
+      "slug": "osad-beau-sejour",
+      "category": "domicile"
+    },
+    {
+      "id": "2578bf11-55d7-5c4f-a7ce-41d1bbaa458c",
+      "slug": "osad-helvetia",
+      "category": "domicile"
+    },
+    {
+      "id": "3082e7fe-a930-5708-a3ab-557c376c8846",
+      "slug": "proxi-soins",
+      "category": "domicile"
+    },
+    {
+      "id": "fa93d5bc-9ebb-55e0-ac63-1edbbff8117c",
+      "slug": "samsa-levant",
+      "category": "domicile"
+    },
+    {
+      "id": "e40207d2-829b-5844-ace9-3155e7981bbb",
+      "slug": "sbv-medical",
+      "category": "domicile"
+    },
+    {
+      "id": "bc3c5bb4-5eef-4a40-8d5f-7e1645f431b5",
+      "slug": "senevita-vaud",
+      "category": "domicile"
+    },
+    {
+      "id": "97015bc2-f47d-492e-8bf9-d18f08d450d0",
+      "slug": "sitex",
+      "category": "domicile"
+    },
+    {
+      "id": "5df0b427-6941-549f-a1fb-fcf6e1b4311d",
+      "slug": "soins-riviera",
+      "category": "domicile"
+    },
+    {
+      "id": "6116ae90-81be-5b8c-ab33-5ca6784049be",
+      "slug": "swiss-agi-san",
+      "category": "domicile"
+    },
+    {
+      "id": "0acfb233-c6c1-46b4-8fb2-38de37b8c274",
+      "slug": "swisscaring",
+      "category": "domicile"
+    },
+    {
+      "id": "f7ca9fd8-1bdd-5938-af50-175d7712505a",
+      "slug": "val-soins",
+      "category": "domicile"
+    },
+    {
+      "id": "2e924483-3e6b-571c-aca8-906f12bb4f08",
+      "slug": "vivradom-orbe",
+      "category": "domicile"
+    },
+    {
+      "id": "02197a28-4499-5333-a9b4-a12b29c9dd24",
+      "slug": "vivradom-renens",
+      "category": "domicile"
+    }
+  ]
+}

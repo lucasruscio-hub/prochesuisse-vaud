@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { connection } from "next/server";
 import { ArrowLeft, ArrowRight, Building2, HeartHandshake, House, MapPin, ShieldCheck, Trees } from "lucide-react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import GoogleReviewCard from "../../components/GoogleReviewCard";
-import { getProviderDetailBySlug } from "../../../lib/provider-repository";
+import { getProviderDetailBySlug, resolveProviderRoute } from "../../../lib/provider-repository";
 import { providerMetadata, providerBreadcrumbs, providerDetailView, providerDetailSections, providerHeroMedia } from "../../../lib/provider-detail";
 
 const focus = "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#10213D]";
@@ -62,15 +62,19 @@ function PhotoHero({ photos, google }) {
 }
 
 export async function generateMetadata({ params }) {
-  const provider = await getProviderDetailBySlug((await params).slug, { includeGoogle: false });
-  if (!provider) notFound();
-  return providerMetadata(provider);
+  const route = await resolveProviderRoute((await params).slug);
+  if (route.kind === "redirect") permanentRedirect(`/prestataires/${route.slug}`);
+  if (route.kind !== "provider") notFound();
+  return providerMetadata(route.provider);
 }
 
 export default async function ProviderPage({ params }) {
   await connection();
-  const provider = await getProviderDetailBySlug((await params).slug);
-  if (!provider) notFound();
+  const slug = (await params).slug;
+  const route = await resolveProviderRoute(slug);
+  if (route.kind === "redirect") permanentRedirect(`/prestataires/${route.slug}`);
+  if (route.kind !== "provider") notFound();
+  const provider = await getProviderDetailBySlug(slug);
   const view = providerDetailView(provider);
   const Icon = view.type === "ems" ? Building2 : view.type === "domicile" ? House : Trees;
   const searchHref = `/recherche?type=${encodeURIComponent(view.type)}`;

@@ -1,19 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { registerHooks } from "node:module";
 import { buildSenevitaCarePacket, validateSenevitaCanonicalPacket, validateSenevitaReviewPacket }
   from "../lib/senevita-home-care-review.mjs";
 import { buildCareApplySql } from "../lib/care-review-apply.mjs";
 import { projectReviewedCareDetail } from "../lib/provider-care-projection.js";
 import { providerDetailView } from "../lib/provider-detail.js";
 import { expectedProvider } from "../scripts/phase5d-senevita-care.mjs";
-
-registerHooks({ resolve(specifier, context, nextResolve) {
-  if (specifier === "server-only") return { url: "data:text/javascript,export{}", shortCircuit: true };
-  return nextResolve(specifier, context);
-} });
-const { getProviderBySlug, getProviderDetailBySlug } = await import("../lib/provider-repository.js");
 
 const raw = JSON.parse(readFileSync(new URL("../docs/research/phase5d-senevita-home-care/senevita-vaud-care.review.json", import.meta.url), "utf8"));
 const canonical = JSON.parse(readFileSync(new URL("../docs/research/phase5d-senevita-home-care/canonical/senevita-vaud-care.json", import.meta.url), "utf8"));
@@ -100,19 +93,6 @@ test("provider projection distinguishes confirmed facts, narrative coverage, and
     type: "domicile", tags: [], detail });
   assert.equal(view.admissions, canonical.offerings[0].admissions.value);
   assert.match(view.pricing, /Durée minimale/);
-});
-
-test("repository preview combines reviewed identity and care into the consumer detail model", async () => {
-  const base = await getProviderBySlug("senevita-vaud");
-  const local = snapshot();
-  const projected = await getProviderDetailBySlug("senevita-vaud", {
-    preview: true, includeGoogle: false, readLocal: async () => local,
-  });
-  assert.notDeepEqual(projected, base);
-  assert.equal(projected.detail.contact.phone, "021 311 19 20");
-  assert.equal(projected.detail.operator.name, "Senevita AG");
-  assert.deepEqual(projected.detail.offerings[0].coverage, ["dans la région de Vaud"]);
-  assert.equal(providerDetailView(projected).offerings[0].services.length, 10);
 });
 
 test("unsafe coverage, publication, or an altered packet is rejected", () => {

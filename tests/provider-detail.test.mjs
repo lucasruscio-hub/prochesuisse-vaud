@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { registerHooks } from "node:module";
 import { providerPath, providerMetadata, providerBreadcrumbs, providerDetailView, providerDetailSections, providerHeroMedia } from "../lib/provider-detail.js";
+import { readFixtureState } from "./fixtures/public-provider-state.mjs";
 
 registerHooks({ resolve(specifier, context, nextResolve) {
   if (specifier === "server-only") return { url: "data:text/javascript,export{}", shortCircuit: true };
@@ -10,10 +11,10 @@ registerHooks({ resolve(specifier, context, nextResolve) {
 const { listProviders, getProviderBySlug } = await import("../lib/provider-repository.js");
 
 test("all provider detail URLs round-trip to the repository's stable slugs", async () => {
-  for (const provider of await listProviders()) {
+  for (const provider of await listProviders({ readState: readFixtureState })) {
     const path = providerPath(provider.slug);
     assert.equal(path, `/prestataires/${provider.slug}`);
-    assert.deepEqual(await getProviderBySlug(decodeURIComponent(path.split("/").at(-1))), provider);
+    assert.deepEqual(await getProviderBySlug(decodeURIComponent(path.split("/").at(-1)), { readState: readFixtureState }), provider);
     const metadata = providerMetadata(provider);
     assert.ok(metadata.title.includes(provider.name));
     assert.ok(metadata.description.includes(provider.commune));
@@ -27,7 +28,7 @@ test("all provider detail URLs round-trip to the repository's stable slugs", asy
 
 test("unknown and malformed slugs have no provider; URL segments stay encoded", async () => {
   for (const slug of ["unknown-provider", "", null, undefined, "../ems-chateau-rive", "EMS-CHATEAU-RIVE"]) {
-    assert.equal(await getProviderBySlug(slug), null);
+    assert.equal(await getProviderBySlug(slug, { readState: readFixtureState }), null);
   }
   assert.equal(providerPath("a/b?c#d"), "/prestataires/a%2Fb%3Fc%23d");
 });
@@ -40,23 +41,24 @@ test("metadata handles missing locality and excludes unverified tags and extra c
   assert.doesNotMatch(JSON.stringify([metadata, providerBreadcrumbs(provider)]), /null|undefined|Bilingue|Tout Vaud|rating|500|4\.8/);
 });
 
-test("sparse legacy providers show identity and transparency without invented sections", async () => {
-  for (const provider of await listProviders()) {
+test("sparse canonical providers show only sourced identity, offering, and transparency", async () => {
+  for (const provider of await listProviders({ readState: readFixtureState })) {
     const view = providerDetailView(provider);
     assert.equal(view.name, provider.name);
-    assert.deepEqual(view.legacyTags, provider.tags);
+    assert.deepEqual(view.legacyTags, []);
     assert.deepEqual(view.photos, []);
     assert.equal(view.overview, null);
     assert.deepEqual(view.facts, []);
-    assert.deepEqual(view.offerings, []);
+    assert.equal(view.offerings.length, 1);
     assert.equal(view.admissions, null);
     assert.equal(view.pricing, null);
     assert.equal(view.availability, null);
     assert.equal(view.mapUrl, null);
     assert.deepEqual(view.reviews, { lia: [] });
     assert.equal(view.operator, null);
-    assert.equal(view.sourceFreshness, null);
-    assert.deepEqual(providerDetailSections(view).map(([id]) => id), ["reperes", "sources"]);
+    assert.ok(view.sourceFreshness);
+    assert.deepEqual(view.legacyTags, []);
+    assert.deepEqual(providerDetailSections(view).map(([id]) => id), ["reperes", "accompagnement", "sources"]);
   }
 });
 
@@ -86,7 +88,7 @@ test("curated detail sections support multiple offerings and keep review sources
   assert.deepEqual(view.availability, { text: "Disponible", checkedAt: "2026-09-22" });
   assert.deepEqual(providerDetailSections(view).map(([id]) => id),
     ["reperes", "accompagnement", "pratique", "localisation", "avis", "organisation", "sources"]);
-  assert.equal(view.legacyTags[0], "Bilingue");
+  assert.deepEqual(view.legacyTags, []);
   assert.ok(!view.offerings.some((offering) => offering.services.includes("Bilingue")));
 });
 
@@ -120,5 +122,5 @@ test("hero media uses legitimate photos and retains the decorative empty state",
     { source: "provider", photos: [providerPhoto] });
   const googlePhoto = { src: "https://lh3.googleusercontent.com/place", alt: "Google" };
   assert.deepEqual(providerHeroMedia({ photos: [providerPhoto], google: { photos: [googlePhoto] } }),
-    { source: "google", photos: [googlePhoto] });
+    { source: "provider", photos: [providerPhoto] });
 });

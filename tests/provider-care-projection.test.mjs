@@ -95,7 +95,7 @@ test("detail normalization hides empty care sections and presents scoped facts",
   assert.deepEqual(rich.offerings[0].stayModes, ["Long séjour"]);
   assert.deepEqual(rich.offerings[0].careProfiles, []);
   assert.ok(providerDetailSections(rich).some(([id]) => id === "accompagnement"));
-  assert.deepEqual(rich.legacyTags, ["Gériatrie"]);
+  assert.deepEqual(rich.legacyTags, []);
 });
 
 test("the same projection renders a second and third synthetic provider", () => {
