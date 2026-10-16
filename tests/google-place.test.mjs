@@ -2,7 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { approvedGooglePlaceId } from "../lib/google-place-approval.js";
 import { projectGooglePlace, withGooglePlace } from "../lib/google-place-projection.js";
-import { getRichGooglePlace, searchGooglePlaceCandidates, MATCH_FIELD_MASK, DETAIL_FIELD_MASK } from "../lib/google-places-core.js";
+import { CARD_FIELD_MASK, getGooglePlaceCard, getRichGooglePlace, searchGooglePlaceCandidates,
+  MATCH_FIELD_MASK, DETAIL_FIELD_MASK } from "../lib/google-places-core.js";
 import { providerDetailView, providerDetailSections } from "../lib/provider-detail.js";
 
 const id = "ChIJ1234567890abc";
@@ -68,6 +69,25 @@ test("fresh rich details project photo and review attribution without exposing p
   assert.equal(google.reviewCount, 17);
   assert.match(google.embedUrl, /place_id%3AChIJ1234567890abc/);
   assert.doesNotMatch(JSON.stringify(google), /photos\/AaBb123|test-key/);
+});
+
+test("card lookup requests only rating and one attributed photo media URL", async () => {
+  const secondPhoto = `places/${id}/photos/Second123`;
+  const requests = [];
+  const response = await getGooglePlaceCard(id, { apiKey: "test-key", fetchImpl: async (url, options) => {
+    requests.push({ url, options });
+    return { ok: true, json: async () => url.includes("/media?")
+      ? { photoUri: "https://lh3.googleusercontent.com/card" }
+      : { id, googleMapsUri: placeUrl, rating: 4.2, userRatingCount: 9,
+        photos: [{ name: photoName, googleMapsUri: placeUrl, authorAttributions: [] },
+          { name: secondPhoto, googleMapsUri: placeUrl, authorAttributions: [] }] } };
+  } });
+  assert.equal(requests[0].options.headers["X-Goog-FieldMask"], CARD_FIELD_MASK);
+  assert.doesNotMatch(CARD_FIELD_MASK, /reviews|websiteUri|displayName|formattedAddress|\*/);
+  assert.equal(requests.length, 2);
+  assert.equal(response.place.photos.length, 1);
+  assert.equal(response.place.photos[0].name, photoName);
+  assert.doesNotMatch(JSON.stringify(response), /Second123/);
 });
 
 test("Google projection cannot replace reviewed Lia identity, contacts, or Lia reviews", () => {

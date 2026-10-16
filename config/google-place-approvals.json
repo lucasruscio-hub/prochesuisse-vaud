@@ -1,4 +1,18 @@
 {
+  "boite-o": {
+    "status": "approved",
+    "placeId": "ChIJUQ7nh4BIjEcROAnVJIOnAEI",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-15",
+    "identityNote": "Human-reviewed La Boîte O Services match: name, exact address and laboiteoservices.ch domain agree; Sàrl suffix accepted."
+  },
+  "dovida": {
+    "status": "approved",
+    "placeId": "ChIJebPQ8i0ujEcR9BeMchE51hU",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-15",
+    "identityNote": "Human-reviewed Dovida Lausanne office match: official dovida.ch domain and Crissier locality agree; Route de Prilly 23 confirmed."
+  },
   "ems-boveresses": {
     "status": "approved",
     "placeId": "ChIJ_xiUXPIvjEcR4n-sfZwEmOI",
@@ -62,11 +76,81 @@
     "reviewedOn": "2026-09-23",
     "identityNote": "Matches Résidence Pré-Fleuri in Lausanne."
   },
+  "grptp": {
+    "status": "approved",
+    "placeId": "ChIJvYsLgQmBjkcRZGkhJvlktd8",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-15",
+    "identityNote": "Human-reviewed GRPTP match: distinctive identity, postcode, locality and grptp.ch domain agree; Arbero/Arbéroz spelling variant confirmed."
+  },
+  "home-assistance": {
+    "status": "approved",
+    "placeId": "ChIJW17dD84vjEcRsfFhC5pwdlY",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-15",
+    "identityNote": "Human-reviewed Home Assistance match: full address and homeassistance.ch domain agree; expanded Google trading name confirmed."
+  },
+  "la-solution-ch": {
+    "status": "approved",
+    "placeId": "ChIJPXeGPojFjUcRWQ7nRjZk8kA",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-15",
+    "identityNote": "Human-reviewed La-solution.ch match: exact address and la-solution.ch domain agree; La-solution SA listing confirmed as the same provider."
+  },
+  "la-source-a-domicile": {
+    "status": "approved",
+    "placeId": "ChIJrfkaUIUvjEcRqx3jjfhp1pM",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-15",
+    "identityNote": "Human-reviewed La Source à domicile match: name, address, postcode, locality and lasource.ch domain agree."
+  },
+  "les-soins-volants": {
+    "status": "approved",
+    "placeId": "ChIJpzTU1HGdjkcR26p6hE9e6hI",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-15",
+    "identityNote": "Human-reviewed Les Soins Volants match: name, address, postcode, locality and soinsvolants.ch domain agree."
+  },
+  "ligue-pulmonaire-vaudoise": {
+    "status": "approved",
+    "placeId": "ChIJeakb2tMxjEcRMISyY2g-QxM",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-15",
+    "identityNote": "Human-reviewed Ligue pulmonaire vaudoise match: organization name, exact address and liguepulmonaire.ch domain agree."
+  },
+  "msg-soins": {
+    "status": "approved",
+    "placeId": "ChIJfemetEmbjkcRP6e5eY4YLXA",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-15",
+    "identityNote": "Human-reviewed MSG Soins match: distinctive name, postcode, Route de Brent 13F and msgsoins.ch domain agree; locality wording confirmed."
+  },
+  "proxi-soins": {
+    "status": "approved",
+    "placeId": "ChIJLUmg3lM3jEcRRYvX6exnBGY",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-15",
+    "identityNote": "Human-reviewed Proxi-Soins match: name, exact address and proxi-soins.ch domain agree."
+  },
   "senevita-vaud": {
     "status": "approved",
     "placeId": "ChIJe-h8IzIujEcRhxtoW7dcFS0",
     "reviewedBy": "Lucas",
     "reviewedOn": "2026-09-23",
     "identityNote": "Matches Senevita Casa Vaud Renens office only; does not represent service coverage."
+  },
+  "swiss-agi-san": {
+    "status": "approved",
+    "placeId": "ChIJg5BMycWXjkcRjmr9nogccek",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-15",
+    "identityNote": "Human-reviewed Swiss Agi San match: distinctive name, complete address and swissagisan.ch domain agree; Sàrl suffix accepted."
+  },
+  "swisscaring": {
+    "status": "approved",
+    "placeId": "ChIJAR1LpucvjEcRcgpn1uw9ANM",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-15",
+    "identityNote": "Human-reviewed Swisscaring Vaud match: name, complete address and swisscaring.ch domain agree; SARL suffix accepted."
   }
 }

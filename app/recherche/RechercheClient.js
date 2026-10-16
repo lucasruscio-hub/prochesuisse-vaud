@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Search,
@@ -11,6 +12,7 @@ import {
   ArrowRight,
   ShieldCheck,
   HeartHandshake,
+  Star,
   X,
 } from "lucide-react";
 
@@ -73,6 +75,34 @@ function ProviderIcon({ type }) {
       <Icon size={22} strokeWidth={1.8} />
     </div>
   );
+}
+
+function ProviderCardMedia({ provider }) {
+  const media = provider.cardMedia;
+  if (media) return (
+    <figure className="relative aspect-[16/9] overflow-hidden bg-[#EDE5E0]">
+      <Image src={media.src} alt={media.alt} fill sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+        className="object-cover transition duration-500 group-hover:scale-[1.025]" unoptimized />
+      <figcaption className="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-black/80 via-black/45 to-transparent px-4 pb-3 pt-10 text-[11px] leading-4 text-white/90">
+        {media.source === "google" ? <>
+          <span translate="no">{media.authors.map((author, index) => <span key={`${author.name}-${index}`}>{index > 0 && ", "}{author.uri
+            ? <a href={author.uri} target="_blank" rel="noopener noreferrer" className="relative z-20 underline underline-offset-2">{author.name}</a>
+            : author.name}</span>)}</span>
+          {media.authors.length > 0 && " · "}
+          <a href={media.sourceUrl} target="_blank" rel="noopener noreferrer"
+            className="relative z-20 font-semibold underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Google Maps</a>
+        </> : <a href={media.sourceUrl} target="_blank" rel="noopener noreferrer"
+          className="relative z-20 underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">{media.credit}</a>}
+      </figcaption>
+    </figure>
+  );
+  const Icon = provider.type === "ems" ? Building2 : provider.type === "domicile" ? House : Trees;
+  return <div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-[#132846] via-[#1C3A61] to-[#87505D]" aria-hidden="true">
+    <div className="absolute -right-10 -top-16 h-48 w-48 rounded-full border-[34px] border-[#FF9EAA]/65" />
+    <div className="absolute -bottom-20 -left-10 h-44 w-44 rounded-full border-[30px] border-white/10" />
+    <div className="absolute inset-0 flex items-center justify-center"><div className="flex h-20 w-20 items-center justify-center rounded-[1.6rem] border border-white/20 bg-white/10 text-white shadow-[0_18px_45px_rgba(0,0,0,0.18)] backdrop-blur-sm"><Icon size={34} strokeWidth={1.4} /></div></div>
+    <div className="absolute bottom-3 left-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70">Sélection Lia · Vaud</div>
+  </div>;
 }
 
 export default function RechercheClient({ providers, initialFilters }) {
@@ -349,71 +379,80 @@ export default function RechercheClient({ providers, initialFilters }) {
           <>
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {visibleProviders.map((provider) => (
-                <Link
-                  href={providerPath(provider.slug)}
-                  aria-label={`Voir la fiche de ${provider.name}`}
+                <article
                   key={provider.id}
-                  className="group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#10213D] flex min-h-[300px] flex-col rounded-2xl border border-[#ECE7E3] bg-white p-6 shadow-[0_5px_20px_rgba(23,35,58,0.035)] transition duration-200 hover:-translate-y-1 hover:border-[#FFD1D6] hover:shadow-[0_16px_35px_rgba(23,35,58,0.08)]"
+                  className="group relative flex min-h-[420px] flex-col overflow-hidden rounded-2xl border border-[#ECE7E3] bg-white shadow-[0_5px_20px_rgba(23,35,58,0.035)] transition duration-200 hover:-translate-y-1 hover:border-[#FFD1D6] hover:shadow-[0_16px_35px_rgba(23,35,58,0.08)]"
                 >
-                  <div className="flex items-start gap-4">
-                    <ProviderIcon type={provider.type} />
+                  <ProviderCardMedia provider={provider} />
+                  <div className="flex flex-1 flex-col p-6">
+                    <div className="flex items-start gap-4">
+                      <ProviderIcon type={provider.type} />
 
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="text-xs font-semibold uppercase tracking-[0.12em] text-[#E64B60]">
-                          {typeLabel(provider.type)}
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="text-xs font-semibold uppercase tracking-[0.12em] text-[#E64B60]">
+                            {typeLabel(provider.type)}
+                          </div>
+
+                          <div className="flex shrink-0 items-center gap-1.5 text-xs text-[#8A94A4]">
+                            <MapPin size={13} />
+                            {provider.npa}
+                          </div>
                         </div>
 
-                        <div className="flex shrink-0 items-center gap-1.5 text-xs text-[#8A94A4]">
-                          <MapPin size={13} />
-                          {provider.npa}
-                        </div>
+                        <h3 className="mt-2 text-lg font-semibold leading-snug text-[#10213D]">
+                          {provider.name}
+                        </h3>
                       </div>
+                    </div>
 
-                      <h3 className="mt-2 text-lg font-semibold leading-snug text-[#10213D]">
-                        {provider.name}
-                      </h3>
+                    <div className="mt-5 flex items-start gap-2 text-sm text-[#69758A]">
+                      <MapPin
+                        size={15}
+                        className="mt-0.5 shrink-0 text-[#FF7A87]"
+                      />
+
+                      <span>{provider.address}</span>
+                    </div>
+
+                    {provider.externalRating && <a href={provider.externalRating.sourceUrl} target="_blank" rel="noopener noreferrer"
+                      className="relative z-20 mt-4 inline-flex w-fit items-center gap-1.5 rounded-full bg-[#FFF8E7] px-3 py-1.5 text-xs font-semibold text-[#694D16] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#10213D]">
+                      <Star size={14} className="fill-[#F6B93B] text-[#D99A1C]" aria-hidden="true" />
+                      {provider.externalRating.value.toLocaleString("fr-CH", { maximumFractionDigits: 1 })}
+                      {provider.externalRating.reviewCount != null && <span className="font-normal text-[#786A4D]">({provider.externalRating.reviewCount} avis)</span>}
+                      <Image src="https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_color_92x30dp.png"
+                        alt="Google" width={46} height={15} className="ml-1 h-auto w-[46px]" unoptimized />
+                    </a>}
+
+                    {provider.badges.length > 0 && (
+                      <div className="mt-5 flex flex-wrap gap-2">
+                        {provider.badges.slice(0, 4).map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-[#F1E8E4] bg-[#FFF8F3] px-3 py-1.5 text-xs font-medium text-[#657084]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    <div className="mt-auto pt-6">
+                      <div className="border-t border-[#F0ECE9] pt-5">
+                        <p className="mb-4 text-xs leading-5 text-[#8992A3]">
+                          Prestations, conditions et disponibilités à
+                          confirmer auprès de l’organisme concerné.
+                        </p>
+
+                        <Link href={providerPath(provider.slug)} aria-label={`Voir la fiche de ${provider.name}`}
+                          className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#10213D] px-4 py-3 text-sm font-semibold text-white transition after:absolute after:inset-0 after:z-10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#10213D] group-hover:bg-[#19345C]">
+                          Voir la fiche
+                          <ArrowRight size={16} />
+                        </Link>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="mt-5 flex items-start gap-2 text-sm text-[#69758A]">
-                    <MapPin
-                      size={15}
-                      className="mt-0.5 shrink-0 text-[#FF7A87]"
-                    />
-
-                    <span>{provider.address}</span>
-                  </div>
-
-                  {provider.badges.length > 0 && (
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {provider.badges.slice(0, 4).map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-[#F1E8E4] bg-[#FFF8F3] px-3 py-1.5 text-xs font-medium text-[#657084]"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="mt-auto pt-6">
-                    <div className="border-t border-[#F0ECE9] pt-5">
-                      <p className="mb-4 text-xs leading-5 text-[#8992A3]">
-                        Prestations, conditions et disponibilités à
-                        confirmer auprès de l’organisme concerné.
-                      </p>
-
-                      <span
-                        className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#10213D] px-4 py-3 text-sm font-semibold text-white transition group-hover:bg-[#19345C]"
-                      >
-                        Voir la fiche
-                        <ArrowRight size={16} />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
+                </article>
               ))}
             </div>
 
