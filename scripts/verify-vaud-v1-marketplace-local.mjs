@@ -33,7 +33,8 @@ export function verifyState(state) {
     [category, projected.filter((provider) => provider.category === category).length]));
   assert.deepEqual(counts, { ems: 31, domicile: 80, residence: 0 });
   assert.equal(projected.length, 111);
-  assert.equal(Object.keys(googleRegistry).length, 22);
+  assert.equal(Object.keys(googleRegistry).length, 43);
+  assert.equal(googleRegistry["ems-pre-pariset"], undefined);
   assert.equal(googleRegistry.nomad, undefined);
   assert.deepEqual(resolvePublicProviderRoute("homeinstead", projected, state, VAUD_V1_REDIRECTS),
     { kind: "redirect", slug: "dovida" });

@@ -10,6 +10,7 @@ registerHooks({ resolve(specifier, context, nextResolve) {
 const { __marketplaceConfig, getProviderDetailBySlug, listProviders } = await import("../lib/provider-repository.js");
 
 const ids = {
+  "ems-arcades": "ChIJ7R-TrhgvjEcRtEE5qFJBBaE",
   "ems-boveresses": "ChIJ_xiUXPIvjEcR4n-sfZwEmOI",
   "ems-chateau-rive": "ChIJQR9rVTovjEcRhdKaRYr9vYg",
   "ems-clair-soleil": "ChIJl9Ku9BkxjEcRwivjNZ5qmCs",
@@ -19,13 +20,19 @@ const newlyApprovedSlugs = [
   "boite-o", "dovida", "grptp", "home-assistance", "la-solution-ch",
   "la-source-a-domicile", "les-soins-volants", "ligue-pulmonaire-vaudoise",
   "msg-soins", "proxi-soins", "swiss-agi-san", "swisscaring",
+  "ems-arcades", "ems-boissonnet", "ems-chantemerle", "ems-grand-pre",
+  "ems-jardins-leman", "ems-laurelles-vevey", "ems-lys", "ems-mauri",
+  "ems-meillerie", "ems-meridienne", "ems-odysse", "ems-paix-soir",
+  "ems-palmiers", "ems-pins", "ems-praz-joret", "ems-pre-tour",
+  "ems-rozavere", "ems-sauvabelin", "ems-tremieres", "ems-valency", "ems-vernie",
 ];
 
-test("deployable registry contains exactly the human-approved additions and keeps nomad held", () => {
+test("deployable registry contains exactly the human-approved additions and keeps unresolved identities held", () => {
   assert.deepEqual(Object.keys(__marketplaceConfig.googleRegistry)
     .filter((slug) => newlyApprovedSlugs.includes(slug)).sort(), newlyApprovedSlugs.toSorted());
   assert.equal(__marketplaceConfig.googleRegistry.nomad, undefined);
-  assert.equal(Object.keys(__marketplaceConfig.googleRegistry).length, 22);
+  assert.equal(__marketplaceConfig.googleRegistry["ems-pre-pariset"], undefined);
+  assert.equal(Object.keys(__marketplaceConfig.googleRegistry).length, 43);
 });
 
 async function projected(slug) {
@@ -41,7 +48,7 @@ test("approved Boveresses, Château, and another provider all use the generic Go
   const priorKey = process.env.GOOGLE_PLACES_API_KEY;
   process.env.GOOGLE_PLACES_API_KEY = "test-key";
   try {
-    for (const slug of ["ems-boveresses", "ems-chateau-rive", "ems-clair-soleil"]) {
+    for (const slug of ["ems-arcades", "ems-boveresses", "ems-chateau-rive", "ems-clair-soleil"]) {
       const provider = await projected(slug);
       assert.equal(provider.detail.google.placeId, ids[slug]);
       assert.equal(provider.detail.google.rating, 4.5);
@@ -57,7 +64,7 @@ test("unapproved and held providers get no Google enrichment", async () => {
   const priorKey = process.env.GOOGLE_PLACES_API_KEY;
   process.env.GOOGLE_PLACES_API_KEY = "test-key";
   try {
-    const unapproved = await projected("ems-arcades");
+    const unapproved = await projected("ems-pre-pariset");
     assert.equal(unapproved.detail.google, undefined);
 
     assert.equal(await projected("nova-via"), null);
@@ -80,7 +87,7 @@ test("marketplace cards fetch only approved identities and fail closed per provi
     } });
     const approved = providers.find((provider) => provider.slug === "ems-boveresses");
     const failed = providers.find((provider) => provider.slug === "ems-clair-soleil");
-    const unapproved = providers.find((provider) => provider.slug === "ems-arcades");
+    const unapproved = providers.find((provider) => provider.slug === "ems-pre-pariset");
     assert.deepEqual(new Set(calls), new Set(Object.values(__marketplaceConfig.googleRegistry)
       .map((entry) => entry.placeId)));
     assert.equal(approved.externalRating.value, 4.3);

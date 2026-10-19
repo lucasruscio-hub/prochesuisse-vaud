@@ -13,12 +13,33 @@
     "reviewedOn": "2026-10-15",
     "identityNote": "Human-reviewed Dovida Lausanne office match: official dovida.ch domain and Crissier locality agree; Route de Prilly 23 confirmed."
   },
+  "ems-arcades": {
+    "status": "approved",
+    "placeId": "ChIJ7R-TrhgvjEcRtEE5qFJBBaE",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS Les Arcades match: distinctive site name and exact Avenue William 15, 1095 Lutry address agree; Google abbreviates Avenue."
+  },
+  "ems-boissonnet": {
+    "status": "approved",
+    "placeId": "ChIJDb_TtBQujEcR0UY2vKJM8hs",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved Boissonnet match: exact address and boissonnet.ch domain agree; Google uses the Fondation Louis Boissonnet operator name."
+  },
   "ems-boveresses": {
     "status": "approved",
     "placeId": "ChIJ_xiUXPIvjEcR4n-sfZwEmOI",
     "reviewedBy": "Lucas",
     "reviewedOn": "2026-09-23",
     "identityNote": "Tertianum Les Boveresses site in Lausanne."
+  },
+  "ems-chantemerle": {
+    "status": "approved",
+    "placeId": "ChIJq5XFyEEujEcRTgRGxfxuMSI",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS Chantemerle match: distinctive Chantemerle identity and exact Chemin de Chantemerle 3, 1010 Lausanne address agree; Home and EMS are accepted label variants."
   },
   "ems-chateau-rive": {
     "status": "approved",
@@ -41,12 +62,33 @@
     "reviewedOn": "2026-09-23",
     "identityNote": "Matches Résidence La Girarde EMS in Epalinges."
   },
+  "ems-grand-pre": {
+    "status": "approved",
+    "placeId": "ChIJUavHbkQyjEcRkQhtO9eiltA",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS Le Grand Pré match: exact address, Primeroche domain and EMS-specific identity agree; the separate CAT listing is explicitly excluded."
+  },
+  "ems-jardins-leman": {
+    "status": "approved",
+    "placeId": "ChIJsW_YGWVGjEcRzCCH-89oeFk",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS Les Jardins du Léman match: distinctive site name, exact address and ghol.ch domain agree."
+  },
   "ems-joli-automne": {
     "status": "approved",
     "placeId": "ChIJ9Yzg3RAxjEcRI_5TQ_mfV0E",
     "reviewedBy": "Lucas",
     "reviewedOn": "2026-09-23",
     "identityNote": "Google listing uses Résidence Joli Automne SA; same Ecublens site as current Tertianum Joli Automne."
+  },
+  "ems-laurelles-vevey": {
+    "status": "approved",
+    "placeId": "ChIJyVC6G_iajkcRduh8U9U6nOk",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS Les Laurelles match: distinctive site name, exact address and balconsdulac.ch domain agree; Territet and Territet-Montreux are accepted locality variants."
   },
   "ems-le-home": {
     "status": "approved",
@@ -55,12 +97,61 @@
     "reviewedOn": "2026-09-23",
     "identityNote": "Matches EMS Le Home site in Pully."
   },
+  "ems-lys": {
+    "status": "approved",
+    "placeId": "ChIJa5UPiMMxjEcR2cY-QlEKvSM",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved Etablissement Les Lys match: exact site name, complete address and primeroche.ch domain agree."
+  },
   "ems-marronnier": {
     "status": "approved",
     "placeId": "ChIJR9PdpxAvjEcRANaFv8Qrduk",
     "reviewedBy": "Lucas",
     "reviewedOn": "2026-09-23",
     "identityNote": "Matches EMS Le Marronnier site in Lutry."
+  },
+  "ems-mauri": {
+    "status": "approved",
+    "placeId": "ChIJEaEqZSEyjEcRiHkmPVZJn8o",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved Fondation Donatella Mauri match: exact foundation identity, address and donatellamauri.ch domain agree; the separate CAT listing is explicitly excluded."
+  },
+  "ems-meillerie": {
+    "status": "approved",
+    "placeId": "ChIJ7VMcacovjEcR6aM-Tytwlgo",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS Meillerie match: site name, exact address and Fondation La Rozavère domain agree."
+  },
+  "ems-meridienne": {
+    "status": "approved",
+    "placeId": "ChIJHXcDzZYxjEcRpUlMPEYVp10",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS La Méridienne match: exact site name, complete address and Fondation La Primerose domain agree."
+  },
+  "ems-odysse": {
+    "status": "approved",
+    "placeId": "ChIJwcjuwCAvjEcRwx3J0XcLwGQ",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved Résidence Odysse match: exact address and odysse.ch domain agree; the plural legal operator label is accepted."
+  },
+  "ems-paix-soir": {
+    "status": "approved",
+    "placeId": "ChIJu9w1YfgtjEcR1tZo8rX18gY",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS La Paix du Soir match: exact site name, address and paixdusoir.ch domain agree."
+  },
+  "ems-palmiers": {
+    "status": "approved",
+    "placeId": "ChIJKbphQnmbjkcRG9LUaZLAn94",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS Les Palmiers match: distinctive site name, exact address and balconsdulac.ch domain agree."
   },
   "ems-petit-flon": {
     "status": "approved",
@@ -69,12 +160,68 @@
     "reviewedOn": "2026-09-23",
     "identityNote": "Matches EMS Petit-Flon establishment."
   },
+  "ems-pins": {
+    "status": "approved",
+    "placeId": "ChIJG4tBYm4ujEcRhhgj5yIajLQ",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS Les Pins match: exact site name, address and lehome-lespins.ch domain agree."
+  },
+  "ems-praz-joret": {
+    "status": "approved",
+    "placeId": "ChIJwYXN21QqjEcRHKIDomkP5r0",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved Résidence Praz Joret match: distinctive name and exact Route de Servion 36A, 1083 Mézières address agree; the Google and reviewed source domains are related variants."
+  },
   "ems-pre-fleuri": {
     "status": "approved",
     "placeId": "ChIJY2RqYxEujEcRzk80tNQjqZg",
     "reviewedBy": "Lucas",
     "reviewedOn": "2026-09-23",
     "identityNote": "Matches Résidence Pré-Fleuri in Lausanne."
+  },
+  "ems-pre-tour": {
+    "status": "approved",
+    "placeId": "ChIJ-wSCq5svjEcRr5fShj8n2IE",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS Pré de la Tour match: exact site name, Place Neuve 3 address and pre-pariset.ch domain agree; postal-box suffix accepted."
+  },
+  "ems-rozavere": {
+    "status": "approved",
+    "placeId": "ChIJqcgkUlsujEcRyuowoYiYroY",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS Rovéréaz match: exact reviewed address and rozavere.ch domain agree; Google uses the Fondation La Rozavère operator label."
+  },
+  "ems-sauvabelin": {
+    "status": "approved",
+    "placeId": "ChIJYclpYzwujEcRQu5kY3ClvOw",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS Sauvabelin match: exact site name, street address and fbg.ch domain agree; the physical 1018 postcode and 1000 Lausanne 18 postal designation are accepted variants."
+  },
+  "ems-tremieres": {
+    "status": "approved",
+    "placeId": "ChIJ4ccL880vjEcR3kym8I42lIc",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved Résidence Les Trémières match: distinctive name, exact address and residence-tremieres.ch domain agree; SA suffix accepted."
+  },
+  "ems-valency": {
+    "status": "approved",
+    "placeId": "ChIJ2ynsLWQxjEcRoEtjxXPO_74",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS Parc de Valency match: exact site name, address and altage.ch domain agree."
+  },
+  "ems-vernie": {
+    "status": "approved",
+    "placeId": "ChIJf3Emns0xjEcRUok6VGoCyjg",
+    "reviewedBy": "Lucas",
+    "reviewedOn": "2026-10-19",
+    "identityNote": "Human-approved EMS La Vernie match: exact address and Fondation La Primerose domain agree; the combined EMS and EPSM facility listing is accepted."
   },
   "grptp": {
     "status": "approved",
