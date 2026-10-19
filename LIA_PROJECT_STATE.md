@@ -7,6 +7,7 @@
 
 ### Verified current repository facts
 
+- On 2026-10-19 the shared marketplace logo was refined into the approved horizontal serif Lia wordmark plus house-heart SVG lockup. The same navy/coral symbol is used for the App Router icon; public header/footer layout and internal Lia page structure remain unchanged.
 - On 2026-10-15 the public marketplace read path was cut over from the 66-row legacy static catalog to one server-only canonical projection. `/recherche`, provider cards, and `/prestataires/[slug]` now share the same repository. A checked-in, architecture-approved UUID+slug manifest gates exactly 111 canonical identities (31 EMS, 80 home care/support, zero residences) without changing any database publication or verification field.
 - The cutover preserves 36 legacy slugs exactly, permanently redirects only the evidenced `homeinstead` predecessor to `dovida`, returns a non-indexed unavailable response for the other 29 removed/held legacy identities, and adds 75 canonical-only routes. The reconciliation is recorded in `docs/reports/vaud-v1-marketplace-reconciliation.md`.
 - Legacy tags are no longer public facts or filters. Sourced offering fields and controlled features produce canonical badges; unsupported filters disappear. Provider-owned reviewed media has a rights/attribution contract, ten existing human-approved Google Place identities have a deployable server-only registry, and Google ratings/review counts/photos remain request-time external facts.
@@ -639,7 +640,7 @@ Historical handoff information says Vercel exists, but this audit found no `.ver
 
 ## 13. Last updated date and handoff notes
 
-**Last updated:** 2026-10-15
+**Last updated:** 2026-10-19
 
 ### Handoff procedure for a new coding conversation
 

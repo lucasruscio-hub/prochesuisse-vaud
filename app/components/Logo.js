@@ -1,15 +1,42 @@
+export function LiaSymbol({ className = "h-9 w-9" }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      viewBox="0 0 36 36"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5.25 15.15 18 5l12.75 10.15V31H5.25V15.15Z"
+        stroke="#10213D"
+        strokeWidth="1.65"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M18 26.15c-.25 0-5.35-3.04-5.35-6.55 0-1.85 1.34-3.2 3.14-3.2 1.02 0 1.79.46 2.21 1.14.42-.68 1.19-1.14 2.21-1.14 1.8 0 3.14 1.35 3.14 3.2 0 3.51-5.1 6.55-5.35 6.55Z"
+        fill="#FF5F72"
+      />
+    </svg>
+  );
+}
+
 export default function Logo({ size = "default" }) {
-  const textSize = size === "compact" ? "text-[46px]" : "text-[48px]";
-  const taglineSize = size === "compact" ? "text-[14px]" : "text-[15px]";
+  const compact = size === "compact";
+  const textSize = compact ? "text-[46px]" : "text-[48px]";
+  const taglineSize = compact ? "text-[14px]" : "text-[15px]";
+  const symbolSize = compact ? "h-8 w-8" : "h-[34px] w-[34px]";
 
   return (
     <div className="leading-tight">
-      <div>
+      <div className="flex items-center gap-[7px]">
         <span
           className={`font-serif ${textSize} font-semibold leading-none tracking-tight text-[#17233A]`}
         >
           Lia
         </span>
+        <LiaSymbol className={`shrink-0 ${symbolSize}`} />
       </div>
 
       <div className={`mt-1 max-w-[160px] ${taglineSize} leading-5 text-[#17233A]`}>
